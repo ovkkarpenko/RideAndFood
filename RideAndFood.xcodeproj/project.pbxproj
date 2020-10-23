@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,19 @@
 		7240BF17253E0E7600C00BB9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF16253E0E7600C00BB9 /* LoginViewController.swift */; };
 		7240BF1C253E0E7A00C00BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */; };
 		7240BF1F253E0E7A00C00BB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */; };
+		7286E5102542380D0027A69B /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E50F2542380D0027A69B /* ColorHelper.swift */; };
+		7286E5122542398F0027A69B /* FontsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E5112542398F0027A69B /* FontsHelper.swift */; };
+		7286E51425423A160027A69B /* LoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E51325423A160027A69B /* LoginStrings.swift */; };
+		7286E51625423A640027A69B /* StringsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E51525423A640027A69B /* StringsHelper.swift */; };
+		7286E51B2542B9CB0027A69B /* ConstantsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E51A2542B9CB0027A69B /* ConstantsHelper.swift */; };
+		7286E51D2542BA940027A69B /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E51C2542BA940027A69B /* Checkbox.swift */; };
+		7286E5202542DEA40027A69B /* TermsOfUseTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E51F2542DEA40027A69B /* TermsOfUseTextViewDelegate.swift */; };
+		7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E5242542E7610027A69B /* TermsOfUseViewController.swift */; };
+		7286E5282542E79D0027A69B /* TermsOfUseStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E5272542E79D0027A69B /* TermsOfUseStrings.swift */; };
+		72FF3AC8253F46070042B2A0 /* InputMask in Frameworks */ = {isa = PBXBuildFile; productRef = 72FF3AC7253F46070042B2A0 /* InputMask */; };
+		72FF3ACE253F470D0042B2A0 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */; };
+		72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */; };
+		72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3AD9253F58CD0042B2A0 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +33,18 @@
 		7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7240BF1E253E0E7A00C00BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7240BF20253E0E7A00C00BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7286E50F2542380D0027A69B /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
+		7286E5112542398F0027A69B /* FontsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsHelper.swift; sourceTree = "<group>"; };
+		7286E51325423A160027A69B /* LoginStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStrings.swift; sourceTree = "<group>"; };
+		7286E51525423A640027A69B /* StringsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsHelper.swift; sourceTree = "<group>"; };
+		7286E51A2542B9CB0027A69B /* ConstantsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsHelper.swift; sourceTree = "<group>"; };
+		7286E51C2542BA940027A69B /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		7286E51F2542DEA40027A69B /* TermsOfUseTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseTextViewDelegate.swift; sourceTree = "<group>"; };
+		7286E5242542E7610027A69B /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
+		7286E5272542E79D0027A69B /* TermsOfUseStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseStrings.swift; sourceTree = "<group>"; };
+		72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
+		72FF3AD9253F58CD0042B2A0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72FF3AC8253F46070042B2A0 /* InputMask in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,7 +78,7 @@
 		7240BF11253E0E7600C00BB9 /* RideAndFood */ = {
 			isa = PBXGroup;
 			children = (
-				7240BF27253E167C00C00BB9 /* LoginScreen */,
+				7286E5222542E7420027A69B /* Modules */,
 				7240BF26253E166500C00BB9 /* SupportingFiles */,
 			);
 			path = RideAndFood;
@@ -72,9 +98,101 @@
 		7240BF27253E167C00C00BB9 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
-				7240BF16253E0E7600C00BB9 /* LoginViewController.swift */,
+				72FF3AD7253F58B40042B2A0 /* View */,
+				72FF3AD6253F58AF0042B2A0 /* Controller */,
+				7286E5192542B96F0027A69B /* Helpers */,
 			);
 			path = LoginScreen;
+			sourceTree = "<group>";
+		};
+		7286E50E254237FF0027A69B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7286E50F2542380D0027A69B /* ColorHelper.swift */,
+				7286E5112542398F0027A69B /* FontsHelper.swift */,
+				7286E51525423A640027A69B /* StringsHelper.swift */,
+				7286E51A2542B9CB0027A69B /* ConstantsHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7286E5192542B96F0027A69B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7286E51325423A160027A69B /* LoginStrings.swift */,
+				7286E51F2542DEA40027A69B /* TermsOfUseTextViewDelegate.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7286E5212542E7340027A69B /* TermsOfUseScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7286E5262542E7910027A69B /* Helpers */,
+				7286E5232542E7510027A69B /* Controller */,
+			);
+			path = TermsOfUseScreen;
+			sourceTree = "<group>";
+		};
+		7286E5222542E7420027A69B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				72FF3ACB253F46D60042B2A0 /* Common */,
+				7240BF27253E167C00C00BB9 /* LoginScreen */,
+				7286E5212542E7340027A69B /* TermsOfUseScreen */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		7286E5232542E7510027A69B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7286E5242542E7610027A69B /* TermsOfUseViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7286E5262542E7910027A69B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7286E5272542E79D0027A69B /* TermsOfUseStrings.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		72FF3ACB253F46D60042B2A0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7286E50E254237FF0027A69B /* Helpers */,
+				72FF3ACC253F46E50042B2A0 /* View */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		72FF3ACC253F46E50042B2A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */,
+				7286E51C2542BA940027A69B /* Checkbox.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		72FF3AD6253F58AF0042B2A0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7240BF16253E0E7600C00BB9 /* LoginViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		72FF3AD7253F58B40042B2A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */,
+				72FF3AD9253F58CD0042B2A0 /* LoginView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -93,6 +211,9 @@
 			dependencies = (
 			);
 			name = RideAndFood;
+			packageProductDependencies = (
+				72FF3AC7253F46070042B2A0 /* InputMask */,
+			);
 			productName = RideAndFood;
 			productReference = 7240BF0F253E0E7600C00BB9 /* RideAndFood.app */;
 			productType = "com.apple.product-type.application";
@@ -121,6 +242,9 @@
 				Base,
 			);
 			mainGroup = 7240BF06253E0E7600C00BB9;
+			packageReferences = (
+				72FF3AC6253F46070042B2A0 /* XCRemoteSwiftPackageReference "input-mask-ios" */,
+			);
 			productRefGroup = 7240BF10253E0E7600C00BB9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -147,7 +271,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
+				7286E5282542E79D0027A69B /* TermsOfUseStrings.swift in Sources */,
+				7286E5122542398F0027A69B /* FontsHelper.swift in Sources */,
+				7286E51B2542B9CB0027A69B /* ConstantsHelper.swift in Sources */,
+				7286E5202542DEA40027A69B /* TermsOfUseTextViewDelegate.swift in Sources */,
+				7286E51425423A160027A69B /* LoginStrings.swift in Sources */,
 				7240BF17253E0E7600C00BB9 /* LoginViewController.swift in Sources */,
+				7286E51D2542BA940027A69B /* Checkbox.swift in Sources */,
+				72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */,
+				72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */,
+				7286E5102542380D0027A69B /* ColorHelper.swift in Sources */,
+				7286E51625423A640027A69B /* StringsHelper.swift in Sources */,
+				72FF3ACE253F470D0042B2A0 /* PrimaryButton.swift in Sources */,
 				7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,6 +474,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		72FF3AC6253F46070042B2A0 /* XCRemoteSwiftPackageReference "input-mask-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RedMadRobot/input-mask-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		72FF3AC7253F46070042B2A0 /* InputMask */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 72FF3AC6253F46070042B2A0 /* XCRemoteSwiftPackageReference "input-mask-ios" */;
+			productName = InputMask;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7240BF07253E0E7600C00BB9 /* Project object */;
 }
