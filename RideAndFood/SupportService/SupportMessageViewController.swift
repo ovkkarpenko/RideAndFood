@@ -10,7 +10,7 @@ import UIKit
 
 class SupportMessageViewController: UIViewController {
     @IBOutlet weak var messageTextField: UITextView!
-    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var continueButton: CustomButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var buttonBottom: NSLayoutConstraint!
     
@@ -19,11 +19,9 @@ class SupportMessageViewController: UIViewController {
         customizeMessageTextField()
         customizeContinueButton()
         
-
-//         call the 'keyboardWillShow' function when the view controller receive the notification that a keyboard is going to be shown
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 
-//           call the 'keyboardWillHide' function when the view controlelr receive notification that keyboard is going to be hidden
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
     }
@@ -36,13 +34,12 @@ class SupportMessageViewController: UIViewController {
     private func customizeMessageTextField() {
         messageTextField.layer.borderWidth = 1
         messageTextField.layer.borderColor = Colors.getColor(.borderGray)().cgColor
-        messageTextField.layer.cornerRadius = CornerRadiuses.getRadius(.raduis15)()
+        messageTextField.layer.cornerRadius = 15
     }
     
     private func customizeContinueButton() {
-        continueButton.layer.cornerRadius = CornerRadiuses.getRadius(.raduis15)()
-        continueButton.backgroundColor = Colors.getColor(.buttonBlue)()
-        continueButton.setTitleColor(Colors.getColor(.buttonWhite)(), for: .normal)
+        continueButton.customizeButton(type: .blueButton)
+        // set title and font
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {

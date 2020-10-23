@@ -16,6 +16,7 @@
 		F7CAAC012540A5000049390C /* GeneralGUISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CAAC002540A5000049390C /* GeneralGUISettings.swift */; };
 		F7FD685D253F72BD00A67E07 /* SupportService.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7FD685C253F72BD00A67E07 /* SupportService.storyboard */; };
 		F7FD6861253F72DB00A67E07 /* SupportMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */; };
+		F7FE9837254330E4009B89F5 /* BaseCustomUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		F7CAAC002540A5000049390C /* GeneralGUISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralGUISettings.swift; sourceTree = "<group>"; };
 		F7FD685C253F72BD00A67E07 /* SupportService.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SupportService.storyboard; sourceTree = "<group>"; };
 		F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportMessageViewController.swift; sourceTree = "<group>"; };
+		F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCustomUIComponents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +69,6 @@
 				7240BF12253E0E7600C00BB9 /* AppDelegate.swift */,
 				7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */,
 				7240BF16253E0E7600C00BB9 /* ViewController.swift */,
-				F7CAAC002540A5000049390C /* GeneralGUISettings.swift */,
 				7240BF18253E0E7600C00BB9 /* Main.storyboard */,
 				7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */,
 				7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */,
@@ -79,6 +80,8 @@
 		F7CAAC032540B1440049390C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				F7CAAC002540A5000049390C /* GeneralGUISettings.swift */,
+				F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				F7CAAC012540A5000049390C /* GeneralGUISettings.swift in Sources */,
 				F7FD6861253F72DB00A67E07 /* SupportMessageViewController.swift in Sources */,
 				7240BF15253E0E7600C00BB9 /* SceneDelegate.swift in Sources */,
+				F7FE9837254330E4009B89F5 /* BaseCustomUIComponents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

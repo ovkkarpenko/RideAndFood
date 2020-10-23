@@ -16,6 +16,7 @@ import UIKit
 enum Colors {
     case buttonBlue
     case buttonWhite
+    case buttonGreen
     case borderGray
     
     func getColor() -> UIColor {
@@ -24,30 +25,18 @@ enum Colors {
             return UIColor(hexString: "#3D3BFF")
         case .buttonWhite:
             return UIColor(hexString: "#FFFFFF")
+        case .buttonGreen:
+            return UIColor(hexString: "#34C759")
         case .borderGray:
             return UIColor(hexString: "#CCCCCC")
         }
     }
 }
 
-enum CornerRadiuses {
-    case raduis9
-    case raduis10
-    case raduis14
-    case raduis15
-    
-    func getRadius() -> CGFloat {
-        switch self {
-        case .raduis9:
-            return 9
-        case .raduis10:
-            return 10
-        case .raduis14:
-            return 14
-        case .raduis15:
-            return 15
-        }
-    }
+enum CustomButtonType {
+    case blueButton
+    case whiteButton
+    case greenButton
 }
 
 public extension UIColor {

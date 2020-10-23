@@ -31,13 +31,17 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bm4-kc-9X0">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bm4-kc-9X0" customClass="CustomButton" customModule="RideAndFood" customModuleProvider="target">
                                                 <rect key="frame" x="25" y="548" width="325" height="50"/>
-                                                <color key="backgroundColor" red="0.23921568630000001" green="0.23137254900000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Txg-H1-tUA"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -76,7 +80,7 @@
                     <navigationItem key="navigationItem" id="ek6-6t-RyC"/>
                     <connections>
                         <outlet property="buttonBottom" destination="ZGc-eb-7Zj" id="gdn-ec-Y41"/>
-                        <outlet property="continueButton" destination="Bm4-kc-9X0" id="gtb-fJ-dJT"/>
+                        <outlet property="continueButton" destination="Bm4-kc-9X0" id="Nad-Wq-2j0"/>
                         <outlet property="messageTextField" destination="4Tg-bV-53D" id="4wT-DP-lDI"/>
                         <outlet property="scrollView" destination="Zqu-Bk-8j2" id="A3y-AR-re5"/>
                     </connections>
