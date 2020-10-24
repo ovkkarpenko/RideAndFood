@@ -9,20 +9,49 @@
 import UIKit
 
 class CustomButton: UIButton {
+    private var customType: CustomButtonType?
+    
+    override var isEnabled: Bool {
+        didSet {
+            if self.isEnabled {
+                setBackgroundColor()
+            } else {
+                self.backgroundColor = Colors.getColor(.disableGray)()
+            }
+        }
+    }
+    
     func customizeButton(type: CustomButtonType) {
+        customType = type
+        
+        let cornerRadius: CGFloat = 15
         switch type {
         case .blueButton:
-            self.layer.cornerRadius = 15
-            self.backgroundColor = Colors.getColor(.buttonBlue)()
+            self.layer.cornerRadius = cornerRadius
+            setBackgroundColor()
             self.setTitleColor(Colors.getColor(.buttonWhite)(), for: .normal)
+            
         case .whiteButton:
-            self.layer.cornerRadius = 15
-            self.backgroundColor = Colors.getColor(.buttonWhite)()
+            self.layer.cornerRadius = cornerRadius
+            setBackgroundColor()
             self.setTitleColor(Colors.getColor(.buttonBlue)(), for: .normal)
         case .greenButton:
-            self.layer.cornerRadius = 15
-            self.backgroundColor = Colors.getColor(.buttonGreen)()
+            self.layer.cornerRadius = cornerRadius
+            setBackgroundColor()
             self.setTitleColor(Colors.getColor(.buttonWhite)(), for: .normal)
+        }
+    }
+    
+    private func setBackgroundColor() {
+        if let customType = customType {
+            switch customType {
+            case .blueButton:
+                self.backgroundColor = Colors.getColor(.buttonBlue)()
+            case .whiteButton:
+                self.backgroundColor = Colors.getColor(.buttonWhite)()
+            case .greenButton:
+                self.backgroundColor = Colors.getColor(.buttonGreen)()
+            }
         }
     }
 }

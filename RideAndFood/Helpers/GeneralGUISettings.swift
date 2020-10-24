@@ -18,6 +18,7 @@ enum Colors {
     case buttonWhite
     case buttonGreen
     case borderGray
+    case disableGray
     
     func getColor() -> UIColor {
         switch self {
@@ -29,6 +30,8 @@ enum Colors {
             return UIColor(hexString: "#34C759")
         case .borderGray:
             return UIColor(hexString: "#CCCCCC")
+        case .disableGray:
+            return UIColor(hexString: "#D0D0D0")
         }
     }
 }
@@ -44,7 +47,7 @@ public extension UIColor {
         let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         let scanner = Scanner(string: hexString)
         if (hexString.hasPrefix("#")) {
-            scanner.scanLocation = 1
+            scanner.currentIndex = scanner.string.index(after: scanner.currentIndex)
         }
         var color: UInt64 = 0
         scanner.scanHexInt64(&color)

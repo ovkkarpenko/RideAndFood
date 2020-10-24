@@ -16,9 +16,10 @@ class SupportMessageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        messageTextField.delegate = self
+        
         customizeMessageTextField()
         customizeContinueButton()
-        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 
@@ -39,6 +40,7 @@ class SupportMessageViewController: UIViewController {
     
     private func customizeContinueButton() {
         continueButton.customizeButton(type: .blueButton)
+        continueButton.isEnabled = false
         // set title and font
     }
     
@@ -49,7 +51,6 @@ class SupportMessageViewController: UIViewController {
         self.buttonBottom.constant = 25 + keyboardSize.height
         
 //        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        
 //        let selectedRange = messageTextField.selectedRange
 //        messageTextField.scrollRangeToVisible(selectedRange)
     }
@@ -60,5 +61,12 @@ class SupportMessageViewController: UIViewController {
 //        scrollView.contentInset = UIEdgeInsets.zero
 //        let selectedRange = messageTextField.selectedRange
 //        messageTextField.scrollRangeToVisible(selectedRange)
+    }
+}
+
+// MARK: - Extensions
+extension SupportMessageViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        continueButton.isEnabled = !(messageTextField.text?.isEmpty ?? false)
     }
 }
