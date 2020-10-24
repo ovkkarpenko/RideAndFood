@@ -19,6 +19,7 @@ enum Colors {
     case buttonGreen
     case borderGray
     case disableGray
+    case textGray
     
     func getColor() -> UIColor {
         switch self {
@@ -32,6 +33,8 @@ enum Colors {
             return UIColor(hexString: "#CCCCCC")
         case .disableGray:
             return UIColor(hexString: "#D0D0D0")
+        case .textGray:
+            return UIColor(hexString: "#8A8A8D")
         }
     }
 }
