@@ -24,19 +24,18 @@ class CustomButton: UIButton {
     func customizeButton(type: CustomButtonType) {
         customType = type
         
-        let cornerRadius: CGFloat = 15
         switch type {
         case .blueButton:
-            self.layer.cornerRadius = cornerRadius
+            self.layer.cornerRadius = generalCornerRaduis
             setBackgroundColor()
             self.setTitleColor(Colors.getColor(.buttonWhite)(), for: .normal)
             
         case .whiteButton:
-            self.layer.cornerRadius = cornerRadius
+            self.layer.cornerRadius = generalCornerRaduis
             setBackgroundColor()
             self.setTitleColor(Colors.getColor(.buttonBlue)(), for: .normal)
         case .greenButton:
-            self.layer.cornerRadius = cornerRadius
+            self.layer.cornerRadius = generalCornerRaduis
             setBackgroundColor()
             self.setTitleColor(Colors.getColor(.buttonWhite)(), for: .normal)
         }

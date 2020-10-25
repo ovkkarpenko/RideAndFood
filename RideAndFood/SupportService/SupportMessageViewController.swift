@@ -9,16 +9,18 @@
 import UIKit
 
 class SupportMessageViewController: UIViewController {
-    @IBOutlet weak var messageTextField: UITextView!
+    @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var continueButton: CustomButton!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var buttonBottom: NSLayoutConstraint!
     
+    private let padding: CGFloat = 25
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        messageTextField.delegate = self
+        messageTextView.delegate = self
         
-        customizeMessageTextField()
+        customizeMessageTextView()
         customizeContinueButton()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -32,31 +34,33 @@ class SupportMessageViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    private func customizeMessageTextField() {
-        messageTextField.layer.borderWidth = 1
-        messageTextField.layer.borderColor = Colors.getColor(.borderGray)().cgColor
-        messageTextField.layer.cornerRadius = 15
+    private func customizeMessageTextView() {
+        messageTextView.layer.borderWidth = 1
+        messageTextView.layer.borderColor = Colors.getColor(.borderGray)().cgColor
+        messageTextView.layer.cornerRadius = generalCornerRaduis
+        messageTextView.textColor = Colors.getColor(.textGray)()
+        messageTextView.text = "Опишите возникшую проблему"
     }
     
     private func customizeContinueButton() {
         continueButton.customizeButton(type: .blueButton)
         continueButton.isEnabled = false
-        // set title and font
+        continueButton.setTitle("Далее", for: .normal)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
+    @objc private func keyboardWillShow(notification: NSNotification) {
 
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
 
-        self.buttonBottom.constant = 25 + keyboardSize.height
+        self.buttonBottom.constant = padding + keyboardSize.height
         
 //        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
 //        let selectedRange = messageTextField.selectedRange
 //        messageTextField.scrollRangeToVisible(selectedRange)
     }
 
-    @objc func keyboardWillHide(notification: NSNotification) {
-        self.buttonBottom.constant = 25
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        self.buttonBottom.constant = padding
 
 //        scrollView.contentInset = UIEdgeInsets.zero
 //        let selectedRange = messageTextField.selectedRange
@@ -67,6 +71,13 @@ class SupportMessageViewController: UIViewController {
 // MARK: - Extensions
 extension SupportMessageViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        continueButton.isEnabled = !(messageTextField.text?.isEmpty ?? false)
+        continueButton.isEnabled = !(messageTextView.text?.isEmpty ?? false)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == Colors.getColor(.textGray)() {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
     }
 }

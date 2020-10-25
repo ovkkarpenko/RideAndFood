@@ -13,6 +13,8 @@ import UIKit
 //public let grayborderColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
 //public let borderWidth: CGFloat = 1
 
+public let generalCornerRaduis: CGFloat = 15
+
 enum Colors {
     case buttonBlue
     case buttonWhite
