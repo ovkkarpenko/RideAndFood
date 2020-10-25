@@ -34,12 +34,23 @@ class LoginViewController: UIViewController {
             self?.confirmButton.isEnabled = isCompleted
         }
         view.resendCodePressedCallback = { [weak self] in
-            
+            self?.getConfirmationCode(showConfirmationView: false)
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
+    private lazy var codeLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = ColorHelper.primary.color()
+        label.textColor = ColorHelper.primaryButtonText.color()
+        label.textAlignment = .center
+        label.isHidden = true
+        label.layer.cornerRadius = 10
+        label.layer.masksToBounds = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     private lazy var confirmButton = PrimaryButton(title: StringsHelper.next.text())
     private let padding: CGFloat = 25
@@ -59,6 +70,12 @@ class LoginViewController: UIViewController {
                                                                                                constant: padding)
     private lazy var confirmButtonBottomConstraint = confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                                                                            constant: -padding)
+    
+    // MARK: - Private properties
+    
+    private var interactor = LoginInteractor()
+    private var phone: String?
+    private var code: String?
     
     // MARK: - UIViewController lifecycle methods
     
@@ -90,6 +107,7 @@ class LoginViewController: UIViewController {
         view.addSubview(loginView)
         view.addSubview(codeConfirmationView)
         view.addSubview(confirmButton)
+        view.addSubview(codeLabel)
         
         let loginViewCenterYConstraint = loginView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150)
         
@@ -104,7 +122,10 @@ class LoginViewController: UIViewController {
             codeConfirmationView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -padding),
             confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             confirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            confirmButtonBottomConstraint
+            confirmButtonBottomConstraint,
+            codeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            codeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            codeLabel.widthAnchor.constraint(equalToConstant: 60)
         ])
         loginViewCenterYConstraint.priority = .defaultLow
         
@@ -129,6 +150,28 @@ class LoginViewController: UIViewController {
         codeConfirmationView.phoneNumberString = loginView.phoneNumberString
     }
     
+    private func getConfirmationCode(showConfirmationView: Bool = true) {
+        guard let phone = phone else {
+            return
+        }
+        
+        interactor.getCode(for: phone) { [weak self] (codeModel, error) in
+            guard let codeModel = codeModel, error == nil else {
+                print("ERROR: \(String(describing: error))")
+                return
+            }
+            
+            print(codeModel)
+            DispatchQueue.main.async {
+                self?.codeLabel.text = "\(codeModel.code)"
+                self?.codeLabel.isHidden = false
+                if showConfirmationView {
+                    self?.showCodeConfirmationView()
+                }
+            }
+        }
+    }
+    
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
             keyboardSize.height > 0 {
@@ -150,7 +193,21 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func confirmButtonPressed() {
-        showCodeConfirmationView()
+        confirmButton.isEnabled = false
+        if let code = codeConfirmationView.code, !code.isEmpty, let phone = phone, !phone.isEmpty {
+            interactor.confirmCode(forPhone: phone, code: code) { (userData, error) in
+                guard let userData = userData, error == nil else {
+                    print("ERROR: \(String(describing: error))")
+                    return
+                }
+                
+                print(userData)
+            }
+        } else if let phone = loginView.phoneNumberString?.components(separatedBy: CharacterSet.decimalDigits.inverted)
+            .joined() {
+            self.phone = phone
+            getConfirmationCode()
+        }
     }
 }
 

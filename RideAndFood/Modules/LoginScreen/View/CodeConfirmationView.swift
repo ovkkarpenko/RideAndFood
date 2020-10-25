@@ -30,6 +30,9 @@ class CodeConfirmationView: UIView {
             resendCodeTextView.attributedText = resendString
         }
     }
+    var code: String? {
+        hiddenTextField.text
+    }
     
     // MARK: - UI
     
@@ -146,7 +149,8 @@ class CodeConfirmationView: UIView {
     }
     
     func runTimer() -> Void {
-        numberOfSeconds = 12
+        timer?.invalidate()
+        numberOfSeconds = 30
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] timer in
             self?.numberOfSeconds -= 1
             if self?.numberOfSeconds == 0 {

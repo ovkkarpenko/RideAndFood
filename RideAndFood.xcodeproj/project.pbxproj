@@ -24,6 +24,18 @@
 		7286E52A2542ECA70027A69B /* CodeConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E5292542ECA70027A69B /* CodeConfirmationView.swift */; };
 		7286E52C254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E52B254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift */; };
 		7286E52E254312C50027A69B /* NumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E52D254312C50027A69B /* NumberInputView.swift */; };
+		72A1DBD62545A764005A047A /* BaseNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBD52545A764005A047A /* BaseNetworkManager.swift */; };
+		72A1DBD92545AC45005A047A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBD82545AC45005A047A /* NetworkManager.swift */; };
+		72A1DBDC2545AC65005A047A /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBDB2545AC65005A047A /* HTTPMethod.swift */; };
+		72A1DBDE2545B23A005A047A /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBDD2545B23A005A047A /* RequestError.swift */; };
+		72A1DBE02545B424005A047A /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBDF2545B424005A047A /* LoginInteractor.swift */; };
+		72A1DBE22545B472005A047A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBE12545B472005A047A /* Response.swift */; };
+		72A1DBE52545B5A9005A047A /* PhoneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBE42545B5A9005A047A /* PhoneModel.swift */; };
+		72A1DBE72545BF19005A047A /* CodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBE62545BF19005A047A /* CodeModel.swift */; };
+		72A1DBE92545BF24005A047A /* CodeConfirmationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBE82545BF24005A047A /* CodeConfirmationModel.swift */; };
+		72A1DBEB2545BF94005A047A /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBEA2545BF94005A047A /* UserDataModel.swift */; };
+		72A1DBED2545BFA2005A047A /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBEC2545BFA2005A047A /* SettingsModel.swift */; };
+		72A1DBEF2545BFCD005A047A /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBEE2545BFCD005A047A /* Language.swift */; };
 		72FF3AC8253F46070042B2A0 /* InputMask in Frameworks */ = {isa = PBXBuildFile; productRef = 72FF3AC7253F46070042B2A0 /* InputMask */; };
 		72FF3ACE253F470D0042B2A0 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */; };
 		72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */; };
@@ -50,6 +62,18 @@
 		7286E5292542ECA70027A69B /* CodeConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeConfirmationView.swift; sourceTree = "<group>"; };
 		7286E52B254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeConfirmationTextFieldDelegate.swift; sourceTree = "<group>"; };
 		7286E52D254312C50027A69B /* NumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputView.swift; sourceTree = "<group>"; };
+		72A1DBD52545A764005A047A /* BaseNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkManager.swift; sourceTree = "<group>"; };
+		72A1DBD82545AC45005A047A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		72A1DBDB2545AC65005A047A /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		72A1DBDD2545B23A005A047A /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
+		72A1DBDF2545B424005A047A /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		72A1DBE12545B472005A047A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		72A1DBE42545B5A9005A047A /* PhoneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneModel.swift; sourceTree = "<group>"; };
+		72A1DBE62545BF19005A047A /* CodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeModel.swift; sourceTree = "<group>"; };
+		72A1DBE82545BF24005A047A /* CodeConfirmationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeConfirmationModel.swift; sourceTree = "<group>"; };
+		72A1DBEA2545BF94005A047A /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
+		72A1DBEC2545BFA2005A047A /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		72A1DBEE2545BFCD005A047A /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
 		72FF3AD9253F58CD0042B2A0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -106,6 +130,7 @@
 		7240BF27253E167C00C00BB9 /* LoginScreen */ = {
 			isa = PBXGroup;
 			children = (
+				72A1DBE32545B581005A047A /* Model */,
 				72FF3AD7253F58B40042B2A0 /* View */,
 				72FF3AD6253F58AF0042B2A0 /* Controller */,
 				7286E5192542B96F0027A69B /* Helpers */,
@@ -131,6 +156,7 @@
 				7286E51F2542DEA40027A69B /* TermsOfUseTextViewDelegate.swift */,
 				7286E52B254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift */,
 				722C7CB225456F630086198C /* ResendCodeTextViewDelegate.swift */,
+				72A1DBDF2545B424005A047A /* LoginInteractor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -170,9 +196,51 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		72A1DBD42545A753005A047A /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				72A1DBD72545AC37005A047A /* Protocols */,
+				72A1DBD52545A764005A047A /* BaseNetworkManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		72A1DBD72545AC37005A047A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				72A1DBD82545AC45005A047A /* NetworkManager.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		72A1DBDA2545AC58005A047A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				72A1DBDB2545AC65005A047A /* HTTPMethod.swift */,
+				72A1DBDD2545B23A005A047A /* RequestError.swift */,
+				72A1DBE12545B472005A047A /* Response.swift */,
+				72A1DBEA2545BF94005A047A /* UserDataModel.swift */,
+				72A1DBEC2545BFA2005A047A /* SettingsModel.swift */,
+				72A1DBEE2545BFCD005A047A /* Language.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		72A1DBE32545B581005A047A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				72A1DBE42545B5A9005A047A /* PhoneModel.swift */,
+				72A1DBE62545BF19005A047A /* CodeModel.swift */,
+				72A1DBE82545BF24005A047A /* CodeConfirmationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		72FF3ACB253F46D60042B2A0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				72A1DBDA2545AC58005A047A /* Model */,
+				72A1DBD42545A753005A047A /* Manager */,
 				7286E50E254237FF0027A69B /* Helpers */,
 				72FF3ACC253F46E50042B2A0 /* View */,
 			);
@@ -284,6 +352,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
+				72A1DBD62545A764005A047A /* BaseNetworkManager.swift in Sources */,
+				72A1DBE92545BF24005A047A /* CodeConfirmationModel.swift in Sources */,
+				72A1DBE72545BF19005A047A /* CodeModel.swift in Sources */,
+				72A1DBDC2545AC65005A047A /* HTTPMethod.swift in Sources */,
 				7286E5282542E79D0027A69B /* TermsOfUseStrings.swift in Sources */,
 				7286E5122542398F0027A69B /* FontsHelper.swift in Sources */,
 				7286E52A2542ECA70027A69B /* CodeConfirmationView.swift in Sources */,
@@ -291,15 +363,23 @@
 				7286E5202542DEA40027A69B /* TermsOfUseTextViewDelegate.swift in Sources */,
 				7286E51425423A160027A69B /* LoginStrings.swift in Sources */,
 				7240BF17253E0E7600C00BB9 /* LoginViewController.swift in Sources */,
+				72A1DBE02545B424005A047A /* LoginInteractor.swift in Sources */,
 				7286E51D2542BA940027A69B /* Checkbox.swift in Sources */,
 				7286E52E254312C50027A69B /* NumberInputView.swift in Sources */,
 				72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */,
+				72A1DBEB2545BF94005A047A /* UserDataModel.swift in Sources */,
+				72A1DBD92545AC45005A047A /* NetworkManager.swift in Sources */,
+				72A1DBDE2545B23A005A047A /* RequestError.swift in Sources */,
+				72A1DBE22545B472005A047A /* Response.swift in Sources */,
 				7286E52C254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift in Sources */,
+				72A1DBEF2545BFCD005A047A /* Language.swift in Sources */,
 				72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */,
 				7286E5102542380D0027A69B /* ColorHelper.swift in Sources */,
 				722C7CB325456F630086198C /* ResendCodeTextViewDelegate.swift in Sources */,
 				7286E51625423A640027A69B /* StringsHelper.swift in Sources */,
+				72A1DBED2545BFA2005A047A /* SettingsModel.swift in Sources */,
 				72FF3ACE253F470D0042B2A0 /* PrimaryButton.swift in Sources */,
+				72A1DBE52545B5A9005A047A /* PhoneModel.swift in Sources */,
 				7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
