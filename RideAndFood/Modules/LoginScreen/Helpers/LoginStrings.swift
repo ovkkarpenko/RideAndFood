@@ -12,6 +12,12 @@ enum LoginStrings {
     case headerPhoneNumber
     case termsOfUse
     case termsOfUseLink
+    case headerConfirmationCode
+    case codeDescriptionBegin
+    case codeDescriptionEnd
+    case resendCodeAfter
+    case resendCodeSeconds
+    case resendCodeLink
     
     func text() -> String {
         switch self {
@@ -21,6 +27,18 @@ enum LoginStrings {
             return "Даю согласие на обработку персональных данных, с пользовательским соглашением ознакомлен"
         case .termsOfUseLink:
             return "пользовательским соглашением"
+        case .headerConfirmationCode:
+            return "Код подтверждения"
+        case .codeDescriptionBegin:
+            return "На номер"
+        case .codeDescriptionEnd:
+            return "отправлено смс с кодом."
+        case .resendCodeAfter:
+            return "Повторная отправка через"
+        case .resendCodeSeconds:
+            return "секунд"
+        case .resendCodeLink:
+            return "Отправить повторно"
         }
     }
 }

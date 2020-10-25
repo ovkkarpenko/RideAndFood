@@ -27,10 +27,38 @@ class LoginViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    private lazy var codeConfirmationView: CodeConfirmationView = {
+        let view = CodeConfirmationView()
+        view.valueChangedCallback = { [weak self] isCompleted in
+            self?.confirmButton.isEnabled = isCompleted
+        }
+        view.resendCodePressedCallback = { [weak self] in
+            
+        }
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    
     private lazy var confirmButton = PrimaryButton(title: StringsHelper.next.text())
+    private let padding: CGFloat = 25
+    
+    // MARK: - Constraints
+    
+    private lazy var loginViewLeadingConstraint = loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding)
+    private lazy var loginViewTrailingConstraint = loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+    private lazy var loginViewTempTrailingConstraint = loginView.trailingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                                                           constant: -padding)
+    private lazy var codeViewCenterXConstraint = codeConfirmationView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+    private lazy var codeViewLeadingConstraint = codeConfirmationView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                                                               constant: padding)
+    private lazy var codeViewTrailingConstraint = codeConfirmationView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                                                                 constant: -padding)
+    private lazy var codeViewTempLeadingConstraint = codeConfirmationView.leadingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                                                               constant: padding)
     private lazy var confirmButtonBottomConstraint = confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                                                                            constant: -padding)
-    private let padding: CGFloat = 25
     
     // MARK: - UIViewController lifecycle methods
     
@@ -60,21 +88,45 @@ class LoginViewController: UIViewController {
     private func setupLayout() {
         view.backgroundColor = ColorHelper.background.color()
         view.addSubview(loginView)
+        view.addSubview(codeConfirmationView)
         view.addSubview(confirmButton)
         
         let loginViewCenterYConstraint = loginView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150)
         
         NSLayoutConstraint.activate([
-            loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             loginView.topAnchor.constraint(greaterThanOrEqualTo: view.topAnchor, constant: padding * 2),
-            loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             loginView.bottomAnchor.constraint(lessThanOrEqualTo: confirmButton.topAnchor, constant: -padding),
+            loginViewLeadingConstraint,
+            loginViewTrailingConstraint,
             loginViewCenterYConstraint,
+            codeViewTempLeadingConstraint,
+            codeConfirmationView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            codeConfirmationView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -padding),
             confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             confirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             confirmButtonBottomConstraint
         ])
         loginViewCenterYConstraint.priority = .defaultLow
+        
+        confirmButton.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
+    }
+    
+    private func showCodeConfirmationView() {
+        loginViewLeadingConstraint.isActive = false
+        loginViewTrailingConstraint.isActive = false
+        loginViewTempTrailingConstraint.isActive = true
+        codeViewTempLeadingConstraint.isActive = false
+        codeViewLeadingConstraint.isActive = true
+        codeViewTrailingConstraint.isActive = true
+        codeViewCenterXConstraint.isActive = true
+        
+        UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
+            self.view.layoutIfNeeded()
+        }
+        confirmButton.isEnabled = false
+        codeConfirmationView.focusTextField()
+        codeConfirmationView.runTimer()
+        codeConfirmationView.phoneNumberString = loginView.phoneNumberString
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -90,12 +142,15 @@ class LoginViewController: UIViewController {
     }
 
     @objc private func keyboardWillHide(notification: NSNotification) {
-
         confirmButtonBottomConstraint.constant = -padding
         
         UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
             self.view.layoutIfNeeded()
         }
+    }
+    
+    @objc private func confirmButtonPressed() {
+        showCodeConfirmationView()
     }
 }
 

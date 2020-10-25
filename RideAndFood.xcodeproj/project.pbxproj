@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		722C7CB325456F630086198C /* ResendCodeTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722C7CB225456F630086198C /* ResendCodeTextViewDelegate.swift */; };
 		7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF12253E0E7600C00BB9 /* AppDelegate.swift */; };
 		7240BF17253E0E7600C00BB9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF16253E0E7600C00BB9 /* LoginViewController.swift */; };
 		7240BF1C253E0E7A00C00BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */; };
@@ -20,6 +21,9 @@
 		7286E5202542DEA40027A69B /* TermsOfUseTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E51F2542DEA40027A69B /* TermsOfUseTextViewDelegate.swift */; };
 		7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E5242542E7610027A69B /* TermsOfUseViewController.swift */; };
 		7286E5282542E79D0027A69B /* TermsOfUseStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E5272542E79D0027A69B /* TermsOfUseStrings.swift */; };
+		7286E52A2542ECA70027A69B /* CodeConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E5292542ECA70027A69B /* CodeConfirmationView.swift */; };
+		7286E52C254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E52B254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift */; };
+		7286E52E254312C50027A69B /* NumberInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E52D254312C50027A69B /* NumberInputView.swift */; };
 		72FF3AC8253F46070042B2A0 /* InputMask in Frameworks */ = {isa = PBXBuildFile; productRef = 72FF3AC7253F46070042B2A0 /* InputMask */; };
 		72FF3ACE253F470D0042B2A0 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */; };
 		72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */; };
@@ -27,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		722C7CB225456F630086198C /* ResendCodeTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendCodeTextViewDelegate.swift; sourceTree = "<group>"; };
 		7240BF0F253E0E7600C00BB9 /* RideAndFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RideAndFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7240BF12253E0E7600C00BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7240BF16253E0E7600C00BB9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +47,9 @@
 		7286E51F2542DEA40027A69B /* TermsOfUseTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseTextViewDelegate.swift; sourceTree = "<group>"; };
 		7286E5242542E7610027A69B /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		7286E5272542E79D0027A69B /* TermsOfUseStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseStrings.swift; sourceTree = "<group>"; };
+		7286E5292542ECA70027A69B /* CodeConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeConfirmationView.swift; sourceTree = "<group>"; };
+		7286E52B254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeConfirmationTextFieldDelegate.swift; sourceTree = "<group>"; };
+		7286E52D254312C50027A69B /* NumberInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberInputView.swift; sourceTree = "<group>"; };
 		72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
 		72FF3AD9253F58CD0042B2A0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -121,6 +129,8 @@
 			children = (
 				7286E51325423A160027A69B /* LoginStrings.swift */,
 				7286E51F2542DEA40027A69B /* TermsOfUseTextViewDelegate.swift */,
+				7286E52B254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift */,
+				722C7CB225456F630086198C /* ResendCodeTextViewDelegate.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -191,6 +201,8 @@
 			children = (
 				72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */,
 				72FF3AD9253F58CD0042B2A0 /* LoginView.swift */,
+				7286E5292542ECA70027A69B /* CodeConfirmationView.swift */,
+				7286E52D254312C50027A69B /* NumberInputView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -274,14 +286,18 @@
 				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
 				7286E5282542E79D0027A69B /* TermsOfUseStrings.swift in Sources */,
 				7286E5122542398F0027A69B /* FontsHelper.swift in Sources */,
+				7286E52A2542ECA70027A69B /* CodeConfirmationView.swift in Sources */,
 				7286E51B2542B9CB0027A69B /* ConstantsHelper.swift in Sources */,
 				7286E5202542DEA40027A69B /* TermsOfUseTextViewDelegate.swift in Sources */,
 				7286E51425423A160027A69B /* LoginStrings.swift in Sources */,
 				7240BF17253E0E7600C00BB9 /* LoginViewController.swift in Sources */,
 				7286E51D2542BA940027A69B /* Checkbox.swift in Sources */,
+				7286E52E254312C50027A69B /* NumberInputView.swift in Sources */,
 				72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */,
+				7286E52C254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift in Sources */,
 				72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */,
 				7286E5102542380D0027A69B /* ColorHelper.swift in Sources */,
+				722C7CB325456F630086198C /* ResendCodeTextViewDelegate.swift in Sources */,
 				7286E51625423A640027A69B /* StringsHelper.swift in Sources */,
 				72FF3ACE253F470D0042B2A0 /* PrimaryButton.swift in Sources */,
 				7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */,

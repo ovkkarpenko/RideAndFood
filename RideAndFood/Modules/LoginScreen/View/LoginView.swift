@@ -27,6 +27,10 @@ class LoginView: UIView {
         }
     }
     
+    var phoneNumberString: String? {
+        phoneTextField.text
+    }
+    
     // MARK: - UI
     
     private lazy var bgImageView: UIImageView = {
