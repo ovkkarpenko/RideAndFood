@@ -135,7 +135,7 @@
                                                         <constraint firstAttribute="height" priority="750" constant="30" id="a7p-v0-mDu"/>
                                                         <constraint firstAttribute="width" priority="750" constant="30" id="b4f-P0-wgV"/>
                                                     </constraints>
-                                                    <state key="normal" image="xmark.circle.fill" catalog="system"/>
+                                                    <state key="normal" image="removeButton"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -247,7 +247,7 @@
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="removeButton" width="30" height="30"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

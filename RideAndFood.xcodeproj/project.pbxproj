@@ -14,6 +14,7 @@
 		7240BF1C253E0E7A00C00BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */; };
 		7240BF1F253E0E7A00C00BB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */; };
 		F709FFDC254458AE00A83A7C /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */; };
+		F720A8A32547467B00B1BA7B /* SupportServiceStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */; };
 		F7CAAC012540A5000049390C /* GeneralGUISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CAAC002540A5000049390C /* GeneralGUISettings.swift */; };
 		F7FD685D253F72BD00A67E07 /* SupportService.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7FD685C253F72BD00A67E07 /* SupportService.storyboard */; };
 		F7FD6861253F72DB00A67E07 /* SupportMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */; };
@@ -30,6 +31,7 @@
 		7240BF1E253E0E7A00C00BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7240BF20253E0E7A00C00BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
+		F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportServiceStrings.swift; sourceTree = "<group>"; };
 		F7CAAC002540A5000049390C /* GeneralGUISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralGUISettings.swift; sourceTree = "<group>"; };
 		F7FD685C253F72BD00A67E07 /* SupportService.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SupportService.storyboard; sourceTree = "<group>"; };
 		F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportMessageViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				F7FD685C253F72BD00A67E07 /* SupportService.storyboard */,
 				F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */,
 				F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */,
+				F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */,
 			);
 			path = SupportService;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 				F7FD6861253F72DB00A67E07 /* SupportMessageViewController.swift in Sources */,
 				7240BF15253E0E7600C00BB9 /* SceneDelegate.swift in Sources */,
 				F709FFDC254458AE00A83A7C /* AddPhotoViewController.swift in Sources */,
+				F720A8A32547467B00B1BA7B /* SupportServiceStrings.swift in Sources */,
 				F7FE9837254330E4009B89F5 /* BaseCustomUIComponents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

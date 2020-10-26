@@ -32,13 +32,13 @@ class AddPhotoViewController: UIViewController {
     }
     
     private func customizeInfoLabel() {
-        infoLabel.text = "При необходимости прикрепите изображения"
+        infoLabel.text = SupportServiceString.getString(.photoAdderDescription)()
         infoLabel.textColor = Colors.getColor(.textGray)()
     }
     
     private func customizeAddPhotoButton() {
         addPhotoButton.customizeButton(type: .blueButton)
-        addPhotoButton.setTitle("Отпарвить", for: .normal)
+        addPhotoButton.setTitle(SupportServiceString.getString(.sendButton)(), for: .normal)
     }
     
     @IBAction func addPhoto(_ sender: UIButton) {
@@ -52,16 +52,16 @@ class AddPhotoViewController: UIViewController {
                     if granted {
                         self.callPicker()
                     } else {
-                        let privacyInfo = UIAlertController(title: "Разрешите доступ", message: "Предоставьте приложению необходимые права доступа в настройках", preferredStyle: .alert)
+                        let privacyInfo = UIAlertController(title: SupportServiceString.getString(.allowAccess)(), message: SupportServiceString.getString(.allowAccessMessage)(), preferredStyle: .alert)
                         
-                        let settings = UIAlertAction(title: "Настройки", style: .default) { _ in
+                        let settings = UIAlertAction(title: SupportServiceString.getString(.settings)(), style: .default) { _ in
                             UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:]) { _ in
                                 privacyInfo.dismiss(animated: true, completion: nil)
                             }
                         }
                         
                         privacyInfo.addAction(settings)
-                        privacyInfo.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+                        privacyInfo.addAction(UIAlertAction(title: SupportServiceString.getString(.cancelButton)(), style: .cancel, handler: nil))
                         self.present(privacyInfo, animated: true)
                     }
                 }
@@ -77,20 +77,20 @@ class AddPhotoViewController: UIViewController {
         
         let picker = UIAlertController()
         
-        let takePhoto = UIAlertAction(title: "Снять фото или видео", style: .default) { [unowned self] _ in
+        let takePhoto = UIAlertAction(title: SupportServiceString.getString(.takePhoto)(), style: .default) { [unowned self] _ in
             self.presentPhotoPicker(sourceType: .camera)
         }
         
         takePhoto.setValue(UIImage(systemName: "camera.fill"), forKey: "image")
         
-        let choosePhoto = UIAlertAction(title: "Медиатека", style: .default) { [unowned self] _ in
+        let choosePhoto = UIAlertAction(title: SupportServiceString.getString(.mediaLibrary)(), style: .default) { [unowned self] _ in
             self.presentPhotoPicker(sourceType: .photoLibrary)
         }
         choosePhoto.setValue(UIImage(systemName: "rectangle.on.rectangle"), forKey: "image")
         
         picker.addAction(takePhoto)
         picker.addAction(choosePhoto)
-        picker.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        picker.addAction(UIAlertAction(title: SupportServiceString.getString(.cancelButton)(), style: .cancel, handler: nil))
         
         present(picker, animated: true)
     }

@@ -39,13 +39,13 @@ class SupportMessageViewController: UIViewController {
         messageTextView.layer.borderColor = Colors.getColor(.borderGray)().cgColor
         messageTextView.layer.cornerRadius = generalCornerRaduis
         messageTextView.textColor = Colors.getColor(.textGray)()
-        messageTextView.text = "Опишите возникшую проблему"
+        messageTextView.text = SupportServiceString.getString(.problemDescription)()
     }
     
     private func customizeContinueButton() {
         continueButton.customizeButton(type: .blueButton)
         continueButton.isEnabled = false
-        continueButton.setTitle("Далее", for: .normal)
+        continueButton.setTitle(SupportServiceString.getString(.continueButton)(), for: .normal)
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
