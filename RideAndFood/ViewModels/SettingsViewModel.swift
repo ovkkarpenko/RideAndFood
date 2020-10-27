@@ -17,22 +17,24 @@ class SettingsViewModel {
     
     private let api = ServerApi()
     
-    func fetchItems() {
-        api.getSettings(userId: 33, completion: { (settings, error) in
+    func fetchItems(userId: Int) {
+        api.getSettings(userId: userId, completion: { (settings, error) in
             guard let settings = settings else { return }
             
             self.items.onNext([
                 SectionModel(model: "", items: [
-                    TableItem(title: "Language", segue: "SettingsLanguageSegue", cellTypes: [.subTitle("English")]),
-                    TableItem(title: "Personal data", segue: "PersonalDataSegue", cellTypes: [.default()]),
-                    TableItem(title: "Push notification instead of ringing", cellTypes: [.switch(settings.doNotCall)])
+                    TableItem(title: SettingsStrings.language.text(), segue: "SettingsLanguageSegue", cellTypes: [.subTitle(SettingsStrings.language(.language)(settings.language))]),
+                    TableItem(title: SettingsStrings.personalData.text(), segue: "PersonalDataSegue", cellTypes: [.default()]),
+                    TableItem(title: SettingsStrings.pushNotification.text(), cellTypes: [.switch(settings.doNotCall)])
                 ]),
+                
                 SectionModel(model: " ", items: [
-                    TableItem(title: "Stock notifications", cellTypes: [.switch(settings.notificationDiscount)]),
-                    TableItem(title: "Available shares", segue: "AvailableSharesSegue", cellTypes: [.default()])
+                    TableItem(title: SettingsStrings.stockNotifications.text(), cellTypes: [.switch(settings.notificationDiscount)]),
+                    TableItem(title: SettingsStrings.availableShares.text(), segue: "AvailableSharesSegue", cellTypes: [.default()])
                 ]),
-                SectionModel(model: "Automatic updating of geolocation data", items: [
-                    TableItem(title: "Refresh over cellular network", cellTypes: [.switch(settings.updateMobileNetwork)])
+                
+                SectionModel(model: SettingsStrings.automaticUpdatingGeo.text(), items: [
+                    TableItem(title: SettingsStrings.refreshNetwork.text(), cellTypes: [.switch(settings.updateMobileNetwork)])
                 ])
             ])
         })

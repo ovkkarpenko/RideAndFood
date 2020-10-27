@@ -21,6 +21,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = SettingsStrings.title.text()
         setupTable()
     }
     
@@ -40,7 +41,7 @@ class SettingsViewController: UIViewController {
                 }
             }).disposed(by: bag)
         
-        viewModel.fetchItems()
+        viewModel.fetchItems(userId: 33)
     }
 }
 
