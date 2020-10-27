@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF12253E0E7600C00BB9 /* AppDelegate.swift */; };
-		7240BF15253E0E7600C00BB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */; };
 		7240BF17253E0E7600C00BB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF16253E0E7600C00BB9 /* ViewController.swift */; };
-		7240BF1A253E0E7600C00BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF18253E0E7600C00BB9 /* Main.storyboard */; };
 		7240BF1C253E0E7A00C00BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */; };
 		7240BF1F253E0E7A00C00BB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */; };
 		F709FFDC254458AE00A83A7C /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */; };
@@ -24,9 +22,7 @@
 /* Begin PBXFileReference section */
 		7240BF0F253E0E7600C00BB9 /* RideAndFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RideAndFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7240BF12253E0E7600C00BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7240BF16253E0E7600C00BB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7240BF19253E0E7600C00BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7240BF1E253E0E7A00C00BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7240BF20253E0E7A00C00BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,15 +66,21 @@
 			children = (
 				F7CAAC032540B1440049390C /* Helpers */,
 				F7FD685F253F72C600A67E07 /* SupportService */,
-				7240BF12253E0E7600C00BB9 /* AppDelegate.swift */,
-				7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */,
 				7240BF16253E0E7600C00BB9 /* ViewController.swift */,
-				7240BF18253E0E7600C00BB9 /* Main.storyboard */,
+				72BA017725489E0600197485 /* SupportingFiles */,
+			);
+			path = RideAndFood;
+			sourceTree = "<group>";
+		};
+		72BA017725489E0600197485 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7240BF12253E0E7600C00BB9 /* AppDelegate.swift */,
 				7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */,
 				7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */,
 				7240BF20253E0E7A00C00BB9 /* Info.plist */,
 			);
-			path = RideAndFood;
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		F7CAAC032540B1440049390C /* Helpers */ = {
@@ -162,7 +164,6 @@
 				7240BF1F253E0E7A00C00BB9 /* LaunchScreen.storyboard in Resources */,
 				7240BF1C253E0E7A00C00BB9 /* Assets.xcassets in Resources */,
 				F7FD685D253F72BD00A67E07 /* SupportService.storyboard in Resources */,
-				7240BF1A253E0E7600C00BB9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +178,6 @@
 				7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */,
 				F7CAAC012540A5000049390C /* GeneralGUISettings.swift in Sources */,
 				F7FD6861253F72DB00A67E07 /* SupportMessageViewController.swift in Sources */,
-				7240BF15253E0E7600C00BB9 /* SceneDelegate.swift in Sources */,
 				F709FFDC254458AE00A83A7C /* AddPhotoViewController.swift in Sources */,
 				F720A8A32547467B00B1BA7B /* SupportServiceStrings.swift in Sources */,
 				F7FE9837254330E4009B89F5 /* BaseCustomUIComponents.swift in Sources */,
@@ -187,14 +187,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7240BF18253E0E7600C00BB9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7240BF19253E0E7600C00BB9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -326,7 +318,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9H4ZLWV74V;
-				INFOPLIST_FILE = RideAndFood/Info.plist;
+				INFOPLIST_FILE = RideAndFood/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -345,7 +337,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9H4ZLWV74V;
-				INFOPLIST_FILE = RideAndFood/Info.plist;
+				INFOPLIST_FILE = RideAndFood/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
