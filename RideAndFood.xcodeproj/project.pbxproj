@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		722C7CB325456F630086198C /* ResendCodeTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722C7CB225456F630086198C /* ResendCodeTextViewDelegate.swift */; };
+		723DE27F2548A8F200E39743 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723DE27E2548A8F200E39743 /* LoginViewController.swift */; };
 		7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF12253E0E7600C00BB9 /* AppDelegate.swift */; };
-		7240BF17253E0E7600C00BB9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF16253E0E7600C00BB9 /* LoginViewController.swift */; };
+		7240BF17253E0E7600C00BB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF16253E0E7600C00BB9 /* ViewController.swift */; };
 		7240BF1C253E0E7A00C00BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */; };
 		7240BF1F253E0E7A00C00BB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */; };
 		7286E5102542380D0027A69B /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E50F2542380D0027A69B /* ColorHelper.swift */; };
@@ -40,13 +41,20 @@
 		72FF3ACE253F470D0042B2A0 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */; };
 		72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */; };
 		72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3AD9253F58CD0042B2A0 /* LoginView.swift */; };
+		F709FFDC254458AE00A83A7C /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */; };
+		F720A8A32547467B00B1BA7B /* SupportServiceStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */; };
+		F7CAAC012540A5000049390C /* GeneralGUISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CAAC002540A5000049390C /* GeneralGUISettings.swift */; };
+		F7FD685D253F72BD00A67E07 /* SupportService.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7FD685C253F72BD00A67E07 /* SupportService.storyboard */; };
+		F7FD6861253F72DB00A67E07 /* SupportMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */; };
+		F7FE9837254330E4009B89F5 /* BaseCustomUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		722C7CB225456F630086198C /* ResendCodeTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendCodeTextViewDelegate.swift; sourceTree = "<group>"; };
+		723DE27E2548A8F200E39743 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7240BF0F253E0E7600C00BB9 /* RideAndFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RideAndFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7240BF12253E0E7600C00BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7240BF16253E0E7600C00BB9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7240BF16253E0E7600C00BB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7240BF1E253E0E7A00C00BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7240BF20253E0E7A00C00BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +85,12 @@
 		72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
 		72FF3AD9253F58CD0042B2A0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
+		F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportServiceStrings.swift; sourceTree = "<group>"; };
+		F7CAAC002540A5000049390C /* GeneralGUISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralGUISettings.swift; sourceTree = "<group>"; };
+		F7FD685C253F72BD00A67E07 /* SupportService.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SupportService.storyboard; sourceTree = "<group>"; };
+		F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportMessageViewController.swift; sourceTree = "<group>"; };
+		F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCustomUIComponents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,20 +125,12 @@
 			isa = PBXGroup;
 			children = (
 				7286E5222542E7420027A69B /* Modules */,
-				7240BF26253E166500C00BB9 /* SupportingFiles */,
+				F7CAAC032540B1440049390C /* Helpers */,
+				F7FD685F253F72C600A67E07 /* SupportService */,
+				7240BF16253E0E7600C00BB9 /* ViewController.swift */,
+				72BA017725489E0600197485 /* SupportingFiles */,
 			);
 			path = RideAndFood;
-			sourceTree = "<group>";
-		};
-		7240BF26253E166500C00BB9 /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-				7240BF12253E0E7600C00BB9 /* AppDelegate.swift */,
-				7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */,
-				7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */,
-				7240BF20253E0E7A00C00BB9 /* Info.plist */,
-			);
-			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		7240BF27253E167C00C00BB9 /* LoginScreen */ = {
@@ -236,6 +242,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		72BA017725489E0600197485 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7240BF12253E0E7600C00BB9 /* AppDelegate.swift */,
+				7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */,
+				7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */,
+				7240BF20253E0E7A00C00BB9 /* Info.plist */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
 		72FF3ACB253F46D60042B2A0 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,7 +276,7 @@
 		72FF3AD6253F58AF0042B2A0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7240BF16253E0E7600C00BB9 /* LoginViewController.swift */,
+				723DE27E2548A8F200E39743 /* LoginViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -273,6 +290,26 @@
 				7286E52D254312C50027A69B /* NumberInputView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F7CAAC032540B1440049390C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F7CAAC002540A5000049390C /* GeneralGUISettings.swift */,
+				F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F7FD685F253F72C600A67E07 /* SupportService */ = {
+			isa = PBXGroup;
+			children = (
+				F7FD685C253F72BD00A67E07 /* SupportService.storyboard */,
+				F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */,
+				F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */,
+				F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */,
+			);
+			path = SupportService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,7 +351,7 @@
 				};
 			};
 			buildConfigurationList = 7240BF0A253E0E7600C00BB9 /* Build configuration list for PBXProject "RideAndFood" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -341,6 +378,7 @@
 			files = (
 				7240BF1F253E0E7A00C00BB9 /* LaunchScreen.storyboard in Resources */,
 				7240BF1C253E0E7A00C00BB9 /* Assets.xcassets in Resources */,
+				F7FD685D253F72BD00A67E07 /* SupportService.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				723DE27F2548A8F200E39743 /* LoginViewController.swift in Sources */,
 				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
 				72A1DBD62545A764005A047A /* BaseNetworkManager.swift in Sources */,
 				72A1DBE92545BF24005A047A /* CodeConfirmationModel.swift in Sources */,
@@ -362,7 +401,7 @@
 				7286E51B2542B9CB0027A69B /* ConstantsHelper.swift in Sources */,
 				7286E5202542DEA40027A69B /* TermsOfUseTextViewDelegate.swift in Sources */,
 				7286E51425423A160027A69B /* LoginStrings.swift in Sources */,
-				7240BF17253E0E7600C00BB9 /* LoginViewController.swift in Sources */,
+				7240BF17253E0E7600C00BB9 /* ViewController.swift in Sources */,
 				72A1DBE02545B424005A047A /* LoginInteractor.swift in Sources */,
 				7286E51D2542BA940027A69B /* Checkbox.swift in Sources */,
 				7286E52E254312C50027A69B /* NumberInputView.swift in Sources */,
@@ -381,6 +420,11 @@
 				72FF3ACE253F470D0042B2A0 /* PrimaryButton.swift in Sources */,
 				72A1DBE52545B5A9005A047A /* PhoneModel.swift in Sources */,
 				7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */,
+				F7CAAC012540A5000049390C /* GeneralGUISettings.swift in Sources */,
+				F7FD6861253F72DB00A67E07 /* SupportMessageViewController.swift in Sources */,
+				F709FFDC254458AE00A83A7C /* AddPhotoViewController.swift in Sources */,
+				F720A8A32547467B00B1BA7B /* SupportServiceStrings.swift in Sources */,
+				F7FE9837254330E4009B89F5 /* BaseCustomUIComponents.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +587,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = skillbox.RideAndFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
