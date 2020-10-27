@@ -3,27 +3,61 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF12253E0E7600C00BB9 /* AppDelegate.swift */; };
 		7240BF15253E0E7600C00BB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */; };
-		7240BF17253E0E7600C00BB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF16253E0E7600C00BB9 /* ViewController.swift */; };
+		7240BF17253E0E7600C00BB9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF16253E0E7600C00BB9 /* SettingsViewController.swift */; };
 		7240BF1A253E0E7600C00BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF18253E0E7600C00BB9 /* Main.storyboard */; };
 		7240BF1C253E0E7A00C00BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */; };
 		7240BF1F253E0E7A00C00BB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */; };
+		96D62A89E82A8316062BDE0E /* Pods_RideAndFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */; };
+		FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A0564254809A000C55447 /* SettingsAvailableSharesViewController.swift */; };
+		FA3A056825480A1900C55447 /* SettingsAvailableSharesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A056725480A1900C55447 /* SettingsAvailableSharesViewModel.swift */; };
+		FA3A056D254810A900C55447 /* CollectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A056C254810A900C55447 /* CollectionHelper.swift */; };
+		FA3A05702548128600C55447 /* PromotionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A056F2548128600C55447 /* PromotionsListViewController.swift */; };
+		FA43AE8B2544911000766652 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA43AE8A2544911000766652 /* Settings.storyboard */; };
+		FA43AE902544937D00766652 /* TableHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43AE8F2544937D00766652 /* TableHelper.swift */; };
+		FA43AE942544981E00766652 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43AE932544981E00766652 /* SettingsViewModel.swift */; };
+		FA43AEA32544B0A100766652 /* SegueSwizzler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43AEA22544B0A100766652 /* SegueSwizzler.swift */; };
+		FA44F2AF25459B080004A1C9 /* SettingsLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA44F2AE25459B080004A1C9 /* SettingsLanguageViewController.swift */; };
+		FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA44F2B125459B1F0004A1C9 /* SettingsLanguageViewModel.swift */; };
+		FA8CA7722546C873001FDE5E /* SettingsPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7712546C873001FDE5E /* SettingsPersonalDataViewController.swift */; };
+		FA8CA7752546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7742546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift */; };
+		FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7782546D0F8001FDE5E /* AlertButton.swift */; };
+		FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA77C2546D360001FDE5E /* AlertTextField.swift */; };
+		FA8CA7802546D531001FDE5E /* AlertTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA77F2546D531001FDE5E /* AlertTextFieldViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		260608DF4629E155247171D4 /* Pods-RideAndFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RideAndFood.release.xcconfig"; path = "Target Support Files/Pods-RideAndFood/Pods-RideAndFood.release.xcconfig"; sourceTree = "<group>"; };
+		59450567917FDB3850FEC3EC /* Pods-RideAndFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RideAndFood.debug.xcconfig"; path = "Target Support Files/Pods-RideAndFood/Pods-RideAndFood.debug.xcconfig"; sourceTree = "<group>"; };
+		61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RideAndFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7240BF0F253E0E7600C00BB9 /* RideAndFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RideAndFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7240BF12253E0E7600C00BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7240BF16253E0E7600C00BB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7240BF16253E0E7600C00BB9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7240BF19253E0E7600C00BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7240BF1E253E0E7A00C00BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7240BF20253E0E7A00C00BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA3A0564254809A000C55447 /* SettingsAvailableSharesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAvailableSharesViewController.swift; sourceTree = "<group>"; };
+		FA3A056725480A1900C55447 /* SettingsAvailableSharesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAvailableSharesViewModel.swift; sourceTree = "<group>"; };
+		FA3A056C254810A900C55447 /* CollectionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHelper.swift; sourceTree = "<group>"; };
+		FA3A056F2548128600C55447 /* PromotionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsListViewController.swift; sourceTree = "<group>"; };
+		FA43AE8A2544911000766652 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		FA43AE8F2544937D00766652 /* TableHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHelper.swift; sourceTree = "<group>"; };
+		FA43AE932544981E00766652 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		FA43AEA22544B0A100766652 /* SegueSwizzler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueSwizzler.swift; sourceTree = "<group>"; };
+		FA44F2AE25459B080004A1C9 /* SettingsLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageViewController.swift; sourceTree = "<group>"; };
+		FA44F2B125459B1F0004A1C9 /* SettingsLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageViewModel.swift; sourceTree = "<group>"; };
+		FA8CA7712546C873001FDE5E /* SettingsPersonalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPersonalDataViewController.swift; sourceTree = "<group>"; };
+		FA8CA7742546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPersonalDataViewModel.swift; sourceTree = "<group>"; };
+		FA8CA7782546D0F8001FDE5E /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
+		FA8CA77C2546D360001FDE5E /* AlertTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTextField.swift; sourceTree = "<group>"; };
+		FA8CA77F2546D531001FDE5E /* AlertTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTextFieldViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +65,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96D62A89E82A8316062BDE0E /* Pods_RideAndFood.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3727488ABC83AA663419FD5A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				59450567917FDB3850FEC3EC /* Pods-RideAndFood.debug.xcconfig */,
+				260608DF4629E155247171D4 /* Pods-RideAndFood.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		493E12A5CDA37FF285717E41 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7240BF06253E0E7600C00BB9 = {
 			isa = PBXGroup;
 			children = (
 				7240BF11253E0E7600C00BB9 /* RideAndFood */,
 				7240BF10253E0E7600C00BB9 /* Products */,
+				3727488ABC83AA663419FD5A /* Pods */,
+				493E12A5CDA37FF285717E41 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +110,86 @@
 		7240BF11253E0E7600C00BB9 /* RideAndFood */ = {
 			isa = PBXGroup;
 			children = (
-				7240BF12253E0E7600C00BB9 /* AppDelegate.swift */,
-				7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */,
-				7240BF16253E0E7600C00BB9 /* ViewController.swift */,
-				7240BF18253E0E7600C00BB9 /* Main.storyboard */,
+				FA43AE85254490CB00766652 /* App */,
+				FA43AE84254490C300766652 /* Views */,
+				FA43AE86254490D300766652 /* Controllers */,
+				FA43AE88254490E000766652 /* ViewModels */,
+				FA43AE87254490DD00766652 /* Models */,
+				FA43AE8E2544935E00766652 /* Helper */,
 				7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */,
-				7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */,
 				7240BF20253E0E7A00C00BB9 /* Info.plist */,
 			);
 			path = RideAndFood;
+			sourceTree = "<group>";
+		};
+		FA43AE84254490C300766652 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA8CA7772546D0C2001FDE5E /* Styles */,
+				7240BF18253E0E7600C00BB9 /* Main.storyboard */,
+				FA43AE8A2544911000766652 /* Settings.storyboard */,
+				7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA43AE85254490CB00766652 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				7240BF12253E0E7600C00BB9 /* AppDelegate.swift */,
+				7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FA43AE86254490D300766652 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7240BF16253E0E7600C00BB9 /* SettingsViewController.swift */,
+				FA44F2AE25459B080004A1C9 /* SettingsLanguageViewController.swift */,
+				FA8CA7712546C873001FDE5E /* SettingsPersonalDataViewController.swift */,
+				FA8CA77F2546D531001FDE5E /* AlertTextFieldViewController.swift */,
+				FA3A0564254809A000C55447 /* SettingsAvailableSharesViewController.swift */,
+				FA3A056F2548128600C55447 /* PromotionsListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FA43AE87254490DD00766652 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FA43AE88254490E000766652 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				FA43AE932544981E00766652 /* SettingsViewModel.swift */,
+				FA44F2B125459B1F0004A1C9 /* SettingsLanguageViewModel.swift */,
+				FA8CA7742546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift */,
+				FA3A056725480A1900C55447 /* SettingsAvailableSharesViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FA43AE8E2544935E00766652 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				FA43AEA22544B0A100766652 /* SegueSwizzler.swift */,
+				FA43AE8F2544937D00766652 /* TableHelper.swift */,
+				FA3A056C254810A900C55447 /* CollectionHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		FA8CA7772546D0C2001FDE5E /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				FA8CA7782546D0F8001FDE5E /* AlertButton.swift */,
+				FA8CA77C2546D360001FDE5E /* AlertTextField.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +199,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7240BF23253E0E7A00C00BB9 /* Build configuration list for PBXNativeTarget "RideAndFood" */;
 			buildPhases = (
+				FC2EFC1717B447D30E11B712 /* [CP] Check Pods Manifest.lock */,
 				7240BF0B253E0E7600C00BB9 /* Sources */,
 				7240BF0C253E0E7600C00BB9 /* Frameworks */,
 				7240BF0D253E0E7600C00BB9 /* Resources */,
+				6B34789B1052C342B165BA8F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -128,19 +255,76 @@
 				7240BF1F253E0E7A00C00BB9 /* LaunchScreen.storyboard in Resources */,
 				7240BF1C253E0E7A00C00BB9 /* Assets.xcassets in Resources */,
 				7240BF1A253E0E7600C00BB9 /* Main.storyboard in Resources */,
+				FA43AE8B2544911000766652 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6B34789B1052C342B165BA8F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RideAndFood/Pods-RideAndFood-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RideAndFood/Pods-RideAndFood-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RideAndFood/Pods-RideAndFood-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC2EFC1717B447D30E11B712 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RideAndFood-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7240BF0B253E0E7600C00BB9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7240BF17253E0E7600C00BB9 /* ViewController.swift in Sources */,
+				FA44F2AF25459B080004A1C9 /* SettingsLanguageViewController.swift in Sources */,
+				FA43AE942544981E00766652 /* SettingsViewModel.swift in Sources */,
+				FA43AEA32544B0A100766652 /* SegueSwizzler.swift in Sources */,
+				FA8CA7802546D531001FDE5E /* AlertTextFieldViewController.swift in Sources */,
+				FA8CA7752546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift in Sources */,
+				FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */,
+				FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */,
+				FA43AE902544937D00766652 /* TableHelper.swift in Sources */,
+				FA8CA7722546C873001FDE5E /* SettingsPersonalDataViewController.swift in Sources */,
+				7240BF17253E0E7600C00BB9 /* SettingsViewController.swift in Sources */,
+				FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */,
 				7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */,
+				FA3A05702548128600C55447 /* PromotionsListViewController.swift in Sources */,
+				FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */,
+				FA3A056D254810A900C55447 /* CollectionHelper.swift in Sources */,
 				7240BF15253E0E7600C00BB9 /* SceneDelegate.swift in Sources */,
+				FA3A056825480A1900C55447 /* SettingsAvailableSharesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +466,7 @@
 		};
 		7240BF24253E0E7A00C00BB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59450567917FDB3850FEC3EC /* Pods-RideAndFood.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +485,7 @@
 		};
 		7240BF25253E0E7A00C00BB9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 260608DF4629E155247171D4 /* Pods-RideAndFood.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
