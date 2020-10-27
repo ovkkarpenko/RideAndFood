@@ -39,6 +39,8 @@ class SettingsViewController: UIViewController {
                     self.performSegue(withIdentifier: segue, sender: nil)
                 }
             }).disposed(by: bag)
+        
+        viewModel.fetchItems()
     }
 }
 

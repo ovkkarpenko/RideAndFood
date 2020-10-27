@@ -13,7 +13,7 @@ import Foundation
 enum CellType {
     case none
     case `default`(UIColor? = nil)
-    case `switch`
+    case `switch`(Bool)
     case icon(UIImage?)
     case subTitle(String)
     case radio(Bool)
@@ -42,8 +42,8 @@ class TableHelper {
                 defaultCell(cell, title: item.title, textColor: textColor)
             case .none:
                 noneCell(cell, title: item.title)
-            case .switch:
-                switchCell(cell, title: item.title)
+            case .switch(let checked):
+                switchCell(cell, title: item.title, checked: checked)
             case .icon(let icon):
                 iconCell(cell, title: item.title, icon: icon)
             case .subTitle(let subTitle):
@@ -79,11 +79,12 @@ class TableHelper {
         cell.accessoryType = .none
     }
     
-    private func switchCell(_ cell: UITableViewCell, title: String) {
+    private func switchCell(_ cell: UITableViewCell, title: String, checked: Bool) {
         cell.textLabel?.text = title
         cell.accessoryType = .none
         
         let switchView = UISwitch()
+        switchView.isOn = checked
         switchView.center = CGPoint(x: cell.frame.width-switchView.frame.width+8, y: cell.frame.height/2)
         cell.addSubview(switchView)
     }

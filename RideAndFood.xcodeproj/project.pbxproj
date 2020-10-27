@@ -29,6 +29,10 @@
 		FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7782546D0F8001FDE5E /* AlertButton.swift */; };
 		FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA77C2546D360001FDE5E /* AlertTextField.swift */; };
 		FA8CA7802546D531001FDE5E /* AlertTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA77F2546D531001FDE5E /* AlertTextFieldViewController.swift */; };
+		FAE81CA3254814BB0082A6B5 /* BaseNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE81CA2254814BB0082A6B5 /* BaseNetworkManager.swift */; };
+		FAE81CA7254815E40082A6B5 /* ServerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE81CA6254815E40082A6B5 /* ServerApi.swift */; };
+		FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE81CA9254818D10082A6B5 /* Settings.swift */; };
+		FAE81CB2254823620082A6B5 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE81CB1254823620082A6B5 /* Response.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +62,10 @@
 		FA8CA7782546D0F8001FDE5E /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
 		FA8CA77C2546D360001FDE5E /* AlertTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTextField.swift; sourceTree = "<group>"; };
 		FA8CA77F2546D531001FDE5E /* AlertTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTextFieldViewController.swift; sourceTree = "<group>"; };
+		FAE81CA2254814BB0082A6B5 /* BaseNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNetworkManager.swift; sourceTree = "<group>"; };
+		FAE81CA6254815E40082A6B5 /* ServerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerApi.swift; sourceTree = "<group>"; };
+		FAE81CA9254818D10082A6B5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		FAE81CB1254823620082A6B5 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +124,7 @@
 				FA43AE88254490E000766652 /* ViewModels */,
 				FA43AE87254490DD00766652 /* Models */,
 				FA43AE8E2544935E00766652 /* Helper */,
+				FAE81CA1254814AC0082A6B5 /* Repositories */,
 				7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */,
 				7240BF20253E0E7A00C00BB9 /* Info.plist */,
 			);
@@ -158,6 +167,8 @@
 		FA43AE87254490DD00766652 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FAE81CA9254818D10082A6B5 /* Settings.swift */,
+				FAE81CB1254823620082A6B5 /* Response.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,6 +201,15 @@
 				FA8CA77C2546D360001FDE5E /* AlertTextField.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		FAE81CA1254814AC0082A6B5 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				FAE81CA2254814BB0082A6B5 /* BaseNetworkManager.swift */,
+				FAE81CA6254815E40082A6B5 /* ServerApi.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA44F2AF25459B080004A1C9 /* SettingsLanguageViewController.swift in Sources */,
+				FAE81CA3254814BB0082A6B5 /* BaseNetworkManager.swift in Sources */,
 				FA43AE942544981E00766652 /* SettingsViewModel.swift in Sources */,
 				FA43AEA32544B0A100766652 /* SegueSwizzler.swift in Sources */,
 				FA8CA7802546D531001FDE5E /* AlertTextFieldViewController.swift in Sources */,
@@ -316,10 +337,13 @@
 				FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */,
 				FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */,
 				FA43AE902544937D00766652 /* TableHelper.swift in Sources */,
+				FAE81CA7254815E40082A6B5 /* ServerApi.swift in Sources */,
 				FA8CA7722546C873001FDE5E /* SettingsPersonalDataViewController.swift in Sources */,
 				7240BF17253E0E7600C00BB9 /* SettingsViewController.swift in Sources */,
 				FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */,
+				FAE81CB2254823620082A6B5 /* Response.swift in Sources */,
 				7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */,
+				FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */,
 				FA3A05702548128600C55447 /* PromotionsListViewController.swift in Sources */,
 				FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */,
 				FA3A056D254810A900C55447 /* CollectionHelper.swift in Sources */,
