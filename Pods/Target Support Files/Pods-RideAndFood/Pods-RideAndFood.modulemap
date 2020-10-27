@@ -1,6 +1,0 @@
-framework module Pods_RideAndFood {
-  umbrella header "Pods-RideAndFood-umbrella.h"
-
-  export *
-  module * { export * }
-}

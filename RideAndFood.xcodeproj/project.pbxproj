@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7240BF13253E0E7600C00BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF12253E0E7600C00BB9 /* AppDelegate.swift */; };
-		7240BF15253E0E7600C00BB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */; };
 		7240BF17253E0E7600C00BB9 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7240BF16253E0E7600C00BB9 /* SettingsViewController.swift */; };
 		7240BF1A253E0E7600C00BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF18253E0E7600C00BB9 /* Main.storyboard */; };
 		7240BF1C253E0E7A00C00BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */; };
@@ -41,7 +40,6 @@
 		61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RideAndFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7240BF0F253E0E7600C00BB9 /* RideAndFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RideAndFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7240BF12253E0E7600C00BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7240BF16253E0E7600C00BB9 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7240BF19253E0E7600C00BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -118,17 +116,26 @@
 		7240BF11253E0E7600C00BB9 /* RideAndFood */ = {
 			isa = PBXGroup;
 			children = (
-				FA43AE85254490CB00766652 /* App */,
 				FA43AE84254490C300766652 /* Views */,
 				FA43AE86254490D300766652 /* Controllers */,
 				FA43AE88254490E000766652 /* ViewModels */,
 				FA43AE87254490DD00766652 /* Models */,
 				FA43AE8E2544935E00766652 /* Helper */,
 				FAE81CA1254814AC0082A6B5 /* Repositories */,
-				7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */,
-				7240BF20253E0E7A00C00BB9 /* Info.plist */,
+				72D60ECE2548AF3C00052305 /* SupportingFiles */,
 			);
 			path = RideAndFood;
+			sourceTree = "<group>";
+		};
+		72D60ECE2548AF3C00052305 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7240BF12253E0E7600C00BB9 /* AppDelegate.swift */,
+				7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */,
+				7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */,
+				7240BF20253E0E7A00C00BB9 /* Info.plist */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		FA43AE84254490C300766652 /* Views */ = {
@@ -137,18 +144,8 @@
 				FA8CA7772546D0C2001FDE5E /* Styles */,
 				7240BF18253E0E7600C00BB9 /* Main.storyboard */,
 				FA43AE8A2544911000766652 /* Settings.storyboard */,
-				7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		FA43AE85254490CB00766652 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				7240BF12253E0E7600C00BB9 /* AppDelegate.swift */,
-				7240BF14253E0E7600C00BB9 /* SceneDelegate.swift */,
-			);
-			path = App;
 			sourceTree = "<group>";
 		};
 		FA43AE86254490D300766652 /* Controllers */ = {
@@ -347,7 +344,6 @@
 				FA3A05702548128600C55447 /* PromotionsListViewController.swift in Sources */,
 				FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */,
 				FA3A056D254810A900C55447 /* CollectionHelper.swift in Sources */,
-				7240BF15253E0E7600C00BB9 /* SceneDelegate.swift in Sources */,
 				FA3A056825480A1900C55447 /* SettingsAvailableSharesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,7 +490,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RideAndFood/Info.plist;
+				INFOPLIST_FILE = RideAndFood/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -513,7 +509,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RideAndFood/Info.plist;
+				INFOPLIST_FILE = RideAndFood/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
