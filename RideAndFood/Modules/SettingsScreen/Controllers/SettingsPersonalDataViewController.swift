@@ -18,9 +18,16 @@ class SettingsPersonalDataViewController: UIViewController {
     let bag = DisposeBag()
     let viewModel = SettingsPersonalDataViewModel()
     
+    var userId: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.fetchItems(userId: userId)
     }
     
     func setupTable() {

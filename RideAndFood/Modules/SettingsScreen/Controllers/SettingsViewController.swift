@@ -19,10 +19,17 @@ class SettingsViewController: UIViewController {
     let bag = DisposeBag()
     let viewModel = SettingsViewModel()
     
+    private let userId = 33
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = SettingsStrings.title.text()
         setupTable()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.fetchItems(userId: userId)
     }
     
     func setupTable() {
@@ -37,11 +44,17 @@ class SettingsViewController: UIViewController {
             .subscribe(onNext: { item in
                 item.completion?(self)
                 if let segue = item.segue {
-                    self.performSegue(withIdentifier: segue, sender: nil)
+                    self.performSegueWithIdentifier(identifier: segue, sender: nil) { segue in
+                        
+                        if let vc = segue.destination as? SettingsLanguageViewController {
+                            vc.userId = self.userId
+                            vc.viewModel.settings = self.viewModel.settings
+                        } else if let vc = segue.destination as? SettingsPersonalDataViewController {
+                            vc.userId = self.userId
+                        }
+                    }
                 }
             }).disposed(by: bag)
-        
-        viewModel.fetchItems(userId: 33)
     }
 }
 

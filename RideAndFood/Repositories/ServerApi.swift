@@ -10,7 +10,10 @@ import Foundation
 
 class ServerApi {
     
+    static let shared = ServerApi()
     private let networkManager: NetworkManager = BaseNetworkManager()
+    
+    private init() { }
     
     func getSettings(userId: Int, completion: @escaping (Settings?, Error?) -> Void) {
         
@@ -19,8 +22,44 @@ class ServerApi {
             urlString: "user/\(userId)/setting",
             data: "") { (response: Response<Settings>?, error) in
             
-            guard let data = response?.data, error == nil else { return completion(nil, error) }
-            completion(data, nil)
+            if let data = response?.data, error == nil { completion(data, nil) }
+            else { completion(nil, error) }
+        }
+    }
+    
+    func saveSettings(_ settings: Settings, userId: Int, completion: ((Bool, Error?) -> Void)? = nil) {
+        
+        networkManager.makeRequest(
+            httpMethod: .post,
+            urlString: "user/\(userId)/setting",
+            data: settings) { (response: Response<Settings>?, error) in
+            
+            if let _ = response?.data, error == nil { completion?(true, nil) }
+            else { completion?(false, error) }
+        }
+    }
+    
+    func getProfile(_ userId: Int, completion: @escaping (Profile?, Error?) -> Void) {
+        
+        networkManager.makeRequest(
+            httpMethod: .get,
+            urlString: "user/\(userId)/profile",
+            data: "") { (response: Response<Profile>?, error) in
+            
+            if let data = response?.data, error == nil { completion(data, nil) }
+            else { completion(nil, error) }
+        }
+    }
+    
+    func saveProfile(_ settings: Profile, userId: Int, completion: ((Bool, Error?) -> Void)? = nil) {
+        
+        networkManager.makeRequest(
+            httpMethod: .put,
+            urlString: "user/\(userId)/profile",
+            data: settings) { (response: Response<Profile>?, error) in
+            
+            if let _ = response?.data, error == nil { completion?(true, nil) }
+            else { completion?(false, error) }
         }
     }
 }

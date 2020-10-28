@@ -125,8 +125,8 @@
                                     <constraint firstItem="bLQ-mB-cuN" firstAttribute="leading" secondItem="bKP-v5-Zdt" secondAttribute="leading" constant="20" id="A8h-qx-5dq"/>
                                     <constraint firstItem="5tk-Za-eJ5" firstAttribute="leading" secondItem="bKP-v5-Zdt" secondAttribute="leading" constant="20" id="S2J-GD-9Fv"/>
                                     <constraint firstAttribute="trailing" secondItem="5tk-Za-eJ5" secondAttribute="trailing" constant="20" id="Uuw-PE-rLc"/>
-                                    <constraint firstAttribute="bottom" secondItem="bLQ-mB-cuN" secondAttribute="bottom" constant="40" id="ZfO-dw-l8y"/>
                                     <constraint firstItem="bLQ-mB-cuN" firstAttribute="top" secondItem="5tk-Za-eJ5" secondAttribute="bottom" constant="8" id="aia-ne-jEr"/>
+                                    <constraint firstItem="5tk-Za-eJ5" firstAttribute="top" secondItem="bKP-v5-Zdt" secondAttribute="top" constant="20" id="cE1-u9-mpA"/>
                                     <constraint firstAttribute="height" constant="140" id="q2y-FZ-5c3"/>
                                 </constraints>
                             </view>
@@ -140,6 +140,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alertHeightConstraint" destination="q2y-FZ-5c3" id="Wgi-gM-Y6U"/>
                         <outlet property="alertView" destination="bKP-v5-Zdt" id="pn2-Ev-IPN"/>
                         <outlet property="button" destination="bLQ-mB-cuN" id="hQ7-rA-ilk"/>
                         <outlet property="textField" destination="5tk-Za-eJ5" id="4l3-bz-WHy"/>

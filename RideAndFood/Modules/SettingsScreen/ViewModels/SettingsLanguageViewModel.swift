@@ -12,21 +12,31 @@ import Foundation
 
 class SettingsLanguageViewModel {
     
-    private var language: [TableItem] = []
+    var settings: Settings?
     var items = PublishSubject<[SectionModel<String, TableItem>]>()
     
-    func selectLanguage(checkedItem: TableItem) {
-        language = language.map { item in
-            return TableItem(title: item.title, cellTypes: [.radio(item.title == checkedItem.title)])
+    private let api = ServerApi.shared
+    private var language: [TableItem] = []
+    
+    func selectLanguage(userId: Int, checkedItem: TableItem) {
+        if var settings = self.settings {
+            settings.language = checkedItem.title == "Русский" ? "rus" : "eng"
+            api.saveSettings(settings, userId: userId)
+        }
+        
+        for i in 0..<language.count {
+            language[i].cellTypes = [.radio(language[i].title == checkedItem.title)]
         }
         items.onNext([SectionModel(model: "", items: language)])
     }
     
     func fetchItems() {
-        language = [
-            TableItem(title: "Русский", cellTypes: [.radio(true)]),
-            TableItem(title: "English", cellTypes: [.radio(false)])
-        ]
+        if let settings = self.settings {
+            language = [
+                TableItem(title: "Русский", cellTypes: [.radio(settings.language == "rus")]),
+                TableItem(title: "English", cellTypes: [.radio(settings.language == "eng")])
+            ]
+        }
         items.onNext([SectionModel(model: "", items: language)])
     }
     
