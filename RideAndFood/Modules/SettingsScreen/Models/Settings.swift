@@ -22,8 +22,10 @@ enum SettingsStrings {
         switch language {
         case "rus":
             return "Русский"
+        case "eng":
+            return "English"
         default:
-            return "Русский"
+            return "English"
         }
     }
     
@@ -67,11 +69,11 @@ struct Settings {
 extension Settings: Codable {
     
     init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        language = try values.decode(String.self, forKey: .language)
-        updateMobileNetwork = try values.decode(Bool.self, forKey: .updateMobileNetwork)
-        notificationDiscount = try values.decode(Bool.self, forKey: .notificationDiscount)
-        doNotCall = try values.decode(Bool.self, forKey: .doNotCall)
+        language = try container.decode(String.self, forKey: .language)
+        updateMobileNetwork = try container.decode(Bool.self, forKey: .updateMobileNetwork)
+        notificationDiscount = try container.decode(Bool.self, forKey: .notificationDiscount)
+        doNotCall = try container.decode(Bool.self, forKey: .doNotCall)
     }
 }
