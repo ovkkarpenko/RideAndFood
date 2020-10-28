@@ -184,8 +184,8 @@
 				FAE81CA1254814AC0082A6B5 /* Repositories */,
 				7286E5222542E7420027A69B /* Modules */,
 				F7CAAC032540B1440049390C /* Helpers */,
-				7240BF16253E0E7600C00BB9 /* ViewController.swift */,
 				72BA017725489E0600197485 /* SupportingFiles */,
+				7240BF16253E0E7600C00BB9 /* ViewController.swift */,
 			);
 			path = RideAndFood;
 			sourceTree = "<group>";
