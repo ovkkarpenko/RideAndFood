@@ -58,6 +58,8 @@
 		FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7782546D0F8001FDE5E /* AlertButton.swift */; };
 		FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA77C2546D360001FDE5E /* AlertTextField.swift */; };
 		FA8CA7802546D531001FDE5E /* AlertTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA77F2546D531001FDE5E /* AlertTextFieldViewController.swift */; };
+		FAA0B6C525496CB80020ACE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA0B6C425496CB80020ACE7 /* SceneDelegate.swift */; };
+		FAA0B6C925496D1D0020ACE7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA0B6C825496D1D0020ACE7 /* SettingsViewController.swift */; };
 		FAE81CA7254815E40082A6B5 /* ServerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE81CA6254815E40082A6B5 /* ServerApi.swift */; };
 		FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE81CA9254818D10082A6B5 /* Settings.swift */; };
 /* End PBXBuildFile section */
@@ -122,6 +124,8 @@
 		FA8CA7782546D0F8001FDE5E /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
 		FA8CA77C2546D360001FDE5E /* AlertTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTextField.swift; sourceTree = "<group>"; };
 		FA8CA77F2546D531001FDE5E /* AlertTextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTextFieldViewController.swift; sourceTree = "<group>"; };
+		FAA0B6C425496CB80020ACE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FAA0B6C825496D1D0020ACE7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FAE81CA6254815E40082A6B5 /* ServerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerApi.swift; sourceTree = "<group>"; };
 		FAE81CA9254818D10082A6B5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,12 +181,11 @@
 		7240BF11253E0E7600C00BB9 /* RideAndFood */ = {
 			isa = PBXGroup;
 			children = (
-				FA43AE8E2544935E00766652 /* Helper */,
 				FAE81CA1254814AC0082A6B5 /* Repositories */,
 				7286E5222542E7420027A69B /* Modules */,
 				F7CAAC032540B1440049390C /* Helpers */,
-				7240BF16253E0E7600C00BB9 /* ViewController.swift */,
 				72BA017725489E0600197485 /* SupportingFiles */,
+				7240BF16253E0E7600C00BB9 /* ViewController.swift */,
 			);
 			path = RideAndFood;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				7240BF12253E0E7600C00BB9 /* AppDelegate.swift */,
+				FAA0B6C425496CB80020ACE7 /* SceneDelegate.swift */,
 				7240BF1B253E0E7A00C00BB9 /* Assets.xcassets */,
 				7240BF1D253E0E7A00C00BB9 /* LaunchScreen.storyboard */,
 				7240BF20253E0E7A00C00BB9 /* Info.plist */,
@@ -362,6 +366,9 @@
 		F7CAAC032540B1440049390C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FA43AEA22544B0A100766652 /* SegueSwizzler.swift */,
+				FA43AE8F2544937D00766652 /* TableHelper.swift */,
+				FA3A056C254810A900C55447 /* CollectionHelper.swift */,
 				F7CAAC002540A5000049390C /* GeneralGUISettings.swift */,
 				F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */,
 			);
@@ -391,6 +398,7 @@
 		FA43AE86254490D300766652 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FAA0B6C825496D1D0020ACE7 /* SettingsViewController.swift */,
 				FA44F2AE25459B080004A1C9 /* SettingsLanguageViewController.swift */,
 				FA8CA7712546C873001FDE5E /* SettingsPersonalDataViewController.swift */,
 				FA8CA77F2546D531001FDE5E /* AlertTextFieldViewController.swift */,
@@ -417,16 +425,6 @@
 				FA3A056725480A1900C55447 /* SettingsAvailableSharesViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		FA43AE8E2544935E00766652 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				FA43AEA22544B0A100766652 /* SegueSwizzler.swift */,
-				FA43AE8F2544937D00766652 /* TableHelper.swift */,
-				FA3A056C254810A900C55447 /* CollectionHelper.swift */,
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 		FA8CA7772546D0C2001FDE5E /* Styles */ = {
@@ -601,9 +599,11 @@
 				FA44F2AF25459B080004A1C9 /* SettingsLanguageViewController.swift in Sources */,
 				FA43AE942544981E00766652 /* SettingsViewModel.swift in Sources */,
 				FA43AEA32544B0A100766652 /* SegueSwizzler.swift in Sources */,
+				FAA0B6C925496D1D0020ACE7 /* SettingsViewController.swift in Sources */,
 				FA8CA7802546D531001FDE5E /* AlertTextFieldViewController.swift in Sources */,
 				FA8CA7752546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift in Sources */,
 				FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */,
+				FAA0B6C525496CB80020ACE7 /* SceneDelegate.swift in Sources */,
 				FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */,
 				FA43AE902544937D00766652 /* TableHelper.swift in Sources */,
 				FAE81CA7254815E40082A6B5 /* ServerApi.swift in Sources */,
