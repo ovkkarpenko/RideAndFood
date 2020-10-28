@@ -188,6 +188,7 @@
 				FAE81CA1254814AC0082A6B5 /* Repositories */,
 				7286E5222542E7420027A69B /* Modules */,
 				F7CAAC032540B1440049390C /* Helpers */,
+				7240BF16253E0E7600C00BB9 /* ViewController.swift */,
 				72BA017725489E0600197485 /* SupportingFiles */,
 				7240BF16253E0E7600C00BB9 /* ViewController.swift */,
 			);
@@ -244,6 +245,7 @@
 				72D60EF22548B35900052305 /* SettingsScreen */,
 				72FF3ACB253F46D60042B2A0 /* Common */,
 				7240BF27253E167C00C00BB9 /* LoginScreen */,
+				F7FD685F253F72C600A67E07 /* SupportService */,
 				7286E5212542E7340027A69B /* TermsOfUseScreen */,
 			);
 			path = Modules;
