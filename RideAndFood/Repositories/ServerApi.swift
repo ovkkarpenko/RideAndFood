@@ -31,6 +31,10 @@ class ServerApi {
         sendRequest(apiConfig: ApiConfig<Profile>.saveProfile(data: profile), completion: completion)
     }
     
+    func getPromotions(completion: (([Promotion]?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<[Promotion]>.getPromotions, completion: completion)
+    }
+    
     private func sendRequest<T: Codable, V: Codable>(apiConfig: ApiConfig<T>, completion: ((V?) -> ())?) {
         let request = apiConfig.createRequest()
         

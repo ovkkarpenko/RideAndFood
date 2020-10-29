@@ -6,4 +6,13 @@
 //  Copyright © 2020 skillbox. All rights reserved.
 //
 
-import Foundation
+enum PersonalDataStrings {
+    case name
+    
+    func text() -> String {
+        switch self {
+        case .name:
+            return "Имя"
+        }
+    }
+}

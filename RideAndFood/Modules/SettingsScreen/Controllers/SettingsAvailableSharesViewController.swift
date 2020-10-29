@@ -21,7 +21,15 @@ class SettingsAvailableSharesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = PromotionsStrings.title.text()
         setupTable()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? PromotionsViewController,
+           let promotionType = sender as? PromotionType {
+            vc.promotionType = promotionType
+        }
     }
     
     func setupTable() {
@@ -35,7 +43,7 @@ class SettingsAvailableSharesViewController: UIViewController {
             .subscribe(onNext: { item in
                 item.completion?(self)
                 if let segue = item.segue {
-                    self.performSegue(withIdentifier: segue, sender: nil)
+                    self.performSegue(withIdentifier: segue, sender: PromotionType.init(rawValue: item.title))
                 }
             }).disposed(by: bag)
     }

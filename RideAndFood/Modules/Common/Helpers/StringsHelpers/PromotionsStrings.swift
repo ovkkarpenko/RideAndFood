@@ -6,4 +6,16 @@
 //  Copyright © 2020 skillbox. All rights reserved.
 //
 
-import Foundation
+enum PromotionsStrings {
+    case title
+    case details
+    
+    func text() -> String {
+        switch self {
+        case .title:
+            return "Акции"
+        case .details:
+            return "Подробнее"
+        }
+    }
+}

@@ -8,49 +8,6 @@
 
 import Foundation
 
-enum SettingsStrings {
-    case title
-    case language
-    case personalData
-    case pushNotification
-    case stockNotifications
-    case availableShares
-    case automaticUpdatingGeo
-    case refreshNetwork
-    
-    func language(_ language: String) -> String {
-        switch language {
-        case "rus":
-            return "Русский"
-        case "eng":
-            return "English"
-        default:
-            return "English"
-        }
-    }
-    
-    func text() -> String {
-        switch self {
-        case .title:
-            return "Настройки"
-        case .language:
-            return "Язык"
-        case .personalData:
-            return "Персональные данные"
-        case .pushNotification:
-            return "Push-уведомление вместо звонка"
-        case .stockNotifications:
-            return "Уведомления об акциях"
-        case .availableShares:
-            return "Доступные акции"
-        case .automaticUpdatingGeo:
-            return "Автоматическое обновление данных геолокации"
-        case .refreshNetwork:
-            return "Обновлять по сотовой сети"
-        }
-    }
-}
-
 struct Settings {
     
     var language: String

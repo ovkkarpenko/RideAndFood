@@ -10,4 +10,7 @@ import UIKit
 
 class PromotionCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var detailsButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
 }

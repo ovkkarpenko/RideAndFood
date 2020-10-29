@@ -19,8 +19,6 @@ class SettingsViewController: UIViewController {
     let bag = DisposeBag()
     let viewModel = SettingsViewModel()
     
-    private let userId = 33
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = SettingsStrings.title.text()
@@ -29,7 +27,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.fetchItems(userId: userId)
+        viewModel.fetchItems()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -39,10 +37,7 @@ class SettingsViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? SettingsLanguageViewController {
-            vc.userId = self.userId
             vc.viewModel.settings = self.viewModel.settings
-        } else if let vc = segue.destination as? SettingsPersonalDataViewController {
-            vc.userId = self.userId
         }
     }
     

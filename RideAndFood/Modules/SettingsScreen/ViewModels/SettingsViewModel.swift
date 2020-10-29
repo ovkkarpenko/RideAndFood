@@ -23,7 +23,7 @@ class SettingsViewModel {
         }
     }
     
-    func fetchItems(userId: Int) {
+    func fetchItems() {
         ServerApi.shared.getSettings(completion: { [weak self] settings in
             guard let settings = settings,
                   let self = self else { return }
