@@ -32,6 +32,20 @@ class SettingsViewController: UIViewController {
         viewModel.fetchItems(userId: userId)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel.saveItems()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? SettingsLanguageViewController {
+            vc.userId = self.userId
+            vc.viewModel.settings = self.viewModel.settings
+        } else if let vc = segue.destination as? SettingsPersonalDataViewController {
+            vc.userId = self.userId
+        }
+    }
+    
     func setupTable() {
         tableView.rx.setDelegate(self).disposed(by: bag)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
@@ -44,15 +58,7 @@ class SettingsViewController: UIViewController {
             .subscribe(onNext: { item in
                 item.completion?(self)
                 if let segue = item.segue {
-                    self.performSegueWithIdentifier(identifier: segue, sender: nil) { segue in
-                        
-                        if let vc = segue.destination as? SettingsLanguageViewController {
-                            vc.userId = self.userId
-                            vc.viewModel.settings = self.viewModel.settings
-                        } else if let vc = segue.destination as? SettingsPersonalDataViewController {
-                            vc.userId = self.userId
-                        }
-                    }
+                    self.performSegue(withIdentifier: segue, sender: nil)
                 }
             }).disposed(by: bag)
     }

@@ -12,5 +12,5 @@ struct Profile: Codable {
     
     var email: String?
     var name: String?
-    var phone: String
+    var phone: String?
 }

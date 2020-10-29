@@ -15,51 +15,35 @@ class ServerApi {
     
     private init() { }
     
-    func getSettings(userId: Int, completion: @escaping (Settings?, Error?) -> Void) {
-        
-        networkManager.makeRequest(
-            httpMethod: .get,
-            urlString: "user/\(userId)/setting",
-            data: "") { (response: Response<Settings>?, error) in
-            
-            if let data = response?.data, error == nil { completion(data, nil) }
-            else { completion(nil, error) }
-        }
+    func getSettings(completion: ((Settings?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<Settings>.getSettings, completion: completion)
     }
     
-    func saveSettings(_ settings: Settings, userId: Int, completion: ((Bool, Error?) -> Void)? = nil) {
-        
-        networkManager.makeRequest(
-            httpMethod: .post,
-            urlString: "user/\(userId)/setting",
-            data: settings) { (response: Response<Settings>?, error) in
-            
-            if let _ = response?.data, error == nil { completion?(true, nil) }
-            else { completion?(false, error) }
-        }
+    func saveSettings(_ settings: Settings, completion: ((Settings?) -> ())? = nil) {
+        sendRequest(apiConfig: ApiConfig<Settings>.saveSettings(data: settings), completion: completion)
     }
     
-    func getProfile(_ userId: Int, completion: @escaping (Profile?, Error?) -> Void) {
-        
-        networkManager.makeRequest(
-            httpMethod: .get,
-            urlString: "user/\(userId)/profile",
-            data: "") { (response: Response<Profile>?, error) in
-            
-            if let data = response?.data, error == nil { completion(data, nil) }
-            else { completion(nil, error) }
-        }
+    func getProfile(completion: ((Profile?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<Profile>.getProfile, completion: completion)
     }
     
-    func saveProfile(_ settings: Profile, userId: Int, completion: ((Bool, Error?) -> Void)? = nil) {
+    func saveProfile(_ profile: Profile, completion: ((Profile?) -> ())? = nil) {
+        sendRequest(apiConfig: ApiConfig<Profile>.saveProfile(data: profile), completion: completion)
+    }
+    
+    private func sendRequest<T: Codable, V: Codable>(apiConfig: ApiConfig<T>, completion: ((V?) -> ())?) {
+        let request = apiConfig.createRequest()
         
         networkManager.makeRequest(
-            httpMethod: .put,
-            urlString: "user/\(userId)/profile",
-            data: settings) { (response: Response<Profile>?, error) in
+            httpMethod: request.method,
+            urlString: request.url,
+            data: request.data) { (response: Response<V>?, error) in
             
-            if let _ = response?.data, error == nil { completion?(true, nil) }
-            else { completion?(false, error) }
+            if let data = response?.data, error == nil {
+                completion?(data)
+            } else {
+                completion?(nil)
+            }
         }
     }
 }
