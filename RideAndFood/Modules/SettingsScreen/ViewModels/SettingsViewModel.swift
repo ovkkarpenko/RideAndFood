@@ -15,32 +15,37 @@ class SettingsViewModel {
     
     var items = PublishSubject<[SectionModel<String, TableItem>]>()
     
-    private let api = ServerApi.shared
     var settings: Settings?
     
+    func saveItems() {
+        if let settings = settings {
+            ServerApi.shared.saveSettings(settings)
+        }
+    }
+    
     func fetchItems(userId: Int) {
-        api.getSettings(userId: userId, completion: { [weak self] (result, error) in
-            guard let result = result,
+        ServerApi.shared.getSettings(completion: { [weak self] settings in
+            guard let settings = settings,
                   let self = self else { return }
             
-            self.settings = result
+            self.settings = settings
             self.items.onNext([
                 SectionModel(model: "", items: [
                     TableItem(
                         title: SettingsStrings.language.text(),
                         segue: "SettingsLanguageSegue",
                         cellTypes: [
-                            .subTitle(SettingsStrings.language(.language)(result.language))
+                            .subTitle(SettingsStrings.language(.language)(settings.language))
                         ]
                     ),
                     TableItem(title: SettingsStrings.personalData.text(), segue: "PersonalDataSegue", cellTypes: [.default()]),
                     TableItem(
                         title: SettingsStrings.pushNotification.text(),
                         cellTypes: [
-                            .switch(result.doNotCall, { isOn in
-                                if var settings = self.settings {
-                                    settings.doNotCall = isOn
-                                    self.api.saveSettings(settings, userId: userId)
+                            .switch(settings.doNotCall, { isOn in
+                                if let _ = self.settings {
+                                    self.settings?.doNotCall = isOn
+                                    ServerApi.shared.saveSettings(settings)
                                 }
                             })
                         ])
@@ -50,10 +55,10 @@ class SettingsViewModel {
                     TableItem(
                         title: SettingsStrings.stockNotifications.text(),
                         cellTypes: [
-                            .switch(result.notificationDiscount, { isOn in
-                                if var settings = self.settings {
-                                    settings.notificationDiscount = isOn
-                                    self.api.saveSettings(settings, userId: userId)
+                            .switch(settings.notificationDiscount, { isOn in
+                                if let _ = self.settings {
+                                    self.settings?.notificationDiscount = isOn
+                                    ServerApi.shared.saveSettings(settings)
                                 }
                             })
                         ]),
@@ -64,10 +69,10 @@ class SettingsViewModel {
                     TableItem(
                         title: SettingsStrings.refreshNetwork.text(),
                         cellTypes: [
-                            .switch(result.updateMobileNetwork, { isOn in
-                                if var settings = self.settings {
-                                    settings.updateMobileNetwork = isOn
-                                    self.api.saveSettings(settings, userId: userId)
+                            .switch(settings.updateMobileNetwork, { isOn in
+                                if let _ = self.settings {
+                                    self.settings?.updateMobileNetwork = isOn
+                                    ServerApi.shared.saveSettings(settings)
                                 }
                             })
                         ]),

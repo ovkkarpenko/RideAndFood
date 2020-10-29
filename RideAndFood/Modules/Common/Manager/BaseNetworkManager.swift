@@ -29,7 +29,7 @@ class BaseNetworkManager: NetworkManager {
         request.httpMethod = httpMethod.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        if httpMethod != .get {
+        if let data = data, httpMethod != .get {
             request.httpBody = try? JSONEncoder().encode(data)
         }
         

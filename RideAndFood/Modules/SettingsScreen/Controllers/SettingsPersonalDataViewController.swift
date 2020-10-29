@@ -27,7 +27,7 @@ class SettingsPersonalDataViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.fetchItems(userId: userId)
+        viewModel.fetchItems()
     }
     
     func setupTable() {

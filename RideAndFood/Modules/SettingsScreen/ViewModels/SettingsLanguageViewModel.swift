@@ -15,13 +15,12 @@ class SettingsLanguageViewModel {
     var settings: Settings?
     var items = PublishSubject<[SectionModel<String, TableItem>]>()
     
-    private let api = ServerApi.shared
     private var language: [TableItem] = []
     
     func selectLanguage(userId: Int, checkedItem: TableItem) {
         if var settings = self.settings {
             settings.language = checkedItem.title == "Русский" ? "rus" : "eng"
-            api.saveSettings(settings, userId: userId)
+            ServerApi.shared.saveSettings(settings)
         }
         
         for i in 0..<language.count {
