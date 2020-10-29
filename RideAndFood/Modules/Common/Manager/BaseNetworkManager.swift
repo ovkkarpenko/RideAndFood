@@ -28,7 +28,10 @@ class BaseNetworkManager: NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(data)
+        
+        if let data = data, httpMethod != .get {
+            request.httpBody = try? JSONEncoder().encode(data)
+        }
         
         DispatchQueue.global().async {
             URLSession.shared.dataTask(with: request) { (data, response, error) in
