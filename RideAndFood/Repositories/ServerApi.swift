@@ -35,6 +35,10 @@ class ServerApi {
         sendRequest(apiConfig: ApiConfig<[Promotion]>.getPromotions, completion: completion)
     }
     
+    func getPromotionDetails(id promotionId: Int, completion: ((PromotionDetails?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<PromotionDetails>.getPromotionDetails(promotionId), completion: completion)
+    }
+    
     private func sendRequest<T: Codable, V: Codable>(apiConfig: ApiConfig<T>, completion: ((V?) -> ())?) {
         let request = apiConfig.createRequest()
         

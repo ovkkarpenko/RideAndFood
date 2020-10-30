@@ -19,8 +19,7 @@ class PromotionsViewModel {
             guard let self = self,
                   var promotions = promotions else { return }
             
-            promotions = promotions.filter { return $0.type.lowercased() == promotionType.rawValue.lowercased() }
-            
+            promotions = promotions.filter { return $0.type == promotionType }
             self.items.onNext([SectionModel(model: "", items: promotions)])
         }
     }

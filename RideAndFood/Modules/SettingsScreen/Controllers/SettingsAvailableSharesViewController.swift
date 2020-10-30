@@ -42,9 +42,6 @@ class SettingsAvailableSharesViewController: UIViewController {
         tableView.rx.modelSelected(TableItem.self)
             .subscribe(onNext: { item in
                 item.completion?(self)
-                if let segue = item.segue {
-                    self.performSegue(withIdentifier: segue, sender: PromotionType.init(rawValue: item.title))
-                }
             }).disposed(by: bag)
     }
 }

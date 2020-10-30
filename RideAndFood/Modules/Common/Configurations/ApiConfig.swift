@@ -8,17 +8,7 @@
 
 import Foundation
 
-struct ServerConfig {
-    
-    static let shared = ServerConfig()
-    
-    private init() { }
-    
-    let baseUrl = "http://85.119.145.2"
-    let baseApiUrl = "http://85.119.145.2/api"
-}
-
-enum ApiConfig<T> {
+enum ApiConfig<T> where T: Codable {
     
     case getSettings
     case saveSettings(data: T)
@@ -27,6 +17,7 @@ enum ApiConfig<T> {
     case saveProfile(data: T)
     
     case getPromotions
+    case getPromotionDetails(Int)
     
     func createRequest() -> (method: HTTPMethod, url: String, data: T?) {
         let baseUrl = ServerConfig.shared.baseApiUrl
@@ -43,6 +34,8 @@ enum ApiConfig<T> {
             return (.put, "\(baseUrl)/user/\(userId)/profile", data)
         case .getPromotions:
             return (.get, "\(baseUrl)/user/\(userId)/promotions", nil)
+        case .getPromotionDetails(let promotionId):
+            return (.get, "\(baseUrl)/user/\(userId)/promotion/\(promotionId)", nil)
         }
     }
 }

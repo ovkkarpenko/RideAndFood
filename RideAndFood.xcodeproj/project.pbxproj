@@ -58,13 +58,16 @@
 		FA2C80CD254AFA4200F82637 /* PromotionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C80CC254AFA4200F82637 /* PromotionCollectionViewCell.swift */; };
 		FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A0564254809A000C55447 /* SettingsAvailableSharesViewController.swift */; };
 		FA3A056825480A1900C55447 /* SettingsAvailableSharesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A056725480A1900C55447 /* SettingsAvailableSharesViewModel.swift */; };
-		FA3A056D254810A900C55447 /* CollectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A056C254810A900C55447 /* CollectionHelper.swift */; };
 		FA3A05702548128600C55447 /* PromotionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A056F2548128600C55447 /* PromotionsViewController.swift */; };
 		FA43AE8B2544911000766652 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA43AE8A2544911000766652 /* Settings.storyboard */; };
 		FA43AE902544937D00766652 /* TableHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43AE8F2544937D00766652 /* TableHelper.swift */; };
 		FA43AE942544981E00766652 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43AE932544981E00766652 /* SettingsViewModel.swift */; };
+		FA44960A254C01000071E76F /* PromotionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA449609254C01000071E76F /* PromotionDetails.swift */; };
+		FA44960D254C0AC80071E76F /* Throwable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA44960C254C0AC80071E76F /* Throwable.swift */; };
+		FA449611254C0BE40071E76F /* DateTimeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA449610254C0BE40071E76F /* DateTimeHelper.swift */; };
 		FA44F2AF25459B080004A1C9 /* SettingsLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA44F2AE25459B080004A1C9 /* SettingsLanguageViewController.swift */; };
 		FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA44F2B125459B1F0004A1C9 /* SettingsLanguageViewModel.swift */; };
+		FA81AE73254B364F00B74182 /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81AE72254B364F00B74182 /* ServerConfig.swift */; };
 		FA8CA7722546C873001FDE5E /* SettingsPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7712546C873001FDE5E /* SettingsPersonalDataViewController.swift */; };
 		FA8CA7752546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7742546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift */; };
 		FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7782546D0F8001FDE5E /* AlertButton.swift */; };
@@ -136,13 +139,16 @@
 		FA2C80CC254AFA4200F82637 /* PromotionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA3A0564254809A000C55447 /* SettingsAvailableSharesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAvailableSharesViewController.swift; sourceTree = "<group>"; };
 		FA3A056725480A1900C55447 /* SettingsAvailableSharesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAvailableSharesViewModel.swift; sourceTree = "<group>"; };
-		FA3A056C254810A900C55447 /* CollectionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHelper.swift; sourceTree = "<group>"; };
 		FA3A056F2548128600C55447 /* PromotionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewController.swift; sourceTree = "<group>"; };
 		FA43AE8A2544911000766652 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		FA43AE8F2544937D00766652 /* TableHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHelper.swift; sourceTree = "<group>"; };
 		FA43AE932544981E00766652 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		FA449609254C01000071E76F /* PromotionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetails.swift; sourceTree = "<group>"; };
+		FA44960C254C0AC80071E76F /* Throwable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Throwable.swift; sourceTree = "<group>"; };
+		FA449610254C0BE40071E76F /* DateTimeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeHelper.swift; sourceTree = "<group>"; };
 		FA44F2AE25459B080004A1C9 /* SettingsLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageViewController.swift; sourceTree = "<group>"; };
 		FA44F2B125459B1F0004A1C9 /* SettingsLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageViewModel.swift; sourceTree = "<group>"; };
+		FA81AE72254B364F00B74182 /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
 		FA8CA7712546C873001FDE5E /* SettingsPersonalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPersonalDataViewController.swift; sourceTree = "<group>"; };
 		FA8CA7742546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPersonalDataViewModel.swift; sourceTree = "<group>"; };
 		FA8CA7782546D0F8001FDE5E /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
@@ -296,6 +302,7 @@
 			children = (
 				72A1DBD72545AC37005A047A /* Protocols */,
 				72A1DBD52545A764005A047A /* BaseNetworkManager.swift */,
+				FA44960C254C0AC80071E76F /* Throwable.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -399,10 +406,10 @@
 			isa = PBXGroup;
 			children = (
 				FA43AE8F2544937D00766652 /* TableHelper.swift */,
-				FA3A056C254810A900C55447 /* CollectionHelper.swift */,
 				F7CAAC002540A5000049390C /* GeneralGUISettings.swift */,
 				F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */,
 				FA050B6B2549A72E00CF363D /* AlertHelper.swift */,
+				FA449610254C0BE40071E76F /* DateTimeHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -458,6 +465,7 @@
 				FAE81CA9254818D10082A6B5 /* Settings.swift */,
 				FA050B6825499CF300CF363D /* Profile.swift */,
 				FA2C80B9254AED1200F82637 /* Promotion.swift */,
+				FA449609254C01000071E76F /* PromotionDetails.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -497,6 +505,7 @@
 			children = (
 				FAE8E5EB254AB8CE000DF2F7 /* UserConfig.swift */,
 				FAE8E5EE254ABA0C000DF2F7 /* ApiConfig.swift */,
+				FA81AE72254B364F00B74182 /* ServerConfig.swift */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -629,6 +638,7 @@
 				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
 				72A1DBD62545A764005A047A /* BaseNetworkManager.swift in Sources */,
 				72A1DBE92545BF24005A047A /* CodeConfirmationModel.swift in Sources */,
+				FA44960A254C01000071E76F /* PromotionDetails.swift in Sources */,
 				FAE8E5EF254ABA0C000DF2F7 /* ApiConfig.swift in Sources */,
 				72A1DBE72545BF19005A047A /* CodeModel.swift in Sources */,
 				72A1DBDC2545AC65005A047A /* HTTPMethod.swift in Sources */,
@@ -667,6 +677,7 @@
 				72A1DBED2545BFA2005A047A /* SettingsModel.swift in Sources */,
 				F7E5E9C7254A17AA0026ED71 /* SupportMessageViewController.swift in Sources */,
 				FAACAA93254B02CC005C3084 /* UIImage.swift in Sources */,
+				FA81AE73254B364F00B74182 /* ServerConfig.swift in Sources */,
 				72FF3ACE253F470D0042B2A0 /* PrimaryButton.swift in Sources */,
 				72A1DBE52545B5A9005A047A /* PhoneModel.swift in Sources */,
 				FA44F2AF25459B080004A1C9 /* SettingsLanguageViewController.swift in Sources */,
@@ -685,7 +696,8 @@
 				FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */,
 				FA3A05702548128600C55447 /* PromotionsViewController.swift in Sources */,
 				FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */,
-				FA3A056D254810A900C55447 /* CollectionHelper.swift in Sources */,
+				FA449611254C0BE40071E76F /* DateTimeHelper.swift in Sources */,
+				FA44960D254C0AC80071E76F /* Throwable.swift in Sources */,
 				FA2C80BA254AED1200F82637 /* Promotion.swift in Sources */,
 				F7E5E9C9254A17B40026ED71 /* SupportServiceStrings.swift in Sources */,
 				FA3A056825480A1900C55447 /* SettingsAvailableSharesViewModel.swift in Sources */,

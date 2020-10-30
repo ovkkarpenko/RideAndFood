@@ -14,8 +14,12 @@ class SettingsAvailableSharesViewModel {
     
     let items = Observable.just([
         SectionModel(model: "", items: [
-            TableItem(title: PromotionType.food.rawValue, segue: "PromotionsSegue", cellTypes: [.default()]),
-            TableItem(title: PromotionType.taxi.rawValue, segue: "PromotionsSegue", cellTypes: [.default()])
+            TableItem(title: PromotionsStrings.food.text(), cellTypes: [.default()], completion: { vc in
+                vc.performSegue(withIdentifier: "PromotionsSegue", sender: PromotionType.food)
+            }),
+            TableItem(title: PromotionsStrings.taxi.text(), cellTypes: [.default()], completion: { vc in
+                vc.performSegue(withIdentifier: "PromotionsSegue", sender: PromotionType.taxi)
+            })
         ])
     ])
     
