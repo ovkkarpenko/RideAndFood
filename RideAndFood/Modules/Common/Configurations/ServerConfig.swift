@@ -8,12 +8,5 @@
 
 import Foundation
 
-struct ServerConfig {
-    
-    static let shared = ServerConfig()
-    
-    private init() { }
-    
-    let baseUrl = "http://85.119.145.2"
-    let baseApiUrl = "http://85.119.145.2/api"
-}
+let baseUrl = "http://85.119.145.2"
+let baseApiUrl = "\(baseUrl)/api"

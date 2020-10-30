@@ -49,7 +49,7 @@ class PromotionDetailsViewController: UIViewController {
                                     : PromotionsStrings.buttonTaxiTitle.text(), for: .normal)
             
             if promotion.media.count >= 2,
-               let url = URL(string: ServerConfig.shared.baseUrl + promotion.media[0].url) {
+               let url = URL(string: baseUrl + promotion.media[0].url) {
                 imageView.imageByUrl(from: url)
             }
             
