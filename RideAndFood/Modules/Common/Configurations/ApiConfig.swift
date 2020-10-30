@@ -20,7 +20,7 @@ enum ApiConfig<T> where T: Codable {
     case getPromotionDetails(Int)
     
     func createRequest() -> (method: HTTPMethod, url: String, data: T?) {
-        let baseUrl = ServerConfig.shared.baseApiUrl
+        let baseUrl = baseApiUrl
         let userId = UserConfig.shared.userId
         
         switch self {

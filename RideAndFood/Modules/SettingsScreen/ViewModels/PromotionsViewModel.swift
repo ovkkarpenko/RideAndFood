@@ -38,7 +38,7 @@ class PromotionsViewModel {
                     cell.title.text = item.title
                     cell.detailsButton.setTitle(PromotionsStrings.details.text(), for: .normal)
                     if item.media.count >= 2,
-                       let url = URL(string: ServerConfig.shared.baseUrl + item.media[1].url) {
+                       let url = URL(string: baseUrl + item.media[1].url) {
                         cell.imageView.imageByUrl(from: url)
                     }
                     return cell

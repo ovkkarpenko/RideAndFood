@@ -12,7 +12,7 @@ class BaseNetworkManager: NetworkManager {
     
     // MARK: - Private fields
     
-    private let baseUrl = URL(string: ServerConfig.shared.baseApiUrl)
+    private let baseUrl = URL(string: baseApiUrl)
     
     // MARK: - NetworkManager
     

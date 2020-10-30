@@ -8,11 +8,24 @@
 
 import Foundation
 
-struct UserConfig {
+class UserConfig {
+    
+    // MARK: - Singleton
     
     static let shared = UserConfig()
-    
     private init() { }
     
-    var userId: Int = 33
+    // MARK: - Private properties
+    
+    private let userIdKey = "userId"
+    
+    // MARK: - Public properties
+    
+    var userId: Int {
+        get {
+            UserDefaults.standard.integer(forKey: userIdKey)
+        } set {
+            UserDefaults.standard.setValue(newValue, forKey: userIdKey)
+        }
+    }
 }
