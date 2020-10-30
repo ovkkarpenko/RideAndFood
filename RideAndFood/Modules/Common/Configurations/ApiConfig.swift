@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ApiConfig<T> {
+enum ApiConfig<T> where T: Codable {
     
     case getSettings
     case saveSettings(data: T)
@@ -16,18 +16,26 @@ enum ApiConfig<T> {
     case getProfile
     case saveProfile(data: T)
     
+    case getPromotions
+    case getPromotionDetails(Int)
+    
     func createRequest() -> (method: HTTPMethod, url: String, data: T?) {
+        let baseUrl = ServerConfig.shared.baseApiUrl
         let userId = UserConfig.shared.userId
         
         switch self {
         case .getSettings:
-            return (.get, "user/\(userId)/setting", nil)
+            return (.get, "\(baseUrl)/user/\(userId)/setting", nil)
         case .saveSettings(let data):
-            return (.post, "user/\(userId)/setting", data)
+            return (.post, "\(baseUrl)/user/\(userId)/setting", data)
         case .getProfile:
-            return (.get, "user/\(userId)/profile", nil)
+            return (.get, "\(baseUrl)/user/\(userId)/profile", nil)
         case .saveProfile(let data):
-            return (.put, "user/\(userId)/profile", data)
+            return (.put, "\(baseUrl)/user/\(userId)/profile", data)
+        case .getPromotions:
+            return (.get, "\(baseUrl)/user/\(userId)/promotions", nil)
+        case .getPromotionDetails(let promotionId):
+            return (.get, "\(baseUrl)/user/\(userId)/promotion/\(promotionId)", nil)
         }
     }
 }

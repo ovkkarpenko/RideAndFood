@@ -17,7 +17,7 @@ class SettingsLanguageViewModel {
     
     private var language: [TableItem] = []
     
-    func selectLanguage(userId: Int, checkedItem: TableItem) {
+    func selectLanguage(checkedItem: TableItem) {
         if var settings = self.settings {
             settings.language = checkedItem.title == "Русский" ? "rus" : "eng"
             ServerApi.shared.saveSettings(settings)
