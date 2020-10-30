@@ -31,7 +31,7 @@ class SettingsPersonalDataViewModel {
                     TableItem(title: "+\(profile.phone ?? "")", cellTypes: [.none, .icon(UIImage(systemName: "person.fill"))])
                 ]),
                 
-                SectionModel(model: "Name", items: [
+                SectionModel(model: PersonalDataStrings.name.text(), items: [
                     TableItem(
                         title: isNameEmpty ? "What is your name?" : profile.name!,
                         cellTypes: [.default(isNameEmpty ? .gray : .black)], completion: { vc in

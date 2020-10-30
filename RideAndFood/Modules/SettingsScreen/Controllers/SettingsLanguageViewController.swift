@@ -18,8 +18,6 @@ class SettingsLanguageViewController: UIViewController {
     let bag = DisposeBag()
     let viewModel = SettingsLanguageViewModel()
     
-    var userId: Int = 0
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
@@ -34,7 +32,7 @@ class SettingsLanguageViewController: UIViewController {
         
         tableView.rx.modelSelected(TableItem.self)
             .subscribe(onNext: { item in
-                self.viewModel.selectLanguage(userId: self.userId, checkedItem: item)
+                self.viewModel.selectLanguage(checkedItem: item)
             }).disposed(by: bag)
         
         viewModel.fetchItems()
