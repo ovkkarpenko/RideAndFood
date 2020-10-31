@@ -18,9 +18,9 @@ enum PromotionsStrings {
     func text() -> String {
         switch self {
         case .food:
-            return "Food"
+            return "Еда"
         case .taxi:
-            return "Taxi"
+            return "Такси"
         case .title:
             return "Акции"
         case .details:
