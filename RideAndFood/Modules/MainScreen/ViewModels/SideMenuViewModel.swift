@@ -30,18 +30,27 @@ class SideMenuViewModel {
                     vc.present(controller, animated: true)
                 }
             }),
-            TableItem(title: SideMenuStrings.paymentMethod.text(), cellTypes: [.default()], completion: { vc in
+            TableItem(
+                title: SideMenuStrings.paymentMethod.text(),
+                cellTypes: [.default(), .icon(UIImage(named: "visa", in: Bundle.init(path: "Images/Icons"), with: .none))],
+                completion: { vc in
                 
             })
         ]),
         
         SectionModel(model: " ", items: [
-            TableItem(title: SideMenuStrings.tariffs.text(), cellTypes: [.default()], completion: { vc in
+            TableItem(
+                title: SideMenuStrings.tariffs.text(),
+                cellTypes: [.default()],
+                completion: { vc in
                 
             }),
-            TableItem(title: SideMenuStrings.promoCode.text(), cellTypes: [.default()], completion: { vc in
-                
-            }),
+            TableItem(
+                title: SideMenuStrings.promoCode.text(),
+                cellTypes: [.default(), .icon(UIImage(named: "promo", in: Bundle.init(path: "Images/Icons"), with: .none))],
+                completion: { vc in
+                    
+                }),
             TableItem(title: SideMenuStrings.promotions.text(), cellTypes: [.default()], completion: { vc in
                 
             })

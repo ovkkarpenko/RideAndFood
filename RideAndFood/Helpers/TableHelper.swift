@@ -104,13 +104,14 @@ class TableHelper {
     }
     
     private func iconCell(_ cell: UITableViewCell, icon: UIImage?) {
-        cell.textLabel?.text = "    \(cell.textLabel?.text ?? "")"
         cell.accessoryType = .none
         
         if let icon = icon {
+            cell.textLabel?.text = "\(icon.size.width >= 25 ? "          " : "       ")\(cell.textLabel?.text ?? "")"
+            
             let imageView = UIImageView(image: icon)
             imageView.tintColor = .systemIndigo
-            imageView.center = CGPoint(x: 20, y: cell.frame.height/2+2)
+            imageView.frame.origin = CGPoint(x: 15, y: cell.frame.height/2-4)
             cell.addSubview(imageView)
         }
     }
