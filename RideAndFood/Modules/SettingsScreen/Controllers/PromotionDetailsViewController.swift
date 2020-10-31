@@ -60,7 +60,7 @@ class PromotionDetailsViewController: UIViewController {
                    let isOver = promotionDetails.timeTo == nil
                     ? DateTimeHelper.shared.stringToDate(format: "yyyy-MM-dd", date: date)
                     : DateTimeHelper.shared.stringToDate(format: "yyyy-MM-dd HH:mm:ss", date: "\(date) \(promotionDetails.timeTo!)"),
-                   now < isOver {
+                   now > isOver {
                     
                     DispatchQueue.main.async {
                         self.promotionIsOverHeightConstraint.constant = 40

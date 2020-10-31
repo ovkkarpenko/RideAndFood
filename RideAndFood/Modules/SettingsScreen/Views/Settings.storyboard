@@ -70,27 +70,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G95-St-YAn">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="475"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Label" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oaP-5J-ZgO">
+                                <rect key="frame" x="20" y="539" width="335" height="98"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="98" id="9EE-un-V5t"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YhU-Eb-5Nb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="G95-St-YAn" firstAttribute="top" secondItem="h1z-G9-gcn" secondAttribute="topMargin" id="26v-w0-C57"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="G95-St-YAn" secondAttribute="bottom" id="iwH-gY-Lf5"/>
+                            <constraint firstItem="YhU-Eb-5Nb" firstAttribute="trailing" secondItem="oaP-5J-ZgO" secondAttribute="trailing" constant="20" id="D7m-j8-Oed"/>
+                            <constraint firstItem="oaP-5J-ZgO" firstAttribute="leading" secondItem="YhU-Eb-5Nb" secondAttribute="leading" constant="20" id="ETr-5q-rDZ"/>
+                            <constraint firstItem="YhU-Eb-5Nb" firstAttribute="bottom" secondItem="oaP-5J-ZgO" secondAttribute="bottom" constant="30" id="bKA-De-bdw"/>
                             <constraint firstItem="G95-St-YAn" firstAttribute="leading" secondItem="YhU-Eb-5Nb" secondAttribute="leading" id="n3C-3G-USn"/>
                             <constraint firstItem="YhU-Eb-5Nb" firstAttribute="trailing" secondItem="G95-St-YAn" secondAttribute="trailing" id="o3Z-45-7Hs"/>
+                            <constraint firstItem="oaP-5J-ZgO" firstAttribute="top" secondItem="G95-St-YAn" secondAttribute="bottom" constant="20" id="rur-vx-3fk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ihn-NL-mqb"/>
                     <connections>
                         <outlet property="tableView" destination="G95-St-YAn" id="3x2-au-yZm"/>
+                        <outlet property="textView" destination="oaP-5J-ZgO" id="B4D-bX-toS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NG3-dZ-ADJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="628" y="81"/>
+            <point key="canvasLocation" x="628" y="80.50974512743629"/>
         </scene>
         <!--Alert Text Field View Controller-->
         <scene sceneID="KEf-Ih-G74">
@@ -417,6 +432,9 @@
     </designables>
     <resources>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
