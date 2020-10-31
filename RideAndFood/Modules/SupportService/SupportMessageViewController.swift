@@ -34,6 +34,10 @@ class SupportMessageViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
+    @IBAction func closeButtonClicked(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
     private func customizeMessageTextView() {
         messageTextView.layer.borderWidth = 1
         messageTextView.layer.borderColor = Colors.getColor(.borderGray)().cgColor
