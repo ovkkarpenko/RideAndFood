@@ -29,3 +29,7 @@ class UserConfig {
         }
     }
 }
+
+// TODO: Store language in UserDefaults
+
+let language = "rus"
