@@ -172,6 +172,9 @@
                                     <constraint firstAttribute="height" constant="50" id="srQ-dj-Iq3"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="send:" destination="INt-vL-1lD" eventType="touchUpInside" id="7xr-4P-ndJ"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyl-V8-qEd">
                                 <rect key="frame" x="25" y="134" width="325" height="296"/>
@@ -221,10 +224,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Служба поддержки" id="4Gk-7g-Vp7"/>
                     <connections>
-                        <outlet property="addPhotoButton" destination="OPj-qg-lqI" id="U2z-vC-HN5"/>
                         <outlet property="addPhotoView" destination="hyl-V8-qEd" id="AUr-kl-1Ba"/>
                         <outlet property="infoLabel" destination="8Ef-Sa-j4M" id="tbn-nL-ghV"/>
                         <outlet property="photoCollectionView" destination="ebV-Ia-ULM" id="z3r-1k-kbP"/>
+                        <outlet property="sendButton" destination="OPj-qg-lqI" id="U2z-vC-HN5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Koc-59-r1j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

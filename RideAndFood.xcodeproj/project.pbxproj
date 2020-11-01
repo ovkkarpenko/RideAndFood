@@ -46,6 +46,8 @@
 		F73BC4FE254ECFF10018FC0A /* RequestErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4FD254ECFF10018FC0A /* RequestErrorModel.swift */; };
 		F73BC502254ED19D0018FC0A /* AddressModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC501254ED19D0018FC0A /* AddressModel.swift */; };
 		F73BC506254ED28E0018FC0A /* PhonesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC505254ED28E0018FC0A /* PhonesModel.swift */; };
+		F73BC50B254EDB3E0018FC0A /* MediaResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC50A254EDB3E0018FC0A /* MediaResponseModel.swift */; };
+		F73BC50E254EDF320018FC0A /* SupportResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC50D254EDF320018FC0A /* SupportResponseModel.swift */; };
 		F77DE253254A1928001338D8 /* GeneralGUISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CAAC002540A5000049390C /* GeneralGUISettings.swift */; };
 		F77DE255254A192C001338D8 /* BaseCustomUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */; };
 		F7891733254A14FD00849D27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA050B9B2549ACE100CF363D /* LaunchScreen.storyboard */; };
@@ -140,6 +142,8 @@
 		F73BC4FD254ECFF10018FC0A /* RequestErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestErrorModel.swift; sourceTree = "<group>"; };
 		F73BC501254ED19D0018FC0A /* AddressModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressModel.swift; sourceTree = "<group>"; };
 		F73BC505254ED28E0018FC0A /* PhonesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonesModel.swift; sourceTree = "<group>"; };
+		F73BC50A254EDB3E0018FC0A /* MediaResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaResponseModel.swift; sourceTree = "<group>"; };
+		F73BC50D254EDF320018FC0A /* SupportResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportResponseModel.swift; sourceTree = "<group>"; };
 		F7CAAC002540A5000049390C /* GeneralGUISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralGUISettings.swift; sourceTree = "<group>"; };
 		F7FD685C253F72BD00A67E07 /* SupportService.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SupportService.storyboard; sourceTree = "<group>"; };
 		F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportMessageViewController.swift; sourceTree = "<group>"; };
@@ -351,6 +355,8 @@
 				72A1DBEE2545BFCD005A047A /* Language.swift */,
 				F73BC501254ED19D0018FC0A /* AddressModel.swift */,
 				F73BC505254ED28E0018FC0A /* PhonesModel.swift */,
+				F73BC50A254EDB3E0018FC0A /* MediaResponseModel.swift */,
+				F73BC50D254EDF320018FC0A /* SupportResponseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -735,6 +741,7 @@
 				FAE8E5EF254ABA0C000DF2F7 /* ApiConfig.swift in Sources */,
 				72A1DBE72545BF19005A047A /* CodeModel.swift in Sources */,
 				72A1DBDC2545AC65005A047A /* HTTPMethod.swift in Sources */,
+				F73BC50E254EDF320018FC0A /* SupportResponseModel.swift in Sources */,
 				F73BC506254ED28E0018FC0A /* PhonesModel.swift in Sources */,
 				F7E5E9CB254A17B60026ED71 /* AddPhotoViewController.swift in Sources */,
 				7286E5282542E79D0027A69B /* TermsOfUseStrings.swift in Sources */,
@@ -784,6 +791,7 @@
 				FA43AE942544981E00766652 /* SettingsViewModel.swift in Sources */,
 				FAA0B6C925496D1D0020ACE7 /* SettingsViewController.swift in Sources */,
 				FA050B6925499CF300CF363D /* Profile.swift in Sources */,
+				F73BC50B254EDB3E0018FC0A /* MediaResponseModel.swift in Sources */,
 				FA8CA7802546D531001FDE5E /* AlertTextFieldViewController.swift in Sources */,
 				FA8CA7752546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift in Sources */,
 				FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */,

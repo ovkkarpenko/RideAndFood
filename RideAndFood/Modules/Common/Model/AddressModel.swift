@@ -12,11 +12,16 @@ struct AddressModel: Codable {
     var id: Int?
     var name: String?
     var address: String?
-    var comment_driver: String?
-    var comment_courier: String?
+    var commentDriver: String?
+    var commentCourier: String?
     var flat: Int?
     var intercom: Int?
     var entrance: Int?
     var floor: Int?
     var destination: Bool?
+    
+    private enum CodingKeys: String, CodingKey {
+        case commentDriver = "comment_driver"
+        case commentCourier = "comment_courier"
+    }
 }

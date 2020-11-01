@@ -12,7 +12,7 @@ import MobileCoreServices
 
 class AddPhotoViewController: UIViewController {
     @IBOutlet weak var addPhotoView: UIView!
-    @IBOutlet weak var addPhotoButton: CustomButton!
+    @IBOutlet weak var sendButton: CustomButton!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var photoCollectionView: UICollectionView!
     
@@ -37,9 +37,27 @@ class AddPhotoViewController: UIViewController {
     }
     
     private func customizeAddPhotoButton() {
-        addPhotoButton.customizeButton(type: .blueButton)
-        addPhotoButton.setTitle(SupportServiceString.getString(.sendButton)(), for: .normal)
+        sendButton.customizeButton(type: .blueButton)
+        sendButton.setTitle(SupportServiceString.getString(.sendButton)(), for: .normal)
     }
+    
+    @IBAction func send(_ sender: Any) {
+        let model = SupportResponseModel(message: "Some message to check")
+        let request = RequestModel(path: "/user/20/support", method: .post, body: model)
+        let networker = Networker()
+        
+        networker.makeRequest(request: request, images: photos) { (results: [SupportResponseModel]?, error: RequestErrorModel?) in
+            if let results = results {
+                print(results)
+            }
+            
+            if let error = error {
+                print(error.message)
+            }
+            
+        }
+    }
+    
     
     @IBAction func addPhoto(_ sender: UIButton) {
         if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) ==  AVAuthorizationStatus.authorized {
@@ -113,6 +131,7 @@ extension AddPhotoViewController: UIImagePickerControllerDelegate, UINavigationC
             if let image = videoPreviewImage(url: url) {
                 photos.append(image)
                 photoCollectionView.reloadData()
+                
             }
         }
         

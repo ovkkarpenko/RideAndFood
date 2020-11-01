@@ -6,11 +6,14 @@
 //  Copyright © 2020 skillbox. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Networker {
-    func makeRequest<T: Codable>(request: RequestModel, completion: @escaping (T?, RequestErrorModel?) -> Void) {
-        if let urlRequest = request.urlRequest() {
+    func makeRequest<T: Codable, U: Codable>(request: RequestModel<U>, images: [UIImage]?, completion: @escaping (T?, RequestErrorModel?) -> Void) {
+        var urlRequest: URLRequest?
+        urlRequest = images == nil ? request.urlRequest() : request.upload(images: images!)
+        
+        if let urlRequest = urlRequest {
             URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
                 if let error = error as NSError? {
                     print("Error code: ", error.code, "Error message: ", error.localizedDescription)
@@ -40,11 +43,7 @@ class Networker {
                 }
                 
                 DispatchQueue.main.async {
-                    if let responseData = responseModel.data {
-                        completion(responseData, RequestErrorModel(response.statusCode))
-                    } else {
-                        completion(nil, RequestErrorModel(response.statusCode))
-                    }
+                    completion(responseModel.data, RequestErrorModel(response.statusCode))
                 }
                 
             }.resume()
