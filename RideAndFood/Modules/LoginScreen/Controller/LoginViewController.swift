@@ -157,7 +157,7 @@ class LoginViewController: UIViewController {
         
         interactor.getCode(for: phone) { [weak self] (codeModel, error) in
             guard let codeModel = codeModel, error == nil else {
-                print("ERROR: \(String(describing: error))")
+                self?.showErrorAlert(message: LoginStrings.errorText.text())
                 return
             }
             
@@ -168,6 +168,12 @@ class LoginViewController: UIViewController {
                     self?.showCodeConfirmationView()
                 }
             }
+        }
+    }
+    
+    private func showErrorAlert(message: String) {
+        DispatchQueue.main.async {
+            AlertHelper.shared.alert(self, title: LoginStrings.errorTitle.text(), message: message)
         }
     }
     
@@ -196,7 +202,7 @@ class LoginViewController: UIViewController {
         if let code = codeConfirmationView.code, !code.isEmpty, let phone = phone, !phone.isEmpty {
             interactor.confirmCode(forPhone: phone, code: code) { [weak self] (userData, error) in
                 guard let userData = userData, error == nil else {
-                    print("ERROR: \(String(describing: error))")
+                    self?.showErrorAlert(message: LoginStrings.wrongCode.text())
                     return
                 }
                 

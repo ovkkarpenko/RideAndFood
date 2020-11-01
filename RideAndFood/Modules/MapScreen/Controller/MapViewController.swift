@@ -66,6 +66,13 @@ class MapViewController: UIViewController {
         return button
     }()
     
+    private lazy var personButton: UIButton = {
+        let button = RoundButton(type: .system)
+        button.bgImage = UIImage(named: "Person")
+        button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: - Private properties
     
     private let accessManager = AccessLocationManager()

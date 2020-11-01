@@ -13,11 +13,31 @@ enum MapStrings {
     case food
     
     func text() -> String {
+        switch language {
+        case "rus":
+            return rusText()
+        case "eng":
+            return engText()
+        default:
+            return rusText()
+        }
+    }
+    
+    private func rusText() -> String {
         switch self {
         case .taxi:
             return "Такси"
         case .food:
             return "Еда"
+        }
+    }
+    
+    private func engText() -> String {
+        switch self {
+        case .taxi:
+            return "Taxi"
+        case .food:
+            return "Food"
         }
     }
 }
