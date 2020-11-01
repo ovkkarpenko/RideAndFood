@@ -15,6 +15,7 @@ private let cellIdentifier = "SettingCell"
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     let bag = DisposeBag()
     let viewModel = SettingsViewModel()
@@ -23,6 +24,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         title = SettingsStrings.title.text()
         setupTable()
+        setupLayout()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,8 +32,8 @@ class SettingsViewController: UIViewController {
         viewModel.fetchItems()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         viewModel.saveItems()
     }
     
@@ -39,6 +41,12 @@ class SettingsViewController: UIViewController {
         if let vc = segue.destination as? SettingsLanguageViewController {
             vc.viewModel.settings = self.viewModel.settings
         }
+    }
+    
+    func setupLayout() {
+        backButton.rx.tap.subscribe(onNext: {
+            self.dismiss(animated: true)
+        }).disposed(by: bag)
     }
     
     func setupTable() {
