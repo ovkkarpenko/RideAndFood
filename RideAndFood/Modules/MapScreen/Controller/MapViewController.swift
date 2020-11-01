@@ -49,6 +49,13 @@ class MapViewController: UIViewController {
         return button
     }()
     
+    private lazy var menuButton: UIButton = {
+        let button = RoundButton(type: .system)
+        button.bgImage = UIImage(named: "MenuButton")
+        button.addTarget(self, action: #selector(menuButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: - Private properties
     
     private let accessManager = AccessLocationManager()
@@ -109,6 +116,7 @@ class MapViewController: UIViewController {
         view.addSubview(statusBarBlurView)
         view.addSubview(cardView)
         view.addSubview(myLocationButton)
+        view.addSubview(menuButton)
         
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -125,7 +133,9 @@ class MapViewController: UIViewController {
             cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             myLocationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding)
+            myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding),
+            menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            menuButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding)
         ])
     }
     
@@ -153,5 +163,14 @@ class MapViewController: UIViewController {
     @objc private func myLocationButtonPressed() {
         guard let coordinate = accessManager.location?.coordinate else { return }
         centerViewOn(coordinate: coordinate)
+    }
+    
+    @objc private func menuButtonPressed() {
+        if let vc = UIStoryboard.init(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "SideMenuController") as? SideMenuViewController {
+            
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.presentAnimate(self)
+        }
     }
 }

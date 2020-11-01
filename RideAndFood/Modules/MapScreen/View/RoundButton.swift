@@ -11,8 +11,7 @@ import UIKit
 class RoundButton: UIButton {
     
     // MARK: - UI
-
-    private let padding: CGFloat = 12
+    
     private let size: CGFloat = 40
     
     // MARK: - Public Properties
@@ -20,7 +19,6 @@ class RoundButton: UIButton {
     var bgImage: UIImage? {
         didSet {
             setBackgroundImage(bgImage, for: .normal)
-            imageEdgeInsets = .init(top: padding, left: padding, bottom: padding, right: padding)
         }
     }
     
