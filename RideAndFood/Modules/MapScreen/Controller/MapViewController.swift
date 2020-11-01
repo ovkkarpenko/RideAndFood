@@ -46,9 +46,7 @@ class MapViewController: UIViewController {
         let view = SideMenuView()
         view.viewController = self
         view.hideSideMenuCallback = { [weak self] in
-            guard let self = self else { return }
-            
-            self.toggleSideMenu(hide: true)
+            self?.toggleSideMenu(hide: true)
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
