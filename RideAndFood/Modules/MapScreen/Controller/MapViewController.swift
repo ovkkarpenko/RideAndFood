@@ -42,6 +42,21 @@ class MapViewController: UIViewController {
         return view
     }()
     
+    private lazy var sideMenuView: SideMenuView = {
+        let view = SideMenuView()
+        view.viewController = self
+        view.hideSideMenuCallback = { [weak self] in
+            guard let self = self else { return }
+            
+            UIView.animate(withDuration: 0.4) {
+                self.sideMenuRightAnchorConstraint.constant = -self.view.bounds.width
+                self.loadViewIfNeeded()
+            }
+        }
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var myLocationButton: UIButton = {
         let button = RoundButton(type: .system)
         button.bgImage = UIImage(named: "MyLocation")
@@ -73,6 +88,9 @@ class MapViewController: UIViewController {
             cardView.address = cuurentPlacemark?.name
         }
     }
+    
+    private lazy var sideMenuRightAnchorConstraint = sideMenuView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -self.view.bounds.width)
+    
     private let padding: CGFloat = 25
     
     // MARK: - Lifecycle methods
@@ -117,6 +135,7 @@ class MapViewController: UIViewController {
         view.addSubview(cardView)
         view.addSubview(myLocationButton)
         view.addSubview(menuButton)
+        view.addSubview(sideMenuView)
         
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -135,7 +154,11 @@ class MapViewController: UIViewController {
             myLocationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding),
             menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            menuButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding)
+            menuButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding),
+            sideMenuRightAnchorConstraint,
+            sideMenuView.topAnchor.constraint(equalTo: view.topAnchor),
+            sideMenuView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            sideMenuView.leftAnchor.constraint(equalTo: view.leftAnchor)
         ])
     }
     
@@ -166,11 +189,10 @@ class MapViewController: UIViewController {
     }
     
     @objc private func menuButtonPressed() {
-        if let vc = UIStoryboard.init(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: "SideMenuController") as? SideMenuViewController {
-            
-            vc.modalPresentationStyle = .overCurrentContext
-            vc.presentAnimate(self)
+        self.sideMenuRightAnchorConstraint.constant = -60
+        
+        UIView.animate(withDuration: 0.4) {
+            self.loadViewIfNeeded()
         }
     }
 }
