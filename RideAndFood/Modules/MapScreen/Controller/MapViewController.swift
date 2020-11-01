@@ -69,7 +69,7 @@ class MapViewController: UIViewController {
     private lazy var personButton: UIButton = {
         let button = RoundButton(type: .system)
         button.bgImage = UIImage(named: "Person")
-        button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
         return button
     }()
     
