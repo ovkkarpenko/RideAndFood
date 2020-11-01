@@ -56,6 +56,13 @@ class MapViewController: UIViewController {
         return button
     }()
     
+    private lazy var personButton: UIButton = {
+        let button = RoundButton(type: .system)
+        button.bgImage = UIImage(named: "Person")
+        button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: - Private properties
     
     private let accessManager = AccessLocationManager()
@@ -117,6 +124,7 @@ class MapViewController: UIViewController {
         view.addSubview(cardView)
         view.addSubview(myLocationButton)
         view.addSubview(menuButton)
+        view.addSubview(personButton)
         
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -135,7 +143,9 @@ class MapViewController: UIViewController {
             myLocationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding),
             menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            menuButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding)
+            menuButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding),
+            personButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding),
+            personButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
     }
     
@@ -172,5 +182,8 @@ class MapViewController: UIViewController {
             vc.modalPresentationStyle = .overCurrentContext
             vc.presentAnimate(self)
         }
+    }
+    
+    @objc private func personButtonPressed() {
     }
 }
