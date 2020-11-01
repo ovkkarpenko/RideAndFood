@@ -40,7 +40,7 @@ class BaseNetworkManager: NetworkManager {
                       error == nil
                 else {
                     if let response = response as? HTTPURLResponse,
-                       response.statusCode != 200 {
+                       !((200 ... 299) ~= response.statusCode) {
                         return completion(nil, RequestError.badRequest)
                     }
                     
@@ -48,7 +48,7 @@ class BaseNetworkManager: NetworkManager {
                 }
                 
                 if let response = response as? HTTPURLResponse,
-                   response.statusCode != 200 {
+                   !((200 ... 299) ~= response.statusCode) {
                     return completion(nil, RequestError.badRequest)
                 }
                 

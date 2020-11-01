@@ -65,7 +65,7 @@ class LoginView: UIView {
         let attributedString = NSMutableAttributedString(string: LoginStrings.termsOfUse.text(),
                                                          attributes: [
                                                             .foregroundColor: ColorHelper.secondaryText.color() as Any,
-                                                            .font: FontHelper.font12.font() as Any])
+                                                            .font: FontHelper.regular12.font() as Any])
         let linkRange = (attributedString.string as NSString).range(of: LoginStrings.termsOfUseLink.text())
         attributedString.addAttribute(.link,
                                       value: "termsOfUse://",

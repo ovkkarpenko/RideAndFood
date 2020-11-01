@@ -17,6 +17,7 @@ enum ColorHelper {
     case primaryButtonText
     case disabledButton
     case controlBackground
+    case shadow
     
     func color() -> UIColor? {
         switch self {
@@ -34,6 +35,8 @@ enum ColorHelper {
             return UIColor(named: "DisabledButton")
         case .controlBackground:
             return UIColor(named: "ControlBackground")
+        case .shadow:
+            return .black
         }
     }
 }
