@@ -161,7 +161,6 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            print(codeModel)
             DispatchQueue.main.async {
                 self?.codeLabel.text = "\(codeModel.code)"
                 self?.codeLabel.isHidden = false
@@ -195,13 +194,20 @@ class LoginViewController: UIViewController {
     @objc private func confirmButtonPressed() {
         confirmButton.isEnabled = false
         if let code = codeConfirmationView.code, !code.isEmpty, let phone = phone, !phone.isEmpty {
-            interactor.confirmCode(forPhone: phone, code: code) { (userData, error) in
+            interactor.confirmCode(forPhone: phone, code: code) { [weak self] (userData, error) in
                 guard let userData = userData, error == nil else {
                     print("ERROR: \(String(describing: error))")
                     return
                 }
                 
-                print(userData)
+                let userDefaultsManager = BaseUserDefaultsManager()
+                
+                userDefaultsManager.isAuthorized = true
+                print(userData.id)
+                
+                DispatchQueue.main.async {
+                    self?.dismiss(animated: true)
+                }
             }
         } else if let phone = loginView.phoneNumberString?.components(separatedBy: CharacterSet.decimalDigits.inverted)
             .joined() {

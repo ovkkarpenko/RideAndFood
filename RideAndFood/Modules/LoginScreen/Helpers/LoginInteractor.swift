@@ -13,14 +13,14 @@ class LoginInteractor {
     // MARK: - Private properties
     
     private let networkManager: NetworkManager = BaseNetworkManager()
-    private let basePath = "auth/"
     
     // MARK: - Public methods
     
     func getCode(for phone: String, completion: @escaping (CodeModel?, Error?) -> Void) {
-        networkManager.makeRequest(httpMethod: .post,
-                                   urlString: "\(basePath)registration",
-        data: PhoneModel(phone: phone)) { (response: Response<CodeModel>?, error) in
+        let request = ApiConfig.registration(data: PhoneModel(phone: phone)).createRequest()
+        networkManager.makeRequest(httpMethod: request.method,
+                                   urlString: request.url,
+                                   data: request.data) { (response: Response<CodeModel>?, error) in
             
             guard let code = response?.data, error == nil else {
                 return completion(nil, error)
@@ -31,9 +31,11 @@ class LoginInteractor {
     }
     
     func confirmCode(forPhone phone: String, code: String, completion: @escaping (UserDataModel?, Error?) -> Void) {
-        networkManager.makeRequest(httpMethod: .post,
-                                   urlString: "\(basePath)confirm",
-        data: CodeConfirmationModel(phone: phone, code: code)) { (response: Response<UserDataModel>?, error) in
+        let request = ApiConfig.confirm(data: CodeConfirmationModel(phone: phone, code: code)).createRequest()
+        
+        networkManager.makeRequest(httpMethod: request.method,
+                                   urlString: request.url,
+                                   data: request.data) { (response: Response<UserDataModel>?, error) in
             guard let userData = response?.data, error == nil else {
                 return completion(nil, error)
             }

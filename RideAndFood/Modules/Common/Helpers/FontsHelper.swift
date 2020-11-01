@@ -9,12 +9,15 @@
 import UIKit
 
 enum FontHelper {
-    case font12
+    case regular12
+    case semibold15
     
     func font() -> UIFont? {
         switch self {
-        case .font12:
+        case .regular12:
             return .systemFont(ofSize: 12)
+        case .semibold15:
+            return .systemFont(ofSize: 15, weight: .semibold)
         }
     }
 }

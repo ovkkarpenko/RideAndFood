@@ -36,7 +36,7 @@ class SettingsPersonalDataViewController: UIViewController {
         let attributedString = NSMutableAttributedString(string: PersonalDataStrings.termsOfUse.text(),
                                                          attributes: [
                                                             .foregroundColor: ColorHelper.secondaryText.color() as Any,
-                                                            .font: FontHelper.font12.font() as Any])
+                                                            .font: FontHelper.regular12.font() as Any])
         
         attributedString.addAttribute(.link,
                                       value: "termsOfUseLink1://",
