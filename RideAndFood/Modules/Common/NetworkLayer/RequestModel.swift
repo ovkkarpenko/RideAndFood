@@ -48,6 +48,7 @@ class RequestModel<EncodeType: Codable> {
                 request.httpMethod = method.rawValue
                 
                 // На самом деле этого здесь не должно быть. Заголовки также вводятся пользователем.
+                // Сделать общий конфигурационный файл с настройками подобного рода.
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
                 request.addValue("application/json", forHTTPHeaderField: "Accept")
                 for header in headers {

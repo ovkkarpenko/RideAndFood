@@ -60,8 +60,6 @@
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string></string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Доступ к медиатеке необходим, чтобы прикрепить файлы для вашего обращения в службу поддержки.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Доступ к медиатеке необходим, чтобы прикрепить файлы для вашего обращения в службу поддержки.</string>
 	<key>UIRequiredDeviceCapabilities</key>

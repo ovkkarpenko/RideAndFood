@@ -25,6 +25,8 @@ enum SupportServiceString {
     case requestSentMessageDescription
     
     func getString() -> String {
+        // if language == .rus {
+        // }
         switch self {
         case .supportServiceTitle:
             return "Служба поддержки"
@@ -54,6 +56,38 @@ enum SupportServiceString {
             return "Обращение отправлено"
         case .requestSentMessageDescription:
             return "В течении часа с вами свяжется наш менеджер и постарается решить вашу проблему."
+        }
+        // else {
+        // }
+        switch self {
+        case .supportServiceTitle:
+            return "Support service"
+        case .continueButton:
+            return "Next"
+        case .problemDescription:
+            return "Describe your problem"
+        case .photoAdderDescription:
+            return "Attach images if necessary"
+        case .sendButton:
+            return "Send"
+        case .takePhoto:
+            return "Take a photo or video"
+        case .mediaLibrary:
+            return "Media"
+        case .cancelButton:
+            return "Cancel"
+        case .great:
+            return "Excellent!"
+        case .allowAccess:
+            return "Allow access"
+        case .allowAccessMessage:
+            return "Grant the app the necessary access rights in the settings"
+        case .settings:
+            return "Settings"
+        case .requestSentMessage:
+            return "Petition submitted"
+        case .requestSentMessageDescription:
+            return "Our Manager will contact you within an hour and try to solve your problem."
         }
     }
 }

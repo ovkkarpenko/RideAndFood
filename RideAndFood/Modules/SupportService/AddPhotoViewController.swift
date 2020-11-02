@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import MobileCoreServices
+import Photos
 
 class AddPhotoViewController: UIViewController {
     @IBOutlet weak var addPhotoView: UIView!
@@ -89,14 +90,14 @@ class AddPhotoViewController: UIViewController {
     }
     
     @IBAction func addPhoto(_ sender: UIButton) {
-        if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) ==  AVAuthorizationStatus.authorized {
+        if PHPhotoLibrary.authorizationStatus() == .authorized {
             callPicker()
         } else {
-            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { [weak self] (granted: Bool) -> Void in
+            PHPhotoLibrary.requestAuthorization {  [weak self] (granted: PHAuthorizationStatus) in
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     
-                    if granted {
+                    if granted == .authorized {
                         self.callPicker()
                     } else {
                         let privacyInfo = UIAlertController(title: SupportServiceString.getString(.allowAccess)(), message: SupportServiceString.getString(.allowAccessMessage)(), preferredStyle: .alert)
@@ -112,7 +113,28 @@ class AddPhotoViewController: UIViewController {
                         self.present(privacyInfo, animated: true)
                     }
                 }
-            })
+            }
+//            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { [weak self] (granted: Bool) -> Void in
+//                DispatchQueue.main.async { [weak self] in
+//                    guard let self = self else { return }
+//
+//                    if granted {
+//                        self.callPicker()
+//                    } else {
+//                        let privacyInfo = UIAlertController(title: SupportServiceString.getString(.allowAccess)(), message: SupportServiceString.getString(.allowAccessMessage)(), preferredStyle: .alert)
+//
+//                        let settings = UIAlertAction(title: SupportServiceString.getString(.settings)(), style: .default) { _ in
+//                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:]) { _ in
+//                                privacyInfo.dismiss(animated: true, completion: nil)
+//                            }
+//                        }
+//
+//                        privacyInfo.addAction(settings)
+//                        privacyInfo.addAction(UIAlertAction(title: SupportServiceString.getString(.cancelButton)(), style: .cancel, handler: nil))
+//                        self.present(privacyInfo, animated: true)
+//                    }
+//                }
+//            })
         }
     }
     
