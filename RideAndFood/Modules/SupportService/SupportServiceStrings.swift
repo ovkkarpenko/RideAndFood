@@ -21,6 +21,8 @@ enum SupportServiceString {
     case allowAccess
     case allowAccessMessage
     case settings
+    case requestSentMessage
+    case requestSentMessageDescription
     
     func getString() -> String {
         switch self {
@@ -48,6 +50,10 @@ enum SupportServiceString {
             return "Предоставьте приложению необходимые права доступа в настройках"
         case .settings:
             return "Настройки"
+        case .requestSentMessage:
+            return "Обращение отправлено"
+        case .requestSentMessageDescription:
+            return "В течении часа с вами свяжется наш менеджер и постарается решить вашу проблему."
         }
     }
 }

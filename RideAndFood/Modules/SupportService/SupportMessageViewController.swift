@@ -18,6 +18,8 @@ class SupportMessageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = SupportServiceString.getString(.supportServiceTitle)()
+        
         messageTextView.delegate = self
         
         customizeMessageTextView()
@@ -44,6 +46,15 @@ class SupportMessageViewController: UIViewController {
         messageTextView.layer.cornerRadius = generalCornerRaduis
         messageTextView.textColor = Colors.getColor(.textGray)()
         messageTextView.text = SupportServiceString.getString(.problemDescription)()
+    }
+    
+    @IBAction func openNextPage(_ sender: Any) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addPhotoViewController = segue.destination as? AddPhotoViewController, segue.identifier == "NextPage" {
+            addPhotoViewController.message = messageTextView.text
+        }
     }
     
     private func customizeContinueButton() {

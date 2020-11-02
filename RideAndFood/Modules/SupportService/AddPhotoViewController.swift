@@ -15,14 +15,23 @@ class AddPhotoViewController: UIViewController {
     @IBOutlet weak var sendButton: CustomButton!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var photoCollectionView: UICollectionView!
+    @IBOutlet weak var responseMessageView: UIView!
+    @IBOutlet weak var requestSentMessageLabel: UILabel!
+    @IBOutlet weak var requestSentMessageDescriptionLabel: UILabel!
     
     private var photos: [UIImage] = []
+    var message: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = SupportServiceString.getString(.supportServiceTitle)()
+        
         customizeAddPhotoView()
         customizeInfoLabel()
         customizeAddPhotoButton()
+        customizeRequestSentMessageLabel()
+        customizeRequestSentMessageDescriptionLabel()
     }
     
     private func customizeAddPhotoView() {
@@ -41,23 +50,43 @@ class AddPhotoViewController: UIViewController {
         sendButton.setTitle(SupportServiceString.getString(.sendButton)(), for: .normal)
     }
     
-    @IBAction func send(_ sender: Any) {
-        let model = SupportResponseModel(message: "Some message to check")
-        let request = RequestModel(path: "/user/20/support", method: .post, body: model)
-        let networker = Networker()
-        
-        networker.makeRequest(request: request, images: photos) { (results: [SupportResponseModel]?, error: RequestErrorModel?) in
-            if let results = results {
-                print(results)
-            }
-            
-            if let error = error {
-                print(error.message)
-            }
-            
-        }
+    private func customizeRequestSentMessageLabel() {
+        requestSentMessageLabel.text = SupportServiceString.getString(.requestSentMessage)()
+        requestSentMessageLabel.textColor = Colors.getColor(.buttonGreen)()
     }
     
+    private func customizeRequestSentMessageDescriptionLabel() {
+        requestSentMessageDescriptionLabel.text = SupportServiceString.getString(.requestSentMessageDescription)()
+        requestSentMessageDescriptionLabel.textColor = Colors.getColor(.textGray)()
+    }
+    
+    @IBAction func send(_ sender: Any) {
+        if responseMessageView.isHidden {
+            let model = SupportResponseModel(message: message)
+            let request = RequestModel(path: supportPath, method: .post, body: model)
+            let networker = Networker()
+
+            networker.makeRequest(request: request, images: photos) { [weak self] (results: [SupportResponseModel]?, error: RequestErrorModel?) in
+                guard let self = self else { return }
+                
+//                if let results = results {
+//                    print(results)
+//                }
+
+                if let error = error {
+                    print(error.message)
+                    if error.response == .allRight {
+                        self.addPhotoView.isHidden = true
+                        self.photoCollectionView.isHidden = true
+                        self.responseMessageView.isHidden = false
+                        self.sendButton.setTitle(SupportServiceString.getString(.great)(), for: .normal)
+                    }
+                }
+            }
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
     
     @IBAction func addPhoto(_ sender: UIButton) {
         if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) ==  AVAuthorizationStatus.authorized {
