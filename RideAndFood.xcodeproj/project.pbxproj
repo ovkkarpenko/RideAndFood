@@ -39,7 +39,6 @@
 		72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */; };
 		72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3AD9253F58CD0042B2A0 /* LoginView.swift */; };
 		96D62A89E82A8316062BDE0E /* Pods_RideAndFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */; };
-		F70DB6C62550A88A00A738CE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA050B822549AADA00CF363D /* Info.plist */; };
 		F73BC4F0254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */; };
 		F73BC4F4254ECE0A0018FC0A /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F3254ECE0A0018FC0A /* RequestModel.swift */; };
 		F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F7254ECF3D0018FC0A /* Networker.swift */; };
@@ -677,7 +676,6 @@
 			files = (
 				F7FD685D253F72BD00A67E07 /* SupportService.storyboard in Resources */,
 				FA05E794254D764500A909A9 /* Main.storyboard in Resources */,
-				F70DB6C62550A88A00A738CE /* Info.plist in Resources */,
 				F7891733254A14FD00849D27 /* LaunchScreen.storyboard in Resources */,
 				FA43AE8B2544911000766652 /* Settings.storyboard in Resources */,
 				FA050B862549AB0500CF363D /* Assets.xcassets in Resources */,
