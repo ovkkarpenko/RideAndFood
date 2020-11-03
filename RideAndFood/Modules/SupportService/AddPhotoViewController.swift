@@ -81,6 +81,7 @@ class AddPhotoViewController: UIViewController {
                         self.photoCollectionView.isHidden = true
                         self.responseMessageView.isHidden = false
                         self.sendButton.setTitle(SupportServiceString.getString(.great)(), for: .normal)
+                        self.navigationItem.setHidesBackButton(true, animated: true)
                     }
                 }
             }
