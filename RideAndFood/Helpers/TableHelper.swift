@@ -94,7 +94,7 @@ class TableHelper {
             }).disposed(by: bag)
         
         switchView.translatesAutoresizingMaskIntoConstraints = false
-        switchView.isOn = checked
+        switchView.setOn(checked, animated: true)
         cell.addSubview(switchView)
         
         NSLayoutConstraint.activate([

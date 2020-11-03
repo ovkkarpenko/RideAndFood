@@ -47,8 +47,13 @@ class SideMenuView: UIView {
     
     private lazy var menuTableView: UITableView = {
         let tableView = UITableView()
+        tableView.tableFooterView = UIView.init(frame: .zero)
         tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(sideMenuSwipe))
+        swipeLeft.direction = .left
+        addGestureRecognizer(swipeLeft)
         
         tableView.rx.setDelegate(self).disposed(by: bag)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
@@ -56,7 +61,7 @@ class SideMenuView: UIView {
         viewModel.items
             .bind(to: tableView.rx.items(dataSource: viewModel.dataSource(cellIdentifier: cellIdentifier)))
             .disposed(by: bag)
-
+        
         tableView.rx.modelSelected(TableItem.self)
             .subscribe(onNext: { [weak self] item in
                 guard let self = self,
@@ -105,7 +110,7 @@ class SideMenuView: UIView {
     
     private func setupLayout() {
         backgroundColor = ColorHelper.background.color()
-
+        
         addSubview(closeButton)
         addSubview(titleLabel)
         addSubview(menuTableView)
@@ -129,6 +134,10 @@ class SideMenuView: UIView {
     }
     
     @objc private func closeButtonPressed() {
+        hideSideMenuCallback?()
+    }
+    
+    @objc private func sideMenuSwipe() {
         hideSideMenuCallback?()
     }
 }
