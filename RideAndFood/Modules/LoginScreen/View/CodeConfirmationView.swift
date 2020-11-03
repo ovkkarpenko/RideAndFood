@@ -106,7 +106,7 @@ class CodeConfirmationView: UIView {
         let string = NSMutableAttributedString(string: descriptionString,
                                                attributes: [
                                                 .foregroundColor: ColorHelper.secondaryText.color() as Any,
-                                                .font: FontHelper.font12.font() as Any,
+                                                .font: FontHelper.regular12.font() as Any,
                                                 .paragraphStyle: paragraph])
         return string
     }
@@ -116,7 +116,7 @@ class CodeConfirmationView: UIView {
         let string = NSMutableAttributedString(string: resendLink,
                                                attributes: [
                                                 .foregroundColor: ColorHelper.primary.color() as Any,
-                                                .font: FontHelper.font12.font() as Any])
+                                                .font: FontHelper.regular12.font() as Any])
         return string
     }
     

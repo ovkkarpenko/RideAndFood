@@ -19,6 +19,15 @@ enum SideMenuStrings {
     case title
     
     func text() -> String {
+        switch UserConfig.shared.settings.language {
+        case .rus:
+            return rus()
+        case .eng:
+            return eng()
+        }
+    }
+    
+    func rus() -> String {
         switch self {
         case .support:
             return "Служба поддержки"
@@ -36,6 +45,27 @@ enum SideMenuStrings {
             return "Об этом приложении (v.\(version))"
         case .title:
             return "Меню"
+        }
+    }
+    
+    func eng() -> String {
+        switch self {
+        case .support:
+            return "Support"
+        case .settings:
+            return "Settings"
+        case .paymentMethod:
+            return "Payment method"
+        case .tariffs:
+            return "Tariffs"
+        case .promoCode:
+            return "Promo code"
+        case .promotions:
+            return "Promotions"
+        case .about(let version):
+            return "About this app (v.\(version))"
+        case .title:
+            return "Menu"
         }
     }
 }

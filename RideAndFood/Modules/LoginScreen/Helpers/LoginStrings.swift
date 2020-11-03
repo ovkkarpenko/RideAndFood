@@ -18,8 +18,20 @@ enum LoginStrings {
     case resendCodeAfter
     case resendCodeSeconds
     case resendCodeLink
+    case errorTitle
+    case errorText
+    case wrongCode
     
     func text() -> String {
+        switch UserConfig.shared.settings.language {
+        case .rus:
+            return rusText()
+        case .eng:
+            return engText()
+        }
+    }
+    
+    private func rusText() -> String {
         switch self {
         case .headerPhoneNumber:
             return "Укажите номер телефона"
@@ -39,6 +51,41 @@ enum LoginStrings {
             return "секунд"
         case .resendCodeLink:
             return "Отправить повторно"
+        case .errorTitle:
+            return "Ошибка"
+        case .errorText:
+            return "Попробуйте ещё раз"
+        case .wrongCode:
+            return "Неверный код"
+        }
+    }
+    
+    private func engText() -> String {
+        switch self {
+        case .headerPhoneNumber:
+            return "Enter your phone number"
+        case .termsOfUse:
+            return "I agree to the processing of personal data, I have read the Terms of use"
+        case .termsOfUseLink:
+            return "Terms of use"
+        case .headerConfirmationCode:
+            return "Confirmation code"
+        case .codeDescriptionBegin:
+            return "The confirmation code was sent to"
+        case .codeDescriptionEnd:
+            return ""
+        case .resendCodeAfter:
+            return "Resend after"
+        case .resendCodeSeconds:
+            return "seconds"
+        case .resendCodeLink:
+            return "Resend"
+        case .errorTitle:
+            return "Error"
+        case .errorText:
+            return "Try again"
+        case .wrongCode:
+            return "Wrong code"
         }
     }
 }

@@ -19,7 +19,13 @@ class SettingsLanguageViewModel {
     
     func selectLanguage(checkedItem: TableItem) {
         if var settings = self.settings {
-            settings.language = checkedItem.title == "Русский" ? "rus" : "eng"
+            if checkedItem.title == "Русский" {
+                settings.language = .rus
+                UserConfig.shared.settings.language = .rus
+            } else {
+                settings.language = .eng
+                UserConfig.shared.settings.language = .eng
+            }
             ServerApi.shared.saveSettings(settings)
         }
         
@@ -32,8 +38,8 @@ class SettingsLanguageViewModel {
     func fetchItems() {
         if let settings = self.settings {
             language = [
-                TableItem(title: "Русский", cellTypes: [.radio(settings.language == "rus")]),
-                TableItem(title: "English", cellTypes: [.radio(settings.language == "eng")])
+                TableItem(title: "Русский", cellTypes: [.radio(settings.language == .rus)]),
+                TableItem(title: "English", cellTypes: [.radio(settings.language == .eng)])
             ]
         }
         items.onNext([SectionModel(model: "", items: language)])

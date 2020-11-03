@@ -13,7 +13,7 @@ import RxSwift
 private let cellIdentifier = "SettingsAvailableSharesCell"
 
 class SettingsAvailableSharesViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     let bag = DisposeBag()
@@ -43,5 +43,16 @@ class SettingsAvailableSharesViewController: UIViewController {
             .subscribe(onNext: { item in
                 item.completion?(self)
             }).disposed(by: bag)
+    }
+    
+    @IBAction func close(_ sender: Any) {
+        if let navigationController = navigationController {
+            
+            if navigationController.viewControllers.count == 1 {
+                dismiss(animated: true)
+            } else {
+                navigationController.popViewController(animated: true)
+            }
+        }
     }
 }

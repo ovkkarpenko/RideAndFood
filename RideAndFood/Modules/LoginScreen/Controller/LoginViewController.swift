@@ -67,7 +67,7 @@ class LoginViewController: UIViewController {
     private lazy var codeViewTrailingConstraint = codeConfirmationView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
                                                                                                  constant: -padding)
     private lazy var codeViewTempLeadingConstraint = codeConfirmationView.leadingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                                                               constant: padding)
+                                                                                                   constant: padding)
     private lazy var confirmButtonBottomConstraint = confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                                                                            constant: -padding)
     
@@ -99,7 +99,7 @@ class LoginViewController: UIViewController {
         
         loginView.focusTextView()
     }
-
+    
     // MARK: - Private methods
     
     private func setupLayout() {
@@ -157,11 +157,10 @@ class LoginViewController: UIViewController {
         
         interactor.getCode(for: phone) { [weak self] (codeModel, error) in
             guard let codeModel = codeModel, error == nil else {
-                print("ERROR: \(String(describing: error))")
+                self?.showErrorAlert(message: LoginStrings.errorText.text())
                 return
             }
             
-            print(codeModel)
             DispatchQueue.main.async {
                 self?.codeLabel.text = "\(codeModel.code)"
                 self?.codeLabel.isHidden = false
@@ -172,9 +171,15 @@ class LoginViewController: UIViewController {
         }
     }
     
+    private func showErrorAlert(message: String) {
+        DispatchQueue.main.async {
+            AlertHelper.shared.alert(self, title: LoginStrings.errorTitle.text(), message: message)
+        }
+    }
+    
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-            keyboardSize.height > 0 {
+           keyboardSize.height > 0 {
             
             confirmButtonBottomConstraint.constant = -keyboardSize.height - padding + view.safeAreaInsets.bottom
             
@@ -183,7 +188,7 @@ class LoginViewController: UIViewController {
             }
         }
     }
-
+    
     @objc private func keyboardWillHide(notification: NSNotification) {
         confirmButtonBottomConstraint.constant = -padding
         
@@ -195,16 +200,24 @@ class LoginViewController: UIViewController {
     @objc private func confirmButtonPressed() {
         confirmButton.isEnabled = false
         if let code = codeConfirmationView.code, !code.isEmpty, let phone = phone, !phone.isEmpty {
-            interactor.confirmCode(forPhone: phone, code: code) { (userData, error) in
+            interactor.confirmCode(forPhone: phone, code: code) { [weak self] (userData, error) in
                 guard let userData = userData, error == nil else {
-                    print("ERROR: \(String(describing: error))")
+                    self?.showErrorAlert(message: LoginStrings.wrongCode.text())
                     return
                 }
                 
-                print(userData)
+                let userDefaultsManager = BaseUserDefaultsManager()
+                userDefaultsManager.isAuthorized = true
+                UserConfig.shared.userId = userData.id
+                
+                print(userData.id)
+                
+                DispatchQueue.main.async {
+                    self?.dismiss(animated: true)
+                }
             }
         } else if let phone = loginView.phoneNumberString?.components(separatedBy: CharacterSet.decimalDigits.inverted)
-            .joined() {
+                    .joined() {
             self.phone = phone
             getConfirmationCode()
         }

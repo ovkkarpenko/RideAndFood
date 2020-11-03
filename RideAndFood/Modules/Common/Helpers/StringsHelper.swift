@@ -12,9 +12,25 @@ enum StringsHelper {
     case next
     
     func text() -> String {
+        switch UserConfig.shared.settings.language {
+        case .rus:
+            return rusText()
+        case .eng:
+            return engText()
+        }
+    }
+    
+    private func rusText() -> String {
         switch self {
         case .next:
             return "Далее"
+        }
+    }
+    
+    private func engText() -> String {
+        switch self {
+        case .next:
+            return "Next"
         }
     }
 }
