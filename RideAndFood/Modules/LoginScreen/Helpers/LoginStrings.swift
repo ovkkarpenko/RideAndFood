@@ -23,7 +23,7 @@ enum LoginStrings {
     case wrongCode
     
     func text() -> String {
-        switch UserConfig.shared.language {
+        switch UserConfig.shared.settings.language {
         case .rus:
             return rusText()
         case .eng:
