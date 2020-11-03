@@ -135,6 +135,12 @@ class MapViewController: UIViewController {
                 }
                 self?.centerViewOn(coordinate: coordinate)
             }
+            
+            ServerApi.shared.getSettings { settings in
+                if let settings = settings {
+                    UserConfig.shared.settings = settings
+                }
+            }
         } else {
             let vc = LoginViewController()
             vc.modalPresentationStyle = .fullScreen

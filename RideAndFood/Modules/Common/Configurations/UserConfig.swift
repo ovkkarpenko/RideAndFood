@@ -18,7 +18,10 @@ class UserConfig {
     // MARK: - Private properties
     
     private let userIdKey = "userId"
-    private let languageKey = "languageKey"
+    private let settingsLanguageKey = "settingsLanguageKey"
+    private let settingsDoNotCallKey = "settingsDoNotCallKey"
+    private let settingsNotificationDiscountKey = "settingsNotificationDiscountKey"
+    private let settingsUpdateMobileNetworkKey = "settingsUpdateMobileNetworkKey"
     
     // MARK: - Public properties
     
@@ -30,11 +33,20 @@ class UserConfig {
         }
     }
     
-    var language: Language {
+    var settings: Settings {
         get {
-            Language(rawValue: UserDefaults.standard.string(forKey: languageKey) ?? "rus") ?? .rus
+            var settings = Settings()
+            settings.language = Language(rawValue: UserDefaults.standard.value(forKey: settingsLanguageKey) as? String ?? "rus") ?? Language.rus
+            settings.doNotCall = UserDefaults.standard.value(forKey: settingsDoNotCallKey) as? Bool ?? false
+            settings.notificationDiscount = UserDefaults.standard.value(forKey: settingsNotificationDiscountKey) as? Bool ?? false
+            settings.updateMobileNetwork = UserDefaults.standard.value(forKey: settingsUpdateMobileNetworkKey) as? Bool ?? false
+            
+            return settings
         } set {
-            UserDefaults.standard.setValue(newValue.rawValue, forKey: languageKey)
+            UserDefaults.standard.setValue(newValue.language.rawValue, forKey: settingsLanguageKey)
+            UserDefaults.standard.setValue(newValue.doNotCall, forKey: settingsDoNotCallKey)
+            UserDefaults.standard.setValue(newValue.notificationDiscount, forKey: settingsNotificationDiscountKey)
+            UserDefaults.standard.setValue(newValue.updateMobileNetwork, forKey: settingsUpdateMobileNetworkKey)
         }
     }
 }

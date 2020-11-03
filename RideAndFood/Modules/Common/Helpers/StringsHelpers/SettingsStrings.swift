@@ -17,7 +17,7 @@ enum SettingsStrings {
     case refreshNetwork
     
     func language() -> String {
-        switch UserConfig.shared.language {
+        switch UserConfig.shared.settings.language {
         case .rus:
             return "Русский"
         case .eng:
@@ -26,6 +26,15 @@ enum SettingsStrings {
     }
     
     func text() -> String {
+        switch UserConfig.shared.settings.language {
+        case .rus:
+            return rus()
+        case .eng:
+            return eng()
+        }
+    }
+    
+    func rus() -> String {
         switch self {
         case .title:
             return "Настройки"
@@ -43,6 +52,27 @@ enum SettingsStrings {
             return "Автоматическое обновление данных геолокации"
         case .refreshNetwork:
             return "Обновлять по сотовой сети"
+        }
+    }
+    
+    func eng() -> String {
+        switch self {
+        case .title:
+            return "Settings"
+        case .language:
+            return "Language"
+        case .personalData:
+            return "Personal data"
+        case .pushNotification:
+            return "Push notification instead of ringing"
+        case .stockNotifications:
+            return "Promotions notifications"
+        case .availableShares:
+            return "Available promotions"
+        case .automaticUpdatingGeo:
+            return "Auto update geolocation"
+        case .refreshNetwork:
+            return "Refresh over cellular network"
         }
     }
 }
