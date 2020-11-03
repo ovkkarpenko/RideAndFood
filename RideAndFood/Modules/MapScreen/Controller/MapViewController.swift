@@ -52,6 +52,14 @@ class MapViewController: UIViewController {
         return view
     }()
     
+    private lazy var backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var myLocationButton: UIButton = {
         let button = RoundButton(type: .system)
         button.bgImage = UIImage(named: "MyLocation")
@@ -98,6 +106,12 @@ class MapViewController: UIViewController {
     private lazy var sideMenuHiddenConstraint = sideMenuView.rightAnchor.constraint(equalTo: view.leftAnchor,
                                                                                     constant: sideMenuOffset)
     
+    private lazy var backgroundLeftConstraint = backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor,
+                                                                                 constant: sideMenuOffset)
+    private lazy var backgroundShownConstraint = backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor)
+    private lazy var backgroundHiddenConstraint = backgroundView.rightAnchor.constraint(equalTo: view.leftAnchor,
+                                                                                    constant: sideMenuOffset)
+    
     private let padding: CGFloat = 25
     private let sideMenuPadding: CGFloat = 42
     private lazy var sideMenuOffset: CGFloat = -500
@@ -113,7 +127,7 @@ class MapViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if (BaseUserDefaultsManager().isAuthorized) {
+        if (BaseUserDefaultsManager().isAuthorized && UserConfig.shared.userId != 0) {
             accessManager.requestLocationAccess { [weak self] (coordinate, error) in
                 guard let coordinate = coordinate, error == nil else {
                     print(error ?? "location is not available")
@@ -144,6 +158,7 @@ class MapViewController: UIViewController {
         view.addSubview(cardView)
         view.addSubview(myLocationButton)
         view.addSubview(menuButton)
+        view.addSubview(backgroundView)
         view.addSubview(sideMenuView)
         
         NSLayoutConstraint.activate([
@@ -167,7 +182,11 @@ class MapViewController: UIViewController {
             sideMenuView.topAnchor.constraint(equalTo: view.topAnchor),
             sideMenuView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             sideMenuHiddenConstraint,
-            sideMenuLeftConstraint
+            sideMenuLeftConstraint,
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundHiddenConstraint,
+            backgroundLeftConstraint
         ])
     }
     
@@ -198,16 +217,29 @@ class MapViewController: UIViewController {
             sideMenuLeftConstraint.constant = self.sideMenuOffset
             sideMenuShownConstraint.isActive = false
             sideMenuHiddenConstraint.isActive = true
+            
+            backgroundLeftConstraint.constant = self.sideMenuOffset
+            backgroundShownConstraint.isActive = false
+            backgroundHiddenConstraint.isActive = true
+            
             animationOptions = .curveEaseIn
         } else {
             sideMenuHiddenConstraint.isActive = false
             sideMenuShownConstraint.isActive = true
             sideMenuLeftConstraint.constant = 0
+            
+            backgroundHiddenConstraint.isActive = false
+            backgroundShownConstraint.isActive = true
+            backgroundLeftConstraint.constant = 0
             animationOptions = .curveEaseOut
         }
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: animationOptions) {
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3, delay: 0, options: animationOptions) { [weak self] in
+            self?.view.layoutIfNeeded()
+        }
+        
+        UIView.animate(withDuration: hide ? 0.1 : 1.5, delay: 0, options: animationOptions) { [weak self] in
+            self?.backgroundView.alpha = hide ? 0 : 0.3
         }
     }
     
