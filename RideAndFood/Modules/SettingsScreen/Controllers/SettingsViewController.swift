@@ -23,13 +23,9 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = SettingsStrings.title.text()
+        viewModel.fetchItems()
         setupTable()
         setupLayout()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewModel.fetchItems()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

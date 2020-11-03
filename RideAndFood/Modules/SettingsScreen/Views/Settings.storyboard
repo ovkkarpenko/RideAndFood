@@ -170,6 +170,22 @@
             </objects>
             <point key="canvasLocation" x="1936.8" y="79.610194902548727"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XRX-qu-6SU">
+            <objects>
+                <navigationController storyboardIdentifier="AvailablePromotionsController" id="Sv4-vy-HIF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SXa-24-jO0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="3sj-SD-ww9" kind="relationship" relationship="rootViewController" id="04r-bg-6uX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zRH-Uo-UeG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-236" y="806"/>
+        </scene>
         <!--Promotions-->
         <scene sceneID="6n8-An-fQK">
             <objects>
@@ -192,7 +208,14 @@
                             <constraint firstItem="LsM-DA-eDQ" firstAttribute="top" secondItem="0FR-xv-oRg" secondAttribute="topMargin" id="qme-fP-Edj"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Promotions" id="F2t-TK-MMF"/>
+                    <navigationItem key="navigationItem" title="Promotions" id="F2t-TK-MMF">
+                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="hEy-WE-hBk">
+                            <color key="tintColor" systemColor="systemGrayColor"/>
+                            <connections>
+                                <action selector="close:" destination="3sj-SD-ww9" id="Xm0-Ey-LlL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="LsM-DA-eDQ" id="K3J-fx-VJG"/>
                         <segue destination="Dmt-Rs-wbW" kind="show" identifier="PromotionsSegue" id="IQX-ri-YwU"/>
@@ -435,6 +458,9 @@
             <size key="intrinsicContentSize" width="51" height="33"/>
         </designable>
     </designables>
+    <inferredMetricsTieBreakers>
+        <segue reference="Es8-ft-laD"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>

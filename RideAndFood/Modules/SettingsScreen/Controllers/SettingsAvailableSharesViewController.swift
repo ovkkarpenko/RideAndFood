@@ -44,4 +44,8 @@ class SettingsAvailableSharesViewController: UIViewController {
                 item.completion?(self)
             }).disposed(by: bag)
     }
+    
+    @IBAction func close(_ sender: Any) {
+        dismiss(animated: true)
+    }
 }

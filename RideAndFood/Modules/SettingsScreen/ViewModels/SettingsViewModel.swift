@@ -13,9 +13,8 @@ import Foundation
 
 class SettingsViewModel {
     
-    var items = PublishSubject<[SectionModel<String, TableItem>]>()
-    
     var settings: Settings?
+    var items = PublishSubject<[SectionModel<String, TableItem>]>()
     
     func saveItems() {
         if let settings = settings {
@@ -24,60 +23,14 @@ class SettingsViewModel {
     }
     
     func fetchItems() {
+        items.onNext(getMenu())
+        
         ServerApi.shared.getSettings(completion: { [weak self] settings in
             guard let settings = settings,
                   let self = self else { return }
             
             self.settings = settings
-            self.items.onNext([
-                SectionModel(model: "", items: [
-                    TableItem(
-                        title: SettingsStrings.language.text(),
-                        segue: "SettingsLanguageSegue",
-                        cellTypes: [
-                            .subTitle(SettingsStrings.language(.language)(settings.language))
-                        ]
-                    ),
-                    TableItem(title: SettingsStrings.personalData.text(), segue: "PersonalDataSegue", cellTypes: [.default()]),
-                    TableItem(
-                        title: SettingsStrings.pushNotification.text(),
-                        cellTypes: [
-                            .switch(settings.doNotCall, { isOn in
-                                if let _ = self.settings {
-                                    self.settings?.doNotCall = isOn
-                                    ServerApi.shared.saveSettings(settings)
-                                }
-                            })
-                        ])
-                ]),
-                
-                SectionModel(model: " ", items: [
-                    TableItem(
-                        title: SettingsStrings.stockNotifications.text(),
-                        cellTypes: [
-                            .switch(settings.notificationDiscount, { isOn in
-                                if let _ = self.settings {
-                                    self.settings?.notificationDiscount = isOn
-                                    ServerApi.shared.saveSettings(settings)
-                                }
-                            })
-                        ]),
-                    TableItem(title: SettingsStrings.availableShares.text(), segue: "AvailableSharesSegue", cellTypes: [.default()])
-                ]),
-                
-                SectionModel(model: SettingsStrings.automaticUpdatingGeo.text(), items: [
-                    TableItem(
-                        title: SettingsStrings.refreshNetwork.text(),
-                        cellTypes: [
-                            .switch(settings.updateMobileNetwork, { isOn in
-                                if let _ = self.settings {
-                                    self.settings?.updateMobileNetwork = isOn
-                                    ServerApi.shared.saveSettings(settings)
-                                }
-                            })
-                        ]),
-                ])
-            ])
+            self.items.onNext(self.getMenu(settings: settings))
         })
     }
     
@@ -94,5 +47,57 @@ class SettingsViewModel {
                 return dataSource[sectionIndex].model
             }
         )
+    }
+    
+    private func getMenu(settings: Settings? = nil) -> [SectionModel<String, TableItem>] {
+        return [
+            SectionModel(model: "", items: [
+                TableItem(
+                    title: SettingsStrings.language.text(),
+                    segue: "SettingsLanguageSegue",
+                    cellTypes: [
+                        .subTitle(SettingsStrings.language(.language)())
+                    ]
+                ),
+                TableItem(title: SettingsStrings.personalData.text(), segue: "PersonalDataSegue", cellTypes: [.default()]),
+                TableItem(
+                    title: SettingsStrings.pushNotification.text(),
+                    cellTypes: [
+                        .switch(settings?.doNotCall ?? false, { isOn in
+                            if let _ = self.settings {
+                                self.settings?.doNotCall = isOn
+                                if let settings = settings { ServerApi.shared.saveSettings(settings) }
+                            }
+                        })
+                    ])
+            ]),
+            
+            SectionModel(model: " ", items: [
+                TableItem(
+                    title: SettingsStrings.stockNotifications.text(),
+                    cellTypes: [
+                        .switch(settings?.notificationDiscount ?? false, { isOn in
+                            if let _ = self.settings {
+                                self.settings?.notificationDiscount = isOn
+                                if let settings = settings { ServerApi.shared.saveSettings(settings) }
+                            }
+                        })
+                    ]),
+                TableItem(title: SettingsStrings.availableShares.text(), segue: "AvailableSharesSegue", cellTypes: [.default()])
+            ]),
+            
+            SectionModel(model: SettingsStrings.automaticUpdatingGeo.text(), items: [
+                TableItem(
+                    title: SettingsStrings.refreshNetwork.text(),
+                    cellTypes: [
+                        .switch(settings?.updateMobileNetwork ?? false, { isOn in
+                            if let _ = self.settings {
+                                self.settings?.updateMobileNetwork = isOn
+                                if let settings = settings { ServerApi.shared.saveSettings(settings) }
+                            }
+                        })
+                    ]),
+            ])
+        ]
     }
 }

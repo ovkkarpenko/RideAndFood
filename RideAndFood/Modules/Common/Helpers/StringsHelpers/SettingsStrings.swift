@@ -16,13 +16,11 @@ enum SettingsStrings {
     case automaticUpdatingGeo
     case refreshNetwork
     
-    func language(_ language: String) -> String {
-        switch language {
-        case "rus":
+    func language() -> String {
+        switch UserConfig.shared.language {
+        case .rus:
             return "Русский"
-        case "eng":
-            return "English"
-        default:
+        case .eng:
             return "English"
         }
     }

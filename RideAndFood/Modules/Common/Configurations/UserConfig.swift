@@ -18,6 +18,7 @@ class UserConfig {
     // MARK: - Private properties
     
     private let userIdKey = "userId"
+    private let languageKey = "languageKey"
     
     // MARK: - Public properties
     
@@ -28,8 +29,12 @@ class UserConfig {
             UserDefaults.standard.setValue(newValue, forKey: userIdKey)
         }
     }
+    
+    var language: Language {
+        get {
+            Language(rawValue: UserDefaults.standard.string(forKey: languageKey) ?? "rus") ?? .rus
+        } set {
+            UserDefaults.standard.setValue(newValue.rawValue, forKey: languageKey)
+        }
+    }
 }
-
-// TODO: Store language in UserDefaults
-
-let language = "rus"
