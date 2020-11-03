@@ -223,20 +223,11 @@ class MapViewController: UIViewController {
             sideMenuLeftConstraint.constant = self.sideMenuOffset
             sideMenuShownConstraint.isActive = false
             sideMenuHiddenConstraint.isActive = true
-            
-            backgroundLeftConstraint.constant = self.sideMenuOffset
-            backgroundShownConstraint.isActive = false
-            backgroundHiddenConstraint.isActive = true
-            
             animationOptions = .curveEaseIn
         } else {
             sideMenuHiddenConstraint.isActive = false
             sideMenuShownConstraint.isActive = true
             sideMenuLeftConstraint.constant = 0
-            
-            backgroundHiddenConstraint.isActive = false
-            backgroundShownConstraint.isActive = true
-            backgroundLeftConstraint.constant = 0
             animationOptions = .curveEaseOut
         }
         
@@ -244,9 +235,22 @@ class MapViewController: UIViewController {
             self?.view.layoutIfNeeded()
         }
         
-        UIView.animate(withDuration: hide ? 0.1 : 1.5, delay: 0, options: animationOptions) { [weak self] in
-            self?.backgroundView.alpha = hide ? 0 : 0.3
+        if (!hide) {
+            self.backgroundHiddenConstraint.isActive = false
+            self.backgroundShownConstraint.isActive = true
+            self.backgroundLeftConstraint.constant = 0
         }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: animationOptions, animations: { [weak self] in
+            self?.backgroundView.alpha = hide ? 0 : 0.3
+        }, completion: { [weak self] _ in
+            guard let self = self else { return }
+            if (hide) {
+                self.backgroundLeftConstraint.constant = self.sideMenuOffset
+                self.backgroundShownConstraint.isActive = false
+                self.backgroundHiddenConstraint.isActive = true
+            }
+        })
     }
     
     @objc private func myLocationButtonPressed() {

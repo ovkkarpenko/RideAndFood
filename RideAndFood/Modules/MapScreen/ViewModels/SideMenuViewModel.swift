@@ -21,6 +21,7 @@ class SideMenuViewModel {
                     .instantiateViewController(withIdentifier: "SupportID") as? UINavigationController {
                     
                     controller.modalPresentationStyle = .fullScreen
+                    controller.modalTransitionStyle = .crossDissolve
                     vc.present(controller, animated: true)
                 }
             }),
@@ -29,6 +30,7 @@ class SideMenuViewModel {
                     .instantiateViewController(withIdentifier: "SettingsNavigationController") as? UINavigationController {
                     
                     controller.modalPresentationStyle = .fullScreen
+                    controller.modalTransitionStyle = .crossDissolve
                     vc.present(controller, animated: true)
                 }
             }),
@@ -58,6 +60,7 @@ class SideMenuViewModel {
                     .instantiateViewController(withIdentifier: "AvailablePromotionsController")  as? UINavigationController {
                     
                     controller.modalPresentationStyle = .fullScreen
+                    controller.modalTransitionStyle = .crossDissolve
                     vc.present(controller, animated: true)
                 }
             })
