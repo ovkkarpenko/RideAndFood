@@ -48,7 +48,8 @@ class SupportMessageViewController: UIViewController {
         messageTextView.text = SupportServiceString.getString(.problemDescription)()
     }
     
-    @IBAction func openNextPage(_ sender: Any) {
+    @IBAction func dismissKeyboard(_ sender: Any) {
+        messageTextView.endEditing(true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

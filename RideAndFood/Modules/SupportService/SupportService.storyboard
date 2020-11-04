@@ -43,12 +43,12 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="openNextPage:" destination="4cE-Vi-Mpy" eventType="touchUpInside" id="FNT-UQ-4nt"/>
                                                     <segue destination="INt-vL-1lD" kind="show" identifier="NextPage" id="wcl-Am-ZQr"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstItem="4Tg-bV-53D" firstAttribute="leading" secondItem="oPw-gK-1ba" secondAttribute="leading" constant="25" id="5Gi-0l-64q"/>
                                             <constraint firstAttribute="trailing" secondItem="Bm4-kc-9X0" secondAttribute="trailing" constant="25" id="IYB-JF-Fi3"/>
@@ -58,6 +58,9 @@
                                             <constraint firstItem="Bm4-kc-9X0" firstAttribute="leading" secondItem="oPw-gK-1ba" secondAttribute="leading" constant="25" id="vu9-8D-X4d"/>
                                             <constraint firstItem="4Tg-bV-53D" firstAttribute="top" secondItem="oPw-gK-1ba" secondAttribute="top" constant="25" id="yQ9-wg-fur"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="ULd-O8-B5e" appends="YES" id="PdF-1a-2TK"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -83,10 +86,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="ek6-6t-RyC">
                         <barButtonItem key="backBarButtonItem" title=" " id="f4L-ob-9dk"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="8sE-OW-HoO">
-                            <color key="tintColor" systemColor="systemGrayColor"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.backward" catalog="system" id="8sE-OW-HoO">
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="closeButtonClicked:" destination="4cE-Vi-Mpy" id="6x3-JV-zOB"/>
+                                <action selector="closeButtonClicked:" destination="4cE-Vi-Mpy" id="baf-fi-YFG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -98,6 +101,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cp2-bU-Fr1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ULd-O8-B5e">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="4cE-Vi-Mpy" id="Atr-rs-Hgg"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="711.20000000000005" y="80.50974512743629"/>
         </scene>
@@ -300,7 +308,7 @@
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="removeButton" width="30" height="30"/>
         <systemColor name="labelColor">
@@ -311,9 +319,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

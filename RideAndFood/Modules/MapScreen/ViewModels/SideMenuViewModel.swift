@@ -47,7 +47,13 @@ class SideMenuViewModel {
                 title: SideMenuStrings.tariffs.text(),
                 cellTypes: [.default()],
                 completion: { vc in
-                    
+                    if let controller = UIStoryboard.init(name: "Tariff", bundle: nil)
+                        .instantiateViewController(withIdentifier: "TariffID") as? UINavigationController {
+                        
+                        controller.modalPresentationStyle = .fullScreen
+                        controller.modalTransitionStyle = .crossDissolve
+                        vc.present(controller, animated: true)
+                    }
                 }),
             TableItem(
                 title: SideMenuStrings.promoCode.text(),
