@@ -13,6 +13,7 @@ class TariffViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = TariffStrings.getString(.storyboardTitle)()
+        
     }
     
     @IBAction func backToMainMenu(_ sender: Any) {

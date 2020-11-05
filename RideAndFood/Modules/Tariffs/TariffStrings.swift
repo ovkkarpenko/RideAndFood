@@ -10,7 +10,6 @@ import Foundation
 
 enum TariffStrings {
     case storyboardTitle
-    case title
     case orderTaxiButton
     
     func getString() -> String {
@@ -19,8 +18,6 @@ enum TariffStrings {
             switch self {
             case .storyboardTitle:
                 return "Тарифы"
-            case .title:
-                return ""
             case .orderTaxiButton:
                 return "Заказать такси"
             }
@@ -28,10 +25,8 @@ enum TariffStrings {
             switch self {
             case .storyboardTitle:
                 return "Tariffs"
-            case .title:
-                return "Order a taxi"
             case .orderTaxiButton:
-                return "Заказать такси"
+                return "Order a taxi"
             }
         }
     }
