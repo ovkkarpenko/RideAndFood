@@ -68,6 +68,7 @@ class PromoCodesViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
+        navigationItem.backBarButtonItem = .init(title: "", style: .plain, target: nil, action: nil)
         navigationController?.navigationBar.tintColor = ColorHelper.primaryText.color()
         navigationItem.title = PromoCodesStrings.title.text()
         navigationItem.leftBarButtonItem = .init(image: UIImage(named: "BackIcon"),

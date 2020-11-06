@@ -57,7 +57,6 @@ class PromoCodeActivatedViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
-        setupNavigationItem()
     }
     
     // MARK: - Private methods
@@ -82,10 +81,6 @@ class PromoCodeActivatedViewController: UIViewController {
             confirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding)
         ])
-    }
-    
-    private func setupNavigationItem() {
-        navigationItem.leftBarButtonItem = nil
     }
     
     @objc private func confirmButtonPressed() {
