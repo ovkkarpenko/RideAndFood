@@ -34,26 +34,38 @@ class BaseNetworkManager: NetworkManager {
         }
         
         DispatchQueue.global().async {
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
-                guard let data = data,
-                      let result = try? JSONDecoder().decode(V.self, from: data),
-                      error == nil
-                else {
-                    if let response = response as? HTTPURLResponse,
-                       !((200 ... 299) ~= response.statusCode) {
+            URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+                guard let data = data, error == nil else {
+                    if !(self?.isSuccess(response: response) ?? false) {
                         return completion(nil, RequestError.badRequest)
                     }
                     
                     return completion(nil, error)
                 }
                 
-                if let response = response as? HTTPURLResponse,
-                   !((200 ... 299) ~= response.statusCode) {
+                guard let result = try? JSONDecoder().decode(V.self, from: data) else {
+                    if let responseError = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                        return completion(nil, RequestError.serverError(responseError.error))
+                    }
+                    
+                    return completion(nil, RequestError.badRequest)
+                }
+                
+                if !(self?.isSuccess(response: response) ?? false) {
                     return completion(nil, RequestError.badRequest)
                 }
                 
                 return completion(result, nil)
             }.resume()
         }
+    }
+    
+    // MARK: - Private methods
+    
+    private func isSuccess(response: URLResponse?) -> Bool {
+        if let response = response as? HTTPURLResponse {
+            return (200 ... 299) ~= response.statusCode
+        }
+        return false
     }
 }

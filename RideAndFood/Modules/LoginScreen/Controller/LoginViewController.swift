@@ -206,10 +206,7 @@ class LoginViewController: UIViewController {
                     return
                 }
                 
-                let userDefaultsManager = BaseUserDefaultsManager()
-                
-                userDefaultsManager.isAuthorized = true
-                print(userData.id)
+                UserConfig.shared.userId = userData.id
                 
                 DispatchQueue.main.async {
                     self?.dismiss(animated: true)

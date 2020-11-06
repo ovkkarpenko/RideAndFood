@@ -10,6 +10,16 @@ import Foundation
 
 enum StringsHelper {
     case next
+    case confirm
+    case great
+    case error
+    case tryAgain
+    case hour
+    case hours
+    case hoursSecond
+    case day
+    case days
+    case daysSecond
     
     func text() -> String {
         switch language {
@@ -26,6 +36,26 @@ enum StringsHelper {
         switch self {
         case .next:
             return "Далее"
+        case .confirm:
+            return "Подтвердить"
+        case .great:
+            return "Отлично!"
+        case .error:
+            return "Ошибка"
+        case .tryAgain:
+            return "Пожалуйста, попробуйте позже"
+        case .hour:
+            return "час"
+        case .hours:
+            return "часов"
+        case .hoursSecond:
+            return "часа"
+        case .day:
+            return "день"
+        case .days:
+            return "дней"
+        case .daysSecond:
+            return "дня"
         }
     }
     
@@ -33,6 +63,26 @@ enum StringsHelper {
         switch self {
         case .next:
             return "Next"
+        case .confirm:
+            return "Confirm"
+        case .great:
+            return "Great!"
+        case .error:
+            return "Error"
+        case .tryAgain:
+            return "Please, try again later"
+        case .hour:
+            return "hour"
+        case .hours:
+            return "hours"
+        case .hoursSecond:
+            return "hours"
+        case .day:
+            return "day"
+        case .days:
+            return "days"
+        case .daysSecond:
+            return "days"
         }
     }
 }

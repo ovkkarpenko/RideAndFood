@@ -93,7 +93,7 @@ class MapViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if (BaseUserDefaultsManager().isAuthorized) {
+        if (UserConfig.shared.userId > 0) {
             accessManager.requestLocationAccess { [weak self] (coordinate, error) in
                 guard let coordinate = coordinate, error == nil else {
                     print(error ?? "location is not available")

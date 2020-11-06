@@ -22,6 +22,9 @@ enum ApiConfig<T> where T: Codable {
     case registration(data: T)
     case confirm(data: T)
     
+    case getPromoCodes
+    case activatePromoCode(data: T)
+    
     func createRequest() -> (method: HTTPMethod, url: String, data: T?) {
         let baseUrl = baseApiUrl
         let userId = UserConfig.shared.userId
@@ -43,6 +46,10 @@ enum ApiConfig<T> where T: Codable {
             return (.post, "\(baseUrl)/auth/registration", data)
         case .confirm(let data):
             return (.post, "\(baseUrl)/auth/confirm", data)
+        case .getPromoCodes:
+            return (.get, "\(baseUrl)/user/\(userId)/promo-codes", nil)
+        case .activatePromoCode(let data):
+            return (.post, "\(baseUrl)/user/\(userId)/promo-codes/activate", data)
         }
     }
 }

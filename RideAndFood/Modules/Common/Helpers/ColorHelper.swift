@@ -18,6 +18,9 @@ enum ColorHelper {
     case disabledButton
     case controlBackground
     case shadow
+    case secondaryBackground
+    case error
+    case success
     
     func color() -> UIColor? {
         switch self {
@@ -37,6 +40,12 @@ enum ColorHelper {
             return UIColor(named: "ControlBackground")
         case .shadow:
             return .black
+        case .secondaryBackground:
+            return UIColor(named: "SecondaryBackground")
+        case .error:
+            return UIColor(named: "Error")
+        case .success:
+            return UIColor(named: "Success")
         }
     }
 }
