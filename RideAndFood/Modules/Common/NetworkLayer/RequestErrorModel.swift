@@ -17,17 +17,22 @@ enum ServerResponses: String {
 
 class RequestErrorModel: Error {
     var message: String
+    var response: ServerResponses = .unknown
     
     init (_ statusCode: Int) {
         let generalString = "Status code: \(statusCode). Message: "
         switch statusCode {
         case 200...299:
+            response = .allRight
             message = generalString + ServerResponses.allRight.rawValue
         case 404:
+            response = .notFound
             message = generalString + ServerResponses.notFound.rawValue
         case 422:
+            response = .bodyError
             message = generalString + ServerResponses.bodyError.rawValue
         default:
+            response = .unknown
             message = generalString + ServerResponses.unknown.rawValue
         }
     }

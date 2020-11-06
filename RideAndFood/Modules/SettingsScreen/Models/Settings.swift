@@ -10,7 +10,7 @@ import Foundation
 
 struct Settings {
     
-    var language: String
+    var language: Language
     var updateMobileNetwork: Bool
     var notificationDiscount: Bool
     var doNotCall: Bool
@@ -21,6 +21,13 @@ struct Settings {
         case notificationDiscount = "notification_discount"
         case doNotCall = "do_not_call"
     }
+    
+    init() {
+        language = .rus
+        updateMobileNetwork = false
+        notificationDiscount = false
+        doNotCall = false
+    }
 }
 
 extension Settings: Codable {
@@ -28,7 +35,7 @@ extension Settings: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        language = try container.decode(String.self, forKey: .language)
+        language = try container.decode(Language.self, forKey: .language)
         updateMobileNetwork = try container.decode(Bool.self, forKey: .updateMobileNetwork)
         notificationDiscount = try container.decode(Bool.self, forKey: .notificationDiscount)
         doNotCall = try container.decode(Bool.self, forKey: .doNotCall)

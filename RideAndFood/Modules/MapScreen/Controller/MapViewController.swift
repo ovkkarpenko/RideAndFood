@@ -42,6 +42,24 @@ class MapViewController: UIViewController {
         return view
     }()
     
+    private lazy var sideMenuView: SideMenuView = {
+        let view = SideMenuView()
+        view.viewController = self
+        view.hideSideMenuCallback = { [weak self] in
+            self?.toggleSideMenu(hide: true)
+        }
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var myLocationButton: UIButton = {
         let button = RoundButton(type: .system)
         button.bgImage = UIImage(named: "MyLocation")
@@ -59,7 +77,7 @@ class MapViewController: UIViewController {
     private lazy var personButton: UIButton = {
         let button = RoundButton(type: .system)
         button.bgImage = UIImage(named: "Person")
-        button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -80,7 +98,23 @@ class MapViewController: UIViewController {
             cardView.address = cuurentPlacemark?.name
         }
     }
+    
+    private lazy var sideMenuLeftConstraint = sideMenuView.leftAnchor.constraint(equalTo: view.leftAnchor,
+                                                                                 constant: sideMenuOffset)
+    private lazy var sideMenuShownConstraint = sideMenuView.rightAnchor.constraint(equalTo: view.rightAnchor,
+                                                                                   constant: -sideMenuPadding)
+    private lazy var sideMenuHiddenConstraint = sideMenuView.rightAnchor.constraint(equalTo: view.leftAnchor,
+                                                                                    constant: sideMenuOffset)
+    
+    private lazy var backgroundLeftConstraint = backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor,
+                                                                                 constant: sideMenuOffset)
+    private lazy var backgroundShownConstraint = backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor)
+    private lazy var backgroundHiddenConstraint = backgroundView.rightAnchor.constraint(equalTo: view.leftAnchor,
+                                                                                    constant: sideMenuOffset)
+    
     private let padding: CGFloat = 25
+    private let sideMenuPadding: CGFloat = 42
+    private lazy var sideMenuOffset: CGFloat = -500
     
     // MARK: - Lifecycle methods
     
@@ -100,6 +134,12 @@ class MapViewController: UIViewController {
                     return
                 }
                 self?.centerViewOn(coordinate: coordinate)
+            }
+            
+            ServerApi.shared.getSettings { settings in
+                if let settings = settings {
+                    UserConfig.shared.settings = settings
+                }
             }
         } else {
             let vc = LoginViewController()
@@ -124,7 +164,8 @@ class MapViewController: UIViewController {
         view.addSubview(cardView)
         view.addSubview(myLocationButton)
         view.addSubview(menuButton)
-        view.addSubview(personButton)
+        view.addSubview(backgroundView)
+        view.addSubview(sideMenuView)
         
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -144,8 +185,14 @@ class MapViewController: UIViewController {
             myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding),
             menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             menuButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding),
-            personButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding),
-            personButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+            sideMenuView.topAnchor.constraint(equalTo: view.topAnchor),
+            sideMenuView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            sideMenuHiddenConstraint,
+            sideMenuLeftConstraint,
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundHiddenConstraint,
+            backgroundLeftConstraint
         ])
     }
     
@@ -170,20 +217,48 @@ class MapViewController: UIViewController {
         }
     }
     
+    private func toggleSideMenu(hide: Bool) {
+        var animationOptions: UIView.AnimationOptions
+        if (hide) {
+            sideMenuLeftConstraint.constant = self.sideMenuOffset
+            sideMenuShownConstraint.isActive = false
+            sideMenuHiddenConstraint.isActive = true
+            animationOptions = .curveEaseIn
+        } else {
+            sideMenuHiddenConstraint.isActive = false
+            sideMenuShownConstraint.isActive = true
+            sideMenuLeftConstraint.constant = 0
+            animationOptions = .curveEaseOut
+        }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: animationOptions) { [weak self] in
+            self?.view.layoutIfNeeded()
+        }
+        
+        if (!hide) {
+            self.backgroundHiddenConstraint.isActive = false
+            self.backgroundShownConstraint.isActive = true
+            self.backgroundLeftConstraint.constant = 0
+        }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: animationOptions, animations: { [weak self] in
+            self?.backgroundView.alpha = hide ? 0 : 0.3
+        }, completion: { [weak self] _ in
+            guard let self = self else { return }
+            if (hide) {
+                self.backgroundLeftConstraint.constant = self.sideMenuOffset
+                self.backgroundShownConstraint.isActive = false
+                self.backgroundHiddenConstraint.isActive = true
+            }
+        })
+    }
+    
     @objc private func myLocationButtonPressed() {
         guard let coordinate = accessManager.location?.coordinate else { return }
         centerViewOn(coordinate: coordinate)
     }
     
     @objc private func menuButtonPressed() {
-        if let vc = UIStoryboard.init(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: "SideMenuController") as? SideMenuViewController {
-            
-            vc.modalPresentationStyle = .overCurrentContext
-            vc.presentAnimate(self)
-        }
-    }
-    
-    @objc private func personButtonPressed() {
+        toggleSideMenu(hide: false)
     }
 }

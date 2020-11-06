@@ -22,13 +22,11 @@ enum StringsHelper {
     case daysSecond
     
     func text() -> String {
-        switch language {
-        case "rus":
+        switch UserConfig.shared.settings.language {
+        case .rus:
             return rusText()
-        case "eng":
+        case .eng:
             return engText()
-        default:
-            return rusText()
         }
     }
     

@@ -12,6 +12,8 @@ import Foundation
 
 class SideMenuViewModel {
     
+    private let bag = DisposeBag()
+    
     let items = Observable.just([
         SectionModel(model: "", items: [
             TableItem(title: SideMenuStrings.support.text(), cellTypes: [.default()], completion: { vc in
@@ -19,6 +21,7 @@ class SideMenuViewModel {
                     .instantiateViewController(withIdentifier: "SupportID") as? UINavigationController {
                     
                     controller.modalPresentationStyle = .fullScreen
+                    controller.modalTransitionStyle = .crossDissolve
                     vc.present(controller, animated: true)
                 }
             }),
@@ -27,6 +30,7 @@ class SideMenuViewModel {
                     .instantiateViewController(withIdentifier: "SettingsNavigationController") as? UINavigationController {
                     
                     controller.modalPresentationStyle = .fullScreen
+                    controller.modalTransitionStyle = .crossDissolve
                     vc.present(controller, animated: true)
                 }
             }),
@@ -34,8 +38,8 @@ class SideMenuViewModel {
                 title: SideMenuStrings.paymentMethod.text(),
                 cellTypes: [.default(), .icon(UIImage(named: "visa", in: Bundle.init(path: "Images/Icons"), with: .none))],
                 completion: { vc in
-                
-            })
+                    
+                })
         ]),
         
         SectionModel(model: " ", items: [
@@ -43,8 +47,14 @@ class SideMenuViewModel {
                 title: SideMenuStrings.tariffs.text(),
                 cellTypes: [.default()],
                 completion: { vc in
-                
-            }),
+                    if let controller = UIStoryboard.init(name: "Tariff", bundle: nil)
+                        .instantiateViewController(withIdentifier: "TariffID") as? UINavigationController {
+                        
+                        controller.modalPresentationStyle = .fullScreen
+                        controller.modalTransitionStyle = .crossDissolve
+                        vc.present(controller, animated: true)
+                    }
+                }),
             TableItem(
                 title: SideMenuStrings.promoCode.text(),
                 cellTypes: [.default(), .icon(UIImage(named: "promo", in: Bundle.init(path: "Images/Icons"), with: .none))],
@@ -52,7 +62,13 @@ class SideMenuViewModel {
                     
                 }),
             TableItem(title: SideMenuStrings.promotions.text(), cellTypes: [.default()], completion: { vc in
-                
+                if let controller = UIStoryboard.init(name: "Settings", bundle: nil)
+                    .instantiateViewController(withIdentifier: "AvailablePromotionsController")  as? UINavigationController {
+                    
+                    controller.modalPresentationStyle = .fullScreen
+                    controller.modalTransitionStyle = .crossDissolve
+                    vc.present(controller, animated: true)
+                }
             })
         ])
     ])

@@ -10,7 +10,7 @@ import Foundation
 
 class ServerApi {
     
-    static let shared = ServerApi()
+    public static let shared = ServerApi()
     private let networkManager: NetworkManager = BaseNetworkManager()
     
     private init() { }
