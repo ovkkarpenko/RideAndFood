@@ -25,6 +25,7 @@ enum Colors {
     case tariffGreen
     case tariffPurple
     case tariffGold
+    case textBlack
     
     func getColor() -> UIColor {
         switch self {
@@ -46,6 +47,8 @@ enum Colors {
             return UIColor(hexString: "#C442F2")
         case .tariffGold:
             return UIColor(hexString: "#D4BD80")
+        case .textBlack:
+            return UIColor(hexString: "#000000")
         }
     }
 }
@@ -55,28 +58,3 @@ enum CustomButtonType {
     case whiteButton
     case greenButton
 }
-
-//enum TariffTypes {
-//    case standart
-//    case premium
-//    case business
-//
-//    func getTariffView() -> TariffTypeView {
-//        let tariff = TariffTypeView(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
-//
-//        switch self {
-//        case .standart:
-//            tariff.setColorToBackground(color: Colors.getColor(.tariffGreen)())
-//            tariff.text.text = TariffStrings.getString(.standart)()
-//            return tariff
-//        case .premium:
-//            tariff.mainView.backgroundColor = Colors.getColor(.tariffPurple)()
-//            tariff.text.text = TariffStrings.getString(.premium)()
-//            return tariff
-//        case .business:
-//            tariff.mainView.backgroundColor = Colors.getColor(.tariffGold)()
-//            tariff.text.text = TariffStrings.getString(.business)()
-//            return tariff
-//        }
-//    }
-//}
