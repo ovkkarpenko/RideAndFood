@@ -376,7 +376,6 @@
 				FA2C80BE254AF88E00F82637 /* StringsHelpers */,
 				7286E50F2542380D0027A69B /* ColorHelper.swift */,
 				7286E5112542398F0027A69B /* FontsHelper.swift */,
-				7286E51525423A640027A69B /* StringsHelper.swift */,
 				7286E51A2542B9CB0027A69B /* ConstantsHelper.swift */,
 				723230632552CFED00F238AF /* FormatHelper.swift */,
 			);
@@ -658,6 +657,7 @@
 				FA3FD467254D84BE00769610 /* SideMenuStrings.swift */,
 				7286E51325423A160027A69B /* LoginStrings.swift */,
 				726353E3254F464500AF868D /* PromoCodesStrings.swift */,
+				7286E51525423A640027A69B /* StringsHelper.swift */,
 			);
 			path = StringsHelpers;
 			sourceTree = "<group>";

@@ -59,7 +59,11 @@ class SideMenuViewModel {
                 title: SideMenuStrings.promoCode.text(),
                 cellTypes: [.default(), .icon(UIImage(named: "promo", in: Bundle.init(path: "Images/Icons"), with: .none))],
                 completion: { vc in
-                    
+                    let promoCodesVC = PromoCodesViewController()
+                    let controller = UINavigationController(rootViewController: promoCodesVC)
+                    controller.modalPresentationStyle = .fullScreen
+                    controller.modalTransitionStyle = .crossDissolve
+                    vc.present(controller, animated: true)
                 }),
             TableItem(title: SideMenuStrings.promotions.text(), cellTypes: [.default()], completion: { vc in
                 if let controller = UIStoryboard.init(name: "Settings", bundle: nil)

@@ -70,11 +70,18 @@ class PromoCodesViewController: UIViewController {
     private func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = ColorHelper.primaryText.color()
         navigationItem.title = PromoCodesStrings.title.text()
-        
+        navigationItem.leftBarButtonItem = .init(image: UIImage(named: "BackIcon"),
+                                                 style: .done,
+                                                 target: self,
+                                                 action: #selector(dismissSelf))
         let navigationBar = navigationController?.navigationBar
         let navigationBarAppearence = UINavigationBarAppearance()
         navigationBarAppearence.shadowColor = .clear
         navigationBar?.standardAppearance = navigationBarAppearence
+    }
+    
+    @objc private func dismissSelf() {
+        dismiss(animated: true)
     }
 }
 
