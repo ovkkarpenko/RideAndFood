@@ -122,7 +122,7 @@ class TableHelper {
         
         let button = UIButton(frame: CGRect(x: cell.frame.width-40, y: cell.frame.height/2-10, width: 20, height: 20))
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .white
+        button.backgroundColor = .none
         if checked {
             button.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             button.tintColor = .green

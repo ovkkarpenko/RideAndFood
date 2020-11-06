@@ -39,6 +39,30 @@ class ServerApi {
         sendRequest(apiConfig: ApiConfig<PromotionDetails>.getPromotionDetails(promotionId), completion: completion)
     }
     
+    func savePaymentCard(_ card: PaymentCard, completion: ((PaymentCardDetails?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<PaymentCard>.savePaymentCard(data: card), completion: completion)
+    }
+    
+    func paymentCardApproved(id cardId: Int, completion: ((Bool?) -> ())?) {
+        let request = ApiConfig<String>.paymentCardApproved(cardId: cardId).createRequest()
+        
+        networkManager.makeRequest(
+            httpMethod: request.method,
+            urlString: request.url,
+            data: request.data) { ( response: String?, error) in
+            
+            completion?(error == nil)
+        }
+    }
+
+    func getPaymentCardDetails(id cardId: Int, completion: ((PaymentCardDetails?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<PaymentCardDetails>.getPaymentCardDetails(cardId: cardId), completion: completion)
+    }
+
+    func getPaymentCards(completion: (([PaymentCard]?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<[PaymentCard]>.getPaymentCards, completion: completion)
+    }
+    
     private func sendRequest<T: Codable, V: Codable>(apiConfig: ApiConfig<T>, completion: ((V?) -> ())?) {
         let request = apiConfig.createRequest()
         
