@@ -9,7 +9,7 @@
 import UIKit
 
 class Networker {
-    func makeRequest<T: Codable, U: Codable>(request: RequestModel<U>, images: [UIImage]?, completion: @escaping (T?, RequestErrorModel?) -> Void) {
+    func makeRequest<T: Codable, U: Codable>(request: RequestModel<U>, images: [UIImage]? = nil, completion: @escaping (T?, RequestErrorModel?) -> Void) {
         var urlRequest: URLRequest?
         urlRequest = images == nil ? request.urlRequest() : request.upload(images: images!)
         

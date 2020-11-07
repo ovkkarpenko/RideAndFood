@@ -17,17 +17,47 @@
                     <view key="view" contentMode="scaleToFill" id="RjH-2W-E20">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBG-Mj-W4h">
+                                <rect key="frame" x="0.0" y="44" width="375" height="540"/>
+                                <connections>
+                                    <segue destination="3g4-3j-E8G" kind="embed" id="YG6-jr-CRY"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Qk-CV-0c7" customClass="CustomButton" customModule="RideAndFood" customModuleProvider="target">
+                                <rect key="frame" x="25" y="592" width="325" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="LYL-Rf-rBA"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="order:" destination="5Ev-3d-g7M" eventType="touchUpInside" id="o0G-t0-Nbc"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="UZs-yj-enu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TBG-Mj-W4h" firstAttribute="top" secondItem="UZs-yj-enu" secondAttribute="top" id="1yq-IV-DHy"/>
+                            <constraint firstItem="UZs-yj-enu" firstAttribute="bottom" secondItem="4Qk-CV-0c7" secondAttribute="bottom" constant="25" id="VwE-mP-NE9"/>
+                            <constraint firstItem="4Qk-CV-0c7" firstAttribute="leading" secondItem="UZs-yj-enu" secondAttribute="leading" constant="25" id="Xuy-ib-I9J"/>
+                            <constraint firstItem="UZs-yj-enu" firstAttribute="trailing" secondItem="TBG-Mj-W4h" secondAttribute="trailing" id="YPT-e3-0VO"/>
+                            <constraint firstItem="TBG-Mj-W4h" firstAttribute="leading" secondItem="UZs-yj-enu" secondAttribute="leading" id="ZIT-29-cdW"/>
+                            <constraint firstItem="UZs-yj-enu" firstAttribute="trailing" secondItem="4Qk-CV-0c7" secondAttribute="trailing" constant="25" id="glJ-0d-AEf"/>
+                            <constraint firstItem="4Qk-CV-0c7" firstAttribute="top" secondItem="TBG-Mj-W4h" secondAttribute="bottom" constant="8" id="vNT-zY-fPt"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="PS1-Zd-tCr">
                         <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="g5y-Ie-V6h">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="backToMainMenu:" destination="5Ev-3d-g7M" id="YRE-82-Pbl"/>
+                                <action selector="back:" destination="5Ev-3d-g7M" id="0Va-Wi-wh5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="orderButton" destination="4Qk-CV-0c7" id="M0c-Yx-czb"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="250" y="18"/>
@@ -35,7 +65,6 @@
         <!--Navigation Controller-->
         <scene sceneID="QqB-W2-DDz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h0k-1h-EQJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="TariffID" automaticallyAdjustsScrollViewInsets="NO" id="mX0-cx-gWp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xR7-fL-Emn">
@@ -47,8 +76,23 @@
                         <segue destination="5Ev-3d-g7M" kind="relationship" relationship="rootViewController" id="JQ3-VD-c44"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h0k-1h-EQJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-552.17391304347825" y="18.75"/>
+        </scene>
+        <!--Tariff Page View Controller-->
+        <scene sceneID="e6r-iJ-QvQ">
+            <objects>
+                <viewController id="3g4-3j-E8G" customClass="TariffPageViewController" customModule="RideAndFood" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vPg-i2-3TE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="540"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxV-bw-HaZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1169" y="17"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

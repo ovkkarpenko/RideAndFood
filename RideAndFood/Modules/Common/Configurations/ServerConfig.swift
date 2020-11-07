@@ -11,3 +11,4 @@ import Foundation
 let baseUrl = "http://85.119.145.2"
 let baseApiUrl = "\(baseUrl)/api"
 let supportPath = "/user/\(UserConfig.shared.userId)/support"
+let tariffPath = "/user/\(UserConfig.shared.userId)/tariff"

@@ -23,18 +23,19 @@ class TariffPage: UIView {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet var iconButtons: [UIButton]!
     @IBOutlet var advantageLabels: [UILabel]!
-    @IBOutlet weak var orderButton: CustomButton!
     
     private var tariffModel: TariffModel!
     private var tariffId: Int!
-    private var labelCornerRadius: CGFloat = 14
+    private var labelCornerRadius: CGFloat = 4
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        initWithNib()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        initWithNib()
     }
     
     convenience init(tariffModel: TariffModel) {
@@ -52,7 +53,6 @@ class TariffPage: UIView {
         setDescriptionLabelParameters()
         setIconButtonsParameters()
         setAdvantageLabelsParameters()
-        setOrderButtonParameters()
     }
     
     fileprivate func initWithNib() {
@@ -89,6 +89,7 @@ class TariffPage: UIView {
     }
     
     private func setLabelState(label: inout UILabel, color: UIColor, text: String? = nil) {
+        label.layer.masksToBounds = true
         label.layer.cornerRadius = labelCornerRadius
         label.backgroundColor = color
         label.textColor = Colors.getColor(.buttonWhite)()
@@ -108,8 +109,7 @@ class TariffPage: UIView {
     
     private func setCarImage() {
         if let imageUrlPart = tariffModel.icon {
-            let imageUrl = baseUrl + imageUrlPart
-            downloadImage(with: baseUrl + imageUrl) { [weak self] (iconImage) in
+            downloadImage(with: baseUrl + imageUrlPart) { [weak self] (iconImage) in
                 guard let self = self else { return }
                 guard let iconImage = iconImage else { return }
                 self.carImageView.image = iconImage
@@ -181,10 +181,5 @@ class TariffPage: UIView {
                 }
             }
         }
-    }
-    
-    private func setOrderButtonParameters() {
-        orderButton.customizeButton(type: .blueButton)
-        orderButton.setTitle(TariffStrings.getString(.orderTaxiButton)(), for: .normal)
     }
 }
