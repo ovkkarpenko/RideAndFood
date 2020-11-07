@@ -14,7 +14,7 @@ class PromotionDetailsViewModel {
     var item = PublishSubject<PromotionDetails>()
     
     func fetchItem(promotionId: Int) {
-        ServerApi.shared.getPromotionDetails(id: promotionId) { [weak self] promotion in
+        ServerApi.shared.getPromotionDetails(id: promotionId) { [weak self] promotion, _ in
             guard let promotion = promotion,
                   let self = self else { return }
             

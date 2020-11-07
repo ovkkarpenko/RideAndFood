@@ -17,11 +17,14 @@ class UserConfig {
     
     // MARK: - Private properties
     
+    private let isShownPointsAlertKey = "isShownPointsAlert"
+    private let paymentTypeKey = "paymentType"
+    private let paymentCardIdKey = "paymentCardIdType"
     private let userIdKey = "userId"
-    private let settingsLanguageKey = "settingsLanguageKey"
-    private let settingsDoNotCallKey = "settingsDoNotCallKey"
-    private let settingsNotificationDiscountKey = "settingsNotificationDiscountKey"
-    private let settingsUpdateMobileNetworkKey = "settingsUpdateMobileNetworkKey"
+    private let settingsLanguageKey = "settingsLanguage"
+    private let settingsDoNotCallKey = "settingsDoNotCall"
+    private let settingsNotificationDiscountKey = "settingsNotificationDiscount"
+    private let settingsUpdateMobileNetworkKey = "settingsUpdateMobileNetwork"
     
     // MARK: - Public properties
     
@@ -30,6 +33,30 @@ class UserConfig {
             UserDefaults.standard.integer(forKey: userIdKey)
         } set {
             UserDefaults.standard.setValue(newValue, forKey: userIdKey)
+        }
+    }
+    
+    var paymentType: PaymentType {
+        get {
+            PaymentType(rawValue: UserDefaults.standard.string(forKey: paymentTypeKey) ?? "") ?? .cash
+        } set {
+            UserDefaults.standard.setValue(newValue.rawValue, forKey: paymentTypeKey)
+        }
+    }
+    
+    var paymentCardId: Int {
+        get {
+            UserDefaults.standard.integer(forKey: paymentCardIdKey)
+        } set {
+            UserDefaults.standard.setValue(newValue, forKey: paymentCardIdKey)
+        }
+    }
+    
+    var isShownPointsAlert: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: isShownPointsAlertKey)
+        } set {
+            UserDefaults.standard.setValue(newValue, forKey: isShownPointsAlertKey)
         }
     }
     

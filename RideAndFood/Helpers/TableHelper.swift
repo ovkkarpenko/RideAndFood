@@ -105,6 +105,7 @@ class TableHelper {
     
     private func iconCell(_ cell: UITableViewCell, icon: UIImage?) {
         cell.accessoryType = .none
+        cell.subviews.first { $0 is UIImageView }?.removeFromSuperview()
         
         if let icon = icon {
             cell.textLabel?.text = "\(icon.size.width >= 25 ? "          " : "       ")\(cell.textLabel?.text ?? "")"
@@ -122,7 +123,7 @@ class TableHelper {
         
         let button = UIButton(frame: CGRect(x: cell.frame.width-40, y: cell.frame.height/2-10, width: 20, height: 20))
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .white
+        button.backgroundColor = .none
         if checked {
             button.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             button.tintColor = .green
