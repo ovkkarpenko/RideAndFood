@@ -17,7 +17,7 @@ class SettingsPersonalDataViewModel {
     let items = PublishSubject<[SectionModel<String, TableItem>]>()
     
     func fetchItems() {
-        ServerApi.shared.getProfile { [weak self] profile in
+        ServerApi.shared.getProfile { [weak self] profile, _ in
             guard let profile = profile,
                   let self = self else { return }
             
@@ -44,7 +44,7 @@ class SettingsPersonalDataViewModel {
                                 alert.placeholder = "What is your name?"
                                 alert.buttonClickedCallback = { text in
                                     
-                                    ServerApi.shared.saveProfile(Profile(name: text)) { profile in
+                                    ServerApi.shared.saveProfile(Profile(name: text)) { profile, _ in
                                         if let _ = profile {
                                             self.fetchItems()
                                         } else {
@@ -73,7 +73,7 @@ class SettingsPersonalDataViewModel {
                                 alert.placeholder = "Enter your e-mail"
                                 alert.buttonClickedCallback = { text in
                                     
-                                    ServerApi.shared.saveProfile(Profile(email: text)) { profile in
+                                    ServerApi.shared.saveProfile(Profile(email: text)) { profile, _ in
                                         if let _ = profile {
                                             self.fetchItems()
                                         } else {

@@ -39,9 +39,12 @@ class BaseNetworkManager: NetworkManager {
                       let result = try? JSONDecoder().decode(V.self, from: data),
                       error == nil
                 else {
-                    if let response = response as? HTTPURLResponse,
-                       !((200 ... 299) ~= response.statusCode) {
-                        return completion(nil, RequestError.badRequest)
+                    if let response = response as? HTTPURLResponse {
+                        if response.statusCode == 403 {
+                            return completion(nil, RequestError.forbidden)
+                        } else if !((200 ... 299) ~= response.statusCode) {
+                            return completion(nil, RequestError.badRequest)
+                        }
                     }
                     
                     return completion(nil, error)
