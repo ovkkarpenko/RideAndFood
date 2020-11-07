@@ -12,7 +12,7 @@ import Foundation
 
 class BindCardView: UIView {
     
-    var confirmCallback: (() -> ())?
+    var confirmCallback: ((PaymentCardDetails) -> ())?
     
     private lazy var cardNumberTextField: MaskTextField = {
         let textField = MaskTextField(format: "[0000] [0000] [0000] [0000]", valueChangedCallback: { [weak self] isCompleted in
@@ -44,7 +44,6 @@ class BindCardView: UIView {
     private lazy var bindCardButton: PrimaryButton = {
         let button = PrimaryButton(title: PaymentStrings.bindCard.text())
         button.isEnabled = false
-        button.addTarget(self, action: #selector(confirmButtomPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -68,6 +67,8 @@ class BindCardView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        cardNumberTextField.becomeFirstResponder()
         
         layer.cornerRadius = 15
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -124,13 +125,23 @@ class BindCardView: UIView {
             .bind(to: viewModel.cardCVV)
             .disposed(by: bag)
         
+        bindCardButton.rx
+            .tap
+            .withLatestFrom(viewModel.userInputs())
+            .subscribe { card in
+                
+                self.viewModel.addCard(card) { cardDetails in
+                    if let cardDetails = cardDetails {
+                        DispatchQueue.main.async {
+                            self.confirmCallback?(cardDetails)
+                        }
+                    }
+                }
+            }.disposed(by: bag)
+        
         viewModel.isCompleted()
-            .subscribe(onNext: { isCompleted in
+            .subscribe { isCompleted in
                 self.bindCardButton.isEnabled = isCompleted
-            }).disposed(by: bag)
-    }
-    
-    @objc private func confirmButtomPressed() {
-        confirmCallback?()
+            }.disposed(by: bag)
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 
 enum PaymentStrings {
     case paymentTitle
+    case cardCellTitle(String)
     case bindCardTitle
     case bindCardNumberTitle
     case bindCardDateTitle
@@ -56,6 +57,8 @@ enum PaymentStrings {
     
     func rus() -> String {
         switch self {
+        case .cardCellTitle(let card):
+            return "Карта **** \(card.suffix(4))"
         case .paymentPointsDetailsStartCollect:
             return "Начать копить баллы"
         case .paymentPointsDetailsTitle:
@@ -113,6 +116,8 @@ enum PaymentStrings {
     
     func eng() -> String {
         switch self {
+        case .cardCellTitle(let card):
+            return "Card **** \(card.suffix(4))"
         case .paymentPointsDetailsStartCollect:
             return "Start collecting points"
         case .paymentPointsDetailsTitle:

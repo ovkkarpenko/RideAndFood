@@ -13,7 +13,7 @@ struct PaymentCardDetails {
     var id: Int
     var number: String
     var expiryDate: String
-    var cvc: String
+    var cvc: String?
     var status: String
     
     enum CodingKeys: String, CodingKey {
@@ -33,7 +33,10 @@ extension PaymentCardDetails: Codable {
         id = try container.decode(Int.self, forKey: .id)
         number = try container.decode(String.self, forKey: .number)
         expiryDate = try container.decode(String.self, forKey: .expiryDate)
-        cvc = try container.decode(String.self, forKey: .cvc)
         status = try container.decode(String.self, forKey: .status)
+        
+        if container.contains(.cvc) {
+            cvc = try container.decode(String.self, forKey: .cvc)
+        }
     }
 }

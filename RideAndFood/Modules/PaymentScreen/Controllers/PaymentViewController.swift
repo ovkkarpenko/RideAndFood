@@ -56,11 +56,28 @@ class PaymentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = PaymentStrings.paymentTitle.text()
+        viewModel.bindCardCallback = { [weak self] in
+            let vc = BindCardViewController()
+            vc.confirmCallback = {
+                self?.viewModel.fetchItems()
+            }
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        viewModel.loadedCardsCallback = { [weak self] in
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value(), animations: {
+                    self?.backgroundImageView.alpha = 0
+                    self?.bindCardButton.alpha = 0
+                }, completion: { _ in
+                    self?.backgroundImageView.isHidden = true
+                    self?.bindCardButton.isHidden = true
+                })
+            }
+        }
+        
         setupLayout()
-        //        ServerApi.shared.paymentCardApproved(id: 83, completion: { isApproved in
-        //
-        //        })
     }
     
     func setupLayout() {
@@ -83,7 +100,10 @@ class PaymentViewController: UIViewController {
     }
     
     @objc private func showBindCardController() {
-        let bindCardVc = BindCardViewController()
-        navigationController?.pushViewController(bindCardVc, animated: true)
+        let vc = BindCardViewController()
+        vc.confirmCallback = { [weak self] in
+            self?.viewModel.fetchItems()
+        }
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

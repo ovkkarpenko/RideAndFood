@@ -136,7 +136,7 @@ class MapViewController: UIViewController {
                 self?.centerViewOn(coordinate: coordinate)
             }
             
-            ServerApi.shared.getSettings { settings in
+            ServerApi.shared.getSettings { settings, _ in
                 if let settings = settings {
                     UserConfig.shared.settings = settings
                 }

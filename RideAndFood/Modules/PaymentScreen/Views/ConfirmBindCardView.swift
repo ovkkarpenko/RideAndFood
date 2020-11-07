@@ -15,6 +15,8 @@ class ConfirmBindCardView: UIView {
     var confirmCallback: (() -> ())?
     var cencelCallback: (() -> ())?
     
+    var cardDetails: PaymentCardDetails?
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = PaymentStrings.bindCardButtonTitle.text()
@@ -26,7 +28,6 @@ class ConfirmBindCardView: UIView {
     
     private lazy var alertLabel: UILabel = {
         let label = UILabel()
-        label.text = PaymentStrings.bindCardAlert("**** 1212").text()
         label.textColor = ColorHelper.secondaryText.color()
         label.font = .systemFont(ofSize: 12)
         label.textAlignment = .center
@@ -66,10 +67,13 @@ class ConfirmBindCardView: UIView {
     
     private let padding: CGFloat = 25
     
-    private let bag = DisposeBag()
-    
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        if let cardDetails = cardDetails {
+            let lastCardNumbers = cardDetails.number.suffix(4)
+            alertLabel.text = PaymentStrings.bindCardAlert(String(lastCardNumbers)).text()
+        }
         
         layer.cornerRadius = 15
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -106,7 +110,13 @@ class ConfirmBindCardView: UIView {
     }
     
     @objc private func confirmButtomPressed() {
-        confirmCallback?()
+        guard let cardDetails = cardDetails else { return }
+        ServerApi.shared.paymentCardApproved(id: cardDetails.id, completion: { [weak self] _, _ in
+            
+            DispatchQueue.main.async {
+                self?.confirmCallback?()
+            }
+        })
     }
     
     @objc private func cencelButtomPressed() {

@@ -18,6 +18,8 @@ class UserConfig {
     // MARK: - Private properties
     
     private let isShownPointsAlertKey = "isShownPointsAlert"
+    private let paymentTypeKey = "paymentType"
+    private let paymentCardIdKey = "paymentCardIdType"
     private let userIdKey = "userId"
     private let settingsLanguageKey = "settingsLanguage"
     private let settingsDoNotCallKey = "settingsDoNotCall"
@@ -31,6 +33,22 @@ class UserConfig {
             UserDefaults.standard.integer(forKey: userIdKey)
         } set {
             UserDefaults.standard.setValue(newValue, forKey: userIdKey)
+        }
+    }
+    
+    var paymentType: PaymentType {
+        get {
+            PaymentType(rawValue: UserDefaults.standard.string(forKey: paymentTypeKey) ?? "") ?? .cash
+        } set {
+            UserDefaults.standard.setValue(newValue.rawValue, forKey: paymentTypeKey)
+        }
+    }
+    
+    var paymentCardId: Int {
+        get {
+            UserDefaults.standard.integer(forKey: paymentCardIdKey)
+        } set {
+            UserDefaults.standard.setValue(newValue, forKey: paymentCardIdKey)
         }
     }
     

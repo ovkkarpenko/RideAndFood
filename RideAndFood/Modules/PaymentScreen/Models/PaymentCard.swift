@@ -10,14 +10,18 @@ import Foundation
 
 struct PaymentCard {
     
+    var id: Int?
     var number: String
     var expiryDate: String
-    var cvc: String
+    var cvc: String?
+    var status: String?
     
     enum CodingKeys: String, CodingKey {
+        case id = "id"
         case number = "number"
         case expiryDate = "expiry_date"
         case cvc = "cvc"
+        case status = "status"
     }
 }
 
@@ -26,8 +30,13 @@ extension PaymentCard: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
+        id = try container.decode(Int.self, forKey: .id)
         number = try container.decode(String.self, forKey: .number)
         expiryDate = try container.decode(String.self, forKey: .expiryDate)
-        cvc = try container.decode(String.self, forKey: .cvc)
+        status = try container.decode(String.self, forKey: .status)
+        
+        if container.contains(.cvc) {
+            cvc = try container.decode(String.self, forKey: .cvc)
+        }
     }
 }

@@ -15,55 +15,47 @@ class ServerApi {
     
     private init() { }
     
-    func getSettings(completion: ((Settings?) -> ())?) {
+    func getSettings(completion: ((Settings?, Error?) -> ())?) {
         sendRequest(apiConfig: ApiConfig<Settings>.getSettings, completion: completion)
     }
     
-    func saveSettings(_ settings: Settings, completion: ((Settings?) -> ())? = nil) {
+    func saveSettings(_ settings: Settings, completion: ((Settings?, Error?) -> ())? = nil) {
         sendRequest(apiConfig: ApiConfig<Settings>.saveSettings(data: settings), completion: completion)
     }
     
-    func getProfile(completion: ((Profile?) -> ())?) {
+    func getProfile(completion: ((Profile?, Error?) -> ())?) {
         sendRequest(apiConfig: ApiConfig<Profile>.getProfile, completion: completion)
     }
     
-    func saveProfile(_ profile: Profile, completion: ((Profile?) -> ())? = nil) {
+    func saveProfile(_ profile: Profile, completion: ((Profile?, Error?) -> ())? = nil) {
         sendRequest(apiConfig: ApiConfig<Profile>.saveProfile(data: profile), completion: completion)
     }
     
-    func getPromotions(completion: (([Promotion]?) -> ())?) {
+    func getPromotions(completion: (([Promotion]?, Error?) -> ())?) {
         sendRequest(apiConfig: ApiConfig<[Promotion]>.getPromotions, completion: completion)
     }
     
-    func getPromotionDetails(id promotionId: Int, completion: ((PromotionDetails?) -> ())?) {
+    func getPromotionDetails(id promotionId: Int, completion: ((PromotionDetails?, Error?) -> ())?) {
         sendRequest(apiConfig: ApiConfig<PromotionDetails>.getPromotionDetails(promotionId), completion: completion)
     }
     
-    func savePaymentCard(_ card: PaymentCard, completion: ((PaymentCardDetails?) -> ())?) {
+    func savePaymentCard(_ card: PaymentCard, completion: ((PaymentCardDetails?, Error?) -> ())?) {
         sendRequest(apiConfig: ApiConfig<PaymentCard>.savePaymentCard(data: card), completion: completion)
     }
     
-    func paymentCardApproved(id cardId: Int, completion: ((Bool?) -> ())?) {
-        let request = ApiConfig<String>.paymentCardApproved(cardId: cardId).createRequest()
-        
-        networkManager.makeRequest(
-            httpMethod: request.method,
-            urlString: request.url,
-            data: request.data) { ( response: String?, error) in
-            
-            completion?(error == nil)
-        }
+    func paymentCardApproved(id cardId: Int, completion: ((String?, Error?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<String>.paymentCardApproved(cardId: cardId), completion: completion)
     }
 
-    func getPaymentCardDetails(id cardId: Int, completion: ((PaymentCardDetails?) -> ())?) {
+    func getPaymentCardDetails(id cardId: Int, completion: ((PaymentCardDetails?, Error?) -> ())?) {
         sendRequest(apiConfig: ApiConfig<PaymentCardDetails>.getPaymentCardDetails(cardId: cardId), completion: completion)
     }
 
-    func getPaymentCards(completion: (([PaymentCard]?) -> ())?) {
+    func getPaymentCards(completion: (([PaymentCard]?, Error?) -> ())?) {
         sendRequest(apiConfig: ApiConfig<[PaymentCard]>.getPaymentCards, completion: completion)
     }
     
-    private func sendRequest<T: Codable, V: Codable>(apiConfig: ApiConfig<T>, completion: ((V?) -> ())?) {
+    private func sendRequest<T: Codable, V: Codable>(apiConfig: ApiConfig<T>, completion: ((V?, Error?) -> ())?) {
         let request = apiConfig.createRequest()
         
         networkManager.makeRequest(
@@ -71,10 +63,10 @@ class ServerApi {
             urlString: request.url,
             data: request.data) { (response: Response<V>?, error) in
             
-            if let data = response?.data, error == nil {
-                completion?(data)
+            if let data = response?.data {
+                completion?(data, error)
             } else {
-                completion?(nil)
+                completion?(nil, error)
             }
         }
     }

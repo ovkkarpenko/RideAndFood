@@ -24,4 +24,36 @@ class BindCardViewModel {
             return number.count == 19 && date.count == 5 && cvv.count == 3
         }
     }
+    
+    func userInputs() -> Observable<PaymentCard> {
+        return Observable.combineLatest(
+            cardNumber.asObserver(),
+            cardDate.asObserver(),
+            cardCVV.asObserver()) { (number, date, cvv) -> (PaymentCard) in
+            
+            return PaymentCard(number: number.replacingOccurrences(of: " ", with: ""), expiryDate: date, cvc: cvv)
+        }
+    }
+    
+    func addCard(_ card: PaymentCard, completion: @escaping (PaymentCardDetails?) -> ()) {
+        ServerApi.shared.savePaymentCard(card, completion: { cardDetails, error in
+            
+            if let error = error as? RequestError {
+                
+                if error == .forbidden {
+//                    ServerApi.shared.getPaymentCardDetails(id: cardDetails.id, completion: { cardDetails, _ in
+//                        
+//                        if let cardDetails = cardDetails,
+//                           cardDetails.status == "new" {
+//                            return completion(true, cardDetails.id)
+//                        }
+//                    })
+                }
+            } else if let cardDetails = cardDetails {
+                return completion(cardDetails)
+            }
+            
+            completion(nil)
+        })
+    }
 }

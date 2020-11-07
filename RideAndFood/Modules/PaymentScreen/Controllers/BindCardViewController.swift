@@ -10,6 +10,8 @@ import UIKit
 
 class BindCardViewController: UIViewController {
     
+    var confirmCallback: (() -> ())?
+    
     private lazy var backgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = ColorHelper.background.color()
@@ -27,7 +29,9 @@ class BindCardViewController: UIViewController {
     
     private lazy var bindCardView: BindCardView = {
         let view = BindCardView()
-        view.confirmCallback = { [weak self] in
+        view.confirmCallback = { [weak self] cardDetails in
+            self?.confirmBindCardView.cardDetails = cardDetails
+            
             self?.toggleBindCardView(true)
             self?.toggleConfirmBindCardView(false)
         }
@@ -38,6 +42,7 @@ class BindCardViewController: UIViewController {
     private lazy var confirmBindCardView: ConfirmBindCardView = {
         let view = ConfirmBindCardView()
         view.confirmCallback = { [weak self] in
+            self?.confirmCallback?()
             self?.navigationController?.popViewController(animated: true)
         }
         view.cencelCallback = { [weak self] in
@@ -115,8 +120,8 @@ class BindCardViewController: UIViewController {
         }
         
         UIView.animate(
-            withDuration: 0.3,
-            delay: 0.3,
+            withDuration: ConstantsHelper.baseAnimationDuration.value(),
+            delay: ConstantsHelper.baseAnimationDuration.value(),
             options: animateOption) { [weak self] in
             self?.view.layoutIfNeeded()
         }
@@ -133,8 +138,8 @@ class BindCardViewController: UIViewController {
         }
         
         UIView.animate(
-            withDuration: 0.3,
-            delay: 0.3,
+            withDuration: ConstantsHelper.baseAnimationDuration.value(),
+            delay: ConstantsHelper.baseAnimationDuration.value(),
             options: animateOption) { [weak self] in
             self?.view.layoutIfNeeded()
         }

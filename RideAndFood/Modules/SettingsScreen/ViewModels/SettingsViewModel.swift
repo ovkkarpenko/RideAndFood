@@ -25,7 +25,7 @@ class SettingsViewModel {
     func fetchItems() {
         items.onNext(getMenu())
         
-        ServerApi.shared.getSettings(completion: { [weak self] settings in
+        ServerApi.shared.getSettings(completion: { [weak self] settings, _ in
             guard let settings = settings,
                   let self = self else { return }
             

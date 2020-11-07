@@ -105,6 +105,7 @@ class TableHelper {
     
     private func iconCell(_ cell: UITableViewCell, icon: UIImage?) {
         cell.accessoryType = .none
+        cell.subviews.first { $0 is UIImageView }?.removeFromSuperview()
         
         if let icon = icon {
             cell.textLabel?.text = "\(icon.size.width >= 25 ? "          " : "       ")\(cell.textLabel?.text ?? "")"

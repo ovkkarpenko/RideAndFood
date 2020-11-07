@@ -93,6 +93,7 @@
 		FA44F2AF25459B080004A1C9 /* SettingsLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA44F2AE25459B080004A1C9 /* SettingsLanguageViewController.swift */; };
 		FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA44F2B125459B1F0004A1C9 /* SettingsLanguageViewModel.swift */; };
 		FA561B4C254F0D8E00BD549E /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA561B4B254F0D8E00BD549E /* SideMenuView.swift */; };
+		FA6100AC255715C700ED0CD5 /* PaymentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6100AB255715C700ED0CD5 /* PaymentType.swift */; };
 		FA8196AE2556A4D50053EE22 /* PaymentPointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8196AD2556A4D50053EE22 /* PaymentPointsView.swift */; };
 		FA8196B12556A7100053EE22 /* PaymentPointsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8196B02556A7100053EE22 /* PaymentPointsDetailsView.swift */; };
 		FA81AE73254B364F00B74182 /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81AE72254B364F00B74182 /* ServerConfig.swift */; };
@@ -213,6 +214,7 @@
 		FA44F2AE25459B080004A1C9 /* SettingsLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageViewController.swift; sourceTree = "<group>"; };
 		FA44F2B125459B1F0004A1C9 /* SettingsLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageViewModel.swift; sourceTree = "<group>"; };
 		FA561B4B254F0D8E00BD549E /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		FA6100AB255715C700ED0CD5 /* PaymentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentType.swift; sourceTree = "<group>"; };
 		FA8196AD2556A4D50053EE22 /* PaymentPointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPointsView.swift; sourceTree = "<group>"; };
 		FA8196B02556A7100053EE22 /* PaymentPointsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPointsDetailsView.swift; sourceTree = "<group>"; };
 		FA81AE72254B364F00B74182 /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 			children = (
 				FAA9495925546F9F005C5B40 /* PaymentCard.swift */,
 				FAA9495C25546FA8005C5B40 /* PaymentCardDetails.swift */,
+				FA6100AB255715C700ED0CD5 /* PaymentType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -894,6 +897,7 @@
 				7286E51425423A160027A69B /* LoginStrings.swift in Sources */,
 				7240BF17253E0E7600C00BB9 /* ViewController.swift in Sources */,
 				FAACAAA0254B0C13005C3084 /* PromotionDetailsViewModel.swift in Sources */,
+				FA6100AC255715C700ED0CD5 /* PaymentType.swift in Sources */,
 				72A1DBE02545B424005A047A /* LoginInteractor.swift in Sources */,
 				7286E51D2542BA940027A69B /* Checkbox.swift in Sources */,
 				7286E52E254312C50027A69B /* NumberInputView.swift in Sources */,
