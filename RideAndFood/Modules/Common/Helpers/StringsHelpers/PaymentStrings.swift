@@ -36,6 +36,8 @@ enum PaymentStrings {
     case celncelButtonTitle
     case points
     case applePay
+    case errorTitle
+    case errorDescription
     
     func language() -> String {
         switch UserConfig.shared.settings.language {
@@ -57,6 +59,10 @@ enum PaymentStrings {
     
     func rus() -> String {
         switch self {
+        case .errorTitle:
+            return "Ошибка при добавлении карты"
+        case .errorDescription:
+            return "Проверьте правильность введенных данных."
         case .cardCellTitle(let card):
             return "Карта **** \(card.suffix(4))"
         case .paymentPointsDetailsStartCollect:
@@ -116,6 +122,10 @@ enum PaymentStrings {
     
     func eng() -> String {
         switch self {
+        case .errorTitle:
+            return "Error adding card"
+        case .errorDescription:
+            return "Check the correctness of the entered data."
         case .cardCellTitle(let card):
             return "Card **** \(card.suffix(4))"
         case .paymentPointsDetailsStartCollect:

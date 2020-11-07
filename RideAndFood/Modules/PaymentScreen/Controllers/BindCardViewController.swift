@@ -30,10 +30,15 @@ class BindCardViewController: UIViewController {
     private lazy var bindCardView: BindCardView = {
         let view = BindCardView()
         view.confirmCallback = { [weak self] cardDetails in
-            self?.confirmBindCardView.cardDetails = cardDetails
+            guard let self = self else { return }
             
-            self?.toggleBindCardView(true)
-            self?.toggleConfirmBindCardView(false)
+            self.confirmBindCardView.cardDetails = cardDetails
+            
+            self.toggleBindCardView(true)
+            self.toggleConfirmBindCardView(false)
+        }
+        view.showErrorAlert = {
+            AlertHelper.shared.alert(self, title: PaymentStrings.errorTitle.text(), message: PaymentStrings.errorDescription.text())
         }
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
