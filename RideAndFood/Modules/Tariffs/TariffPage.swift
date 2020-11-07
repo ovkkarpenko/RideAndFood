@@ -20,13 +20,15 @@ class TariffPage: UIView {
     @IBOutlet weak var carsLabel: UILabel!
     @IBOutlet weak var carImageView: UIImageView!
     @IBOutlet weak var aboutTariffLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet var iconButtons: [UIButton]!
     @IBOutlet var advantageLabels: [UILabel]!
+    @IBOutlet var advantageView: [UIView]!
+    
     
     private var tariffModel: TariffModel!
     private var tariffId: Int!
-    private var labelCornerRadius: CGFloat = 4
+    private var labelCornerRadius: CGFloat = 10
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -50,9 +52,10 @@ class TariffPage: UIView {
         setAttributedTextToCarsLabel()
         setCarImage()
         setAboutTariffLabelParameters()
-        setDescriptionLabelParameters()
+        setDescriptionTextViewParameters()
         setIconButtonsParameters()
         setAdvantageLabelsParameters()
+        setAdvantageViewParameters()
     }
     
     fileprivate func initWithNib() {
@@ -100,12 +103,11 @@ class TariffPage: UIView {
     }
     
     private func setAttributedTextToCarsLabel() {
-//        let cars = NSMutableAttributedString(string: TariffStrings.getString(.cars)(), attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.textGray)])
-//        if let carsString = tariffModel.cars {
-//            cars.append(NSAttributedString(string: carsString, attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.textBlack)()]))
-//        }
-//        carsLabel.attributedText = cars
-        carsLabel.text = "sdasdas"
+        let cars = NSMutableAttributedString(string: TariffStrings.getString(.cars)(), attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.textGray)()])
+        if let carsString = tariffModel.cars {
+            cars.append(NSAttributedString(string: carsString, attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.textBlack)()]))
+        }
+        carsLabel.attributedText = cars
     }
     
     private func setCarImage() {
@@ -123,10 +125,10 @@ class TariffPage: UIView {
         aboutTariffLabel.textColor = Colors.getColor(.textBlack)()
     }
     
-    private func setDescriptionLabelParameters() {
+    private func setDescriptionTextViewParameters() {
         if let description = tariffModel.description {
-            descriptionLabel.textColor = Colors.getColor(.textGray)()
-            descriptionLabel.text = description
+            descriptionTextView.textColor = Colors.getColor(.textGray)()
+            descriptionTextView.text = description
         }
     }
     
@@ -148,12 +150,11 @@ class TariffPage: UIView {
                     downloadImage(with: baseUrl + iconUrlPart) { [weak self] (iconImage) in
                         guard let self = self else { return }
                         guard let iconImage = iconImage else { return }
+                        self.iconButtons[i].tintColor = color
                         self.iconButtons[i].setImage(iconImage, for: .normal)
                     }
                 }
             }
-            
-            iconButtons[i].tintColor = color
         }
     }
     
@@ -181,6 +182,20 @@ class TariffPage: UIView {
                     advantageLabels[i].text = advantageText
                 }
             }
+        }
+    }
+    
+    private func setAdvantageViewParameters() {
+        for view in advantageView {
+            view.layer.masksToBounds = false
+            view.layer.cornerRadius = generalCornerRaduis
+            view.layer.shadowColor = Colors.getColor(.shadowColor)().cgColor
+            view.layer.shadowOpacity = 1
+            view.layer.shadowOffset = .zero
+            view.layer.shadowRadius = generalCornerRaduis
+            view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
+            view.layer.shouldRasterize = true
+            view.layer.rasterizationScale = UIScreen.main.scale
         }
     }
 }

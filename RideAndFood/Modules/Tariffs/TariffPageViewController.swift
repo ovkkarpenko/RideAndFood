@@ -12,18 +12,18 @@ class TariffPageViewController: UIPageViewController {
     private var pages: [UIViewController] = []
     private var tariffModel: [TariffModel] = []
     
-    override var transitionStyle: UIPageViewController.TransitionStyle {
-        return .scroll
-    }
-    
-    override var spineLocation: UIPageViewController.SpineLocation {
-        return .none
+    required init?(coder: NSCoder) {
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = self
-
+        
+        setTariffs()
+    }
+    
+    private func setTariffs() {
         let request = RequestModel<TariffModel>(path: tariffPath, method: .get)
         let networker = Networker()
         
@@ -37,6 +37,10 @@ class TariffPageViewController: UIPageViewController {
                 if let firstViewController = self.pages.first {
                     self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
                 }
+            }
+            
+            if let error = error {
+                print(error.message)
             }
         }
     }
@@ -57,37 +61,18 @@ class TariffPageViewController: UIPageViewController {
 
 extension TariffPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = pages.firstIndex(of: viewController) else {
+        guard let currentIndex = pages.firstIndex(of: viewController) else {
             return nil
         }
         
-        let previousIndex = viewControllerIndex - 1
-        
-        guard previousIndex >= 0 else {
-            return pages.last
-        }
-        
-        guard pages.count > previousIndex else {
-            return nil
-        }
-        
-        return pages[previousIndex]
+        return currentIndex == 0 ? pages.last : pages[currentIndex - 1]
     }
     
     func pageViewController(_: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = pages.firstIndex(of: viewController) else {
+        guard let currentIndex = pages.firstIndex(of: viewController) else {
             return nil
         }
         
-        let nextIndex = viewControllerIndex + 1
-        guard pages.count != nextIndex else {
-            return pages.first
-        }
-        
-        guard pages.count > nextIndex else {
-            return nil
-        }
-        
-        return pages[nextIndex]
+        return currentIndex == pages.count - 1 ? pages.first : pages[currentIndex + 1]
     }
 }

@@ -32,7 +32,7 @@ enum TariffStrings {
             case .business:
                 return "Business"
             case .cars:
-                return "Автомобили"
+                return "Автомобили: "
             case .aboutTariff:
                 return "О тарифе"
             }
@@ -49,7 +49,7 @@ enum TariffStrings {
             case .business:
                 return "Business"
             case .cars:
-                return "Cars"
+                return "Cars: "
             case .aboutTariff:
                 return "About tariff"
             }

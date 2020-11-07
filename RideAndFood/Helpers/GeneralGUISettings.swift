@@ -8,11 +8,6 @@
 
 import UIKit
 
-//public let cornerRadius15: CGFloat = 15
-//public let blueButtonColor = #colorLiteral(red: 0.2392156863, green: 0.231372549, blue: 1, alpha: 1)
-//public let grayborderColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
-//public let borderWidth: CGFloat = 1
-
 public let generalCornerRaduis: CGFloat = 15
 
 enum Colors {
@@ -26,6 +21,7 @@ enum Colors {
     case tariffPurple
     case tariffGold
     case textBlack
+    case shadowColor
     
     func getColor() -> UIColor {
         switch self {
@@ -49,6 +45,8 @@ enum Colors {
             return UIColor(hexString: "#D4BD80")
         case .textBlack:
             return UIColor(hexString: "#000000")
+        case .shadowColor:
+            return UIColor(hexString: "#000000", alpha: 0.1)
         }
     }
 }
