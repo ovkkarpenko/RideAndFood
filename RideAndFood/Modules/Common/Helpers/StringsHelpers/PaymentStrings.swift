@@ -21,6 +21,17 @@ enum PaymentStrings {
     case bindCardButtonTitle
     case bindCardAlert(String)
     case confirmButtonTitle
+    case newOrderButtonTitle
+    case detailsButtonTitle
+    case congratulationsAlertTitle
+    case pointsFullTitle(String)
+    case pointsTitle(String)
+    case congratulationsFullTitle(String)
+    case congratulationsPointsTitle(String)
+    case congratulationsDescription
+    case paymentPointsDetailsTitle
+    case paymentPointsDetailsStartCollect
+    case paymentPointsDetailsDescription
     case celncelButtonTitle
     case points
     case applePay
@@ -45,6 +56,26 @@ enum PaymentStrings {
     
     func rus() -> String {
         switch self {
+        case .paymentPointsDetailsStartCollect:
+            return "Начать копить баллы"
+        case .paymentPointsDetailsTitle:
+            return "Пользуйтесь сервисом – копите баллы!"
+        case .congratulationsAlertTitle:
+            return "Поздравляем!"
+        case .pointsFullTitle(let points):
+            return "У вас \(points) баллов"
+        case .pointsTitle(let points):
+            return "\(points) баллов"
+        case .congratulationsFullTitle(let points):
+            return "У вас \(points) бонусных баллов"
+        case .congratulationsPointsTitle(let points):
+            return "\(points) бонусных баллов"
+        case .congratulationsDescription:
+            return "Количество баллов всегда можно посмотреть в данном разделе, либо при оплате заказа"
+        case .newOrderButtonTitle:
+            return "Новый заказ"
+        case .detailsButtonTitle:
+            return "Подробнее"
         case .confirmButtonTitle:
             return "Подтвердить"
         case .celncelButtonTitle:
@@ -75,11 +106,33 @@ enum PaymentStrings {
             return "Наличные"
         case .applePay:
             return "Apple Pay"
+        case .paymentPointsDetailsDescription:
+            return "Программа лояльности для пользователей сервисами приложения «Ride & Drive». Программа предназначена для накопления баллов пользователем при оплате любым способом. 1 балл приравнивается к 1 рублю. При использовании сервиса «Такси» баллы начисляются согласно ставке 10% от суммы заказа свыше 800 рублей единовременно. При использовании сервиса «Еда» баллы начисляются согласно ставке 5% от суммы заказа свыше 1000 рублей единовременно. Использование баллов дает право пользователю на комбинированную оплату заказа. При оплате баллами заказа сервиса «Такси» минимальная сумма заказа – 200 рублей, максимальная оплата баллами – 50 баллов.  При оплате баллами заказа сервиса «Еда» минимальная сумма заказа – 300 рублей, максимальная оплата баллами – 50 баллов."
         }
     }
     
     func eng() -> String {
         switch self {
+        case .paymentPointsDetailsStartCollect:
+            return "Start collecting points"
+        case .paymentPointsDetailsTitle:
+            return "Use the service - collect points!"
+        case .congratulationsAlertTitle:
+            return "Congratulations!"
+        case .pointsFullTitle(let points):
+            return "You have \(points) points"
+        case .pointsTitle(let points):
+            return "\(points) points"
+        case .congratulationsFullTitle(let points):
+            return "You have \(points) bonus points"
+        case .congratulationsPointsTitle(let points):
+            return "\(points) bonus points"
+        case .congratulationsDescription:
+            return "The number of points can always be viewed in this section, or when paying for an order"
+        case .newOrderButtonTitle:
+            return "New order"
+        case .detailsButtonTitle:
+            return "Details"
         case .confirmButtonTitle:
             return "Confirm"
         case .celncelButtonTitle:
@@ -110,6 +163,8 @@ enum PaymentStrings {
             return "Cash"
         case .applePay:
             return "Apple Pay"
+        case .paymentPointsDetailsDescription:
+            return "Loyalty program for users of the services of the \"Ride & Drive\" application. The program is intended for the accumulation of points by the user when paying in any way. 1 point is equal to 1 ruble. When using the Taxi service, points are awarded at the rate of 10% of the order amount over 800 rubles at a time. When using the \"Food\" service, points are awarded at a rate of 5% of the order amount over 1000 rubles at a time. The use of points entitles the user to a combined order payment. When paying with points for ordering the Taxi service, the minimum order amount is 200 rubles, the maximum payment with points is 50 points. When paying with points for ordering the \"Food\" service, the minimum order amount is 300 rubles, the maximum payment with points is 50 points."
         }
     }
 }

@@ -13,19 +13,23 @@ import RxDataSources
 class PaymentViewController: UIViewController {
     
     private let bag = DisposeBag()
+    let viewModel = PaymentViewModel()
     
     private lazy var tableView: UITableView = {
         let cellIdentifier = "PaymentCell"
         let tableView = UITableView()
         tableView.isScrollEnabled = false
-        tableView.allowsSelection = false
         tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
-        let viewModel = PaymentViewModel()
         viewModel.items
             .bind(to: tableView.rx.items(dataSource: viewModel.dataSource(cellIdentifier: cellIdentifier)))
             .disposed(by: bag)
+        
+        tableView.rx.modelSelected(TableItem.self)
+            .subscribe(onNext: { item in
+                item.completion?(self)
+            }).disposed(by: bag)
         
         viewModel.fetchItems()
         

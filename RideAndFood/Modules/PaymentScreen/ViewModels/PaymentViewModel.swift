@@ -48,7 +48,17 @@ class PaymentViewModel {
                 TableItem(title: PaymentStrings.applePay.text(), cellTypes: [.radio(false), .icon(UIImage(named: "applePay", in: Bundle.init(path: "Images/Icons"), with: .none))]),
             ]),
             
-            SectionModel(model: " ", items: [TableItem(title: PaymentStrings.points.text(), cellTypes: [.default(), .icon(UIImage(named: "points", in: Bundle.init(path: "Images/Icons"), with: .none))])])
+            SectionModel(model: " ", items: [
+                TableItem(
+                    title: PaymentStrings.points.text(),
+                    cellTypes: [.icon(UIImage(named: "points", in: Bundle.init(path: "Images/Icons"), with: .none)), .default()],
+                    completion: { rootVC in
+                        let vc = PaymentPointsViewController()
+                        vc.modalPresentationStyle = .overFullScreen
+                        vc.modalTransitionStyle = .crossDissolve
+                        rootVC.present(vc, animated: true)
+                    })
+            ])
         ]
     }
 }
