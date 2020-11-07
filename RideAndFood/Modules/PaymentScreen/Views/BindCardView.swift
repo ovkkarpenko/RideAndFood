@@ -12,6 +12,7 @@ import Foundation
 
 class BindCardView: UIView {
     
+    var showErrorAlert: (() -> ())?
     var confirmCallback: ((PaymentCardDetails) -> ())?
     
     private lazy var cardNumberTextField: MaskTextField = {
@@ -135,6 +136,8 @@ class BindCardView: UIView {
                         DispatchQueue.main.async {
                             self.confirmCallback?(cardDetails)
                         }
+                    } else {
+                        self.showErrorAlert?()
                     }
                 }
             }.disposed(by: bag)

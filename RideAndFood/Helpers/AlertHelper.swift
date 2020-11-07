@@ -10,12 +10,14 @@ import UIKit
 import Foundation
 
 class AlertHelper {
-
+    
     static let shared = AlertHelper()
     
     func alert(_ vc: UIViewController, title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        vc.present(alert, animated: true)
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            vc.present(alert, animated: true)
+        }
     }
 }
