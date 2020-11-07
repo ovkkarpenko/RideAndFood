@@ -12,14 +12,13 @@
         <!--Tariff View Controller-->
         <scene sceneID="7ls-z7-7OC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uWe-1D-C2m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="5Ev-3d-g7M" customClass="TariffViewController" customModule="RideAndFood" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RjH-2W-E20">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBG-Mj-W4h">
-                                <rect key="frame" x="0.0" y="44" width="375" height="540"/>
+                                <rect key="frame" x="0.0" y="69" width="375" height="515"/>
                                 <connections>
                                     <segue destination="3g4-3j-E8G" kind="embed" id="YG6-jr-CRY"/>
                                 </connections>
@@ -38,7 +37,7 @@
                         <viewLayoutGuide key="safeArea" id="UZs-yj-enu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="TBG-Mj-W4h" firstAttribute="top" secondItem="UZs-yj-enu" secondAttribute="top" id="1yq-IV-DHy"/>
+                            <constraint firstItem="TBG-Mj-W4h" firstAttribute="top" secondItem="UZs-yj-enu" secondAttribute="top" constant="25" id="1yq-IV-DHy"/>
                             <constraint firstItem="UZs-yj-enu" firstAttribute="bottom" secondItem="4Qk-CV-0c7" secondAttribute="bottom" constant="25" id="VwE-mP-NE9"/>
                             <constraint firstItem="4Qk-CV-0c7" firstAttribute="leading" secondItem="UZs-yj-enu" secondAttribute="leading" constant="25" id="Xuy-ib-I9J"/>
                             <constraint firstItem="UZs-yj-enu" firstAttribute="trailing" secondItem="TBG-Mj-W4h" secondAttribute="trailing" id="YPT-e3-0VO"/>
@@ -59,6 +58,7 @@
                         <outlet property="orderButton" destination="4Qk-CV-0c7" id="M0c-Yx-czb"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uWe-1D-C2m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="250" y="18"/>
         </scene>
@@ -85,8 +85,9 @@
             <objects>
                 <viewController id="3g4-3j-E8G" customClass="TariffPageViewController" customModule="RideAndFood" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vPg-i2-3TE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="540"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="moD-Ye-uXb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>

@@ -100,11 +100,12 @@ class TariffPage: UIView {
     }
     
     private func setAttributedTextToCarsLabel() {
-        let cars = NSMutableAttributedString(string: TariffStrings.getString(.cars)(), attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.textGray)])
-        if let carsString = tariffModel.cars {
-            cars.append(NSAttributedString(string: carsString, attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.textBlack)()]))
-        }
-        carsLabel.attributedText = cars
+//        let cars = NSMutableAttributedString(string: TariffStrings.getString(.cars)(), attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.textGray)])
+//        if let carsString = tariffModel.cars {
+//            cars.append(NSAttributedString(string: carsString, attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.textBlack)()]))
+//        }
+//        carsLabel.attributedText = cars
+        carsLabel.text = "sdasdas"
     }
     
     private func setCarImage() {
@@ -142,7 +143,7 @@ class TariffPage: UIView {
         }
         
         for i in 0..<iconButtons.count {
-            if let advantage = tariffModel.advantage {
+            if let advantage = tariffModel.advantages {
                 if let iconUrlPart = advantage[i]?.icon {
                     downloadImage(with: baseUrl + iconUrlPart) { [weak self] (iconImage) in
                         guard let self = self else { return }
@@ -175,7 +176,7 @@ class TariffPage: UIView {
     
     private func setAdvantageLabelsParameters() {
         for i in 0..<advantageLabels.count {
-            if let advantage = tariffModel.advantage {
+            if let advantage = tariffModel.advantages {
                 if let advantageText = advantage[i]?.name {
                     advantageLabels[i].text = advantageText
                 }

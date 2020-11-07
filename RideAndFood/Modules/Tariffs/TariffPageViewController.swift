@@ -33,7 +33,7 @@ class TariffPageViewController: UIPageViewController {
             if let results = results {
                 self.tariffModel = results
                 self.setPages()
-                
+
                 if let firstViewController = self.pages.first {
                     self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
                 }
