@@ -73,8 +73,8 @@ class TableHelper {
     }
     
     private func defaultCell(_ cell: UITableViewCell, textColor: UIColor?) {
-        cell.textLabel?.textColor = textColor == nil ? .black : textColor
         cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.textColor = textColor == nil ? .black : textColor
     }
     
     private func noneCell(_ cell: UITableViewCell) {
@@ -157,6 +157,8 @@ class TableHelper {
     }
     
     private func defaultCellConfig(_ cell: UITableViewCell, title: String) {
+        cell.subviews.first { $0 is UIImageView }?.removeFromSuperview()
+        
         cell.textLabel?.text = title
         cell.frame = CGRect(x: 0, y: 0, width: 375, height: 40)
         cell.textLabel?.font = .systemFont(ofSize: 15)

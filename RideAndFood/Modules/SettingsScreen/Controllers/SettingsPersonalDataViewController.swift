@@ -27,11 +27,6 @@ class SettingsPersonalDataViewController: UIViewController {
         setupTextView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        viewModel.fetchItems()
-    }
-    
     func setupTextView() {
         let attributedString = NSMutableAttributedString(string: PersonalDataStrings.termsOfUse.text(),
                                                          attributes: [
@@ -67,6 +62,8 @@ class SettingsPersonalDataViewController: UIViewController {
                     self.performSegue(withIdentifier: segue, sender: nil)
                 }
             }).disposed(by: bag)
+        
+        viewModel.fetchItems()
     }
 }
 
