@@ -65,7 +65,7 @@ extension TariffPageViewController: UIPageViewControllerDataSource {
             return nil
         }
         
-        return currentIndex == 0 ? pages.last : pages[currentIndex - 1]
+        return currentIndex == 0 ? nil : pages[currentIndex - 1]
     }
     
     func pageViewController(_: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -73,6 +73,6 @@ extension TariffPageViewController: UIPageViewControllerDataSource {
             return nil
         }
         
-        return currentIndex == pages.count - 1 ? pages.first : pages[currentIndex + 1]
+        return currentIndex == pages.count - 1 ? nil : pages[currentIndex + 1]
     }
 }
