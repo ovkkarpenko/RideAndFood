@@ -32,14 +32,14 @@ class TaxiOrderView: UIView {
     
     convenience init(input: Int) {
         self.init()
-        self.input = input
+        self.input = input // temporary
+        secondTextView.customTextViewDelegate = self
+        
         customizeTapIndicator()
         customizePanelView()
         
         firstTextView.setType(.fromAddress)
         secondTextView.setType(.toAddress)
-//        firstTextView = CustomTextView(textViewType: .fromAddress)
-//        secondTextView = CustomTextView(textViewType: .toAddress)
         button.customizeButton(type: .blueButton)
     }
     
@@ -71,4 +71,10 @@ class TaxiOrderView: UIView {
         panelView.layer.rasterizationScale = UIScreen.main.scale
     }
     
+}
+
+extension TaxiOrderView: CustomTextViewDelegate {
+    func checkIfDestinationAddressAvailable(state: Bool) {
+        self.additionalViewContainer.isHidden = !state
+    }
 }

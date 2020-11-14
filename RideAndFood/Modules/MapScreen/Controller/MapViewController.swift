@@ -56,9 +56,9 @@ class MapViewController: UIViewController {
 //                             taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10),
 //                             taxiOrderView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 25),
 //                             taxiOrderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 400)])
-//        (NSLayoutConstraint.activate([taxiOrderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//                                     taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//                                     taxiOrderView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]))
+        (NSLayoutConstraint.activate([taxiOrderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                     taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                     taxiOrderView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]))
     }
     
     private lazy var sideMenuView: SideMenuView = {

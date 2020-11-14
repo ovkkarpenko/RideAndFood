@@ -13,6 +13,10 @@ enum TextViewType: Int {
     case toAddress = 2
 }
 
+protocol CustomTextViewDelegate: class {
+    func checkIfDestinationAddressAvailable(state: Bool)
+}
+
 class CustomTextView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var texField: UITextField!
@@ -22,6 +26,7 @@ class CustomTextView: UIView {
     @IBOutlet weak var verticalSplitterView: UIView!
     
     static let CUSTOM_TEXT_VIEW_NIB = "CustomTextView"
+    weak var customTextViewDelegate: CustomTextViewDelegate?
     
     private var textViewType: TextViewType! {
         didSet {
@@ -29,10 +34,11 @@ class CustomTextView: UIView {
         }
     }
     
-    private var isTextFieldDisable = true {
+    private var isDestinationAddressAvailable = false {
         didSet {
-            if isTextFieldDisable != oldValue {
+            if isDestinationAddressAvailable != oldValue {
                 setToAddressParameters()
+                customTextViewDelegate?.checkIfDestinationAddressAvailable(state: isDestinationAddressAvailable)
             }
         }
     }
@@ -83,11 +89,18 @@ class CustomTextView: UIView {
         mapButton.isUserInteractionEnabled = false
         mapButton.setImage(UIImage(named: "visa"), for: .normal)
         indicatorView.backgroundColor = Colors.getColor(.buttonBlue)()
-        texField.becomeFirstResponder()
     }
     
     private func setToAddressParameters() {
-        if isTextFieldDisable {
+        if isDestinationAddressAvailable {
+            locationImage.tintColor = Colors.getColor(.locationOrange)()
+            mapButton.isUserInteractionEnabled = true
+            mapButton.setImage(nil, for: .normal)
+            mapButton.setTitle(TaxiOrderStrings.getString(.map)(), for: .normal)
+            mapButton.setTitleColor(Colors.getColor(.textBlack)(), for: .normal)
+            verticalSplitterView.isHidden = false
+            indicatorView.backgroundColor = Colors.getColor(.locationOrange)()
+        } else {
             locationImage.tintColor = Colors.getColor(.disableGray)()
             mapButton.isUserInteractionEnabled = true
             mapButton.setImage(nil, for: .normal)
@@ -96,14 +109,6 @@ class CustomTextView: UIView {
             verticalSplitterView.isHidden = false
             indicatorView.backgroundColor = Colors.getColor(.disableGray)()
             texField.placeholder = TaxiOrderStrings.getString(.destinationPlaceholder)()
-        } else {
-            locationImage.tintColor = Colors.getColor(.locationOrange)()
-            mapButton.isUserInteractionEnabled = true
-            mapButton.setImage(nil, for: .normal)
-            mapButton.setTitle(TaxiOrderStrings.getString(.map)(), for: .normal)
-            mapButton.setTitleColor(Colors.getColor(.textBlack)(), for: .normal)
-            verticalSplitterView.isHidden = false
-            indicatorView.backgroundColor = Colors.getColor(.locationOrange)()
         }
     }
 }
@@ -114,7 +119,7 @@ extension CustomTextView: UITextFieldDelegate {
         switch textViewType {
         case .toAddress:
             if let text = texField.text {
-                isTextFieldDisable = text.count > 0 ? false : true
+                isDestinationAddressAvailable = text.count > 0 ? true : false
             }
         default:
             break
