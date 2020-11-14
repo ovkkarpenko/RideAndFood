@@ -86,7 +86,15 @@ class MapCardView: UIView {
         }
     }
     
-    var taxiAction: (() -> Void)?
+    var taxiAction: (() -> Void)? {
+        didSet {
+            if let action = taxiAction {
+                taxiButton.action = action
+                // should change button state
+            }
+        }
+    }
+    
     var foodAction: (() -> Void)?
     
     var address: String? {

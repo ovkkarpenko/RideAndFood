@@ -39,8 +39,27 @@ class MapViewController: UIViewController {
     private lazy var cardView: MapCardView = {
         let view = MapCardView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.taxiAction = taxiButtonPressed
         return view
     }()
+    
+    private var taxiOrderView: TaxiOrderView!
+    
+    @objc private func taxiButtonPressed() {
+        print("Button tapped")
+//        taxiOrderView = TaxiOrderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 400))
+        taxiOrderView = TaxiOrderView(input: 1)
+        view.addSubview(taxiOrderView)
+        taxiOrderView.frame = CGRect(x: 0, y: view.bounds.height - 400, width: view.bounds.width, height: 400)
+        
+//        view.addConstraints([taxiOrderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+//                             taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10),
+//                             taxiOrderView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 25),
+//                             taxiOrderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 400)])
+//        (NSLayoutConstraint.activate([taxiOrderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//                                     taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//                                     taxiOrderView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]))
+    }
     
     private lazy var sideMenuView: SideMenuView = {
         let view = SideMenuView()

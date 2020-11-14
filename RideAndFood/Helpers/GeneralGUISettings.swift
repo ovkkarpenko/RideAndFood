@@ -22,6 +22,8 @@ enum Colors {
     case tariffGold
     case textBlack
     case shadowColor
+    case locationOrange
+    case tapIndicatorGray
     
     func getColor() -> UIColor {
         switch self {
@@ -47,6 +49,10 @@ enum Colors {
             return UIColor(hexString: "#000000")
         case .shadowColor:
             return UIColor(hexString: "#000000", alpha: 0.1)
+        case .locationOrange:
+            return UIColor(hexString: "#FB8E50")
+        case .tapIndicatorGray:
+            return UIColor(hexString: "#000000", alpha: 0.5)
         }
     }
 }

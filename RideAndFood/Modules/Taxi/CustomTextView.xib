@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomTextView" customModule="RideAndFood" customModuleProvider="target">
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="type">
+                    <integer key="value" value="1"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="Cwx-BF-0cY"/>
+                <outlet property="indicatorView" destination="k5L-is-MZf" id="mNb-i1-nAL"/>
+                <outlet property="locationImage" destination="qPN-8j-Ydn" id="Lgc-qG-ycs"/>
+                <outlet property="mapButton" destination="7dV-ye-QeM" id="9SC-GK-BEX"/>
+                <outlet property="texField" destination="JEF-pb-XWE" id="VQr-93-sXn"/>
+                <outlet property="verticalSplitterView" destination="1ox-ig-4Qy" id="Eha-cm-VIm"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pZ1-DD-mTV">
+                    <rect key="frame" x="25" y="0.0" width="325" height="43"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7hR-zq-sRP">
+                            <rect key="frame" x="0.0" y="0.0" width="325" height="34"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPN-8j-Ydn">
+                                    <rect key="frame" x="0.0" y="7.5" width="12" height="19"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="12" id="Go4-DW-AK0"/>
+                                        <constraint firstAttribute="height" constant="19" id="uEq-3n-BcK"/>
+                                    </constraints>
+                                    <state key="normal" image="Mark"/>
+                                </button>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JEF-pb-XWE">
+                                    <rect key="frame" x="22" y="0.0" width="232" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="CMG-zi-vET"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="250" id="y5J-SU-buL"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="f5S-wX-0Iv"/>
+                                    </connections>
+                                </textField>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ox-ig-4Qy">
+                                    <rect key="frame" x="264" y="3.5" width="1" height="27"/>
+                                    <color key="backgroundColor" name="DisabledButton"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="27" id="4kI-4A-4q1"/>
+                                        <constraint firstAttribute="width" constant="1" id="RhP-2k-pab"/>
+                                    </constraints>
+                                </view>
+                                <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dV-ye-QeM">
+                                    <rect key="frame" x="275" y="12" width="50" height="10"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="10" id="Bt2-ea-fs1"/>
+                                        <constraint firstAttribute="width" constant="50" id="V3X-SG-GjF"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <state key="normal" image="visa"/>
+                                </button>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k5L-is-MZf">
+                            <rect key="frame" x="15" y="42" width="310" height="1"/>
+                            <color key="backgroundColor" name="Primary"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="ozR-UO-tWE"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="k5L-is-MZf" secondAttribute="trailing" id="4M5-VS-Ipg"/>
+                        <constraint firstAttribute="trailing" secondItem="7hR-zq-sRP" secondAttribute="trailing" id="8s0-y6-YwO"/>
+                        <constraint firstItem="k5L-is-MZf" firstAttribute="leading" secondItem="pZ1-DD-mTV" secondAttribute="leading" constant="15" id="9sH-SH-UQB"/>
+                        <constraint firstAttribute="height" constant="43" id="W22-fF-AIm"/>
+                        <constraint firstItem="7hR-zq-sRP" firstAttribute="leading" secondItem="pZ1-DD-mTV" secondAttribute="leading" id="djV-Di-IPX"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="pZ1-DD-mTV" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="3HL-gu-Gqv"/>
+                <constraint firstItem="pZ1-DD-mTV" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="G7S-0q-fGM"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pZ1-DD-mTV" secondAttribute="bottom" id="JUd-VC-gQi"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pZ1-DD-mTV" secondAttribute="trailing" constant="25" id="hEw-LI-LFS"/>
+            </constraints>
+            <point key="canvasLocation" x="125.59999999999999" y="-104.7976011994003"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Mark" width="31" height="47.5"/>
+        <image name="visa" width="33" height="10"/>
+        <namedColor name="DisabledButton">
+            <color red="0.81599998474121094" green="0.81599998474121094" blue="0.81599998474121094" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="Primary">
+            <color red="0.25699999928474426" green="0.17299999296665192" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
