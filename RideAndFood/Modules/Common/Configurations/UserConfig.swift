@@ -18,6 +18,7 @@ class UserConfig {
     // MARK: - Private properties
     
     private let userIdKey = "userId"
+    private let userPhoneNumber = "phoneNumber"
     private let settingsLanguageKey = "settingsLanguageKey"
     private let settingsDoNotCallKey = "settingsDoNotCallKey"
     private let settingsNotificationDiscountKey = "settingsNotificationDiscountKey"
@@ -30,6 +31,14 @@ class UserConfig {
             UserDefaults.standard.integer(forKey: userIdKey)
         } set {
             UserDefaults.standard.setValue(newValue, forKey: userIdKey)
+        }
+    }
+    
+    var phoneNumber: String {
+        get {
+            UserDefaults.standard.string(forKey: userPhoneNumber) ?? ""
+        } set {
+            UserDefaults.standard.setValue(newValue, forKey: userPhoneNumber)
         }
     }
     
