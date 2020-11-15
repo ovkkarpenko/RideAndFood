@@ -52,9 +52,9 @@ class LoginView: UIView {
     
     private lazy var phoneTextField: PhoneTextField = {
         let maskedTextField = PhoneTextField(frame: .zero)
-        maskedTextField.valueChangedCallback = { [weak self] isCompleted in
+        maskedTextField.configure(with: .init(valueChangedCallback: { [weak self] isCompleted in
             self?.isCompleted = isCompleted && self?.checkbox.isChecked ?? false
-        }
+        }))
         maskedTextField.translatesAutoresizingMaskIntoConstraints = false
         return maskedTextField
     }()

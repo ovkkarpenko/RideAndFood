@@ -40,7 +40,7 @@ class SecondaryButton: UIButton {
     private func setup() {
         backgroundColor = ColorHelper.background.color()
         setTitleColor(ColorHelper.primaryText.color(), for: .normal)
-        
+        titleLabel?.font = FontHelper.regular17.font()
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         layer.cornerRadius = cornerRadius

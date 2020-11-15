@@ -37,7 +37,23 @@ class AccountViewController: UIViewController {
         return view
     }()
     
-    private let hideCardViewConstant: CGFloat = 500
+    private lazy var phoneEnteringView: AccountPhoneEnteringView = {
+        let view = AccountPhoneEnteringView()
+        let model = AccountPhoneEnteringViewModel { [weak self] phoneNumber in
+            self?.confirmPhoneNumber(phoneNumber)
+        }
+        view.configure(with: model)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var codeConfirmationView: CodeConfirmationView = {
+        let view = CodeConfirmationView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let hideCardViewConstant: CGFloat = 200
     private lazy var cardViewBottomConstraint = cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
                                                                                  constant: hideCardViewConstant)
     
@@ -48,8 +64,10 @@ class AccountViewController: UIViewController {
     var cellId = "acoountCell"
     private lazy var accountTableViewDataSource = AccountTableViewDataSource(phoneNumbers: phoneNumbers, cellId: cellId)
     private lazy var accountTableViewDelegate = AccountTableViewDelegate(viewController: self) { [weak self] row in
-        
+        self?.phoneNumberPressed(row: row)
     }
+    
+    private var isAddingMode = false
     
     
     // MARK: - Lifecycle methods
@@ -59,6 +77,15 @@ class AccountViewController: UIViewController {
         
         setupNavigationBar()
         setupLayout()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
     // MARK: - Private methods
@@ -91,23 +118,138 @@ class AccountViewController: UIViewController {
                                                  action: #selector(dismissSelf))
     }
     
-    private func showCardView() {
+    private func showCardView(completion: ((Bool) -> Void)? = nil) {
+        guard cardViewBottomConstraint.constant > 0 else { return }
         cardViewBottomConstraint.constant = 0
-        animateConstraints()
+        animateConstraints(completion: completion)
     }
     
-    private func hideCardView() {
+    private func hideCardView(completion: ((Bool) -> Void)? = nil) {
         cardViewBottomConstraint.constant = hideCardViewConstant
-        animateConstraints()
+        animateConstraints(completion: completion)
     }
     
-    private func animateConstraints() {
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+    private func updateCardView(block: @escaping () -> Void, completion: (() -> Void)? = nil) {
+        hideCardView { [weak self] _ in
+            block()
+            self?.view.layoutIfNeeded()
+            self?.showCardView { _ in
+                completion?()
+            }
         }
+    }
+    
+    private func animateConstraints(completion: ((Bool) -> Void)? = nil) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: completion)
+    }
+    
+    private func phoneNumberPressed(row: Int) {
+        let contentView = ButtonsStackView()
+        var buttonsStackViewModel: ButtonsStackViewModel
+        if phoneNumbers[row].isDefault {
+            buttonsStackViewModel = .init(primaryTitle: AccountStrings.addPhoneNumber.text(),
+                                          secondaryTitle: AccountStrings.changePhoneNumber.text(),
+                                          primaryButtonPressedBlock: { [weak self] in
+                                            self?.isAddingMode = true
+                                            self?.showPhoneEntering()
+                                          },
+                                          secondaryButtonPressedBlock: {[weak self] in
+                                            self?.isAddingMode = false
+                                            self?.showPhoneEntering()
+                                          })
+        } else {
+            buttonsStackViewModel = .init(primaryTitle: AccountStrings.setAsDefault.text(),
+                                          secondaryTitle: StringsHelper.delete.text(),
+                                          primaryButtonPressedBlock: { [weak self] in
+                                            if let phoneNumberModel = self?.phoneNumbers[row] {
+                                                self?.setPhoneAsDefault(phoneModel: phoneNumberModel)
+                                            }
+                                          },
+                                          secondaryButtonPressedBlock: {[weak self] in
+                                            if let phoneNumberModel = self?.phoneNumbers[row] {
+                                                self?.deletePhone(phoneModel: phoneNumberModel)
+                                            }
+                                          })
+        }
+        contentView.configure(with: buttonsStackViewModel)
+        cardView.configure(with: .init(contentView: contentView,
+                                             paddingBottom: 5,
+                                             didSwipeDownCallback: { [weak self] in
+            self?.hideCardView()
+        }))
+        view.layoutIfNeeded()
+        showCardView()
+    }
+    
+    private func showPhoneEntering() {
+        updateCardView { [weak self] in
+            guard let contentView = self?.phoneEnteringView else { return }
+            self?.cardView.configure(with: .init(contentView: contentView,
+                                                 paddingBottom: 25,
+                                                 didSwipeDownCallback: { [weak self] in
+                                                    self?.view.endEditing(false)
+                                                 }))
+        } completion: { [weak self] in
+            self?.phoneEnteringView.focusTextView()
+        }
+    }
+    
+    private func setPhoneAsDefault(phoneModel: PhoneNumberModel) {
+        print(#function)
+    }
+    
+    private func deletePhone(phoneModel: PhoneNumberModel) {
+        hideCardView()
+    }
+    
+    private func confirmPhoneNumber(_ phoneNumber: String?) {
+        updateCardView { [weak self] in
+            guard let codeConfirmationView = self?.codeConfirmationView else { return }
+            codeConfirmationView.configure(with: .init(phoneNumber: phoneNumber,
+                                                       valueChangedBlock: { (isCompleted, code) in
+                                                        print("valueChangedBlock", isCompleted, code!)
+                                                       },
+                                                       resendCodePressedBlock: {
+                                                        print("resendCodePressedBlock")
+                                                       }))
+            self?.cardView.configure(with: .init(contentView: codeConfirmationView,
+                                                 paddingBottom: 15, didSwipeDownCallback: { [weak self] in
+                                                    self?.view.endEditing(false)
+                                                 }))
+        } completion: { [weak self] in
+            self?.codeConfirmationView.focusTextField()
+            self?.codeConfirmationView.runTimer()
+        }
+        
+        print(phoneNumber?.onlyNumbers() ?? #function)
+    }
+    
+    private func confirmCode(code: String) {
+        print(code)
     }
     
     @objc func dismissSelf() {
         self.dismiss(animated: true)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+           keyboardSize.height > 0 {
+            cardViewBottomConstraint.constant = -keyboardSize.height
+            
+            UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        cardViewBottomConstraint.constant = 0
+        
+        UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
+            self.view.layoutIfNeeded()
+        }
     }
 }

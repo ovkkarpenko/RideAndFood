@@ -23,11 +23,15 @@
 		7232305E2552BB6000F238AF /* PromoCodesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7232305D2552BB6000F238AF /* PromoCodesListViewController.swift */; };
 		723230612552BC9300F238AF /* PromoCodeCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723230602552BC9300F238AF /* PromoCodeCardCell.swift */; };
 		723230642552CFED00F238AF /* FormatHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723230632552CFED00F238AF /* FormatHelper.swift */; };
+		723958E82561347600027FA8 /* AccountPhoneEnteringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723958E72561347600027FA8 /* AccountPhoneEnteringView.swift */; };
+		723958EE2561352800027FA8 /* PhoneTextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723958ED2561352800027FA8 /* PhoneTextFieldModel.swift */; };
+		723958FB25613DD400027FA8 /* AccountPhoneEnteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723958FA25613DD400027FA8 /* AccountPhoneEnteringViewModel.swift */; };
 		723DE27F2548A8F200E39743 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723DE27E2548A8F200E39743 /* LoginViewController.swift */; };
 		726353E4254F464500AF868D /* PromoCodesStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726353E3254F464500AF868D /* PromoCodesStrings.swift */; };
 		726353E7254F49C800AF868D /* PromoCodesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726353E6254F49C800AF868D /* PromoCodesCell.swift */; };
 		7270D100254F377800DE6BBC /* PromoCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270D0FF254F377800DE6BBC /* PromoCodesViewController.swift */; };
 		72726F69254F696300B6BB48 /* EnterPromoCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72726F68254F696300B6BB48 /* EnterPromoCodeViewController.swift */; };
+		72736D1F2561744D0094DBC5 /* CodeConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72736D1E2561744D0094DBC5 /* CodeConfirmationViewModel.swift */; };
 		7286E5102542380D0027A69B /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E50F2542380D0027A69B /* ColorHelper.swift */; };
 		7286E5122542398F0027A69B /* FontsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E5112542398F0027A69B /* FontsHelper.swift */; };
 		7286E51425423A160027A69B /* LoginStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286E51325423A160027A69B /* LoginStrings.swift */; };
@@ -158,12 +162,16 @@
 		7232305D2552BB6000F238AF /* PromoCodesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesListViewController.swift; sourceTree = "<group>"; };
 		723230602552BC9300F238AF /* PromoCodeCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeCardCell.swift; sourceTree = "<group>"; };
 		723230632552CFED00F238AF /* FormatHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatHelper.swift; sourceTree = "<group>"; };
+		723958E72561347600027FA8 /* AccountPhoneEnteringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPhoneEnteringView.swift; sourceTree = "<group>"; };
+		723958ED2561352800027FA8 /* PhoneTextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextFieldModel.swift; sourceTree = "<group>"; };
+		723958FA25613DD400027FA8 /* AccountPhoneEnteringViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountPhoneEnteringViewModel.swift; sourceTree = "<group>"; };
 		723DE27E2548A8F200E39743 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7240BF0F253E0E7600C00BB9 /* RideAndFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RideAndFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		726353E3254F464500AF868D /* PromoCodesStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesStrings.swift; sourceTree = "<group>"; };
 		726353E6254F49C800AF868D /* PromoCodesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesCell.swift; sourceTree = "<group>"; };
 		7270D0FF254F377800DE6BBC /* PromoCodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesViewController.swift; sourceTree = "<group>"; };
 		72726F68254F696300B6BB48 /* EnterPromoCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPromoCodeViewController.swift; sourceTree = "<group>"; };
+		72736D1E2561744D0094DBC5 /* CodeConfirmationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeConfirmationViewModel.swift; sourceTree = "<group>"; };
 		7286E50F2542380D0027A69B /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		7286E5112542398F0027A69B /* FontsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsHelper.swift; sourceTree = "<group>"; };
 		7286E51325423A160027A69B /* LoginStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStrings.swift; sourceTree = "<group>"; };
@@ -523,6 +531,8 @@
 				72A1DBE42545B5A9005A047A /* PhoneModel.swift */,
 				72A1DBE62545BF19005A047A /* CodeModel.swift */,
 				72A1DBE82545BF24005A047A /* CodeConfirmationModel.swift */,
+				723958ED2561352800027FA8 /* PhoneTextFieldModel.swift */,
+				72736D1E2561744D0094DBC5 /* CodeConfirmationViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -584,6 +594,7 @@
 			children = (
 				72E93404255F0BF700CED717 /* PhoneNumberModel.swift */,
 				72E93407255F0F1700CED717 /* AccountCellModel.swift */,
+				723958FA25613DD400027FA8 /* AccountPhoneEnteringViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -612,6 +623,7 @@
 			isa = PBXGroup;
 			children = (
 				72F467DE255AFFEA00F8926E /* AccountTableViewCell.swift */,
+				723958E72561347600027FA8 /* AccountPhoneEnteringView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -964,6 +976,7 @@
 				7270D100254F377800DE6BBC /* PromoCodesViewController.swift in Sources */,
 				723DE27F2548A8F200E39743 /* LoginViewController.swift in Sources */,
 				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
+				723958FB25613DD400027FA8 /* AccountPhoneEnteringViewModel.swift in Sources */,
 				72A1DBD62545A764005A047A /* BaseNetworkManager.swift in Sources */,
 				72E30EFB254EEFF50037E4B4 /* RoundButton.swift in Sources */,
 				72A1DBE92545BF24005A047A /* CodeConfirmationModel.swift in Sources */,
@@ -1017,6 +1030,7 @@
 				726353E7254F49C800AF868D /* PromoCodesCell.swift in Sources */,
 				72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */,
 				F77DE253254A1928001338D8 /* GeneralGUISettings.swift in Sources */,
+				723958E82561347600027FA8 /* AccountPhoneEnteringView.swift in Sources */,
 				72F467DF255AFFEA00F8926E /* AccountTableViewCell.swift in Sources */,
 				72280184255F033F00C75841 /* ButtonsStackView.swift in Sources */,
 				726353E4254F464500AF868D /* PromoCodesStrings.swift in Sources */,
@@ -1068,9 +1082,11 @@
 				FA3A05702548128600C55447 /* PromotionsViewController.swift in Sources */,
 				FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */,
 				FA449611254C0BE40071E76F /* DateTimeHelper.swift in Sources */,
+				72736D1F2561744D0094DBC5 /* CodeConfirmationViewModel.swift in Sources */,
 				72F467D52559C52D00F8926E /* AccountStrings.swift in Sources */,
 				F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */,
 				FA44960D254C0AC80071E76F /* Throwable.swift in Sources */,
+				723958EE2561352800027FA8 /* PhoneTextFieldModel.swift in Sources */,
 				723230552551D94C00F238AF /* ActivatePromoCodeResult.swift in Sources */,
 				FA2C80BA254AED1200F82637 /* Promotion.swift in Sources */,
 				F73BC4FB254ECF900018FC0A /* ResponseModel.swift in Sources */,

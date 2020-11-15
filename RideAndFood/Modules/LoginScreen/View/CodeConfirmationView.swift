@@ -10,30 +10,6 @@ import UIKit
 
 class CodeConfirmationView: UIView {
     
-    // MARK: - Public properties
-    
-    var valueChangedCallback: ((Bool) -> Void)?
-    var resendCodePressedCallback: (() -> Void)? {
-        didSet {
-            resendCodeTextViewDelegate.pressedCallback = { [weak self] in
-                if let resendCodePressedCallback = self?.resendCodePressedCallback {
-                    resendCodePressedCallback()
-                }
-                self?.runTimer()
-            }
-        }
-    }
-    var phoneNumberString: String? {
-        didSet {
-            let range = (resendString.string as NSString).range(of: "\(LoginStrings.codeDescriptionBegin.text()) ")
-            resendString.replaceCharacters(in: range, with: "\(LoginStrings.codeDescriptionBegin.text()) \(phoneNumberString ?? "")")
-            resendCodeTextView.attributedText = resendString
-        }
-    }
-    var code: String? {
-        hiddenTextField.text
-    }
-    
     // MARK: - UI
     
     private lazy var hiddenTextField: UITextField = {
@@ -79,11 +55,12 @@ class CodeConfirmationView: UIView {
     private lazy var textFieldDelegate = CodeConfirmationTextFieldDelegate()
     private lazy var resendCodeTextViewDelegate = ResendCodeTextViewDelegate()
     
+    private var valueChangedBlock: ((Bool, String?) -> Void)?
+    private var phoneNumberString: String?
+    
     private var isCompleted = false {
         didSet {
-            if let valueChangedCallback = valueChangedCallback {
-               valueChangedCallback(isCompleted)
-            }
+            valueChangedBlock?(isCompleted, hiddenTextField.text)
         }
     }
     
@@ -217,6 +194,23 @@ class CodeConfirmationView: UIView {
             resendString.replaceCharacters(in: resendSecondsRange, with: string)
         }
         
+        resendCodeTextView.attributedText = resendString
+    }
+}
+
+// MARK: - ConfigurableView
+
+extension CodeConfirmationView: IConfigurableView {
+    
+    func configure(with model: CodeConfirmationViewModel) {
+        valueChangedBlock = model.valueChangedBlock
+        resendCodeTextViewDelegate.pressedCallback = { [weak self] in
+            model.resendCodePressedBlock?()
+            self?.runTimer()
+        }
+        phoneNumberString = model.phoneNumber
+        let range = (resendString.string as NSString).range(of: "\(LoginStrings.codeDescriptionBegin.text()) ")
+        resendString.replaceCharacters(in: range, with: "\(LoginStrings.codeDescriptionBegin.text()) \(phoneNumberString ?? "")")
         resendCodeTextView.attributedText = resendString
     }
 }

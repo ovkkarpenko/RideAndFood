@@ -12,6 +12,7 @@ enum FontHelper {
     case regular10
     case regular12
     case regular15
+    case regular17
     case semibold12
     case semibold15
     case semibold17
@@ -24,6 +25,8 @@ enum FontHelper {
             return .systemFont(ofSize: 12)
         case .regular15:
             return .systemFont(ofSize: 15)
+        case .regular17:
+            return .systemFont(ofSize: 17)
         case .semibold12:
             return .systemFont(ofSize: 12, weight: .semibold)
         case .semibold15:

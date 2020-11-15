@@ -24,6 +24,7 @@ class CardView: UIView {
     private let pickerLineHeight: CGFloat = 5
     private let pickerLineMargin: CGFloat = 10
     private let padding: CGFloat = 25
+    private var paddingBottom: CGFloat = 25
     private let cornerRadius: CGFloat = 15
     private let shadowOpacity: Float = 0.2
     private let shadowRadius: CGFloat = 10
@@ -77,7 +78,7 @@ class CardView: UIView {
             contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             contentView.topAnchor.constraint(equalTo: topAnchor, constant: padding),
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding)
+            contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -paddingBottom)
         ])
     }
     
@@ -91,6 +92,7 @@ class CardView: UIView {
 extension CardView: IConfigurableView {
     func configure(with model: CardContainerViewModel) {
         didSwipeDownCallback = model.didSwipeDownCallback
+        paddingBottom = model.paddingBottom
         contentView?.removeFromSuperview()
         contentView = model.contentView
         setupContentView()

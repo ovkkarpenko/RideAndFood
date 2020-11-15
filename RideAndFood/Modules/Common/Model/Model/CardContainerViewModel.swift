@@ -10,5 +10,6 @@ import UIKit
 
 struct CardContainerViewModel {
     let contentView: UIView
+    let paddingBottom: CGFloat
     let didSwipeDownCallback: (() -> Void)?
 }

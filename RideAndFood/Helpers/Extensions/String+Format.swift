@@ -30,4 +30,8 @@ extension String {
         
         return "+\(numbers[0]) (\(operatorCode)) \(firstSection)-\(moddleSection)-\(lastSection)"
     }
+    
+    func onlyNumbers() -> String {
+        return self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    }
 }

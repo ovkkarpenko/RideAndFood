@@ -20,12 +20,13 @@ class ButtonsStackView: UIView {
     
     private lazy var secondaryButton: SecondaryButton = {
         let button = SecondaryButton(title: AccountStrings.changePhoneNumber.text())
-        button.addTarget(self, action: #selector(primaryButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(secondaryButtonPressed), for: .touchUpInside)
         return button
     }()
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [primaryButton, secondaryButton])
+        stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
