@@ -8,18 +8,9 @@
 
 import UIKit
 
-enum TextViewType: Int {
-    case fromAddress = 1
-    case toAddress = 2
-}
-
-protocol CustomTextViewDelegate: class {
-    func checkIfDestinationAddressAvailable(state: Bool)
-}
-
 class CustomTextView: UIView {
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var texField: UITextField!
+    @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var locationImage: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var indicatorView: UIView!
@@ -28,7 +19,7 @@ class CustomTextView: UIView {
     static let CUSTOM_TEXT_VIEW_NIB = "CustomTextView"
     weak var customTextViewDelegate: CustomTextViewDelegate?
     
-    private var textViewType: TextViewType! {
+    private var textViewType: TextViewType? {
         didSet {
             customizeViews()
         }
@@ -55,7 +46,7 @@ class CustomTextView: UIView {
     
     convenience init(textViewType: TextViewType) {
         self.init()
-        
+
         self.textViewType = textViewType
     }
     
@@ -67,7 +58,7 @@ class CustomTextView: UIView {
     }
     
     //MARK: - public methods
-    func setType(_ textViewType: TextViewType) {
+    func setTextViewType(_ textViewType: TextViewType) {
         self.textViewType = textViewType
     }
     
@@ -108,7 +99,7 @@ class CustomTextView: UIView {
             mapButton.setTitleColor(Colors.getColor(.textBlack)(), for: .normal)
             verticalSplitterView.isHidden = false
             indicatorView.backgroundColor = Colors.getColor(.disableGray)()
-            texField.placeholder = TaxiOrderStrings.getString(.destinationPlaceholder)()
+            textField.placeholder = TaxiOrderStrings.getString(.destinationPlaceholder)()
         }
     }
 }
@@ -118,7 +109,7 @@ extension CustomTextView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         switch textViewType {
         case .toAddress:
-            if let text = texField.text {
+            if let text = textField.text {
                 isDestinationAddressAvailable = text.count > 0 ? true : false
             }
         default:

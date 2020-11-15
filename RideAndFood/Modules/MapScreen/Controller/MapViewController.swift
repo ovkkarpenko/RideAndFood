@@ -43,24 +43,6 @@ class MapViewController: UIViewController {
         return view
     }()
     
-    private var taxiOrderView: TaxiOrderView!
-    
-    @objc private func taxiButtonPressed() {
-        print("Button tapped")
-//        taxiOrderView = TaxiOrderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 400))
-        taxiOrderView = TaxiOrderView(input: 1)
-        view.addSubview(taxiOrderView)
-        taxiOrderView.frame = CGRect(x: 0, y: view.bounds.height - 400, width: view.bounds.width, height: 400)
-        
-//        view.addConstraints([taxiOrderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-//                             taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 10),
-//                             taxiOrderView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 25),
-//                             taxiOrderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 400)])
-        (NSLayoutConstraint.activate([taxiOrderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                     taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                     taxiOrderView.bottomAnchor.constraint(equalTo: view.bottomAnchor)]))
-    }
-    
     private lazy var sideMenuView: SideMenuView = {
         let view = SideMenuView()
         view.viewController = self
@@ -100,6 +82,17 @@ class MapViewController: UIViewController {
         return button
     }()
     
+    private lazy var transparentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Colors.getColor(.tapIndicatorGray)()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
+        return view
+    }()
+    
+    private var taxiOrderView: TaxiOrderView? = nil
+    
     // MARK: - Private properties
     
     private let accessManager = AccessLocationManager()
@@ -130,6 +123,8 @@ class MapViewController: UIViewController {
     private lazy var backgroundShownConstraint = backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor)
     private lazy var backgroundHiddenConstraint = backgroundView.rightAnchor.constraint(equalTo: view.leftAnchor,
                                                                                     constant: sideMenuOffset)
+    private lazy var taxiOrderViewBottomConstraint = taxiOrderView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom)
+    private lazy var taxiOrderViewTopConstraint = taxiOrderView!.topAnchor.constraint(equalTo: myLocationButton.bottomAnchor, constant: 10)
     
     private let padding: CGFloat = 25
     private let sideMenuPadding: CGFloat = 42
@@ -141,6 +136,11 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
+        setKeyboardObserver()
+    }
+    
+    deinit {
+        removeKeyboardObservation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -272,6 +272,37 @@ class MapViewController: UIViewController {
         })
     }
     
+    private func initializeTaxiOrderView() {
+        taxiOrderView = TaxiOrderView(input: 1)
+        if let taxiOrderView = taxiOrderView {
+            view.addSubview(transparentView)
+            view.addSubview(taxiOrderView)
+            transparentView.isHidden = true
+            cardView.isHidden = true
+            
+            NSLayoutConstraint.activate([transparentView.topAnchor.constraint(equalTo: view.topAnchor),
+                                         transparentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                         transparentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                         transparentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+            
+            taxiOrderView.translatesAutoresizingMaskIntoConstraints = false
+            (NSLayoutConstraint.activate([taxiOrderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                          taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                         taxiOrderViewBottomConstraint, taxiOrderViewTopConstraint]))
+        }
+    }
+    
+    private func setKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardObservation() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     @objc private func myLocationButtonPressed() {
         guard let coordinate = accessManager.location?.coordinate else { return }
         centerViewOn(coordinate: coordinate)
@@ -279,5 +310,32 @@ class MapViewController: UIViewController {
     
     @objc private func menuButtonPressed() {
         toggleSideMenu(hide: false)
+    }
+    
+    @objc private func taxiButtonPressed() {
+        initializeTaxiOrderView()
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        transparentView.isHidden = false
+// MARK: - TODO: Нужно поменять цвет полоски касания при появлении прозрачной вьюшки.
+        taxiOrderViewBottomConstraint.constant = -keyboardSize.height
+        taxiOrderViewTopConstraint.isActive = false
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        taxiOrderViewBottomConstraint.constant = view.safeAreaInsets.bottom
+        transparentView.isHidden = true
+        taxiOrderViewTopConstraint.isActive = true
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

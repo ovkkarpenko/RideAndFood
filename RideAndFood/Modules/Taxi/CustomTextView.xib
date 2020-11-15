@@ -11,17 +11,12 @@
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomTextView" customModule="RideAndFood" customModuleProvider="target">
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="number" keyPath="type">
-                    <integer key="value" value="1"/>
-                </userDefinedRuntimeAttribute>
-            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Cwx-BF-0cY"/>
                 <outlet property="indicatorView" destination="k5L-is-MZf" id="mNb-i1-nAL"/>
                 <outlet property="locationImage" destination="qPN-8j-Ydn" id="Lgc-qG-ycs"/>
                 <outlet property="mapButton" destination="7dV-ye-QeM" id="9SC-GK-BEX"/>
-                <outlet property="texField" destination="JEF-pb-XWE" id="VQr-93-sXn"/>
+                <outlet property="textField" destination="JEF-pb-XWE" id="VQr-93-sXn"/>
                 <outlet property="verticalSplitterView" destination="1ox-ig-4Qy" id="Eha-cm-VIm"/>
             </connections>
         </placeholder>
@@ -31,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="pZ1-DD-mTV">
-                    <rect key="frame" x="25" y="0.0" width="325" height="43"/>
+                    <rect key="frame" x="25" y="0.0" width="325" height="667"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7hR-zq-sRP">
                             <rect key="frame" x="0.0" y="0.0" width="325" height="34"/>
@@ -76,7 +71,7 @@
                             </subviews>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k5L-is-MZf">
-                            <rect key="frame" x="15" y="42" width="310" height="1"/>
+                            <rect key="frame" x="15" y="666" width="310" height="1"/>
                             <color key="backgroundColor" name="Primary"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="ozR-UO-tWE"/>
@@ -87,7 +82,6 @@
                         <constraint firstAttribute="trailing" secondItem="k5L-is-MZf" secondAttribute="trailing" id="4M5-VS-Ipg"/>
                         <constraint firstAttribute="trailing" secondItem="7hR-zq-sRP" secondAttribute="trailing" id="8s0-y6-YwO"/>
                         <constraint firstItem="k5L-is-MZf" firstAttribute="leading" secondItem="pZ1-DD-mTV" secondAttribute="leading" constant="15" id="9sH-SH-UQB"/>
-                        <constraint firstAttribute="height" constant="43" id="W22-fF-AIm"/>
                         <constraint firstItem="7hR-zq-sRP" firstAttribute="leading" secondItem="pZ1-DD-mTV" secondAttribute="leading" id="djV-Di-IPX"/>
                     </constraints>
                 </stackView>

@@ -33,14 +33,14 @@ class TaxiOrderView: UIView {
     convenience init(input: Int) {
         self.init()
         self.input = input // temporary
-        secondTextView.customTextViewDelegate = self
         
+        button.customizeButton(type: .blueButton)
         customizeTapIndicator()
         customizePanelView()
         
-        firstTextView.setType(.fromAddress)
-        secondTextView.setType(.toAddress)
-        button.customizeButton(type: .blueButton)
+        firstTextView.setTextViewType(.fromAddress)
+        secondTextView.setTextViewType(.toAddress)
+        secondTextView.customTextViewDelegate = self
     }
     
     fileprivate func initWithNib() {
@@ -64,7 +64,7 @@ class TaxiOrderView: UIView {
         panelView.backgroundColor = Colors.getColor(.buttonWhite)()
         panelView.layer.shadowColor = Colors.getColor(.shadowColor)().cgColor
         panelView.layer.shadowOpacity = 1
-        panelView.layer.shadowOffset = .zero
+        panelView.layer.shadowOffset = CGSize(width: 0, height: -10)
         panelView.layer.shadowRadius = cornerRadius
         panelView.layer.shadowPath = UIBezierPath(rect: panelView.bounds).cgPath
         panelView.layer.shouldRasterize = true
