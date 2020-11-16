@@ -29,7 +29,7 @@ class CustomTextView: UIView {
         didSet {
             if isDestinationAddressAvailable != oldValue {
                 setToAddressParameters()
-                customTextViewDelegate?.checkIfDestinationAddressAvailable(state: isDestinationAddressAvailable)
+//                customTextViewDelegate?.checkIfDestinationAddressAvailable(state: isDestinationAddressAvailable)
             }
         }
     }
@@ -115,5 +115,13 @@ extension CustomTextView: UITextFieldDelegate {
         default:
             break
         }
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
     }
 }

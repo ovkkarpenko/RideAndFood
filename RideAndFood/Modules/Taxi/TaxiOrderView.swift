@@ -8,11 +8,11 @@
 
 import UIKit
 class TaxiOrderView: UIView {
-    @IBOutlet var contentView: UIView!
-    @IBOutlet var firstTextView: CustomTextView!
-    @IBOutlet var secondTextView: CustomTextView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var firstTextView: CustomTextView!
+    @IBOutlet weak var secondTextView: CustomTextView!
     @IBOutlet weak var additionalViewContainer: UIView!
-    @IBOutlet var button: CustomButton!
+    @IBOutlet weak var button: CustomButton!
     @IBOutlet weak var tapIndicator: UIView!
     @IBOutlet weak var panelView: UIView!
     
@@ -50,6 +50,7 @@ class TaxiOrderView: UIView {
         addSubview(contentView)
     }
     
+    //MARK: - private methods
     private func customizeTapIndicator() {
         tapIndicator.layer.cornerRadius = 2
         tapIndicator.backgroundColor = Colors.getColor(.tapIndicatorGray)()
@@ -71,10 +72,15 @@ class TaxiOrderView: UIView {
         panelView.layer.rasterizationScale = UIScreen.main.scale
     }
     
+    //MARK: - public methods
+    func setTapIndicatorColor(color: UIColor) {
+        tapIndicator.backgroundColor = color
+    }
+    
 }
 
 extension TaxiOrderView: CustomTextViewDelegate {
-    func checkIfDestinationAddressAvailable(state: Bool) {
+    func isDestinationAddressSelected(state: Bool) {
         self.additionalViewContainer.isHidden = !state
     }
 }

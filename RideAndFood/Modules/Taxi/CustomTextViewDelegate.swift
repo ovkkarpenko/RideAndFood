@@ -9,5 +9,6 @@
 import Foundation
 
 protocol CustomTextViewDelegate: class {
-    func checkIfDestinationAddressAvailable(state: Bool)
+//    func checkIfDestinationAddressAvailable(state: Bool)
+    func isDestinationAddressSelected(state: Bool)
 }
