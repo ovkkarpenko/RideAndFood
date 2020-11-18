@@ -25,6 +25,7 @@ enum Colors {
     case locationOrange
     case tapIndicatorGray
     case tapIndicatorOnDark
+    case tableViewBorderGray
     
     func getColor() -> UIColor {
         switch self {
@@ -56,6 +57,8 @@ enum Colors {
             return UIColor(hexString: "#000000", alpha: 0.5)
         case .tapIndicatorOnDark:
             return UIColor(hexString: "#FFFFFF", alpha: 0.5)
+        case .tableViewBorderGray:
+            return UIColor(hexString: "#C6C6C8")
         }
     }
 }

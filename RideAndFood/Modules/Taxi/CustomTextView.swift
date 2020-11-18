@@ -102,6 +102,15 @@ class CustomTextView: UIView {
             textField.placeholder = TaxiOrderStrings.getString(.destinationPlaceholder)()
         }
     }
+    
+    // MARK: - actions
+    @IBAction func tapLocationButton(_ sender: Any) {
+        customTextViewDelegate?.locationButtonTapped()
+    }
+    
+    @IBAction func tapMapButton(_ sender: Any) {
+        customTextViewDelegate?.mapButtonTapped()
+    }
 }
 
 // MARK: - Extensions
@@ -118,10 +127,20 @@ extension CustomTextView: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
+        switch textViewType {
+        case .toAddress:
+            customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
+        default:
+            break
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
+        switch textViewType {
+        case .toAddress:
+            customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
+        default:
+            break
+        }
     }
 }

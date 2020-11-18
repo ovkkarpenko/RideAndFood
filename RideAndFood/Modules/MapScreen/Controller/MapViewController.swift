@@ -93,7 +93,7 @@ class MapViewController: UIViewController {
     
     private lazy var taxiOrderView: TaxiOrderView = {
         setKeyboardObserver()
-        return TaxiOrderView(input: 1)
+        return TaxiOrderView(input: 2)
     }()
     
     // MARK: - Private properties
@@ -128,7 +128,7 @@ class MapViewController: UIViewController {
                                                                                     constant: sideMenuOffset)
     private lazy var taxiOrderViewBottomConstraint = taxiOrderView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom)
     private lazy var taxiOrderViewTopConstraintWithoutKeyboard = taxiOrderView.topAnchor.constraint(equalTo: myLocationButton.bottomAnchor, constant: 10)
-    private lazy var taxiOrderViewTopConstraintKeyboard = taxiOrderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25)
+    private lazy var taxiOrderViewTopConstraintKeyboard = taxiOrderView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 25)
     
     private let padding: CGFloat = 25
     private let sideMenuPadding: CGFloat = 42

@@ -38,6 +38,9 @@
                                         <constraint firstAttribute="height" constant="19" id="uEq-3n-BcK"/>
                                     </constraints>
                                     <state key="normal" image="Mark"/>
+                                    <connections>
+                                        <action selector="tapLocationButton:" destination="-1" eventType="touchUpInside" id="QyB-Bx-Y4O"/>
+                                    </connections>
                                 </button>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JEF-pb-XWE">
                                     <rect key="frame" x="22" y="0.0" width="232" height="34"/>
@@ -67,6 +70,9 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <state key="normal" image="visa"/>
+                                    <connections>
+                                        <action selector="tapMapButton:" destination="-1" eventType="touchUpInside" id="38u-8I-0Hf"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </stackView>

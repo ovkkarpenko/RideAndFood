@@ -11,4 +11,6 @@ import Foundation
 protocol CustomTextViewDelegate: class {
 //    func checkIfDestinationAddressAvailable(state: Bool)
     func isDestinationAddressSelected(state: Bool)
+    func mapButtonTapped()
+    func locationButtonTapped()
 }
