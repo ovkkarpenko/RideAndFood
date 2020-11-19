@@ -76,3 +76,60 @@ enum SettingsStrings {
         }
     }
 }
+
+enum SettingsPersonalDataStrings {
+    case name
+    case termsOfUse
+    case termsOfUseLink1
+    case termsOfUseLink2
+    case nameCellTitle
+    case emailCellTitle
+    case confirm
+    
+    func text() -> String {
+        switch UserConfig.shared.settings.language {
+        case .rus:
+            return rus()
+        case .eng:
+            return eng()
+        }
+    }
+    
+    func rus() -> String {
+        switch self {
+        case .name:
+            return "Имя"
+        case .termsOfUse:
+            return "Указывая свои данные, вы подтверждаете, что ознакомились с пользовательским соглашением, а так же с политикой конфиденциальности"
+        case .termsOfUseLink1:
+            return "пользовательским соглашением"
+        case .termsOfUseLink2:
+            return "политикой конфиденциальности"
+        case .nameCellTitle:
+            return "Как вас зовут?"
+        case .emailCellTitle:
+            return "Укажите ваш e-mail"
+        case .confirm:
+            return "Подтвердить"
+        }
+    }
+    
+    func eng() -> String {
+        switch self {
+        case .name:
+            return "Name"
+        case .termsOfUse:
+            return "By entering your data, you confirm that you have read the user agreement, as well as the privacy policy"
+        case .termsOfUseLink1:
+            return "user agreement"
+        case .termsOfUseLink2:
+            return "privacy policy"
+        case .nameCellTitle:
+            return "What is your name?"
+        case .emailCellTitle:
+            return "Enter your e-mail"
+        case .confirm:
+            return "Confirm"
+        }
+    }
+}

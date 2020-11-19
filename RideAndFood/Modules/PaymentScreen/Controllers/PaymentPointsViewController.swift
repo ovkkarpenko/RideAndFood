@@ -102,7 +102,7 @@ class PaymentPointsViewController: UIViewController {
             pointsViewHeightConstraint.constant = 0
         } else {
             animateOption = .curveEaseOut
-            pointsViewHeightConstraint.constant = UserConfig.shared.isShownPointsAlert ? 160 : 210
+            pointsViewHeightConstraint.constant = UserConfig.shared.isShownPointsAlert ? 180 : 230
             UserConfig.shared.isShownPointsAlert = true
         }
         
@@ -125,7 +125,7 @@ class PaymentPointsViewController: UIViewController {
             pointsDetailsViewHeightConstraint.constant = 0
         } else {
             animateOption = .curveEaseOut
-            pointsDetailsViewHeightConstraint.constant = 590
+            pointsDetailsViewHeightConstraint.constant = 620
         }
         
         UIView.animate(

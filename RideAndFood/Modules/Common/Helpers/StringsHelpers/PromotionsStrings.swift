@@ -16,6 +16,15 @@ enum PromotionsStrings {
     case promotionIsOver
     
     func text() -> String {
+        switch UserConfig.shared.settings.language {
+        case .rus:
+            return rus()
+        case .eng:
+            return eng()
+        }
+    }
+    
+    func rus() -> String {
         switch self {
         case .food:
             return "Еда"
@@ -30,7 +39,26 @@ enum PromotionsStrings {
         case .buttonTaxiTitle:
             return "В путь!"
         case .promotionIsOver:
-            return "На данный момент акция недействительна.\nВоспользуйтесь ей в указанный временной промежуток"
+            return "На данный момент акция не действительна.\nВоспользуйтесь ей в указанный временной промежуток"
+        }
+    }
+    
+    func eng() -> String {
+        switch self {
+        case .food:
+            return "Food"
+        case .taxi:
+            return "Taxi"
+        case .title:
+            return "Promotions"
+        case .details:
+            return "Details"
+        case .buttonFoodTitle:
+            return "Go shopping!"
+        case .buttonTaxiTitle:
+            return "Let's hit the road!"
+        case .promotionIsOver:
+            return "At the moment, the promotion is not valid.\nUse it in the specified time period"
         }
     }
 }

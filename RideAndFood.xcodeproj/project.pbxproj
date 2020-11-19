@@ -84,7 +84,6 @@
 		FA2C80BA254AED1200F82637 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C80B9254AED1200F82637 /* Promotion.swift */; };
 		FA2C80C0254AF8A000F82637 /* SettingsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C80BF254AF8A000F82637 /* SettingsStrings.swift */; };
 		FA2C80C4254AF8BD00F82637 /* PromotionsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C80C3254AF8BD00F82637 /* PromotionsStrings.swift */; };
-		FA2C80C7254AF91F00F82637 /* PersonalDataStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C80C6254AF91F00F82637 /* PersonalDataStrings.swift */; };
 		FA2C80CA254AF96E00F82637 /* PromotionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C80C9254AF96E00F82637 /* PromotionsViewModel.swift */; };
 		FA2C80CD254AFA4200F82637 /* PromotionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C80CC254AFA4200F82637 /* PromotionCollectionViewCell.swift */; };
 		FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A0564254809A000C55447 /* SettingsAvailableSharesViewController.swift */; };
@@ -113,6 +112,18 @@
 		FA983C2B2555D5B5006EE969 /* PaymentCongratulationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA983C2A2555D5B5006EE969 /* PaymentCongratulationsView.swift */; };
 		FA983C2F2555DA9C006EE969 /* PaymentPointsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA983C2E2555DA9C006EE969 /* PaymentPointsViewController.swift */; };
 		FAA0B6C925496D1D0020ACE7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA0B6C825496D1D0020ACE7 /* SettingsViewController.swift */; };
+		FAA7697B256572EC00AC4253 /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7696E256572EC00AC4253 /* AddressViewModel.swift */; };
+		FAA7697C256572EC00AC4253 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA76970256572EC00AC4253 /* Address.swift */; };
+		FAA7697D256572EC00AC4253 /* AddressesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA76972256572EC00AC4253 /* AddressesViewController.swift */; };
+		FAA7697E256572EC00AC4253 /* AddAddresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA76973256572EC00AC4253 /* AddAddresViewController.swift */; };
+		FAA7698F2565739D00AC4253 /* DeliveryAddressTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA769892565739D00AC4253 /* DeliveryAddressTitleView.swift */; };
+		FAA769902565739D00AC4253 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7698A2565739D00AC4253 /* AddressTableViewCell.swift */; };
+		FAA769912565739D00AC4253 /* DeliveryAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7698B2565739D00AC4253 /* DeliveryAddressView.swift */; };
+		FAA769922565739D00AC4253 /* RemoveAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7698C2565739D00AC4253 /* RemoveAddressView.swift */; };
+		FAA769932565739D00AC4253 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7698D2565739D00AC4253 /* AddressView.swift */; };
+		FAA769942565739D00AC4253 /* SelectAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7698E2565739D00AC4253 /* SelectAddressView.swift */; };
+		FAA76997256573BE00AC4253 /* AddressesStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA76996256573BE00AC4253 /* AddressesStrings.swift */; };
+		FAA7699A256573E400AC4253 /* SelectAddressMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA76999256573E400AC4253 /* SelectAddressMapViewController.swift */; };
 		FAA9495125546F73005C5B40 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA9495025546F73005C5B40 /* PaymentViewController.swift */; };
 		FAA9495625546F80005C5B40 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA9495525546F80005C5B40 /* PaymentViewModel.swift */; };
 		FAA9495A25546F9F005C5B40 /* PaymentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA9495925546F9F005C5B40 /* PaymentCard.swift */; };
@@ -213,7 +224,6 @@
 		FA2C80B9254AED1200F82637 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		FA2C80BF254AF8A000F82637 /* SettingsStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStrings.swift; sourceTree = "<group>"; };
 		FA2C80C3254AF8BD00F82637 /* PromotionsStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsStrings.swift; sourceTree = "<group>"; };
-		FA2C80C6254AF91F00F82637 /* PersonalDataStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataStrings.swift; sourceTree = "<group>"; };
 		FA2C80C9254AF96E00F82637 /* PromotionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewModel.swift; sourceTree = "<group>"; };
 		FA2C80CC254AFA4200F82637 /* PromotionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA3A0564254809A000C55447 /* SettingsAvailableSharesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAvailableSharesViewController.swift; sourceTree = "<group>"; };
@@ -242,6 +252,18 @@
 		FA983C2A2555D5B5006EE969 /* PaymentCongratulationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCongratulationsView.swift; sourceTree = "<group>"; };
 		FA983C2E2555DA9C006EE969 /* PaymentPointsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPointsViewController.swift; sourceTree = "<group>"; };
 		FAA0B6C825496D1D0020ACE7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FAA7696E256572EC00AC4253 /* AddressViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
+		FAA76970256572EC00AC4253 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		FAA76972256572EC00AC4253 /* AddressesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesViewController.swift; sourceTree = "<group>"; };
+		FAA76973256572EC00AC4253 /* AddAddresViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAddresViewController.swift; sourceTree = "<group>"; };
+		FAA769892565739D00AC4253 /* DeliveryAddressTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryAddressTitleView.swift; sourceTree = "<group>"; };
+		FAA7698A2565739D00AC4253 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
+		FAA7698B2565739D00AC4253 /* DeliveryAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryAddressView.swift; sourceTree = "<group>"; };
+		FAA7698C2565739D00AC4253 /* RemoveAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveAddressView.swift; sourceTree = "<group>"; };
+		FAA7698D2565739D00AC4253 /* AddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
+		FAA7698E2565739D00AC4253 /* SelectAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAddressView.swift; sourceTree = "<group>"; };
+		FAA76996256573BE00AC4253 /* AddressesStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddressesStrings.swift; path = "../../../../../../../../../Downloads/RideAndFood-feat-FoodMainScreen/RideAndFood/Modules/Common/Helpers/StringsHelpers/AddressesStrings.swift"; sourceTree = "<group>"; };
+		FAA76999256573E400AC4253 /* SelectAddressMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectAddressMapViewController.swift; path = "../../../../../../../../Downloads/RideAndFood-feat-FoodMainScreen/RideAndFood/Modules/Common/Helpers/SelectAddressMapViewController.swift"; sourceTree = "<group>"; };
 		FAA9495025546F73005C5B40 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		FAA9495525546F80005C5B40 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		FAA9495925546F9F005C5B40 /* PaymentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCard.swift; sourceTree = "<group>"; };
@@ -336,6 +358,7 @@
 			children = (
 				FA2C80BE254AF88E00F82637 /* StringsHelpers */,
 				7286E50F2542380D0027A69B /* ColorHelper.swift */,
+				FAA76999256573E400AC4253 /* SelectAddressMapViewController.swift */,
 				7286E5112542398F0027A69B /* FontsHelper.swift */,
 				7286E51525423A640027A69B /* StringsHelper.swift */,
 				7286E51A2542B9CB0027A69B /* ConstantsHelper.swift */,
@@ -367,8 +390,14 @@
 		7286E5222542E7420027A69B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
+				72FF3ACB253F46D60042B2A0 /* Common */,
+				FAA7696C256572EC00AC4253 /* AddressesScreen */,
+				F7090888255B16B10047EDB6 /* Taxi */,
+=======
 				F7090888255B16B10047EDB6 /* Taxi */,
 				72FF3ACB253F46D60042B2A0 /* Common */,
+>>>>>>> parent of 60ad1b0... added food view
 				72D60EF22548B35900052305 /* SettingsScreen */,
 				FAA9494B25546F1B005C5B40 /* PaymentScreen */,
 				7240BF27253E167C00C00BB9 /* LoginScreen */,
@@ -630,9 +659,9 @@
 		FA2C80BE254AF88E00F82637 /* StringsHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				FAA76996256573BE00AC4253 /* AddressesStrings.swift */,
 				FA2C80BF254AF8A000F82637 /* SettingsStrings.swift */,
 				FA2C80C3254AF8BD00F82637 /* PromotionsStrings.swift */,
-				FA2C80C6254AF91F00F82637 /* PersonalDataStrings.swift */,
 				FA3FD467254D84BE00769610 /* SideMenuStrings.swift */,
 				FAC0660725553FFB003CC6AA /* PaymentStrings.swift */,
 			);
@@ -694,6 +723,55 @@
 				FA8CA77C2546D360001FDE5E /* AlertTextField.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		FAA7696C256572EC00AC4253 /* AddressesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				FAA7696D256572EC00AC4253 /* ViewModels */,
+				FAA7696F256572EC00AC4253 /* Models */,
+				FAA76971256572EC00AC4253 /* Controllers */,
+				FAA76974256572EC00AC4253 /* Views */,
+			);
+			path = AddressesScreen;
+			sourceTree = "<group>";
+		};
+		FAA7696D256572EC00AC4253 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				FAA7696E256572EC00AC4253 /* AddressViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FAA7696F256572EC00AC4253 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FAA76970256572EC00AC4253 /* Address.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FAA76971256572EC00AC4253 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FAA76972256572EC00AC4253 /* AddressesViewController.swift */,
+				FAA76973256572EC00AC4253 /* AddAddresViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FAA76974256572EC00AC4253 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FAA7698A2565739D00AC4253 /* AddressTableViewCell.swift */,
+				FAA7698D2565739D00AC4253 /* AddressView.swift */,
+				FAA769892565739D00AC4253 /* DeliveryAddressTitleView.swift */,
+				FAA7698B2565739D00AC4253 /* DeliveryAddressView.swift */,
+				FAA7698C2565739D00AC4253 /* RemoveAddressView.swift */,
+				FAA7698E2565739D00AC4253 /* SelectAddressView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FAA9494B25546F1B005C5B40 /* PaymentScreen */ = {
@@ -899,8 +977,12 @@
 				FAACAA9D254B0973005C3084 /* PromotionDetailsViewController.swift in Sources */,
 				723DE27F2548A8F200E39743 /* LoginViewController.swift in Sources */,
 				FAC066192555717B003CC6AA /* BindCardViewModel.swift in Sources */,
+				FAA7697B256572EC00AC4253 /* AddressViewModel.swift in Sources */,
+				FAA7699A256573E400AC4253 /* SelectAddressMapViewController.swift in Sources */,
 				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
+				FAA769922565739D00AC4253 /* RemoveAddressView.swift in Sources */,
 				72A1DBD62545A764005A047A /* BaseNetworkManager.swift in Sources */,
+				FAA769942565739D00AC4253 /* SelectAddressView.swift in Sources */,
 				72E30EFB254EEFF50037E4B4 /* RoundButton.swift in Sources */,
 				72A1DBE92545BF24005A047A /* CodeConfirmationModel.swift in Sources */,
 				F73D1B0E25568E440001F7FC /* TariffViewController.swift in Sources */,
@@ -917,7 +999,6 @@
 				7286E5282542E79D0027A69B /* TermsOfUseStrings.swift in Sources */,
 				F709088D255B25B40047EDB6 /* CustomTextView.swift in Sources */,
 				FAC0661C255585AB003CC6AA /* ConfirmBindCardView.swift in Sources */,
-				FA2C80C7254AF91F00F82637 /* PersonalDataStrings.swift in Sources */,
 				FA050B7F2549AA9200CF363D /* AppDelegate.swift in Sources */,
 				FA983C2B2555D5B5006EE969 /* PaymentCongratulationsView.swift in Sources */,
 				FA8196AE2556A4D50053EE22 /* PaymentPointsView.swift in Sources */,
@@ -938,12 +1019,21 @@
 				72A1DBE02545B424005A047A /* LoginInteractor.swift in Sources */,
 				7286E51D2542BA940027A69B /* Checkbox.swift in Sources */,
 				7286E52E254312C50027A69B /* NumberInputView.swift in Sources */,
+				FAA769932565739D00AC4253 /* AddressView.swift in Sources */,
 				72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */,
 				72F79DFF25474D7D00F4E6AC /* UserDefaultsManager.swift in Sources */,
 				72A1DBEB2545BF94005A047A /* UserDataModel.swift in Sources */,
 				72A1DBD92545AC45005A047A /* NetworkManager.swift in Sources */,
 				72A1DBDE2545B23A005A047A /* RequestError.swift in Sources */,
 				FA2C80CA254AF96E00F82637 /* PromotionsViewModel.swift in Sources */,
+<<<<<<< HEAD
+<<<<<<< HEAD
+				F7968F482561BD29008B46EA /* TextViewType.swift in Sources */,
+				FAA7697C256572EC00AC4253 /* Address.swift in Sources */,
+=======
+>>>>>>> parent of bd91966... Added taxi order view with some event controllers like keyboard appearance controller etc.
+=======
+>>>>>>> parent of bd91966... Added taxi order view with some event controllers like keyboard appearance controller etc.
 				72A1DBE22545B472005A047A /* Response.swift in Sources */,
 				7286E52C254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift in Sources */,
 				FA2C80C0254AF8A000F82637 /* SettingsStrings.swift in Sources */,
@@ -963,6 +1053,7 @@
 				722C7CB325456F630086198C /* ResendCodeTextViewDelegate.swift in Sources */,
 				FAE8E5EC254AB8CE000DF2F7 /* UserConfig.swift in Sources */,
 				728D79F725488C7200BD748E /* MapCardView.swift in Sources */,
+				FAA76997256573BE00AC4253 /* AddressesStrings.swift in Sources */,
 				7286E51625423A640027A69B /* StringsHelper.swift in Sources */,
 				72A1DBF62545D8A5005A047A /* AccessLocationManager.swift in Sources */,
 				72A1DBED2545BFA2005A047A /* SettingsModel.swift in Sources */,
@@ -974,9 +1065,11 @@
 				FAA9495625546F80005C5B40 /* PaymentViewModel.swift in Sources */,
 				72A1DBE52545B5A9005A047A /* PhoneModel.swift in Sources */,
 				FAA9495A25546F9F005C5B40 /* PaymentCard.swift in Sources */,
+				FAA769912565739D00AC4253 /* DeliveryAddressView.swift in Sources */,
 				72FBDC6325488F3F00727C12 /* MapStrings.swift in Sources */,
 				FAC0660D2555607C003CC6AA /* BindCardViewController.swift in Sources */,
 				FA44F2AF25459B080004A1C9 /* SettingsLanguageViewController.swift in Sources */,
+				FAA7697D256572EC00AC4253 /* AddressesViewController.swift in Sources */,
 				FA43AE942544981E00766652 /* SettingsViewModel.swift in Sources */,
 				FAA0B6C925496D1D0020ACE7 /* SettingsViewController.swift in Sources */,
 				FA050B6925499CF300CF363D /* Profile.swift in Sources */,
@@ -989,6 +1082,8 @@
 				FAE81CA7254815E40082A6B5 /* ServerApi.swift in Sources */,
 				FA8CA7722546C873001FDE5E /* SettingsPersonalDataViewController.swift in Sources */,
 				F73BC4F4254ECE0A0018FC0A /* RequestModel.swift in Sources */,
+				FAA7698F2565739D00AC4253 /* DeliveryAddressTitleView.swift in Sources */,
+				FAA769902565739D00AC4253 /* AddressTableViewCell.swift in Sources */,
 				FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */,
 				F7805C432552F26400D1BBAD /* TariffModel.swift in Sources */,
 				FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */,
@@ -1002,6 +1097,7 @@
 				FA44960D254C0AC80071E76F /* Throwable.swift in Sources */,
 				FA2C80BA254AED1200F82637 /* Promotion.swift in Sources */,
 				F73BC4FB254ECF900018FC0A /* ResponseModel.swift in Sources */,
+				FAA7697E256572EC00AC4253 /* AddAddresViewController.swift in Sources */,
 				F7E5E9C9254A17B40026ED71 /* SupportServiceStrings.swift in Sources */,
 				FAA9495D25546FA8005C5B40 /* PaymentCardDetails.swift in Sources */,
 				FA3A056825480A1900C55447 /* SettingsAvailableSharesViewModel.swift in Sources */,

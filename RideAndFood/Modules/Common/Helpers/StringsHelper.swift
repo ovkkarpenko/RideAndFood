@@ -10,6 +10,8 @@ import Foundation
 
 enum StringsHelper {
     case next
+    case alertErrorTitle
+    case alertErrorDescription
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -24,6 +26,10 @@ enum StringsHelper {
         switch self {
         case .next:
             return "Далее"
+        case .alertErrorTitle:
+            return "Ошибка"
+        case .alertErrorDescription:
+            return "Пожалуйста, убедитесь, что вы правильно ввели данные."
         }
     }
     
@@ -31,6 +37,10 @@ enum StringsHelper {
         switch self {
         case .next:
             return "Next"
+        case .alertErrorTitle:
+            return "Error"
+        case .alertErrorDescription:
+            return "Please ensure that you enter the data correctly."
         }
     }
 }

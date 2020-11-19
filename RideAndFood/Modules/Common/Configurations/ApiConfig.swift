@@ -27,6 +27,11 @@ enum ApiConfig<T> where T: Codable {
     case getPaymentCardDetails(cardId: Int)
     case getPaymentCards
     
+    case saveAddress(data: T)
+    case getAddresses
+    case removeAddress(addressId: Int)
+    case updateAddress(data: T, addressId: Int)
+    
     func createRequest() -> (method: HTTPMethod, url: String, data: T?) {
         let baseUrl = baseApiUrl
         let userId = UserConfig.shared.userId
@@ -56,6 +61,14 @@ enum ApiConfig<T> where T: Codable {
             return (.get, "\(baseUrl)/user/\(userId)/payment-card/\(cardId)", nil)
         case .getPaymentCards:
             return (.get, "\(baseUrl)/user/\(userId)/payment-cards", nil)
+        case .saveAddress(let data):
+            return (.post, "\(baseUrl)/user/\(userId)/address", data)
+        case .removeAddress(let id):
+            return (.delete, "\(baseUrl)/user/\(userId)/address/\(id)", nil)
+        case .updateAddress(let data, let id):
+            return (.put, "\(baseUrl)/user/\(userId)/address/\(id)", data)
+        case .getAddresses:
+            return (.get, "\(baseUrl)/user/\(userId)/address", nil)
         }
     }
 }

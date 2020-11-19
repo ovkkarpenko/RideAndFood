@@ -60,7 +60,7 @@ class BindCardViewController: UIViewController {
     
     private let padding: CGFloat = 20
     
-    private lazy var confirmButtonBottomConstraint = bindCardView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+    private lazy var bindCardViewBottomConstraint = bindCardView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
     private lazy var bindCardViewHeightConstraint = bindCardView.heightAnchor.constraint(equalToConstant: 0)
     private lazy var confirmBindCardViewHeightConstraint = confirmBindCardView.heightAnchor.constraint(equalToConstant: 0)
     
@@ -100,10 +100,9 @@ class BindCardViewController: UIViewController {
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             backgroundImageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -padding),
             backgroundImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
-            confirmButtonBottomConstraint,
             
             bindCardViewHeightConstraint,
-            bindCardView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bindCardViewBottomConstraint,
             bindCardView.leftAnchor.constraint(equalTo: view.leftAnchor),
             bindCardView.rightAnchor.constraint(equalTo: view.rightAnchor),
             
@@ -121,7 +120,7 @@ class BindCardViewController: UIViewController {
             bindCardViewHeightConstraint.constant = 0
         } else {
             animateOption = .curveEaseOut
-            bindCardViewHeightConstraint.constant = 200
+            bindCardViewHeightConstraint.constant = 220
         }
         
         UIView.animate(
@@ -139,7 +138,7 @@ class BindCardViewController: UIViewController {
             confirmBindCardViewHeightConstraint.constant = 0
         } else {
             animateOption = .curveEaseOut
-            confirmBindCardViewHeightConstraint.constant = 230
+            confirmBindCardViewHeightConstraint.constant = 250
         }
         
         UIView.animate(
@@ -154,7 +153,7 @@ class BindCardViewController: UIViewController {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
            keyboardSize.height > 0 {
             
-            confirmButtonBottomConstraint.constant = -keyboardSize.height + view.safeAreaInsets.bottom
+            bindCardViewBottomConstraint.constant = -keyboardSize.height + view.safeAreaInsets.bottom
             
             UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
                 self.view.layoutIfNeeded()
@@ -163,7 +162,7 @@ class BindCardViewController: UIViewController {
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        confirmButtonBottomConstraint.constant = 0
+        bindCardViewBottomConstraint.constant = 0
         
         UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
             self.view.layoutIfNeeded()

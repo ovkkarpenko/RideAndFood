@@ -40,7 +40,10 @@ class SideMenuViewModel {
                     var backbutton = UIButton(type: .custom)
                     backbutton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
                     backbutton.tintColor = .gray
-                    _ = backbutton.rx.tap.subscribe(onNext: {
+                    
+                    _ = backbutton.rx
+                        .tap
+                        .subscribe(onNext: {
                         controller.navigationController?.dismiss(animated: true)
                     })
                     

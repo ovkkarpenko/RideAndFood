@@ -130,6 +130,14 @@ class MapViewController: UIViewController {
     private lazy var backgroundShownConstraint = backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor)
     private lazy var backgroundHiddenConstraint = backgroundView.rightAnchor.constraint(equalTo: view.leftAnchor,
                                                                                     constant: sideMenuOffset)
+<<<<<<< HEAD
+<<<<<<< HEAD
+//    private lazy var taxiOrderViewBottomConstraint = taxiOrderView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom)
+//    private lazy var taxiOrderViewTopConstraint = taxiOrderView!.topAnchor.constraint(equalTo: myLocationButton.bottomAnchor, constant: 10)
+=======
+>>>>>>> parent of bd91966... Added taxi order view with some event controllers like keyboard appearance controller etc.
+=======
+>>>>>>> parent of bd91966... Added taxi order view with some event controllers like keyboard appearance controller etc.
     
     private let padding: CGFloat = 25
     private let sideMenuPadding: CGFloat = 42
@@ -272,6 +280,43 @@ class MapViewController: UIViewController {
         })
     }
     
+<<<<<<< HEAD
+<<<<<<< HEAD
+    private func initializeTaxiOrderView() {
+        taxiOrderView = TaxiOrderView(input: 1)
+        if let taxiOrderView = taxiOrderView {
+            view.addSubview(transparentView)
+            view.addSubview(taxiOrderView)
+            transparentView.isHidden = true
+            cardView.isHidden = true
+            
+            NSLayoutConstraint.activate([transparentView.topAnchor.constraint(equalTo: view.topAnchor),
+                                         transparentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                         transparentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                         transparentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+            
+            taxiOrderView.translatesAutoresizingMaskIntoConstraints = false
+//            (NSLayoutConstraint.activate([taxiOrderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//                                          taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//                                         taxiOrderViewBottomConstraint, taxiOrderViewTopConstraint]))
+        }
+    }
+    
+    private func setKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardObservation() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+=======
+>>>>>>> parent of bd91966... Added taxi order view with some event controllers like keyboard appearance controller etc.
+=======
+>>>>>>> parent of bd91966... Added taxi order view with some event controllers like keyboard appearance controller etc.
     @objc private func myLocationButtonPressed() {
         guard let coordinate = accessManager.location?.coordinate else { return }
         centerViewOn(coordinate: coordinate)
@@ -280,4 +325,54 @@ class MapViewController: UIViewController {
     @objc private func menuButtonPressed() {
         toggleSideMenu(hide: false)
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
+    
+    @objc private func taxiButtonPressed() {
+        initializeTaxiOrderView()
+    }
+    
+<<<<<<< HEAD
+    @objc private func foodButtonPressed() {
+//        let foodView = FoodView()
+//        foodView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        view.addSubview(foodView)
+//
+//        NSLayoutConstraint.activate([
+//            foodView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            foodView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            foodView.topAnchor.constraint(equalTo: view.topAnchor),
+//            foodView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+//        ])
+    }
+    
+=======
+>>>>>>> parent of 60ad1b0... added food view
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        transparentView.isHidden = false
+// MARK: - TODO: Нужно поменять цвет полоски касания при появлении прозрачной вьюшки.
+//        taxiOrderViewBottomConstraint.constant = -keyboardSize.height
+//        taxiOrderViewTopConstraint.isActive = false
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+//        taxiOrderViewBottomConstraint.constant = view.safeAreaInsets.bottom
+        transparentView.isHidden = true
+//        taxiOrderViewTopConstraint.isActive = true
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+=======
+>>>>>>> parent of bd91966... Added taxi order view with some event controllers like keyboard appearance controller etc.
+=======
+>>>>>>> parent of bd91966... Added taxi order view with some event controllers like keyboard appearance controller etc.
 }

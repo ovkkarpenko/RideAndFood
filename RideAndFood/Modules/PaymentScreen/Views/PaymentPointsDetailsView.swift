@@ -117,6 +117,10 @@ class PaymentPointsDetailsView: UIView {
             newOrderButton.leftAnchor.constraint(equalTo: leftAnchor, constant: padding),
             newOrderButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -padding)
         ])
+        
+        layer.shadowColor = ColorHelper.shadow.color()?.cgColor
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 10
     }
     
     @objc private func closeButtonPressed() {

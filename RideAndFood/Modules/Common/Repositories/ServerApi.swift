@@ -55,6 +55,22 @@ class ServerApi {
         sendRequest(apiConfig: ApiConfig<[PaymentCard]>.getPaymentCards, completion: completion)
     }
     
+    func getAddresses(completion: (([Address]?, Error?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<[Address]>.getAddresses, completion: completion)
+    }
+    
+    func saveAddress(_ address: Address, completion: (([Address]?, Error?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<Address>.saveAddress(data: address), completion: completion)
+    }
+    
+    func updateAddress(_ address: Address, completion: ((Address?, Error?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<Address>.updateAddress(data: address, addressId: address.id ?? 0), completion: completion)
+    }
+    
+    func deleteAddress(_ address: Address, completion: (([Address]?, Error?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<Address>.removeAddress(addressId: address.id ?? 0), completion: completion)
+    }
+    
     private func sendRequest<T: Codable, V: Codable>(apiConfig: ApiConfig<T>, completion: ((V?, Error?) -> ())?) {
         let request = apiConfig.createRequest()
         
