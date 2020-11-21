@@ -12,7 +12,7 @@ import RxSwift
 
 class FoodAddressView: UIView {
     
-    var showShopCallback: ((_ address: Address) -> ())?
+    var delegate: FoodViewDelegate?
     
     private lazy var addressIcon: UIImageView = {
         let image = UIImage(named: "LocationIconActive", in: Bundle.init(path: "Images/MapScreen"), with: .none)
@@ -134,7 +134,7 @@ class FoodAddressView: UIView {
             .modelSelected(Address.self)
             .subscribe(onNext: { [weak self] address in
                 
-                self?.showShopCallback?(address)
+                self?.delegate?.showShop(address: address)
             }).disposed(by: bag)
         
         viewModel.addressesPublishSubject

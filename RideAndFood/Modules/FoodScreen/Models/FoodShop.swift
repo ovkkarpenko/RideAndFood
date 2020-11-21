@@ -1,5 +1,5 @@
 //
-//  Shop.swift
+//  FoodShop.swift
 //  RideAndFood
 //
 //  Created by Oleksandr Karpenko on 21.11.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Shop: Codable {
+struct FoodShop: Codable {
     
     var id: Int
     var name: String

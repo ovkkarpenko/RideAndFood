@@ -16,7 +16,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.shadowColor = ColorHelper.shadow.color()?.cgColor
-        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOpacity = 0.1
         view.layer.shadowRadius = 3
         view.layer.cornerRadius = 15
         view.translatesAutoresizingMaskIntoConstraints = false

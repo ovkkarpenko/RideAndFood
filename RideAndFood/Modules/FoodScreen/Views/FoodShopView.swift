@@ -12,7 +12,7 @@ import RxSwift
 
 class FoodShopView: UIView {
     
-    var showCategoryCallback: ((_ shop: Shop) -> ())?
+    var delegate: FoodViewDelegate?
     
     private lazy var addressIcon: UIImageView = {
         let image = UIImage(named: "LocationIconActive", in: Bundle.init(path: "Images/MapScreen"), with: .none)
@@ -23,6 +23,7 @@ class FoodShopView: UIView {
     
     lazy var addressTextField: UITextField = {
         let textField = MaskTextField()
+        textField.setActive()
         textField.keyboardType = .default
         textField.isEnabled = false
         textField.textColor = .gray
@@ -92,16 +93,19 @@ class FoodShopView: UIView {
             shopsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
         ])
         
-        
-        
+        layer.shadowColor = ColorHelper.shadow.color()?.cgColor
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 10
+        layer.cornerRadius = 15
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     func setupCollectionView() {
         shopsCollectionView.rx
-            .modelSelected(Shop.self)
+            .modelSelected(FoodShop.self)
             .subscribe(onNext: { [weak self] item in
                 
-                self?.showCategoryCallback?(item)
+                self?.delegate?.showCategory(shop: item)
             }).disposed(by: bag)
         
         viewModel.shopsPublishSubject
