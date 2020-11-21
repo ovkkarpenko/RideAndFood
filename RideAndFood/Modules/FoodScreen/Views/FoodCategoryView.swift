@@ -1,5 +1,5 @@
 //
-//  FoodSelectShopView.swift
+//  FoodCategoryView.swift
 //  RideAndFood
 //
 //  Created by Oleksandr Karpenko on 21.11.2020.
@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import Foundation
+import RxSwift
 
-class FoodSelectShopView: UIView {
+class FoodCategoryView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,11 +25,10 @@ class FoodSelectShopView: UIView {
     
     private let padding: CGFloat = 20
     
+    private let bag = DisposeBag()
+    private let viewModel = FoodShopViewModel()
+    
     func setupLayout() {
-        
-        NSLayoutConstraint.activate([
-            
-        ])
         
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor
         layer.shadowOpacity = 0.2

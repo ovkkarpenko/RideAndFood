@@ -1,5 +1,5 @@
 //
-//  FoodSelectAddressView.swift
+//  FoodAddressView.swift
 //  RideAndFood
 //
 //  Created by Oleksandr Karpenko on 18.11.2020.
@@ -10,9 +10,9 @@ import UIKit
 import Foundation
 import RxSwift
 
-class FoodSelectAddressView: UIView {
+class FoodAddressView: UIView {
     
-    var showShopCallback: (() -> ())?
+    var showShopCallback: ((_ address: Address) -> ())?
     
     private lazy var addressIcon: UIImageView = {
         let image = UIImage(named: "LocationIconActive", in: Bundle.init(path: "Images/MapScreen"), with: .none)
@@ -134,7 +134,7 @@ class FoodSelectAddressView: UIView {
             .modelSelected(Address.self)
             .subscribe(onNext: { [weak self] address in
                 
-                self?.showShopCallback?()
+                self?.showShopCallback?(address)
             }).disposed(by: bag)
         
         viewModel.addressesPublishSubject

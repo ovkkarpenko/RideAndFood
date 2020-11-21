@@ -13,6 +13,7 @@ import RxSwift
 enum SelectedViewType {
     case address
     case shop
+    case category
 }
 
 class FoodView: UIView {
@@ -25,22 +26,40 @@ class FoodView: UIView {
         return view
     }()
     
-    private lazy var foodSelectAddressView: FoodSelectAddressView = {
-        let view = FoodSelectAddressView()
-        view.showShopCallback = { [weak self] in
+    private lazy var foodAddressView: FoodAddressView = {
+        let view = FoodAddressView()
+        view.showShopCallback = { [weak self] address in
             guard let self = self else { return }
             
             self.selectedView = .shop
-            self.toggle(true, constraint: self.foodSelectAddressViewTopConstraint)
-            self.toggle(false, constraint: self.foodSelectShopViewTopConstraint)
+            self.foodShopView.addressTextField.text = address.address
+            self.foodShopView.addressNameLabel.text = address.name
+            
+            self.toggle(true, constraint: self.foodAddressViewTopConstraint)
+            self.toggle(false, constraint: self.foodShopViewTopConstraint)
         }
         view.backgroundColor = ColorHelper.background.color()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private lazy var foodSelectShopView: FoodSelectShopView = {
-        let view = FoodSelectShopView()
+    private lazy var foodShopView: FoodShopView = {
+        let view = FoodShopView()
+        view.showCategoryCallback = { [weak self] shop in
+            guard let self = self else { return }
+            
+            self.selectedView = .category
+            
+            self.toggle(true, constraint: self.foodShopViewTopConstraint)
+            self.toggle(false, constraint: self.foodCategoryViewTopConstraint)
+        }
+        view.backgroundColor = ColorHelper.background.color()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var foodCategoryView: FoodCategoryView = {
+        let view = FoodCategoryView()
         view.backgroundColor = ColorHelper.background.color()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -60,8 +79,9 @@ class FoodView: UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.first?.view == backgroundView {
-            toggle(true, constraint: foodSelectAddressViewTopConstraint, dismiss: selectedView == .address)
-            toggle(true, constraint: foodSelectShopViewTopConstraint, dismiss: selectedView == .shop)
+            toggle(true, constraint: foodAddressViewTopConstraint, dismiss: selectedView == .address)
+            toggle(true, constraint: foodShopViewTopConstraint, dismiss: selectedView == .shop)
+            toggle(true, constraint: foodCategoryViewTopConstraint, dismiss: selectedView == .category)
         }
     }
     
@@ -70,7 +90,7 @@ class FoodView: UIView {
         
         if !isLoaded {
             isLoaded = true
-            toggle(false, constraint: foodSelectAddressViewTopConstraint)
+            toggle(false, constraint: foodAddressViewTopConstraint)
         }
     }
     
@@ -81,19 +101,24 @@ class FoodView: UIView {
     private let foodViewShownPadding: CGFloat = 300
     private let foodViewHiddenPadding: CGFloat = 800
     
-    private lazy var foodSelectAddressViewTopConstraint = foodSelectAddressView.topAnchor.constraint(
+    private lazy var foodAddressViewTopConstraint = foodAddressView.topAnchor.constraint(
         equalTo: topAnchor,
         constant: foodViewHiddenPadding)
-    private lazy var foodSelectAddressViewBottomCostraint = foodSelectAddressView.bottomAnchor.constraint(equalTo: bottomAnchor)
+    private lazy var foodAddressViewBottomCostraint = foodAddressView.bottomAnchor.constraint(equalTo: bottomAnchor)
     
-    private lazy var foodSelectShopViewTopConstraint = foodSelectShopView.topAnchor.constraint(
+    private lazy var foodShopViewTopConstraint = foodShopView.topAnchor.constraint(
+        equalTo: topAnchor,
+        constant: foodViewHiddenPadding)
+    
+    private lazy var foodCategoryViewTopConstraint = foodCategoryView.topAnchor.constraint(
         equalTo: topAnchor,
         constant: foodViewHiddenPadding)
     
     func setupLayout() {
         addSubview(backgroundView)
-        addSubview(foodSelectAddressView)
-        addSubview(foodSelectShopView)
+        addSubview(foodAddressView)
+        addSubview(foodShopView)
+        addSubview(foodCategoryView)
         
         NSLayoutConstraint.activate([
             backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -101,15 +126,20 @@ class FoodView: UIView {
             backgroundView.topAnchor.constraint(equalTo: topAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            foodSelectAddressView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            foodSelectAddressView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            foodSelectAddressViewTopConstraint,
-            foodSelectAddressViewBottomCostraint,
+            foodAddressView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            foodAddressView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            foodAddressViewTopConstraint,
+            foodAddressViewBottomCostraint,
             
-            foodSelectShopView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            foodSelectShopView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            foodSelectShopViewTopConstraint,
-            foodSelectShopView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            foodShopView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            foodShopView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            foodShopViewTopConstraint,
+            foodShopView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            foodCategoryView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            foodCategoryView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            foodCategoryViewTopConstraint,
+            foodCategoryView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
         
         NotificationCenter.default.addObserver(self,
@@ -146,8 +176,8 @@ class FoodView: UIView {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
            keyboardSize.height > 0 {
             
-            foodSelectAddressViewTopConstraint.constant = -keyboardSize.height + foodViewShownPadding
-            foodSelectAddressViewBottomCostraint.constant = -keyboardSize.height + safeAreaInsets.bottom
+            foodAddressViewTopConstraint.constant = -keyboardSize.height + foodViewShownPadding
+            foodAddressViewBottomCostraint.constant = -keyboardSize.height + safeAreaInsets.bottom
             
             UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
                 self.layoutIfNeeded()
@@ -156,8 +186,8 @@ class FoodView: UIView {
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        foodSelectAddressViewTopConstraint.constant = foodViewShownPadding
-        foodSelectAddressViewBottomCostraint.constant = 0
+        foodAddressViewTopConstraint.constant = foodViewShownPadding
+        foodAddressViewBottomCostraint.constant = 0
         
         UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
             self.layoutIfNeeded()
