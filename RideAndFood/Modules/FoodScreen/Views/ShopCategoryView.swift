@@ -1,5 +1,5 @@
 //
-//  FoodCategoryView.swift
+//  ShopCategoryView.swift
 //  RideAndFood
 //
 //  Created by Oleksandr Karpenko on 21.11.2020.
@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class FoodCategoryView: UIView {
+class ShopCategoryView: UIView {
     
     var delegate: FoodViewDelegate?
     
@@ -119,10 +119,10 @@ class FoodCategoryView: UIView {
     
     func setupCollectionView() {
         categoriesCollectionView.rx
-            .modelSelected(FoodCategory.self)
+            .modelSelected(ShopCategories.self)
             .subscribe(onNext: { [weak self] item in
                 
-                //                self?.delegate?.showCategory(shop: item)
+                self?.delegate?.showProductCategory(category: item)
             }).disposed(by: bag)
         
         viewModel.categoriesPublishSubject

@@ -20,7 +20,7 @@ class BindCardViewController: UIViewController {
     }()
     
     private lazy var backgroundImageView: UIImageView = {
-        let image = UIImage(named: "background2", in: Bundle.init(path: "Images/PaymentScreen"), with: .none)
+        let image = UIImage(named: "cardBackground", in: Bundle.init(path: "Images/PaymentScreen"), with: .none)
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false

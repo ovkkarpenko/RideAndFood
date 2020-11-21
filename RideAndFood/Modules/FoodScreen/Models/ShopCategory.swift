@@ -1,5 +1,5 @@
 //
-//  FoodCategory.swift
+//  ShopCategory.swift
 //  RideAndFood
 //
 //  Created by Oleksandr Karpenko on 21.11.2020.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct FoodCategory: Codable {
+struct ShopCategory: Codable {
     
     var id: Int
     var name: String
-    var categories: [FoodCategories]
+    var categories: [ShopCategories]
 }
 
-struct FoodCategories: Codable {
+struct ShopCategories: Codable {
     
     var id: Int
     var name: String

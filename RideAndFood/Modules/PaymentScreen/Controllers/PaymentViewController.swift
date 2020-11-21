@@ -38,7 +38,7 @@ class PaymentViewController: UIViewController {
     }()
     
     private lazy var backgroundImageView: UIImageView = {
-        let image = UIImage(named: "background", in: Bundle.init(path: "Images/PaymentScreen"), with: .none)
+        let image = UIImage(named: "womanBackground", in: Bundle.init(path: "Images/PaymentScreen"), with: .none)
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false

@@ -105,7 +105,7 @@ class FoodShopView: UIView {
             .modelSelected(FoodShop.self)
             .subscribe(onNext: { [weak self] item in
                 
-                self?.delegate?.showCategory(shop: item)
+                self?.delegate?.showShopCategory(shop: item)
             }).disposed(by: bag)
         
         viewModel.shopsPublishSubject

@@ -283,7 +283,7 @@ class MapViewController: UIViewController {
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
   
         UIView.animate(withDuration: 0.3) { [weak self] in
             guard let self = self else { return }

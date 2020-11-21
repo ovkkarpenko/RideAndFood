@@ -75,8 +75,8 @@ class ServerApi {
         sendRequest(apiConfig: ApiConfig<[FoodShop]>.getShops, completion: completion)
     }
     
-    func getShopDetails(shopId: Int, completion: ((FoodCategory?, Error?) -> ())?) {
-        sendRequest(apiConfig: ApiConfig<FoodCategory>.getShopDetails(shopId), completion: completion)
+    func getShopDetails(shopId: Int, completion: ((ShopCategory?, Error?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<ShopCategory>.getShopDetails(shopId), completion: completion)
     }
     
     private func sendRequest<T: Codable, V: Codable>(apiConfig: ApiConfig<T>, completion: ((V?, Error?) -> ())?) {
