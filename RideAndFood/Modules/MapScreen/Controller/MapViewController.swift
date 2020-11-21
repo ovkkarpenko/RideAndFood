@@ -40,6 +40,7 @@ class MapViewController: UIViewController {
         let view = MapCardView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.taxiAction = taxiButtonPressed
+        view.foodAction = foodButtonPressed
         return view
     }()
     

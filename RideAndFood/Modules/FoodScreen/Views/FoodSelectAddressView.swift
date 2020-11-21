@@ -8,11 +8,14 @@
 
 import UIKit
 import Foundation
+import RxSwift
 
 class FoodSelectAddressView: UIView {
     
+    var showShopCallback: (() -> ())?
+    
     private lazy var addressIcon: UIImageView = {
-        let image = UIImage(named: "subtract", in: Bundle.init(path: "Images/Icons"), with: .none)
+        let image = UIImage(named: "LocationIconActive", in: Bundle.init(path: "Images/MapScreen"), with: .none)
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -21,7 +24,7 @@ class FoodSelectAddressView: UIView {
     private lazy var addressTextField: UITextField = {
         let textField = MaskTextField()
         textField.keyboardType = .default
-        //        textField.placeholder = AddAddressesStrings.addres.text()
+        textField.placeholder = FoodSelectAddressStrings.addressTextField.text()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -35,10 +38,10 @@ class FoodSelectAddressView: UIView {
         leftLine.layer.addSublayer(leftLineLayer)
         
         let button = UIButton()
-        button.setTitle("Text", for: .normal)
+        button.setTitle(AddAddressesStrings.mapButton.text(), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12)
         button.setTitleColor(ColorHelper.primaryText.color(), for: .normal)
-        //        button.addTarget(self, action: #selector(showMapButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(showMapButtonPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         
         let image = UIImage(named: "rightArrow", in: Bundle.init(path: "Images/Icons"), with: .none)
@@ -53,24 +56,46 @@ class FoodSelectAddressView: UIView {
         return stackView
     }()
     
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.tableFooterView = UIView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    private lazy var confirmButton: UIButton = {
+        let button = PrimaryButton(title: PaymentStrings.confirmButtonTitle.text())
+        //        button.addTarget(self, action: #selector(showAddAddresController), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupLayout()
+        setupTableView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
         setupLayout()
+        setupTableView()
     }
     
     private let padding: CGFloat = 20
+    private let cellIdentifier = "AddressCell"
+    
+    private let bag = DisposeBag()
+    private let viewModel = AddressViewModel(type: .selectAddress)
     
     func setupLayout() {
         addSubview(addressIcon)
         addSubview(addressTextField)
         addSubview(showMapButton)
+        addSubview(tableView)
+        addSubview(confirmButton)
         
         NSLayoutConstraint.activate([
             addressIcon.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
@@ -84,6 +109,15 @@ class FoodSelectAddressView: UIView {
             showMapButton.heightAnchor.constraint(equalToConstant: 23),
             showMapButton.topAnchor.constraint(equalTo: addressTextField.topAnchor, constant: -5),
             showMapButton.trailingAnchor.constraint(equalTo: addressTextField.trailingAnchor),
+            
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: addressTextField.bottomAnchor, constant: padding),
+            tableView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -padding),
+            
+            confirmButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            confirmButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            confirmButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
         ])
         
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor
@@ -91,5 +125,26 @@ class FoodSelectAddressView: UIView {
         layer.shadowRadius = 10
         layer.cornerRadius = 15
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
+    
+    func setupTableView() {
+        tableView.register(AddressTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        
+        tableView.rx
+            .modelSelected(Address.self)
+            .subscribe(onNext: { [weak self] address in
+                
+                self?.showShopCallback?()
+            }).disposed(by: bag)
+        
+        viewModel.addressesPublishSubject
+            .bind(to: tableView.rx.items(dataSource: viewModel.dataSource(cellIdentifier: cellIdentifier)))
+            .disposed(by: bag)
+        
+        viewModel.fetchItems()
+    }
+    
+    @objc private func showMapButtonPressed() {
+        
     }
 }

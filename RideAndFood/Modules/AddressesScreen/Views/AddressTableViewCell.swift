@@ -25,9 +25,8 @@ class AddressTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var homeIcom: UIImageView = {
-        let image = UIImage(named: "home", in: Bundle.init(path: "Images/Icons"), with: .none)
-        let imageView = UIImageView(image: image)
+    lazy var iconImageView: UIImageView = {
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -56,21 +55,20 @@ class AddressTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    
     func setupLayout() {
         accessoryType = .disclosureIndicator
         
-        addSubview(homeIcom)
+        addSubview(iconImageView)
         addSubview(nameLabel)
         addSubview(addressLabel)
         
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: 55),
             
-            homeIcom.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
-            homeIcom.centerYAnchor.constraint(equalTo: centerYAnchor),
-            homeIcom.widthAnchor.constraint(equalToConstant: 14),
-            homeIcom.heightAnchor.constraint(equalToConstant: 12),
+            iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
+            iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            iconImageView.widthAnchor.constraint(equalToConstant: 14),
+            iconImageView.heightAnchor.constraint(equalToConstant: 14),
             
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: paddingLeft),
             nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding),

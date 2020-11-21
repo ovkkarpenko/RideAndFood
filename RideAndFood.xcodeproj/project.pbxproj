@@ -76,6 +76,7 @@
 		FA050B6C2549A72E00CF363D /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA050B6B2549A72E00CF363D /* AlertHelper.swift */; };
 		FA050B7F2549AA9200CF363D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA050B7E2549AA9200CF363D /* AppDelegate.swift */; };
 		FA050B862549AB0500CF363D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA050B852549AB0500CF363D /* Assets.xcassets */; };
+		FA18FFF025690C7100148FAB /* FoodSelectShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18FFEF25690C7100148FAB /* FoodSelectShopView.swift */; };
 		FA2C80BA254AED1200F82637 /* Promotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C80B9254AED1200F82637 /* Promotion.swift */; };
 		FA2C80C0254AF8A000F82637 /* SettingsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C80BF254AF8A000F82637 /* SettingsStrings.swift */; };
 		FA2C80C4254AF8BD00F82637 /* PromotionsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C80C3254AF8BD00F82637 /* PromotionsStrings.swift */; };
@@ -134,6 +135,7 @@
 		FAD0B00A25669B1F008C2794 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0B00025669B1F008C2794 /* AddressTableViewCell.swift */; };
 		FAD0B00D25669BA0008C2794 /* AddressesStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0B00C25669BA0008C2794 /* AddressesStrings.swift */; };
 		FAD0B01025669BB0008C2794 /* SelectAddressMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0B00F25669BB0008C2794 /* SelectAddressMapViewController.swift */; };
+		FAD0B01B2566D427008C2794 /* FoodStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0B01A2566D427008C2794 /* FoodStrings.swift */; };
 		FAE81CA7254815E40082A6B5 /* ServerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE81CA6254815E40082A6B5 /* ServerApi.swift */; };
 		FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE81CA9254818D10082A6B5 /* Settings.swift */; };
 		FAE8E5EC254AB8CE000DF2F7 /* UserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE8E5EB254AB8CE000DF2F7 /* UserConfig.swift */; };
@@ -213,6 +215,7 @@
 		FA050B822549AADA00CF363D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA050B852549AB0500CF363D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA050B9B2549ACE100CF363D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FA18FFEF25690C7100148FAB /* FoodSelectShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSelectShopView.swift; sourceTree = "<group>"; };
 		FA2C80B9254AED1200F82637 /* Promotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promotion.swift; sourceTree = "<group>"; };
 		FA2C80BF254AF8A000F82637 /* SettingsStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStrings.swift; sourceTree = "<group>"; };
 		FA2C80C3254AF8BD00F82637 /* PromotionsStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsStrings.swift; sourceTree = "<group>"; };
@@ -271,6 +274,7 @@
 		FAD0B00025669B1F008C2794 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
 		FAD0B00C25669BA0008C2794 /* AddressesStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressesStrings.swift; sourceTree = "<group>"; };
 		FAD0B00F25669BB0008C2794 /* SelectAddressMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectAddressMapViewController.swift; sourceTree = "<group>"; };
+		FAD0B01A2566D427008C2794 /* FoodStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodStrings.swift; sourceTree = "<group>"; };
 		FAE81CA6254815E40082A6B5 /* ServerApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerApi.swift; sourceTree = "<group>"; };
 		FAE81CA9254818D10082A6B5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		FAE8E5EB254AB8CE000DF2F7 /* UserConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfig.swift; sourceTree = "<group>"; };
@@ -353,7 +357,6 @@
 				FA2C80BE254AF88E00F82637 /* StringsHelpers */,
 				7286E50F2542380D0027A69B /* ColorHelper.swift */,
 				7286E5112542398F0027A69B /* FontsHelper.swift */,
-				FAD0B00F25669BB0008C2794 /* SelectAddressMapViewController.swift */,
 				7286E51525423A640027A69B /* StringsHelper.swift */,
 				7286E51A2542B9CB0027A69B /* ConstantsHelper.swift */,
 			);
@@ -641,6 +644,7 @@
 				FA2C80C3254AF8BD00F82637 /* PromotionsStrings.swift */,
 				FA3FD467254D84BE00769610 /* SideMenuStrings.swift */,
 				FAC0660725553FFB003CC6AA /* PaymentStrings.swift */,
+				FAD0B01A2566D427008C2794 /* FoodStrings.swift */,
 			);
 			path = StringsHelpers;
 			sourceTree = "<group>";
@@ -757,7 +761,9 @@
 		FAD0AFEB25669B1A008C2794 /* FoodScreen */ = {
 			isa = PBXGroup;
 			children = (
+				FAD0B01D2566D53F008C2794 /* ViewModels */,
 				FAD0AFEC25669B1A008C2794 /* Views */,
+				FAD0B01E2566D542008C2794 /* Models */,
 			);
 			path = FoodScreen;
 			sourceTree = "<group>";
@@ -767,6 +773,7 @@
 			children = (
 				FAD0AFED25669B1A008C2794 /* FoodSelectAddressView.swift */,
 				FAD0AFEE25669B1A008C2794 /* FoodView.swift */,
+				FA18FFEF25690C7100148FAB /* FoodSelectShopView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -803,6 +810,7 @@
 			children = (
 				FAD0AFF825669B1F008C2794 /* AddressesViewController.swift */,
 				FAD0AFF925669B1F008C2794 /* AddAddresViewController.swift */,
+				FAD0B00F25669BB0008C2794 /* SelectAddressMapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -818,6 +826,20 @@
 				FAD0B00025669B1F008C2794 /* AddressTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		FAD0B01D2566D53F008C2794 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FAD0B01E2566D542008C2794 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FAE81CA1254814AC0082A6B5 /* Repositories */ = {
@@ -977,6 +999,7 @@
 				FAD0AFF025669B1A008C2794 /* FoodView.swift in Sources */,
 				FAD0B00325669B1F008C2794 /* AddressesViewController.swift in Sources */,
 				FA44960A254C01000071E76F /* PromotionDetails.swift in Sources */,
+				FA18FFF025690C7100148FAB /* FoodSelectShopView.swift in Sources */,
 				FAE8E5EF254ABA0C000DF2F7 /* ApiConfig.swift in Sources */,
 				FAC0661025556592003CC6AA /* BindCardView.swift in Sources */,
 				72A1DBE72545BF19005A047A /* CodeModel.swift in Sources */,
@@ -1076,6 +1099,7 @@
 				FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */,
 				FA449611254C0BE40071E76F /* DateTimeHelper.swift in Sources */,
 				F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */,
+				FAD0B01B2566D427008C2794 /* FoodStrings.swift in Sources */,
 				FAC0660825553FFB003CC6AA /* PaymentStrings.swift in Sources */,
 				FA44960D254C0AC80071E76F /* Throwable.swift in Sources */,
 				FA2C80BA254AED1200F82637 /* Promotion.swift in Sources */,
