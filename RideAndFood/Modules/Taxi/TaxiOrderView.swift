@@ -29,6 +29,8 @@ class TaxiOrderView: UIView {
         // запрос сохраненных адресов
     }()
     
+    var hideTaxiOrderViewAction: (() -> ())?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         initWithNib()
@@ -41,17 +43,17 @@ class TaxiOrderView: UIView {
     }
     
     // временно включено для тестирования
-    convenience init(input: Int) {
-        self.init()
-//        self.input = input // temporary
-        firstTextView.isHidden = false
-        secondTextView.isHidden = false
-        firstTextView.setTextViewType(.fromAddress)
-        secondTextView.setTextViewType(.toAddress)
-
-        firstTextView.customTextViewDelegate = self
-        secondTextView.customTextViewDelegate = self
-    }
+//    convenience init(input: Int) {
+//        self.init()
+////        self.input = input // temporary
+//        firstTextView.isHidden = false
+//        secondTextView.isHidden = false
+//        firstTextView.setTextViewType(.fromAddress)
+//        secondTextView.setTextViewType(.toAddress)
+//
+//        firstTextView.customTextViewDelegate = self
+//        secondTextView.customTextViewDelegate = self
+//    }
     
     
     fileprivate func initWithNib() {
@@ -63,10 +65,11 @@ class TaxiOrderView: UIView {
         designGeneralViewElements()
     }
     
-    //MARK: - private methods
+    //MARK: -- private methods
     private func customizeTapIndicator() {
         tapIndicator.layer.cornerRadius = 2
         tapIndicator.backgroundColor = Colors.getColor(.tapIndicatorGray)()
+        secondTextView.isHidden = false
     }
     
     private func customizePanelView() {
@@ -97,7 +100,17 @@ class TaxiOrderView: UIView {
         }
     }
     
-    //MARK: - public methods
+    private func setGestureRecognizers() {
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(hideTaxiOrderView))
+        swipeGesture.direction = .down
+        self.addGestureRecognizer(swipeGesture)
+    }
+    
+    @objc private func hideTaxiOrderView() {
+        hideTaxiOrderViewAction?()
+    }
+    
+    // MARK: -- public methods
     func setTapIndicatorColor(color: UIColor) {
         tapIndicator.backgroundColor = color
     }
@@ -106,6 +119,7 @@ class TaxiOrderView: UIView {
         button.customizeButton(type: .blueButton)
         customizeTapIndicator()
         customizePanelView()
+        setGestureRecognizers()
     }
     
     func addTableView() {

@@ -92,8 +92,13 @@ class MapViewController: UIViewController {
     }()
     
     private lazy var taxiOrderView: TaxiOrderView = {
-        setKeyboardObserver()
-        return TaxiOrderView(input: 2)
+        let view = TaxiOrderView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.hideTaxiOrderViewAction = { [weak self] in
+            guard let self = self else { return }
+            self.toggleTaxiView(state: false)
+        }
+        return view
     }()
     
     // MARK: - Private properties
@@ -127,8 +132,8 @@ class MapViewController: UIViewController {
     private lazy var backgroundHiddenConstraint = backgroundView.rightAnchor.constraint(equalTo: view.leftAnchor,
                                                                                     constant: sideMenuOffset)
     private lazy var taxiOrderViewBottomConstraint = taxiOrderView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom)
-    private lazy var taxiOrderViewTopConstraintWithoutKeyboard = taxiOrderView.topAnchor.constraint(equalTo: myLocationButton.bottomAnchor, constant: 10)
-    private lazy var taxiOrderViewTopConstraintKeyboard = taxiOrderView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 25)
+    private lazy var taxiOrderViewTopConstraintWithoutKeyboard = taxiOrderView.topAnchor.constraint(equalTo: myLocationButton.bottomAnchor, constant: padding)
+    private lazy var taxiOrderViewTopConstraintKeyboard = taxiOrderView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)
     
     private let padding: CGFloat = 25
     private let sideMenuPadding: CGFloat = 42
@@ -140,11 +145,6 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
-    }
-    
-    deinit {
-        // MARK: - TODO: Should move it to taxiOrderView dissapearance. Cos keyboard is
-        removeKeyboardObservation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -240,6 +240,47 @@ class MapViewController: UIViewController {
         }
     }
     
+    private func toggleTaxiView(state: Bool) {
+        if self.view.endEditing(false) {
+            dismissKeyboard()
+        }
+        
+        if state { // appearance
+            cardView.isHidden = true
+            taxiOrderView.isHidden = false
+            taxiOrderViewBottomConstraint.isActive = true
+            taxiOrderViewTopConstraintWithoutKeyboard.isActive = true
+            self.taxiOrderView.frame.origin.y = UIScreen.main.bounds.height
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
+                guard let self = self else { return }
+                self.view.layoutIfNeeded()
+            } completion: { [weak self] _ in
+                guard let self = self else { return }
+                self.setKeyboardObserver()
+            }
+        } else { // disappearance
+            taxiOrderViewBottomConstraint.isActive = false
+            let defaultTopConstraint = taxiOrderViewTopConstraintWithoutKeyboard.constant
+            taxiOrderViewTopConstraintWithoutKeyboard.constant = taxiOrderView.frame.height + padding
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
+                guard let self = self else { return }
+                self.view.layoutIfNeeded()
+            } completion: { [weak self] _ in
+                guard let self = self else { return }
+                self.cardView.isHidden = false
+                
+                self.taxiOrderView.isHidden = true
+                self.taxiOrderViewTopConstraintWithoutKeyboard.constant = defaultTopConstraint
+                self.taxiOrderViewBottomConstraint.isActive = false
+                self.taxiOrderView.frame.origin.y = UIScreen.main.bounds.height
+                self.taxiOrderViewTopConstraintWithoutKeyboard.isActive = false
+                
+                self.removeKeyboardObservation()
+            }
+        }
+    }
+    
     private func toggleSideMenu(hide: Bool) {
         var animationOptions: UIView.AnimationOptions
         if (hide) {
@@ -280,18 +321,16 @@ class MapViewController: UIViewController {
         view.addSubview(transparentView)
         view.addSubview(taxiOrderView)
         transparentView.isHidden = true
-        cardView.isHidden = true
-        
+
         NSLayoutConstraint.activate([transparentView.topAnchor.constraint(equalTo: view.topAnchor),
                                      transparentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                      transparentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                                      transparentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
         
-        taxiOrderView.translatesAutoresizingMaskIntoConstraints = false
         (NSLayoutConstraint.activate([taxiOrderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                       taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                      taxiOrderViewBottomConstraint, taxiOrderViewTopConstraintWithoutKeyboard]))
-        
+                                      taxiOrderViewTopConstraintWithoutKeyboard, taxiOrderViewBottomConstraint]))
+        toggleTaxiView(state: true)
     }
     
     private func setKeyboardObserver() {
