@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class TaxiOrderView: UIView {
+class OrderView: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var firstTextView: CustomTextView!
     @IBOutlet weak var secondTextView: CustomTextView!
@@ -16,25 +16,21 @@ class TaxiOrderView: UIView {
     @IBOutlet weak var tapIndicator: UIView!
     @IBOutlet weak var panelView: UIView!
     
-    // нужно добавить сюда адрес с карты
-    
-    static let TAXI_ORDER_VIEW = "TaxiOrderView"
+    static let ORDER_VIEW = "OrderView"
     
     lazy var tableView: UITableView = {
         UITableView()
     }()
     
-    lazy var savedAddresses: [AddressModel]? = {
-        [AddressModel(name: "fdsjlfkjs", address: "fhdhsfjksd")] // tamp
-        // запрос сохраненных адресов
-    }()
+    private var savedAddresses: [AddressModel]?
+    
+    private var currentAddress: String?
     
     var hideTaxiOrderViewAction: (() -> ())?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         initWithNib()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -43,33 +39,32 @@ class TaxiOrderView: UIView {
     }
     
     // временно включено для тестирования
-//    convenience init(input: Int) {
-//        self.init()
-////        self.input = input // temporary
-//        firstTextView.isHidden = false
-//        secondTextView.isHidden = false
-//        firstTextView.setTextViewType(.fromAddress)
-//        secondTextView.setTextViewType(.toAddress)
-//
-//        firstTextView.customTextViewDelegate = self
-//        secondTextView.customTextViewDelegate = self
-//    }
+    convenience init(input: Int) {
+        self.init()
+        firstTextView.isHidden = false
+        secondTextView.isHidden = false
+        firstTextView.setTextViewType(.fromAddress)
+        secondTextView.setTextViewType(.toAddress)
+
+        firstTextView.customTextViewDelegate = self
+        secondTextView.customTextViewDelegate = self
+    }
     
     
     fileprivate func initWithNib() {
-        Bundle.main.loadNibNamed(TaxiOrderView.TAXI_ORDER_VIEW, owner: self, options: nil)
+        Bundle.main.loadNibNamed(OrderView.ORDER_VIEW, owner: self, options: nil)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView)
         
         designGeneralViewElements()
+        getSavedAddresses()
     }
     
     //MARK: -- private methods
     private func customizeTapIndicator() {
         tapIndicator.layer.cornerRadius = 2
         tapIndicator.backgroundColor = Colors.getColor(.tapIndicatorGray)()
-        secondTextView.isHidden = false
     }
     
     private func customizePanelView() {
@@ -106,6 +101,23 @@ class TaxiOrderView: UIView {
         self.addGestureRecognizer(swipeGesture)
     }
     
+    private func getSavedAddresses() {
+        let request = RequestModel<AddressModel>(path: addressPath, method: .get)
+        let networker = Networker()
+        
+        networker.makeRequest(request: request) { [weak self] (results: [AddressModel]?, error: RequestErrorModel?) in
+            guard let self = self else { return }
+            
+            if let results = results {
+                self.savedAddresses = results
+            }
+            
+            if let error = error {
+                print(error.message)
+            }
+        }
+    }
+    
     @objc private func hideTaxiOrderView() {
         hideTaxiOrderViewAction?()
     }
@@ -134,10 +146,14 @@ class TaxiOrderView: UIView {
         tableView.trailingAnchor.constraint(equalTo: additionalViewContainer.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: additionalViewContainer.bottomAnchor).isActive = true
     }
+    
+//    func setCurrentAddress(address: String) {
+//        self.currentAddress = address
+//    }
 }
 
 // MARK: - Extensions
-extension TaxiOrderView: CustomTextViewDelegate {
+extension OrderView: CustomTextViewDelegate {
     func isDestinationAddressSelected(state: Bool) {
         if savedAddresses != nil, savedAddresses!.count != 0 {
             customizeAdditionalViewContainer()
@@ -155,7 +171,7 @@ extension TaxiOrderView: CustomTextViewDelegate {
     }
 }
 
-extension TaxiOrderView: UITableViewDataSource, UITableViewDelegate {
+extension OrderView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return savedAddresses == nil ? 0 : savedAddresses!.count
     }

@@ -91,8 +91,8 @@ class MapViewController: UIViewController {
         return view
     }()
     
-    private lazy var taxiOrderView: TaxiOrderView = {
-        let view = TaxiOrderView()
+    private lazy var taxiOrderView: OrderView = {
+        let view = OrderView(input: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.hideTaxiOrderViewAction = { [weak self] in
             guard let self = self else { return }
