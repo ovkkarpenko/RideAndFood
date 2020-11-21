@@ -85,7 +85,7 @@ class ShopCategoryView: UIView {
     private let padding: CGFloat = 20
     
     private let bag = DisposeBag()
-    private let viewModel = FoodCategoryViewModel()
+    private let viewModel = ShopCategoryViewModel()
     
     func setupLayout() {
         addSubview(backButton)

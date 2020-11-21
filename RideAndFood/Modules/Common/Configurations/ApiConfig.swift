@@ -33,7 +33,8 @@ enum ApiConfig<T> where T: Codable {
     case updateAddress(data: T, addressId: Int)
     
     case getShops
-    case getShopDetails(Int)
+    case getShopCategory(Int)
+    case getShopSubCategory(Int)
     
     func createRequest() -> (method: HTTPMethod, url: String, data: T?) {
         let baseUrl = baseApiUrl
@@ -74,8 +75,10 @@ enum ApiConfig<T> where T: Codable {
             return (.get, "\(baseUrl)/user/\(userId)/address", nil)
         case .getShops:
             return (.get, "\(baseUrl)/user/\(userId)/shops", nil)
-        case .getShopDetails(let shopId):
+        case .getShopCategory(let shopId):
             return (.get, "\(baseUrl)/user/\(userId)/shop/\(shopId)", nil)
+        case .getShopSubCategory(let shopId):
+            return (.get, "\(baseUrl)/user/\(userId)/shop/\(shopId)/products", nil)
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FoodCategoryViewModel.swift
+//  ShopCategoryViewModel.swift
 //  RideAndFood
 //
 //  Created by Oleksandr Karpenko on 21.11.2020.
@@ -10,13 +10,13 @@ import UIKit
 import RxSwift
 import RxDataSources
 
-class FoodCategoryViewModel {
+class ShopCategoryViewModel {
     
     var categoriesPublishSubject = PublishSubject<[SectionModel<String, ShopCategories>]>()
     
     func fetchItems(shopId: Int, _ completion: (() -> ())? = nil) {
         
-        ServerApi.shared.getShopDetails(shopId: shopId){ [weak self] item, _ in
+        ServerApi.shared.getShopCategory(shopId: shopId){ [weak self] item, _ in
             
             if let item = item {
                 self?.categoriesPublishSubject.onNext([SectionModel(model: "", items: item.categories)])

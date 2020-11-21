@@ -44,6 +44,14 @@ class ProductCategoryView: UIView {
         return label
     }()
     
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.tableFooterView = UIView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     private lazy var bottomLine = CALayer()
     
     override init(frame: CGRect) {
@@ -71,15 +79,17 @@ class ProductCategoryView: UIView {
     }
     
     private let padding: CGFloat = 20
+    private let cellIdentifier = "SubCategoryCell"
     
     private let bag = DisposeBag()
-    private let viewModel = FoodCategoryViewModel()
+    private let viewModel = ShopSubCategoryViewModel()
     
     func setupLayout() {
         addSubview(backButton)
         addSubview(shopNameLabel)
         addSubview(categoryLabel)
         layer.addSublayer(bottomLine)
+        addSubview(tableView)
         
         NSLayoutConstraint.activate([
             backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
@@ -89,7 +99,12 @@ class ProductCategoryView: UIView {
             shopNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-            categoryLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: padding)
+            categoryLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: padding),
+            
+            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: padding),
+            tableView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding),
         ])
         
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor
@@ -100,6 +115,19 @@ class ProductCategoryView: UIView {
     }
     
     func setupTableView() {
+        tableView.rx
+            .modelSelected(FoodShop.self)
+            .subscribe(onNext: { [weak self] item in
+                
+                //                self?.delegate?.showProductCategory(category: item)
+            }).disposed(by: bag)
         
+        viewModel.itemsPublishSubject
+            .bind(to: tableView.rx.items(dataSource: viewModel.dataSource(cellIdentifier: cellIdentifier)))
+            .disposed(by: bag)
+    }
+    
+    func loadSubCategorues(shopId: Int) {
+        viewModel.fetchItems(shopId: shopId)
     }
 }

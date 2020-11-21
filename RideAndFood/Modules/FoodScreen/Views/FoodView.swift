@@ -226,6 +226,8 @@ extension FoodView: FoodViewDelegate {
         
         if let shop = shop {
             productCategoryView.shopNameLabel.text = shop.name
+            productCategoryView.loadSubCategorues(shopId: shop.id)
+            
             shopCategoryView.shopNameLabel.text = shop.name
             shopCategoryView.loadCategorues(shopId: shop.id)
         }
