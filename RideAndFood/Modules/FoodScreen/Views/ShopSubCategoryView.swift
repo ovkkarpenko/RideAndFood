@@ -1,5 +1,5 @@
 //
-//  ProductCategoryView.swift
+//  ShopSubCategoryView.swift
 //  RideAndFood
 //
 //  Created by Oleksandr Karpenko on 21.11.2020.
@@ -9,9 +9,10 @@
 import UIKit
 import RxSwift
 
-class ProductCategoryView: UIView {
+class ShopSubCategoryView: UIView {
     
     var delegate: FoodViewDelegate?
+    var shopId: Int?
     
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -29,7 +30,6 @@ class ProductCategoryView: UIView {
     
     lazy var shopNameLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .right
         label.textColor = ColorHelper.secondaryText.color()
         label.font = .boldSystemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -116,10 +116,10 @@ class ProductCategoryView: UIView {
     
     func setupTableView() {
         tableView.rx
-            .modelSelected(FoodShop.self)
+            .modelSelected(ShopSubCategory.self)
             .subscribe(onNext: { [weak self] item in
                 
-                //                self?.delegate?.showProductCategory(category: item)
+                self?.delegate?.showShopProducts(shopId: self?.shopId, subCategory: item)
             }).disposed(by: bag)
         
         viewModel.itemsPublishSubject
@@ -128,6 +128,7 @@ class ProductCategoryView: UIView {
     }
     
     func loadSubCategorues(shopId: Int) {
+        self.shopId = shopId
         viewModel.fetchItems(shopId: shopId)
     }
 }

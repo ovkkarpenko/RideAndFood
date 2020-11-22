@@ -12,7 +12,7 @@ import RxDataSources
 
 class ShopSubCategoryViewModel {
     
-    var itemsPublishSubject = PublishSubject<[SectionModel<String, FoodShop>]>()
+    var itemsPublishSubject = PublishSubject<[SectionModel<String, ShopSubCategory>]>()
     
     func fetchItems(shopId: Int, _ completion: (() -> ())? = nil) {
         
@@ -28,9 +28,9 @@ class ShopSubCategoryViewModel {
         }
     }
     
-    func dataSource(cellIdentifier: String) -> RxTableViewSectionedReloadDataSource<SectionModel<String, FoodShop>> {
+    func dataSource(cellIdentifier: String) -> RxTableViewSectionedReloadDataSource<SectionModel<String, ShopSubCategory>> {
         
-        return RxTableViewSectionedReloadDataSource<SectionModel<String, FoodShop>>(
+        return RxTableViewSectionedReloadDataSource<SectionModel<String, ShopSubCategory>>(
             configureCell: { (_, tv, indexPath, item) in
                 
                 let cell = tv.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)

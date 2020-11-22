@@ -12,7 +12,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "ShopCell"
     
-    lazy var backgroundShadow: UIView = {
+    private lazy var backgroundShadow: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.shadowColor = ColorHelper.shadow.color()?.cgColor

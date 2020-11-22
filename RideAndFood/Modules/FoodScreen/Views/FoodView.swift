@@ -15,6 +15,7 @@ enum SelectedViewType {
     case shop
     case shopCategory
     case shopDetails
+    case shopProducts
     case productCategory
 }
 
@@ -22,6 +23,7 @@ protocol FoodViewDelegate {
     func showShop(address: Address?)
     func showShopCategory(shop: FoodShop?)
     func showShopDetails()
+    func showShopProducts(shopId: Int?, subCategory: ShopSubCategory?)
     func showProductCategory(category: ShopCategory?)
 }
 
@@ -59,8 +61,8 @@ class FoodView: UIView {
         return view
     }()
     
-    private lazy var productCategoryView: ProductCategoryView = {
-        let view = ProductCategoryView()
+    private lazy var shopSubCategoryView: ShopSubCategoryView = {
+        let view = ShopSubCategoryView()
         view.delegate = self
         view.backgroundColor = ColorHelper.background.color()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -69,6 +71,14 @@ class FoodView: UIView {
     
     private lazy var shopDetailsView: ShopDetailsView = {
         let view = ShopDetailsView()
+        view.delegate = self
+        view.backgroundColor = ColorHelper.background.color()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var shopProductsView: ShopProductsView = {
+        let view = ShopProductsView()
         view.delegate = self
         view.backgroundColor = ColorHelper.background.color()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -89,11 +99,12 @@ class FoodView: UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.first?.view == backgroundView {
-            toggle(true, constraint: foodAddressViewTopConstraint, dismiss: selectedView == .address)
-            toggle(true, constraint: foodShopViewTopConstraint, dismiss: selectedView == .shop)
-            toggle(true, constraint: shopCategoryViewTopConstraint, dismiss: selectedView == .shopCategory)
-            toggle(true, constraint: productCategoryViewTopConstraint, dismiss: selectedView == .productCategory)
-            toggle(true, constraint: shopDetailsViewTopConstraint, dismiss: selectedView == .shopDetails)
+            toggle(true, view: foodAddressView, constraint: foodAddressViewTopConstraint, dismiss: selectedView == .address)
+            toggle(true, view: foodShopView, constraint: foodShopViewTopConstraint, dismiss: selectedView == .shop)
+            toggle(true, view: shopCategoryView, constraint: shopCategoryViewTopConstraint, dismiss: selectedView == .shopCategory)
+            toggle(true, view: shopSubCategoryView, constraint: shopSubCategoryViewTopConstraint, dismiss: selectedView == .productCategory)
+            toggle(true, view: shopDetailsView, constraint: shopDetailsViewTopConstraint, dismiss: selectedView == .shopDetails)
+            toggle(true, view: shopProductsView, constraint: shopProductsViewTopConstraint, dismiss: selectedView == .shopProducts)
         }
     }
     
@@ -102,7 +113,7 @@ class FoodView: UIView {
         
         if !isLoaded {
             isLoaded = true
-            toggle(false, constraint: foodAddressViewTopConstraint)
+            toggle(false, view: foodAddressView, constraint: foodAddressViewTopConstraint)
         }
     }
     
@@ -126,11 +137,15 @@ class FoodView: UIView {
         equalTo: topAnchor,
         constant: hiddenPadding)
     
-    private lazy var productCategoryViewTopConstraint = productCategoryView.topAnchor.constraint(
+    private lazy var shopSubCategoryViewTopConstraint = shopSubCategoryView.topAnchor.constraint(
         equalTo: topAnchor,
         constant: hiddenPadding)
     
     private lazy var shopDetailsViewTopConstraint = shopDetailsView.topAnchor.constraint(
+        equalTo: topAnchor,
+        constant: hiddenPadding)
+    
+    private lazy var shopProductsViewTopConstraint = shopProductsView.topAnchor.constraint(
         equalTo: topAnchor,
         constant: hiddenPadding)
     
@@ -139,8 +154,9 @@ class FoodView: UIView {
         addSubview(foodAddressView)
         addSubview(foodShopView)
         addSubview(shopCategoryView)
-        addSubview(productCategoryView)
+        addSubview(shopSubCategoryView)
         addSubview(shopDetailsView)
+        addSubview(shopProductsView)
         
         NSLayoutConstraint.activate([
             backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -163,15 +179,20 @@ class FoodView: UIView {
             shopCategoryViewTopConstraint,
             shopCategoryView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            productCategoryView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            productCategoryView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            productCategoryViewTopConstraint,
-            productCategoryView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            shopSubCategoryView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            shopSubCategoryView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            shopSubCategoryViewTopConstraint,
+            shopSubCategoryView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             shopDetailsView.leadingAnchor.constraint(equalTo: leadingAnchor),
             shopDetailsView.trailingAnchor.constraint(equalTo: trailingAnchor),
             shopDetailsViewTopConstraint,
             shopDetailsView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            shopProductsView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            shopProductsView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            shopProductsViewTopConstraint,
+            shopProductsView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
         
         NotificationCenter.default.addObserver(self,
@@ -209,14 +230,13 @@ class FoodView: UIView {
 
 extension FoodView: FoodViewDelegate {
     
-    func toggle(_ hide: Bool, constraint: NSLayoutConstraint, dismiss: Bool = false) {
+    func toggle(_ hide: Bool, view: UIView,constraint: NSLayoutConstraint, dismiss: Bool = false) {
         if hide {
-            if dismiss { backgroundView.alpha = 0 }
             constraint.constant = hiddenPadding
         } else {
-            backgroundView.alpha = 0.3
-            
-            if selectedView == .shopCategory || selectedView == .productCategory { constraint.constant = shownPadding-200 }
+            if selectedView == .shopCategory || selectedView == .productCategory || selectedView == .shopProducts {
+                constraint.constant = shownPadding-200
+            }
             else { constraint.constant = shownPadding }
         }
         
@@ -225,6 +245,15 @@ extension FoodView: FoodViewDelegate {
             delay: 0,
             options: hide ? .curveEaseIn : .curveEaseOut,
             animations: { [weak self] in
+                
+                if hide {
+                    view.alpha = 0
+                    if dismiss { self?.backgroundView.alpha = 0 }
+                } else {
+                    view.alpha = 1
+                    self?.backgroundView.alpha = 0.3
+                }
+                
                 self?.layoutIfNeeded()
             }, completion: { [weak self] _ in
                 if dismiss { self?.removeFromSuperview() }
@@ -239,17 +268,17 @@ extension FoodView: FoodViewDelegate {
             foodShopView.addressNameLabel.text = address.name
         }
         
-        toggle(true, constraint: foodAddressViewTopConstraint)
-        toggle(true, constraint: shopCategoryViewTopConstraint)
-        toggle(false, constraint: foodShopViewTopConstraint)
+        toggle(true, view: foodAddressView, constraint: foodAddressViewTopConstraint)
+        toggle(true, view: shopCategoryView, constraint: shopCategoryViewTopConstraint)
+        toggle(false, view: foodShopView, constraint: foodShopViewTopConstraint)
     }
     
     func showShopCategory(shop: FoodShop?) {
         selectedView = .shopCategory
         
         if let shop = shop {
-            productCategoryView.shopNameLabel.text = shop.name
-            productCategoryView.loadSubCategorues(shopId: shop.id)
+            shopSubCategoryView.shopNameLabel.text = shop.name
+            shopSubCategoryView.loadSubCategorues(shopId: shop.id)
             
             shopCategoryView.shopNameLabel.text = shop.name
             shopCategoryView.loadCategorues(shopId: shop.id)
@@ -258,27 +287,42 @@ extension FoodView: FoodViewDelegate {
             shopDetailsView.loadDetails(shopId: shop.id)
         }
         
-        toggle(true, constraint: foodShopViewTopConstraint)
-        toggle(true, constraint: productCategoryViewTopConstraint)
-        toggle(true, constraint: shopDetailsViewTopConstraint)
-        toggle(false, constraint: shopCategoryViewTopConstraint)
+        toggle(true, view: foodShopView, constraint: foodShopViewTopConstraint)
+        toggle(true, view: shopSubCategoryView, constraint: shopSubCategoryViewTopConstraint)
+        toggle(true, view: shopDetailsView, constraint: shopDetailsViewTopConstraint)
+        toggle(false, view: shopCategoryView, constraint: shopCategoryViewTopConstraint)
     }
     
     func showProductCategory(category: ShopCategory?) {
         selectedView = .productCategory
         
         if let category = category {
-            productCategoryView.categoryLabel.text = category.name
+            shopProductsView.categoryLabel.text = category.name
+            shopSubCategoryView.categoryLabel.text = category.name
         }
         
-        toggle(true, constraint: shopCategoryViewTopConstraint)
-        toggle(false, constraint: productCategoryViewTopConstraint)
+        toggle(true, view: shopCategoryView, constraint: shopCategoryViewTopConstraint)
+        toggle(true, view: shopProductsView, constraint: shopProductsViewTopConstraint)
+        toggle(false, view: shopSubCategoryView, constraint: shopSubCategoryViewTopConstraint)
     }
     
     func showShopDetails() {
         selectedView = .shopDetails
         
-        toggle(true, constraint: shopCategoryViewTopConstraint)
-        toggle(false, constraint: shopDetailsViewTopConstraint)
+        toggle(true, view: shopCategoryView, constraint: shopCategoryViewTopConstraint)
+        toggle(false, view: shopDetailsView, constraint: shopDetailsViewTopConstraint)
+    }
+    
+    func showShopProducts(shopId: Int?, subCategory: ShopSubCategory?) {
+        selectedView = .shopProducts
+        
+        if let shopId = shopId,
+           let subCategory = subCategory {
+            shopProductsView.subCategoryLabel.text = subCategory.name
+            shopProductsView.loadProducts(shopId: shopId, subCategoryId: subCategory.id)
+        }
+        
+        toggle(true, view: shopSubCategoryView, constraint: shopSubCategoryViewTopConstraint)
+        toggle(false, view: shopProductsView, constraint: shopProductsViewTopConstraint)
     }
 }
