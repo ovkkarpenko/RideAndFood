@@ -91,8 +91,8 @@ class MapViewController: UIViewController {
         return view
     }()
     
-    private lazy var taxiOrderView: OrderView = {
-        let view = OrderView(input: 1)
+    private lazy var addressInputView: OrderViewDirector = {
+        let view = OrderViewDirector(type: .addressInput)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.hideTaxiOrderViewAction = { [weak self] in
             guard let self = self else { return }
@@ -108,7 +108,8 @@ class MapViewController: UIViewController {
     private lazy var mapViewDelegate: MapViewDelegate = {
         let delegate = MapViewDelegate()
         delegate.mapViewCenterUpdatedCollback = { [weak self] placemark in
-            self?.cuurentPlacemark = placemark
+            guard let self = self else { return }
+            self.cuurentPlacemark = placemark
         }
         return delegate
     }()
@@ -116,6 +117,7 @@ class MapViewController: UIViewController {
     private var cuurentPlacemark: CLPlacemark? {
         didSet {
             cardView.address = cuurentPlacemark?.name
+            addressInputView.currentAddress = cuurentPlacemark?.name
         }
     }
     
@@ -131,9 +133,9 @@ class MapViewController: UIViewController {
     private lazy var backgroundShownConstraint = backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor)
     private lazy var backgroundHiddenConstraint = backgroundView.rightAnchor.constraint(equalTo: view.leftAnchor,
                                                                                     constant: sideMenuOffset)
-    private lazy var taxiOrderViewBottomConstraint = taxiOrderView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom)
-    private lazy var taxiOrderViewTopConstraintWithoutKeyboard = taxiOrderView.topAnchor.constraint(equalTo: myLocationButton.bottomAnchor, constant: padding)
-    private lazy var taxiOrderViewTopConstraintKeyboard = taxiOrderView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)
+    private lazy var taxiOrderViewBottomConstraint = addressInputView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom)
+    private lazy var taxiOrderViewTopConstraintWithoutKeyboard = addressInputView.topAnchor.constraint(equalTo: myLocationButton.bottomAnchor, constant: padding)
+    private lazy var taxiOrderViewTopConstraintKeyboard = addressInputView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)
     
     private let padding: CGFloat = 25
     private let sideMenuPadding: CGFloat = 42
@@ -247,10 +249,10 @@ class MapViewController: UIViewController {
         
         if state { // appearance
             cardView.isHidden = true
-            taxiOrderView.isHidden = false
+            addressInputView.isHidden = false
             taxiOrderViewBottomConstraint.isActive = true
             taxiOrderViewTopConstraintWithoutKeyboard.isActive = true
-            self.taxiOrderView.frame.origin.y = UIScreen.main.bounds.height
+            self.addressInputView.frame.origin.y = UIScreen.main.bounds.height
             
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
                 guard let self = self else { return }
@@ -262,7 +264,7 @@ class MapViewController: UIViewController {
         } else { // disappearance
             taxiOrderViewBottomConstraint.isActive = false
             let defaultTopConstraint = taxiOrderViewTopConstraintWithoutKeyboard.constant
-            taxiOrderViewTopConstraintWithoutKeyboard.constant = taxiOrderView.frame.height + padding
+            taxiOrderViewTopConstraintWithoutKeyboard.constant = addressInputView.frame.height + padding
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
                 guard let self = self else { return }
                 self.view.layoutIfNeeded()
@@ -270,10 +272,10 @@ class MapViewController: UIViewController {
                 guard let self = self else { return }
                 self.cardView.isHidden = false
                 
-                self.taxiOrderView.isHidden = true
+                self.addressInputView.isHidden = true
                 self.taxiOrderViewTopConstraintWithoutKeyboard.constant = defaultTopConstraint
                 self.taxiOrderViewBottomConstraint.isActive = false
-                self.taxiOrderView.frame.origin.y = UIScreen.main.bounds.height
+                self.addressInputView.frame.origin.y = UIScreen.main.bounds.height
                 self.taxiOrderViewTopConstraintWithoutKeyboard.isActive = false
                 
                 self.removeKeyboardObservation()
@@ -319,7 +321,7 @@ class MapViewController: UIViewController {
     
     private func initializeTaxiOrderView() {
         view.addSubview(transparentView)
-        view.addSubview(taxiOrderView)
+        view.addSubview(addressInputView)
         transparentView.isHidden = true
 
         NSLayoutConstraint.activate([transparentView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -327,8 +329,8 @@ class MapViewController: UIViewController {
                                      transparentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                                      transparentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
         
-        (NSLayoutConstraint.activate([taxiOrderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                      taxiOrderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        (NSLayoutConstraint.activate([addressInputView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                      addressInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                                       taxiOrderViewTopConstraintWithoutKeyboard, taxiOrderViewBottomConstraint]))
         toggleTaxiView(state: true)
     }
@@ -361,7 +363,7 @@ class MapViewController: UIViewController {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
         transparentView.isHidden = false
-        taxiOrderView.setTapIndicatorColor(color: Colors.getColor(.tapIndicatorOnDark)())
+        addressInputView.setTapIndicatorColor(color: Colors.getColor(.tapIndicatorOnDark)())
         taxiOrderViewBottomConstraint.constant = -keyboardSize.height
         taxiOrderViewTopConstraintWithoutKeyboard.isActive = false
         taxiOrderViewTopConstraintKeyboard.isActive = true
@@ -376,7 +378,7 @@ class MapViewController: UIViewController {
         transparentView.isHidden = true
         taxiOrderViewTopConstraintWithoutKeyboard.isActive = true
         taxiOrderViewTopConstraintKeyboard.isActive = false
-        taxiOrderView.setTapIndicatorColor(color: Colors.getColor(.tapIndicatorGray)())
+        addressInputView.setTapIndicatorColor(color: Colors.getColor(.tapIndicatorGray)())
     }
     
     @objc private func dismissKeyboard() {

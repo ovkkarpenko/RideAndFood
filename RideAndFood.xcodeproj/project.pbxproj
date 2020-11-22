@@ -68,6 +68,8 @@
 		F7805C402552EFBE00D1BBAD /* TariffStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7805C3F2552EFBE00D1BBAD /* TariffStrings.swift */; };
 		F7805C432552F26400D1BBAD /* TariffModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7805C422552F26400D1BBAD /* TariffModel.swift */; };
 		F7891733254A14FD00849D27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA050B9B2549ACE100CF363D /* LaunchScreen.storyboard */; };
+		F791F055256A7E5D003CE502 /* OrderViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F791F054256A7E5D003CE502 /* OrderViewDelegate.swift */; };
+		F791F058256A844A003CE502 /* OrderViewDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F791F057256A844A003CE502 /* OrderViewDirector.swift */; };
 		F795DF3325547A50005A607C /* TariffPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F795DF3225547A50005A607C /* TariffPage.swift */; };
 		F795DF3625547A58005A607C /* TariffPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = F795DF3525547A58005A607C /* TariffPage.xib */; };
 		F7968F452561BCEE008B46EA /* CustomTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7968F442561BCEE008B46EA /* CustomTextViewDelegate.swift */; };
@@ -197,6 +199,8 @@
 		F7805C392552E41500D1BBAD /* Tariff.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tariff.storyboard; sourceTree = "<group>"; };
 		F7805C3F2552EFBE00D1BBAD /* TariffStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffStrings.swift; sourceTree = "<group>"; };
 		F7805C422552F26400D1BBAD /* TariffModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffModel.swift; sourceTree = "<group>"; };
+		F791F054256A7E5D003CE502 /* OrderViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewDelegate.swift; sourceTree = "<group>"; };
+		F791F057256A844A003CE502 /* OrderViewDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewDirector.swift; sourceTree = "<group>"; };
 		F795DF3225547A50005A607C /* TariffPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPage.swift; sourceTree = "<group>"; };
 		F795DF3525547A58005A607C /* TariffPage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TariffPage.xib; sourceTree = "<group>"; };
 		F7968F442561BCEE008B46EA /* CustomTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextViewDelegate.swift; sourceTree = "<group>"; };
@@ -569,6 +573,8 @@
 				F7090889255B25A90047EDB6 /* CustomTextView.xib */,
 				F7E692D3255DB65E00D7C691 /* OrderView.xib */,
 				F7E692D6255DB66600D7C691 /* OrderView.swift */,
+				F791F057256A844A003CE502 /* OrderViewDirector.swift */,
+				F791F054256A7E5D003CE502 /* OrderViewDelegate.swift */,
 				F709088C255B25B40047EDB6 /* CustomTextView.swift */,
 				F7968F472561BD29008B46EA /* TextViewType.swift */,
 				F7968F442561BCEE008B46EA /* CustomTextViewDelegate.swift */,
@@ -998,6 +1004,7 @@
 				FA8CA7722546C873001FDE5E /* SettingsPersonalDataViewController.swift in Sources */,
 				F73BC4F4254ECE0A0018FC0A /* RequestModel.swift in Sources */,
 				FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */,
+				F791F058256A844A003CE502 /* OrderViewDirector.swift in Sources */,
 				F7805C432552F26400D1BBAD /* TariffModel.swift in Sources */,
 				FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */,
 				F73BC502254ED19D0018FC0A /* AddressModel.swift in Sources */,
@@ -1010,6 +1017,7 @@
 				FA44960D254C0AC80071E76F /* Throwable.swift in Sources */,
 				FA2C80BA254AED1200F82637 /* Promotion.swift in Sources */,
 				F73BC4FB254ECF900018FC0A /* ResponseModel.swift in Sources */,
+				F791F055256A7E5D003CE502 /* OrderViewDelegate.swift in Sources */,
 				F7E5E9C9254A17B40026ED71 /* SupportServiceStrings.swift in Sources */,
 				FAA9495D25546FA8005C5B40 /* PaymentCardDetails.swift in Sources */,
 				FA3A056825480A1900C55447 /* SettingsAvailableSharesViewModel.swift in Sources */,

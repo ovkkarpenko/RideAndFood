@@ -19,7 +19,7 @@ class CustomTextView: UIView {
     static let CUSTOM_TEXT_VIEW_NIB = "CustomTextView"
     weak var customTextViewDelegate: CustomTextViewDelegate?
     
-    private var textViewType: TextViewType? {
+    var textViewType: TextViewType? {
         didSet {
             customizeViews()
         }

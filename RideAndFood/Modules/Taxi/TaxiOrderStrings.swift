@@ -11,6 +11,7 @@ import Foundation
 enum TaxiOrderStrings {
     case map
     case destinationPlaceholder
+    case next
     
     func getString() -> String {
         switch UserConfig.shared.settings.language {
@@ -20,6 +21,8 @@ enum TaxiOrderStrings {
                 return "Карта →"
             case .destinationPlaceholder:
                 return "Куда вы хотите поехать?"
+            case .next:
+                return  "Далее"
             }
         case .eng:
             switch self {
@@ -27,6 +30,8 @@ enum TaxiOrderStrings {
                 return "Map →"
             case .destinationPlaceholder:
                 return "Where do you want to go?"
+            case .next:
+                return "Next"
             }
         }
     }

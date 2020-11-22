@@ -7,6 +7,16 @@
 //
 
 import UIKit
+
+enum OrderViewType {
+    case addressInput
+    case currentAddressDetail
+    case destinationAddressDetail
+    case orderPrice
+    case confirmationCode
+    case destinationAddressFromMap
+}
+
 class OrderView: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var firstTextView: CustomTextView!
@@ -24,7 +34,13 @@ class OrderView: UIView {
     
     private var savedAddresses: [AddressModel]?
     
-    private var currentAddress: String?
+    var currentAddress: String? {
+        willSet {
+            if  let textViewType = firstTextView.textViewType, textViewType == .fromAddress {
+                firstTextView.textField.text = newValue
+            }
+        }
+    }
     
     var hideTaxiOrderViewAction: (() -> ())?
     
@@ -37,19 +53,6 @@ class OrderView: UIView {
         super.init(coder: coder)
         initWithNib()
     }
-    
-    // временно включено для тестирования
-    convenience init(input: Int) {
-        self.init()
-        firstTextView.isHidden = false
-        secondTextView.isHidden = false
-        firstTextView.setTextViewType(.fromAddress)
-        secondTextView.setTextViewType(.toAddress)
-
-        firstTextView.customTextViewDelegate = self
-        secondTextView.customTextViewDelegate = self
-    }
-    
     
     fileprivate func initWithNib() {
         Bundle.main.loadNibNamed(OrderView.ORDER_VIEW, owner: self, options: nil)
@@ -147,9 +150,11 @@ class OrderView: UIView {
         tableView.bottomAnchor.constraint(equalTo: additionalViewContainer.bottomAnchor).isActive = true
     }
     
-//    func setCurrentAddress(address: String) {
-//        self.currentAddress = address
-//    }
+    func setCurrentAddress(address: String?) {
+        if let address = address {
+            self.currentAddress = address
+        }
+    }
 }
 
 // MARK: - Extensions
