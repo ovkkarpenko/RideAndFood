@@ -30,12 +30,6 @@ class LoginViewController: UIViewController {
     
     private lazy var codeConfirmationView: CodeConfirmationView = {
         let view = CodeConfirmationView()
-        view.valueChangedCallback = { [weak self] isCompleted in
-            self?.confirmButton.isEnabled = isCompleted
-        }
-        view.resendCodePressedCallback = { [weak self] in
-            self?.getConfirmationCode(showConfirmationView: false)
-        }
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -76,6 +70,14 @@ class LoginViewController: UIViewController {
     private var interactor = LoginInteractor()
     private var phone: String?
     private var code: String?
+    private lazy var resendCodePressedBlock: () -> Void = { [weak self] in
+        self?.getConfirmationCode(showConfirmationView: false)
+    }
+    private lazy var codeConfirmationValueChangedBlock: (Bool, String?) -> Void = { [weak self] isCompleted, code in
+        self?.confirmButton.isEnabled = isCompleted
+        self?.code = code
+    }
+    
     
     // MARK: - UIViewController lifecycle methods
     
@@ -133,6 +135,9 @@ class LoginViewController: UIViewController {
     }
     
     private func showCodeConfirmationView() {
+        codeConfirmationView.configure(with: .init(phoneNumber: loginView.phoneNumberString,
+                                                   valueChangedBlock: codeConfirmationValueChangedBlock,
+                                                   resendCodePressedBlock: resendCodePressedBlock))
         loginViewLeadingConstraint.isActive = false
         loginViewTrailingConstraint.isActive = false
         loginViewTempTrailingConstraint.isActive = true
@@ -147,7 +152,6 @@ class LoginViewController: UIViewController {
         confirmButton.isEnabled = false
         codeConfirmationView.focusTextField()
         codeConfirmationView.runTimer()
-        codeConfirmationView.phoneNumberString = loginView.phoneNumberString
     }
     
     private func getConfirmationCode(showConfirmationView: Bool = true) {
@@ -199,18 +203,14 @@ class LoginViewController: UIViewController {
     
     @objc private func confirmButtonPressed() {
         confirmButton.isEnabled = false
-        if let code = codeConfirmationView.code, !code.isEmpty, let phone = phone, !phone.isEmpty {
+        if let code = code, !code.isEmpty, let phone = phone, !phone.isEmpty {
             interactor.confirmCode(forPhone: phone, code: code) { [weak self] (userData, error) in
                 guard let userData = userData, error == nil else {
                     self?.showErrorAlert(message: LoginStrings.wrongCode.text())
                     return
                 }
                 
-                let userDefaultsManager = BaseUserDefaultsManager()
-                userDefaultsManager.isAuthorized = true
                 UserConfig.shared.userId = userData.id
-                
-                print(userData.id)
                 
                 DispatchQueue.main.async {
                     self?.dismiss(animated: true)

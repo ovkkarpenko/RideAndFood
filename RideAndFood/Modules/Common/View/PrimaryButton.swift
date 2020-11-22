@@ -50,7 +50,7 @@ class PrimaryButton: UIButton {
     private func setup() {
         backgroundColor = ColorHelper.primary.color()
         setTitleColor(ColorHelper.primaryButtonText.color(), for: .normal)
-        
+        titleLabel?.font = FontHelper.regular17.font()
         translatesAutoresizingMaskIntoConstraints = false
         heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         layer.cornerRadius = cornerRadius

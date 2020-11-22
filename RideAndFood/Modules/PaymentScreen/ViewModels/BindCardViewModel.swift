@@ -39,15 +39,18 @@ class BindCardViewModel {
         ServerApi.shared.savePaymentCard(card, completion: { cardDetails, error in
             
             if let error = error as? RequestError {
-                
-                if error == .forbidden {
+                switch error {
+                case .forbidden:
+                    break
 //                    ServerApi.shared.getPaymentCardDetails(id: cardDetails.id, completion: { cardDetails, _ in
-//                        
+//
 //                        if let cardDetails = cardDetails,
 //                           cardDetails.status == "new" {
 //                            return completion(true, cardDetails.id)
 //                        }
 //                    })
+                default:
+                    break
                 }
             } else if let cardDetails = cardDetails {
                 return completion(cardDetails)

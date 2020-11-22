@@ -37,6 +37,15 @@ enum ApiConfig<T> where T: Codable {
     case getShopSubCategory(Int)
     case getShopProducts(Int, Int)
     
+    case getPromoCodes
+    case activatePromoCode(data: T)
+    
+    case getPhones
+    case addPhone(data: T)
+    case confirmPhone(data: T)
+    case changePhone(data: T)
+    case deletePhone(data: T)
+    
     func createRequest() -> (method: HTTPMethod, url: String, data: T?) {
         let baseUrl = baseApiUrl
         let userId = UserConfig.shared.userId
@@ -82,6 +91,22 @@ enum ApiConfig<T> where T: Codable {
             return (.get, "\(baseUrl)/user/\(userId)/shop/\(shopId)/products", nil)
         case .getShopProducts(let shopId, let subCategoryId):
             return (.get, "\(baseUrl)/user/\(userId)/shop/\(shopId)/products/\(subCategoryId)", nil)
+        case .getPromoCodes:
+            return (.get, "\(baseUrl)/user/\(userId)/promo-codes", nil)
+        case .activatePromoCode(let data):
+            return (.post, "\(baseUrl)/user/\(userId)/promo-codes/activate", data)
+        case .getPhones:
+            return (.get, "\(baseUrl)/user/\(userId)/phones", nil)
+        case .addPhone(let data):
+            return (.post, "\(baseUrl)/user/\(userId)/phones", data)
+        case .confirmPhone(let data):
+            let actionId = (data as? PhoneConfirmationCode)?.actionId ?? 0
+            return (.post, "\(baseUrl)/user/\(userId)/phones/\(actionId)/confirm", data)
+        case .changePhone(let data):
+            let phoneId = (data as? Phone)?.id ?? 0
+            return (.put, "\(baseUrl)/user/\(userId)/phones/\(phoneId)", data)
+        case .deletePhone(let data):
+            return (.delete, "\(baseUrl)/user/\(userId)/phones/\(data)", nil)
         }
     }
 }

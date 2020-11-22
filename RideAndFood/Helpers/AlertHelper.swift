@@ -20,4 +20,10 @@ class AlertHelper {
             vc.present(alert, animated: true)
         }
     }
+    
+    func alert(_ vc: UIViewController?, title: String, message: String? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        vc?.present(alert, animated: true)
+    }
 }

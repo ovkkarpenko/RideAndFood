@@ -12,6 +12,17 @@ enum StringsHelper {
     case next
     case alertErrorTitle
     case alertErrorDescription
+    case confirm
+    case great
+    case error
+    case tryAgain
+    case hour
+    case hours
+    case hoursSecond
+    case day
+    case days
+    case daysSecond
+    case delete
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -30,6 +41,28 @@ enum StringsHelper {
             return "Ошибка"
         case .alertErrorDescription:
             return "Пожалуйста, убедитесь, что вы правильно ввели данные."
+        case .confirm:
+            return "Подтвердить"
+        case .great:
+            return "Отлично!"
+        case .error:
+            return "Ошибка"
+        case .tryAgain:
+            return "Пожалуйста, попробуйте позже"
+        case .hour:
+            return "час"
+        case .hours:
+            return "часов"
+        case .hoursSecond:
+            return "часа"
+        case .day:
+            return "день"
+        case .days:
+            return "дней"
+        case .daysSecond:
+            return "дня"
+        case .delete:
+            return "Удалить"
         }
     }
     
@@ -41,6 +74,28 @@ enum StringsHelper {
             return "Error"
         case .alertErrorDescription:
             return "Please ensure that you enter the data correctly."
+        case .confirm:
+            return "Confirm"
+        case .great:
+            return "Great!"
+        case .error:
+            return "Error"
+        case .tryAgain:
+            return "Please, try again later"
+        case .hour:
+            return "hour"
+        case .hours:
+            return "hours"
+        case .hoursSecond:
+            return "hours"
+        case .day:
+            return "day"
+        case .days:
+            return "days"
+        case .daysSecond:
+            return "days"
+        case .delete:
+            return "delete"
         }
     }
 }

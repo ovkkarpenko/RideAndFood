@@ -10,10 +10,8 @@ import UIKit
 import InputMask
 
 class PhoneTextField: UITextField {
-
-    // MARK: - Public properties
     
-    var valueChangedCallback: ((Bool) -> Void)?
+    // MARK: - Public properties
     var isCompleted = false {
         didSet {
             if let valueChangedCallback = valueChangedCallback {
@@ -23,9 +21,12 @@ class PhoneTextField: UITextField {
     }
     
     // MARK: - UI
+    
     private lazy var bottomLine = CALayer()
     
     // MARK: - Private properties
+    
+    private var valueChangedCallback: ((Bool) -> Void)?
     
     private lazy var listener = MaskedTextFieldDelegate(primaryFormat: "+7 ([000]) [000]-[00]-[00]") { [weak self] _, _, isCompleted in
         
@@ -71,5 +72,14 @@ class PhoneTextField: UITextField {
         bottomLine.backgroundColor = ColorHelper.disabledButton.color()?.cgColor
         borderStyle = UITextField.BorderStyle.none
         layer.addSublayer(bottomLine)
+    }
+}
+
+// MARK: - ConfigurableView
+
+extension PhoneTextField: IConfigurableView {
+    
+    func configure(with model: PhoneTextFieldModel) {
+        self.valueChangedCallback = model.valueChangedCallback
     }
 }
