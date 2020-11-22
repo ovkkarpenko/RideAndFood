@@ -79,7 +79,7 @@ class MapViewController: UIViewController {
     private lazy var personButton: UIButton = {
         let button = RoundButton(type: .system)
         button.bgImage = UIImage(named: "Person")
-//        button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -166,6 +166,7 @@ class MapViewController: UIViewController {
         view.addSubview(cardView)
         view.addSubview(myLocationButton)
         view.addSubview(menuButton)
+        view.addSubview(personButton)
         view.addSubview(backgroundView)
         view.addSubview(sideMenuView)
         
@@ -194,7 +195,9 @@ class MapViewController: UIViewController {
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             backgroundHiddenConstraint,
-            backgroundLeftConstraint
+            backgroundLeftConstraint,
+            personButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+            personButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
     }
     
@@ -297,5 +300,11 @@ class MapViewController: UIViewController {
     
     @objc private func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    @objc private func personButtonPressed() {
+        let vc = UINavigationController(rootViewController: ProfileViewController())
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }

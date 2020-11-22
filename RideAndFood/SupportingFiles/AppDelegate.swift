@@ -15,9 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        let rootVc = MapViewController()
-        
-        let rootVc = UINavigationController(rootViewController: ProfileViewController())
+        let rootVc = MapViewController()
         
         window = UIWindow()
         window?.rootViewController = rootVc
