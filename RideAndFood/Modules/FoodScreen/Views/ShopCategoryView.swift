@@ -38,6 +38,12 @@ class ShopCategoryView: UIView {
     
     private lazy var infoButton: UIButton = {
         let button = UIButton(type: .custom)
+        
+        button.rx.tap
+            .subscribe(onNext: { _ in
+                self.delegate?.showShopDetails()
+            }).disposed(by: bag)
+        
         button.setImage(UIImage(systemName: "info.circle"), for: .normal)
         button.tintColor = ColorHelper.primary.color()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -119,7 +125,7 @@ class ShopCategoryView: UIView {
     
     func setupCollectionView() {
         categoriesCollectionView.rx
-            .modelSelected(ShopCategories.self)
+            .modelSelected(ShopCategory.self)
             .subscribe(onNext: { [weak self] item in
                 
                 self?.delegate?.showProductCategory(category: item)

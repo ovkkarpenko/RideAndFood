@@ -75,8 +75,8 @@ class ServerApi {
         sendRequest(apiConfig: ApiConfig<[FoodShop]>.getShops, completion: completion)
     }
     
-    func getShopCategory(shopId: Int, completion: ((ShopCategory?, Error?) -> ())?) {
-        sendRequest(apiConfig: ApiConfig<ShopCategory>.getShopCategory(shopId), completion: completion)
+    func getShopDetails(shopId: Int, completion: ((ShopDetails?, Error?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<ShopDetails>.getShopDetails(shopId), completion: completion)
     }
     
     func getShopSubCategory(shopId: Int, completion: (([FoodShop]?, Error?) -> ())?) {

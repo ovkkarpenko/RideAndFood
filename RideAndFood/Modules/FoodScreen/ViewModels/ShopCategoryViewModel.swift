@@ -12,11 +12,11 @@ import RxDataSources
 
 class ShopCategoryViewModel {
     
-    var categoriesPublishSubject = PublishSubject<[SectionModel<String, ShopCategories>]>()
+    var categoriesPublishSubject = PublishSubject<[SectionModel<String, ShopCategory>]>()
     
     func fetchItems(shopId: Int, _ completion: (() -> ())? = nil) {
         
-        ServerApi.shared.getShopCategory(shopId: shopId){ [weak self] item, _ in
+        ServerApi.shared.getShopDetails(shopId: shopId){ [weak self] item, _ in
             
             if let item = item {
                 self?.categoriesPublishSubject.onNext([SectionModel(model: "", items: item.categories)])
@@ -28,9 +28,9 @@ class ShopCategoryViewModel {
         }
     }
     
-    func dataSource(cellIdentifier: String) -> RxCollectionViewSectionedReloadDataSource<SectionModel<String, ShopCategories>> {
+    func dataSource(cellIdentifier: String) -> RxCollectionViewSectionedReloadDataSource<SectionModel<String, ShopCategory>> {
         
-        return RxCollectionViewSectionedReloadDataSource<SectionModel<String, ShopCategories>>(
+        return RxCollectionViewSectionedReloadDataSource<SectionModel<String, ShopCategory>>(
             configureCell: { (_, tv, indexPath, item) in
                 
                 let cell = tv.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! CategoryCollectionViewCell

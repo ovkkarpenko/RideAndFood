@@ -105,6 +105,8 @@
 		FA48B7722569777D007DD7C3 /* ProductCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48B7712569777D007DD7C3 /* ProductCategoryView.swift */; };
 		FA561B4C254F0D8E00BD549E /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA561B4B254F0D8E00BD549E /* SideMenuView.swift */; };
 		FA6100AC255715C700ED0CD5 /* PaymentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6100AB255715C700ED0CD5 /* PaymentType.swift */; };
+		FA6DDFE2256A488400244E94 /* ShopDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6DDFE1256A488400244E94 /* ShopDetailsView.swift */; };
+		FA6DDFE5256A488B00244E94 /* ShopDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6DDFE4256A488B00244E94 /* ShopDetailsViewModel.swift */; };
 		FA8196AE2556A4D50053EE22 /* PaymentPointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8196AD2556A4D50053EE22 /* PaymentPointsView.swift */; };
 		FA8196B12556A7100053EE22 /* PaymentPointsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8196B02556A7100053EE22 /* PaymentPointsDetailsView.swift */; };
 		FA81AE73254B364F00B74182 /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81AE72254B364F00B74182 /* ServerConfig.swift */; };
@@ -253,6 +255,8 @@
 		FA48B7712569777D007DD7C3 /* ProductCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryView.swift; sourceTree = "<group>"; };
 		FA561B4B254F0D8E00BD549E /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		FA6100AB255715C700ED0CD5 /* PaymentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentType.swift; sourceTree = "<group>"; };
+		FA6DDFE1256A488400244E94 /* ShopDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailsView.swift; sourceTree = "<group>"; };
+		FA6DDFE4256A488B00244E94 /* ShopDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailsViewModel.swift; sourceTree = "<group>"; };
 		FA8196AD2556A4D50053EE22 /* PaymentPointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPointsView.swift; sourceTree = "<group>"; };
 		FA8196B02556A7100053EE22 /* PaymentPointsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPointsDetailsView.swift; sourceTree = "<group>"; };
 		FA81AE72254B364F00B74182 /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
@@ -796,6 +800,7 @@
 				FA18FFFB25692B5600148FAB /* ShopCategoryView.swift */,
 				FA1800002569648000148FAB /* CategoryCollectionViewCell.swift */,
 				FA48B7712569777D007DD7C3 /* ProductCategoryView.swift */,
+				FA6DDFE1256A488400244E94 /* ShopDetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -856,6 +861,7 @@
 				FA18FFF2256917D900148FAB /* FoodShopViewModel.swift */,
 				FA180003256964CD00148FAB /* ShopCategoryViewModel.swift */,
 				FAB9706E256988E600FD6563 /* ShopSubCategoryViewModel.swift */,
+				FA6DDFE4256A488B00244E94 /* ShopDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1025,6 +1031,7 @@
 				72A1DBE92545BF24005A047A /* CodeConfirmationModel.swift in Sources */,
 				F73D1B0E25568E440001F7FC /* TariffViewController.swift in Sources */,
 				FA180004256964CD00148FAB /* ShopCategoryViewModel.swift in Sources */,
+				FA6DDFE2256A488400244E94 /* ShopDetailsView.swift in Sources */,
 				FAD0AFF025669B1A008C2794 /* FoodView.swift in Sources */,
 				FAD0B00325669B1F008C2794 /* AddressesViewController.swift in Sources */,
 				FA44960A254C01000071E76F /* PromotionDetails.swift in Sources */,
@@ -1067,6 +1074,7 @@
 				7286E52E254312C50027A69B /* NumberInputView.swift in Sources */,
 				72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */,
 				72F79DFF25474D7D00F4E6AC /* UserDefaultsManager.swift in Sources */,
+				FA6DDFE5256A488B00244E94 /* ShopDetailsViewModel.swift in Sources */,
 				72A1DBEB2545BF94005A047A /* UserDataModel.swift in Sources */,
 				FAD0AFEF25669B1A008C2794 /* FoodAddressView.swift in Sources */,
 				72A1DBD92545AC45005A047A /* NetworkManager.swift in Sources */,
