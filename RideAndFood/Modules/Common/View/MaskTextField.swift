@@ -63,6 +63,10 @@ class MaskTextField: UITextField {
         setup()
     }
     
+    func setActive() {
+        bottomLine.backgroundColor = ColorHelper.primary.color()?.cgColor
+    }
+    
     // MARK: - Lifecycle methods
     
     override func layoutSubviews() {

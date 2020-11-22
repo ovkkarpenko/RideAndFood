@@ -56,7 +56,7 @@ class AddressesViewController: UIViewController {
     private lazy var backgroundImageYAnchorConstraint = backgroundImage.centerYAnchor.constraint(equalTo: view.centerYAnchor)
     
     private let bag = DisposeBag()
-    private let viewModel = AddressViewModel()
+    private let viewModel = AddressViewModel(type: .addAddress)
     
     override func viewDidLoad() {
         super.viewDidLoad()
