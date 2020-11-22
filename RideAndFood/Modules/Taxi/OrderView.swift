@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 enum OrderViewType {
     case addressInput
@@ -19,6 +20,7 @@ enum OrderViewType {
 
 class OrderView: UIView {
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var firstTextView: CustomTextView!
     @IBOutlet weak var secondTextView: CustomTextView!
     @IBOutlet weak var additionalViewContainer: UIView!
@@ -28,11 +30,16 @@ class OrderView: UIView {
     
     static let ORDER_VIEW = "OrderView"
     
+    weak var delegate: OrderViewDelegate?
+    
+    private lazy var backViewBottomConstraintWithKeyboard = backView.bottomAnchor.constraint(equalTo: bottomAnchor)
+    
     lazy var tableView: UITableView = {
         UITableView()
     }()
     
     private var savedAddresses: [AddressModel]?
+    var buttonAction: (()->OrderViewDirector)?
     
     var currentAddress: String? {
         willSet {
@@ -41,8 +48,6 @@ class OrderView: UIView {
             }
         }
     }
-    
-    var hideTaxiOrderViewAction: (() -> ())?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,8 +65,13 @@ class OrderView: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView)
         
+        setKeyboardObserver()
         designGeneralViewElements()
         getSavedAddresses()
+    }
+    
+    deinit {
+        removeKeyboardObservation()
     }
     
     //MARK: -- private methods
@@ -99,9 +109,11 @@ class OrderView: UIView {
     }
     
     private func setGestureRecognizers() {
-        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(hideTaxiOrderView))
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         swipeGesture.direction = .down
         self.addGestureRecognizer(swipeGesture)
+        
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     private func getSavedAddresses() {
@@ -121,14 +133,50 @@ class OrderView: UIView {
         }
     }
     
-    @objc private func hideTaxiOrderView() {
-        hideTaxiOrderViewAction?()
+    private func setKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardObservation() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+//    @objc private func hideOrderView() {
+//    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+    
+        delegate?.shouldShowTranspatentView()
+        tapIndicator.backgroundColor = Colors.getColor(.tapIndicatorOnDark)()
+        backViewBottomConstraintWithKeyboard.constant = -keyboardSize.height - safeAreaInsets.bottom
+        backViewBottomConstraintWithKeyboard.isActive = true
+        
+        UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
+            guard let self = self else { return }
+            self.layoutIfNeeded()
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        delegate?.shouldRemoveTranspatentView()
+        backViewBottomConstraintWithKeyboard.isActive = false
+        tapIndicator.backgroundColor = Colors.getColor(.tapIndicatorGray)()
+    }
+    
+    @objc private func dismissKeyboard() {
+        self.endEditing(true)
+    }
+    
+    @objc private func buttonTapped() {
+        print("all right")
+        delegate?.buttonTapped(newSubview: buttonAction?())
+        // вернуть этот результат контроллеру
     }
     
     // MARK: -- public methods
-    func setTapIndicatorColor(color: UIColor) {
-        tapIndicator.backgroundColor = color
-    }
     
     func designGeneralViewElements() {
         button.customizeButton(type: .blueButton)

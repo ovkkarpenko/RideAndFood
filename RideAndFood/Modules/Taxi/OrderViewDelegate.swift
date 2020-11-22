@@ -8,5 +8,8 @@
 
 import Foundation
 
-//protocol OrderViewDelegate: class {
-//}
+protocol OrderViewDelegate: class {
+    func shouldShowTranspatentView()
+    func shouldRemoveTranspatentView()
+    func buttonTapped(newSubview: OrderViewDirector?)
+}

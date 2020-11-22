@@ -9,8 +9,11 @@
 import UIKit
 
 class OrderViewDirector: OrderView {
+    var type: OrderViewType?
+    
     convenience init(type: OrderViewType) {
         self.init()
+        self.type = type
         
         switch type {
         case .addressInput:
@@ -20,7 +23,7 @@ class OrderViewDirector: OrderView {
         case .destinationAddressDetail:
             break
         case .orderPrice:
-            break
+            setupOrderPriceView()
         case .confirmationCode:
             break
         case .destinationAddressFromMap:
@@ -29,6 +32,23 @@ class OrderViewDirector: OrderView {
     }
     
     private func setupAddressInputView() {
+        firstTextView.isHidden = false
+        secondTextView.isHidden = false
+        
+        firstTextView.setTextViewType(.fromAddress)
+        secondTextView.setTextViewType(.toAddress)
+        
+        firstTextView.customTextViewDelegate = self
+        secondTextView.customTextViewDelegate = self
+        
+        button.setTitle(TaxiOrderStrings.getString(.next)(), for: .normal)
+        
+        buttonAction = {
+            return OrderViewDirector(type: .orderPrice)
+        }
+    }
+    
+    private func setupOrderPriceView() {
         firstTextView.isHidden = false
         secondTextView.isHidden = false
         
