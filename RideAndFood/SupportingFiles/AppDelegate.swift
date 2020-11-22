@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let rootVc = MapViewController()
         
-        let rootVc = UINavigationController(rootViewController: AccountViewController())
+        let rootVc = UINavigationController(rootViewController: ProfileViewController())
         
         window = UIWindow()
         window?.rootViewController = rootVc

@@ -12,11 +12,15 @@ class CardView: UIView {
      
     // MARK: - UI
     
+    private lazy var backgroundView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     private var contentView: UIView?
     private lazy var pickerLineView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = pickerLineHeight / 2
-        view.backgroundColor = ColorHelper.transparentGray.color()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -53,33 +57,47 @@ class CardView: UIView {
         let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipeDown))
         swipeRecognizer.direction = .down
         addGestureRecognizer(swipeRecognizer)
-        layer.cornerRadius = cornerRadius
-        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        layer.shadowColor = ColorHelper.shadow.color()?.cgColor
-        layer.shadowOpacity = shadowOpacity
-        layer.shadowRadius = shadowRadius
-        backgroundColor = ColorHelper.background.color()
+        backgroundView.layer.cornerRadius = cornerRadius
+        backgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        backgroundView.layer.shadowColor = ColorHelper.shadow.color()?.cgColor
+        backgroundView.layer.shadowOpacity = shadowOpacity
+        backgroundView.layer.shadowRadius = shadowRadius
+        backgroundView.backgroundColor = ColorHelper.background.color()
         
+        addSubview(backgroundView)
         addSubview(pickerLineView)
         
         NSLayoutConstraint.activate([
             pickerLineView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            pickerLineView.bottomAnchor.constraint(equalTo: topAnchor, constant: -pickerLineMargin),
+            pickerLineView.topAnchor.constraint(equalTo: topAnchor),
+            pickerLineView.bottomAnchor.constraint(equalTo: backgroundView.topAnchor, constant: -pickerLineMargin),
             pickerLineView.widthAnchor.constraint(equalToConstant: pickerLineWidth),
             pickerLineView.heightAnchor.constraint(equalToConstant: pickerLineHeight),
+            backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
     }
     
     private func setupContentView() {
         guard let contentView = contentView else { return }
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(contentView)
+        backgroundView.addSubview(contentView)
         NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-            contentView.topAnchor.constraint(equalTo: topAnchor, constant: padding),
-            contentView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            contentView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: padding),
+            contentView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: padding),
+            contentView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -padding),
             contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -paddingBottom)
         ])
+    }
+    
+    private func updateStyle(_ style: CardViewStyle) {
+        switch style {
+        case .light:
+            pickerLineView.backgroundColor = ColorHelper.transparentWhite.color()
+        case .dark:
+            pickerLineView.backgroundColor = ColorHelper.transparentGray.color()
+        }
     }
     
     @objc private func didSwipeDown() {
@@ -93,8 +111,16 @@ extension CardView: IConfigurableView {
     func configure(with model: CardContainerViewModel) {
         didSwipeDownCallback = model.didSwipeDownCallback
         paddingBottom = model.paddingBottom
+        updateStyle(model.style)
         contentView?.removeFromSuperview()
         contentView = model.contentView
         setupContentView()
     }
+}
+
+// MARK: - Style
+
+enum CardViewStyle {
+    case light
+    case dark
 }

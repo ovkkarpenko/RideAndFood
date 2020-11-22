@@ -1,5 +1,5 @@
 //
-//  AccountPhoneEnteringView.swift
+//  ProfilePhoneEnteringView.swift
 //  RideAndFood
 //
 //  Created by Nikita Gundorin on 15.11.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountPhoneEnteringView: UIView {
+class ProfilePhoneEnteringView: UIView {
     
     // MARK: - UI
     
@@ -38,7 +38,7 @@ class AccountPhoneEnteringView: UIView {
     
     // MARK: - Private properties
     
-    private var confirmButtonPressedBlock: ((String?) -> Void)?
+    private var confirmButtonPressedBlock: ((String) -> Void)?
     
     // MARK: - Initializers
     
@@ -60,6 +60,10 @@ class AccountPhoneEnteringView: UIView {
         phoneTextField.becomeFirstResponder()
     }
     
+    func clearContent() {
+        phoneTextField.text = nil
+    }
+    
     // MARK: - Private methods
     
     private func setupLayout() {
@@ -74,15 +78,17 @@ class AccountPhoneEnteringView: UIView {
     
     @objc private func confirmButtonPressed() {
         phoneTextField.endEditing(false)
-        confirmButtonPressedBlock?(phoneTextField.text)
+        if let phone = phoneTextField.text {
+            confirmButtonPressedBlock?(phone)
+        }
     }
 }
 
 // MARK: - ConfigurableView
 
-extension AccountPhoneEnteringView: IConfigurableView {
+extension ProfilePhoneEnteringView: IConfigurableView {
     
-    func configure(with model: AccountPhoneEnteringViewModel) {
+    func configure(with model: ProfilePhoneEnteringViewModel) {
         confirmButtonPressedBlock = model.confirmButtonPressedBlock
     }
 }

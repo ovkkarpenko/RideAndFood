@@ -22,6 +22,8 @@ enum ColorHelper {
     case error
     case success
     case transparentGray
+    case transparentBlack
+    case transparentWhite
     
     func color() -> UIColor? {
         switch self {
@@ -49,6 +51,10 @@ enum ColorHelper {
             return UIColor(named: "Success")
         case .transparentGray:
             return UIColor(named: "TransparentGray")
+        case .transparentBlack:
+            return UIColor(named: "TransparentBlack")
+        case .transparentWhite:
+            return UIColor(named: "TransparentWhite")
         }
     }
 }

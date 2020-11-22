@@ -1,5 +1,5 @@
 //
-//  AccountTableViewDelegate.swift
+//  ProfileTableViewDelegate.swift
 //  RideAndFood
 //
 //  Created by Nikita Gundorin on 13.11.2020.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-class AccountTableViewDelegate: NSObject, UITableViewDelegate {
+class ProfileTableViewDelegate: NSObject, UITableViewDelegate {
     
     // MARK: - Private properties
     
-    private weak var viewController: AccountViewController?
+    private weak var viewController: ProfileViewController?
     private let phoneNumberTappedBlock: (Int) -> Void
     
     // MARK: - Initializer
     
-    init(viewController: AccountViewController?,
+    init(viewController: ProfileViewController?,
          phoneNumberTappedBlock: @escaping (Int) -> Void) {
         self.viewController = viewController
         self.phoneNumberTappedBlock = phoneNumberTappedBlock

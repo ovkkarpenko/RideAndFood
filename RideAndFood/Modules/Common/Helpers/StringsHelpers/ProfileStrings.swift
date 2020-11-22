@@ -1,5 +1,5 @@
 //
-//  AccountStrings.swift
+//  ProfileStrings.swift
 //  RideAndFood
 //
 //  Created by Nikita Gundorin on 09.11.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AccountStrings {
+enum ProfileStrings {
     case title
     case myAdresses
     case paymentsHistory

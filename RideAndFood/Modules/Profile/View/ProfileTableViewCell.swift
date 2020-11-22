@@ -1,5 +1,5 @@
 //
-//  AccountTableViewCell.swift
+//  ProfileTableViewCell.swift
 //  RideAndFood
 //
 //  Created by Nikita Gundorin on 10.11.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountTableViewCell: UITableViewCell {
+class ProfileTableViewCell: UITableViewCell {
     
     // MARK: - UI
     
@@ -31,13 +31,13 @@ class AccountTableViewCell: UITableViewCell {
     private let trailingPadding: CGFloat = 40
     private let padding: CGFloat = 13
     private let innerPadding: CGFloat = 7
-    private lazy var labelLeadingConstraintWithLeftView: NSLayoutConstraint? = {
+    private var labelLeadingConstraintWithLeftView: NSLayoutConstraint? {
         if let leftView = leftView {
             return titleLabel.leadingAnchor.constraint(equalTo: leftView.trailingAnchor,
                                                        constant: innerPadding)
         }
         return nil
-    }()
+    }
     private lazy var labelLeadingConstraintWithoutLeftView: NSLayoutConstraint =
         titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor,
                                             constant: leadingPadding)
@@ -72,7 +72,6 @@ class AccountTableViewCell: UITableViewCell {
             descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -trailingPadding)
         ])
-        accessoryType = .disclosureIndicator
     }
     
     private func setupLeftView(view: UIView?) {
@@ -98,10 +97,15 @@ class AccountTableViewCell: UITableViewCell {
 
 // MARK: - IConfigurableView
 
-extension AccountTableViewCell: IConfigurableView {
-    func configure(with model: AccountCellModel) {
+extension ProfileTableViewCell: IConfigurableView {
+    func configure(with model: ProfileCellModel) {
         titleLabel.text = model.title
         descriptionLabel.text = model.description
         setupLeftView(view: model.leftView)
+        if model.hasDisclosureIndicator {
+            accessoryType = .disclosureIndicator
+        } else {
+            accessoryType = .none
+        }
     }
 }

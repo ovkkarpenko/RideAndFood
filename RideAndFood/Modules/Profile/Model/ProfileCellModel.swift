@@ -1,5 +1,5 @@
 //
-//  AccountTableViewCell.swift
+//  ProfileCellModel..swift
 //  RideAndFood
 //
 //  Created by Nikita Gundorin on 13.11.2020.
@@ -8,8 +8,9 @@
 
 import UIKit
 
-struct AccountCellModel {
+struct ProfileCellModel {
     let title: String
     let leftView: UIView?
     let description: String?
+    let hasDisclosureIndicator: Bool
 }

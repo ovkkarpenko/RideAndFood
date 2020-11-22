@@ -1,5 +1,5 @@
 //
-//  AccountPhoneEnteringViewModel.swift
+//  ProfilePhoneEnteringViewModel.swift
 //  RideAndFood
 //
 //  Created by Nikita Gundorin on 15.11.2020.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct AccountPhoneEnteringViewModel {
-    let confirmButtonPressedBlock: (String?) -> Void
+struct ProfilePhoneEnteringViewModel {
+    let confirmButtonPressedBlock: (String) -> Void
 }
