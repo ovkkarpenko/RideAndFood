@@ -11,5 +11,6 @@ import Foundation
 enum RequestError: Error {
     case invalidUrl
     case badRequest
-    case serverError(String)
+    case serverError(message: String)
+    case forbidden
 }

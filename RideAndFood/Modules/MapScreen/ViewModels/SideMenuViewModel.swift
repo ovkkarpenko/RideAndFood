@@ -12,8 +12,6 @@ import Foundation
 
 class SideMenuViewModel {
     
-    private let bag = DisposeBag()
-    
     let items = Observable.just([
         SectionModel(model: "", items: [
             TableItem(title: SideMenuStrings.support.text(), cellTypes: [.default()], completion: { vc in
@@ -38,7 +36,22 @@ class SideMenuViewModel {
                 title: SideMenuStrings.paymentMethod.text(),
                 cellTypes: [.default(), .icon(UIImage(named: "visa", in: Bundle.init(path: "Images/Icons"), with: .none))],
                 completion: { vc in
+                    let controller = PaymentViewController()
+                    var backbutton = UIButton(type: .custom)
+                    backbutton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+                    backbutton.tintColor = .gray
                     
+                    _ = backbutton.rx
+                        .tap
+                        .subscribe(onNext: {
+                        controller.navigationController?.dismiss(animated: true)
+                    })
+                    
+                    controller.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backbutton)
+                    let navigationController = UINavigationController(rootViewController: controller)
+                    navigationController.modalPresentationStyle = .fullScreen
+                    navigationController.modalTransitionStyle = .crossDissolve
+                    vc.present(navigationController, animated: true)
                 })
         ]),
         

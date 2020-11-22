@@ -48,6 +48,12 @@ class PromotionDetailsViewController: UIViewController {
                                     ? PromotionsStrings.buttonFoodTitle.text()
                                     : PromotionsStrings.buttonTaxiTitle.text(), for: .normal)
             
+            actionButton.rx
+                .tap
+                .subscribe { _ in
+                    self.dismiss(animated: true)
+                }.disposed(by: bag)
+            
             if promotion.media.count >= 2,
                let url = URL(string: baseUrl + promotion.media[0].url) {
                 imageView.imageByUrl(from: url)

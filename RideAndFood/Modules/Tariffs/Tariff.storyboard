@@ -17,26 +17,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="n0E-8E-wGQ">
-                                <rect key="frame" x="97" y="151" width="123" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pageControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TBG-Mj-W4h">
+                                <rect key="frame" x="0.0" y="69" width="375" height="515"/>
+                                <connections>
+                                    <segue destination="3g4-3j-E8G" kind="embed" id="YG6-jr-CRY"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Qk-CV-0c7" customClass="CustomButton" customModule="RideAndFood" customModuleProvider="target">
+                                <rect key="frame" x="25" y="592" width="325" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="LYL-Rf-rBA"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="order:" destination="5Ev-3d-g7M" eventType="touchUpInside" id="o0G-t0-Nbc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UZs-yj-enu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TBG-Mj-W4h" firstAttribute="top" secondItem="UZs-yj-enu" secondAttribute="top" constant="25" id="1yq-IV-DHy"/>
+                            <constraint firstItem="UZs-yj-enu" firstAttribute="bottom" secondItem="4Qk-CV-0c7" secondAttribute="bottom" constant="25" id="VwE-mP-NE9"/>
+                            <constraint firstItem="4Qk-CV-0c7" firstAttribute="leading" secondItem="UZs-yj-enu" secondAttribute="leading" constant="25" id="Xuy-ib-I9J"/>
+                            <constraint firstItem="UZs-yj-enu" firstAttribute="trailing" secondItem="TBG-Mj-W4h" secondAttribute="trailing" id="YPT-e3-0VO"/>
+                            <constraint firstItem="TBG-Mj-W4h" firstAttribute="leading" secondItem="UZs-yj-enu" secondAttribute="leading" id="ZIT-29-cdW"/>
+                            <constraint firstItem="UZs-yj-enu" firstAttribute="trailing" secondItem="4Qk-CV-0c7" secondAttribute="trailing" constant="25" id="glJ-0d-AEf"/>
+                            <constraint firstItem="4Qk-CV-0c7" firstAttribute="top" secondItem="TBG-Mj-W4h" secondAttribute="bottom" constant="8" id="vNT-zY-fPt"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="PS1-Zd-tCr">
-                        <barButtonItem key="leftBarButtonItem" image="chevron.backward" catalog="system" id="g5y-Ie-V6h">
+                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="g5y-Ie-V6h">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="backToMainMenu:" destination="5Ev-3d-g7M" id="YRE-82-Pbl"/>
+                                <action selector="back:" destination="5Ev-3d-g7M" id="0Va-Wi-wh5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="orderButton" destination="4Qk-CV-0c7" id="M0c-Yx-czb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uWe-1D-C2m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="357.97101449275362" y="18.75"/>
+            <point key="canvasLocation" x="250" y="18"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QqB-W2-DDz">
@@ -56,10 +80,25 @@
             </objects>
             <point key="canvasLocation" x="-552.17391304347825" y="18.75"/>
         </scene>
+        <!--Tariff Page View Controller-->
+        <scene sceneID="e6r-iJ-QvQ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxV-bw-HaZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController modalTransitionStyle="crossDissolve" id="3g4-3j-E8G" customClass="TariffPageViewController" customModule="RideAndFood" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vPg-i2-3TE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="moD-Ye-uXb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1169" y="17"/>
+        </scene>
     </scenes>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

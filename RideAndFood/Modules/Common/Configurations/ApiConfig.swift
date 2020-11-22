@@ -22,6 +22,21 @@ enum ApiConfig<T> where T: Codable {
     case registration(data: T)
     case confirm(data: T)
     
+    case savePaymentCard(data: T)
+    case paymentCardApproved(cardId: Int)
+    case getPaymentCardDetails(cardId: Int)
+    case getPaymentCards
+    
+    case saveAddress(data: T)
+    case getAddresses
+    case removeAddress(addressId: Int)
+    case updateAddress(data: T, addressId: Int)
+    
+    case getShops
+    case getShopDetails(Int)
+    case getShopSubCategory(Int)
+    case getShopProducts(Int, Int)
+    
     case getPromoCodes
     case activatePromoCode(data: T)
     
@@ -52,6 +67,30 @@ enum ApiConfig<T> where T: Codable {
             return (.post, "\(baseUrl)/auth/registration", data)
         case .confirm(let data):
             return (.post, "\(baseUrl)/auth/confirm", data)
+        case .savePaymentCard(let data):
+            return (.post, "\(baseUrl)/user/\(userId)/payment-card", data)
+        case .paymentCardApproved(let cardId):
+            return (.post, "\(baseUrl)/user/\(userId)/payment-card/\(cardId)/approved", nil)
+        case .getPaymentCardDetails(let cardId):
+            return (.get, "\(baseUrl)/user/\(userId)/payment-card/\(cardId)", nil)
+        case .getPaymentCards:
+            return (.get, "\(baseUrl)/user/\(userId)/payment-cards", nil)
+        case .saveAddress(let data):
+            return (.post, "\(baseUrl)/user/\(userId)/address", data)
+        case .removeAddress(let id):
+            return (.delete, "\(baseUrl)/user/\(userId)/address/\(id)", nil)
+        case .updateAddress(let data, let id):
+            return (.put, "\(baseUrl)/user/\(userId)/address/\(id)", data)
+        case .getAddresses:
+            return (.get, "\(baseUrl)/user/\(userId)/address", nil)
+        case .getShops:
+            return (.get, "\(baseUrl)/user/\(userId)/shops", nil)
+        case .getShopDetails(let shopId):
+            return (.get, "\(baseUrl)/user/\(userId)/shop/\(shopId)", nil)
+        case .getShopSubCategory(let shopId):
+            return (.get, "\(baseUrl)/user/\(userId)/shop/\(shopId)/products", nil)
+        case .getShopProducts(let shopId, let subCategoryId):
+            return (.get, "\(baseUrl)/user/\(userId)/shop/\(shopId)/products/\(subCategoryId)", nil)
         case .getPromoCodes:
             return (.get, "\(baseUrl)/user/\(userId)/promo-codes", nil)
         case .activatePromoCode(let data):

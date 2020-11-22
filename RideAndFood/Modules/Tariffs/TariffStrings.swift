@@ -10,8 +10,12 @@ import Foundation
 
 enum TariffStrings {
     case storyboardTitle
-    case title
     case orderTaxiButton
+    case standart
+    case premium
+    case business
+    case cars
+    case aboutTariff
     
     func getString() -> String {
         switch UserConfig.shared.settings.language {
@@ -19,20 +23,42 @@ enum TariffStrings {
             switch self {
             case .storyboardTitle:
                 return "Тарифы"
-            case .title:
-                return ""
             case .orderTaxiButton:
                 return "Заказать такси"
+            case .standart:
+                return "Standart"
+            case .premium:
+                return "Premium"
+            case .business:
+                return "Business"
+            case .cars:
+                return "Автомобили: "
+            case .aboutTariff:
+                return "О тарифе"
             }
         case .eng:
             switch self {
             case .storyboardTitle:
                 return "Tariffs"
-            case .title:
-                return "Order a taxi"
             case .orderTaxiButton:
-                return "Заказать такси"
+                return "Order a taxi"
+            case .standart:
+                return "Standart"
+            case .premium:
+                return "Premium"
+            case .business:
+                return "Business"
+            case .cars:
+                return "Cars: "
+            case .aboutTariff:
+                return "About tariff"
             }
         }
     }
+}
+
+enum TariffId: Int {
+    case standart = 1
+    case premium = 2
+    case business = 3
 }

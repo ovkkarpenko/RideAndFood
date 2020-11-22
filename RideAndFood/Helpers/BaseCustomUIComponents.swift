@@ -54,7 +54,3 @@ class CustomButton: UIButton {
         }
     }
 }
-
-class CustomPageControl: UIPageControl {
-    
-}

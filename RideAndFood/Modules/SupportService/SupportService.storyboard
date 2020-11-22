@@ -86,7 +86,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ek6-6t-RyC">
                         <barButtonItem key="backBarButtonItem" title=" " id="f4L-ob-9dk"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.backward" catalog="system" id="8sE-OW-HoO">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="8sE-OW-HoO">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="closeButtonClicked:" destination="4cE-Vi-Mpy" id="baf-fi-YFG"/>
@@ -308,7 +308,7 @@
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="removeButton" width="30" height="30"/>
         <systemColor name="labelColor">

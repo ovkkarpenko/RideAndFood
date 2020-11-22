@@ -14,4 +14,10 @@ struct TariffModel: Codable {
     var cars: String?
     var description: String?
     var icon: String?
+    var advantages: [Advantage?]?
+    
+    struct Advantage: Codable {
+        var name: String?
+        var icon: String?
+    }
 }

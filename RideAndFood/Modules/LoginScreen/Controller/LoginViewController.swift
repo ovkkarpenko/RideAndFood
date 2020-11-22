@@ -211,7 +211,6 @@ class LoginViewController: UIViewController {
                 }
                 
                 UserConfig.shared.userId = userData.id
-                UserConfig.shared.phoneNumber = self?.loginView.phoneNumberString ?? ""
                 
                 DispatchQueue.main.async {
                     self?.dismiss(animated: true)

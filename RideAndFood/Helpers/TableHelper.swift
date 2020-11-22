@@ -73,8 +73,8 @@ class TableHelper {
     }
     
     private func defaultCell(_ cell: UITableViewCell, textColor: UIColor?) {
-        cell.textLabel?.textColor = textColor == nil ? .black : textColor
         cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.textColor = textColor == nil ? .black : textColor
     }
     
     private func noneCell(_ cell: UITableViewCell) {
@@ -105,6 +105,7 @@ class TableHelper {
     
     private func iconCell(_ cell: UITableViewCell, icon: UIImage?) {
         cell.accessoryType = .none
+        cell.subviews.first { $0 is UIImageView }?.removeFromSuperview()
         
         if let icon = icon {
             cell.textLabel?.text = "\(icon.size.width >= 25 ? "          " : "       ")\(cell.textLabel?.text ?? "")"
@@ -122,7 +123,7 @@ class TableHelper {
         
         let button = UIButton(frame: CGRect(x: cell.frame.width-40, y: cell.frame.height/2-10, width: 20, height: 20))
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .white
+        button.backgroundColor = .none
         if checked {
             button.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
             button.tintColor = .green
@@ -156,6 +157,8 @@ class TableHelper {
     }
     
     private func defaultCellConfig(_ cell: UITableViewCell, title: String) {
+        cell.subviews.first { $0 is UIImageView }?.removeFromSuperview()
+        
         cell.textLabel?.text = title
         cell.frame = CGRect(x: 0, y: 0, width: 375, height: 40)
         cell.textLabel?.font = .systemFont(ofSize: 15)

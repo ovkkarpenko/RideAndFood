@@ -39,6 +39,8 @@ class MapViewController: UIViewController {
     private lazy var cardView: MapCardView = {
         let view = MapCardView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.taxiAction = taxiButtonPressed
+        view.foodAction = foodButtonPressed
         return view
     }()
     
@@ -110,8 +112,8 @@ class MapViewController: UIViewController {
                                                                                  constant: sideMenuOffset)
     private lazy var backgroundShownConstraint = backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor)
     private lazy var backgroundHiddenConstraint = backgroundView.rightAnchor.constraint(equalTo: view.leftAnchor,
-                                                                                    constant: sideMenuOffset)
-    
+                                                                                        constant: sideMenuOffset)
+
     private let padding: CGFloat = 25
     private let sideMenuPadding: CGFloat = 42
     private lazy var sideMenuOffset: CGFloat = -500
@@ -136,7 +138,7 @@ class MapViewController: UIViewController {
                 self?.centerViewOn(coordinate: coordinate)
             }
             
-            ServerApi.shared.getSettings { settings in
+            ServerApi.shared.getSettings { settings, _ in
                 if let settings = settings {
                     UserConfig.shared.settings = settings
                 }
@@ -260,5 +262,40 @@ class MapViewController: UIViewController {
     
     @objc private func menuButtonPressed() {
         toggleSideMenu(hide: false)
+    }
+    
+    @objc private func taxiButtonPressed() {
+//        initializeTaxiOrderView()
+    }
+    
+    @objc private func foodButtonPressed() {
+        let foodView = FoodView()
+        foodView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(foodView)
+
+        NSLayoutConstraint.activate([
+            foodView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            foodView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            foodView.topAnchor.constraint(equalTo: view.topAnchor),
+            foodView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        guard let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+  
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else { return }
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

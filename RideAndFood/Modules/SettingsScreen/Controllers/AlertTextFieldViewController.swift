@@ -16,7 +16,7 @@ class AlertTextFieldViewController: UIViewController {
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var alertHeightConstraint: NSLayoutConstraint!
     
-    private let padding: CGFloat = 135
+    private let padding: CGFloat = 160
     
     let bag = DisposeBag()
     
@@ -44,7 +44,7 @@ class AlertTextFieldViewController: UIViewController {
         
         UIView.animate(withDuration: 0.6) { [weak self] in
             guard let self = self else { return }
-            self.alertHeightConstraint.constant = self.padding + keyboardSize.height
+            self.alertHeightConstraint.constant = self.padding + keyboardSize.height - self.view.safeAreaInsets.bottom
             self.view.layoutIfNeeded()
         }
     }

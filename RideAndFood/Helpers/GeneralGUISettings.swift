@@ -8,11 +8,6 @@
 
 import UIKit
 
-//public let cornerRadius15: CGFloat = 15
-//public let blueButtonColor = #colorLiteral(red: 0.2392156863, green: 0.231372549, blue: 1, alpha: 1)
-//public let grayborderColor = #colorLiteral(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
-//public let borderWidth: CGFloat = 1
-
 public let generalCornerRaduis: CGFloat = 15
 
 enum Colors {
@@ -22,6 +17,13 @@ enum Colors {
     case borderGray
     case disableGray
     case textGray
+    case tariffGreen
+    case tariffPurple
+    case tariffGold
+    case textBlack
+    case shadowColor
+    case locationOrange
+    case tapIndicatorGray
     
     func getColor() -> UIColor {
         switch self {
@@ -37,6 +39,20 @@ enum Colors {
             return UIColor(hexString: "#D0D0D0")
         case .textGray:
             return UIColor(hexString: "#8A8A8D")
+        case .tariffGreen:
+            return UIColor(hexString: "#A0E14C")
+        case .tariffPurple:
+            return UIColor(hexString: "#C442F2")
+        case .tariffGold:
+            return UIColor(hexString: "#D4BD80")
+        case .textBlack:
+            return UIColor(hexString: "#000000")
+        case .shadowColor:
+            return UIColor(hexString: "#000000", alpha: 0.1)
+        case .locationOrange:
+            return UIColor(hexString: "#FB8E50")
+        case .tapIndicatorGray:
+            return UIColor(hexString: "#000000", alpha: 0.5)
         }
     }
 }
@@ -45,33 +61,4 @@ enum CustomButtonType {
     case blueButton
     case whiteButton
     case greenButton
-}
-
-public extension UIColor {
-    convenience init(hexString: String, alpha: CGFloat = 1.0) {
-        let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let scanner = Scanner(string: hexString)
-        if (hexString.hasPrefix("#")) {
-            scanner.currentIndex = scanner.string.index(after: scanner.currentIndex)
-        }
-        var color: UInt64 = 0
-        scanner.scanHexInt64(&color)
-        let mask = 0x000000FF
-        let r = Int(color >> 16) & mask
-        let g = Int(color >> 8) & mask
-        let b = Int(color) & mask
-        let red   = CGFloat(r) / 255.0
-        let green = CGFloat(g) / 255.0
-        let blue  = CGFloat(b) / 255.0
-        self.init(red:red, green:green, blue:blue, alpha:alpha)
-    }
-    func toHexString() -> String {
-        var r:CGFloat = 0
-        var g:CGFloat = 0
-        var b:CGFloat = 0
-        var a:CGFloat = 0
-        getRed(&r, green: &g, blue: &b, alpha: &a)
-        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
-        return String(format:"#%06x", rgb)
-    }
 }

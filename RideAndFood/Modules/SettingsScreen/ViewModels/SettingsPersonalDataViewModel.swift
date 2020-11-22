@@ -17,8 +17,8 @@ class SettingsPersonalDataViewModel {
     let items = PublishSubject<[SectionModel<String, TableItem>]>()
     
     func fetchItems() {
-        ServerApi.shared.getProfile { [weak self] profile in
-            guard let profile = profile,
+        ServerApi.shared.getProfile { [weak self] profile, _ in
+            guard var profile = profile,
                   let self = self else { return }
             
             self.profile = profile
@@ -26,29 +26,37 @@ class SettingsPersonalDataViewModel {
             let isNameEmpty = profile.name == nil || profile.name!.isEmpty
             let isEmailEmpty = profile.email == nil || profile.email!.isEmpty
             
+            if var phone = profile.phone {
+                phone.insert(contentsOf: "-", at: phone.startIndex(offsetBy: +9))
+                phone.insert(contentsOf: "-", at: phone.startIndex(offsetBy: +7))
+                phone.insert(contentsOf: ") ", at: phone.startIndex(offsetBy: +4))
+                phone.insert(contentsOf: " (", at: phone.startIndex(offsetBy: +1))
+                profile.phone = phone
+            }
+            
             self.items.onNext([
                 SectionModel(model: "", items: [
                     TableItem(title: "+\(profile.phone ?? "")", cellTypes: [.none, .icon(UIImage(systemName: "person.fill"))])
                 ]),
                 
-                SectionModel(model: PersonalDataStrings.name.text(), items: [
+                SectionModel(model: SettingsPersonalDataStrings.name.text(), items: [
                     TableItem(
-                        title: isNameEmpty ? "What is your name?" : profile.name!,
+                        title: isNameEmpty ? SettingsPersonalDataStrings.nameCellTitle.text() : profile.name!,
                         cellTypes: [.default(isNameEmpty ? .gray : .black)], completion: { vc in
                             
                             if let alert = UIStoryboard(name: "Settings", bundle: nil)
                                 .instantiateViewController(withIdentifier: "AlertController") as? AlertTextFieldViewController {
                                 
-                                alert.buttonTitle = "Confirm"
+                                alert.buttonTitle = SettingsPersonalDataStrings.confirm.text()
                                 alert.textFieldValue = profile.name ?? ""
-                                alert.placeholder = "What is your name?"
+                                alert.placeholder = SettingsPersonalDataStrings.nameCellTitle.text()
                                 alert.buttonClickedCallback = { text in
                                     
-                                    ServerApi.shared.saveProfile(Profile(name: text)) { profile in
+                                    ServerApi.shared.saveProfile(Profile(name: text)) { profile, _ in
                                         if let _ = profile {
                                             self.fetchItems()
                                         } else {
-                                            AlertHelper.shared.alert(vc, title: "Error", message: "Please ensure that you enter your name correctly.")
+                                            AlertHelper.shared.alert(vc, title: StringsHelper.alertErrorTitle.text(), message: StringsHelper.alertErrorDescription.text())
                                         }
                                     }
                                     
@@ -62,22 +70,22 @@ class SettingsPersonalDataViewModel {
                 
                 SectionModel(model: "E-main", items: [
                     TableItem(
-                        title: isEmailEmpty ? "Enter your e-mail" : profile.email!,
+                        title: isEmailEmpty ? SettingsPersonalDataStrings.emailCellTitle.text() : profile.email!,
                         cellTypes: [.default(isEmailEmpty ? .gray : .black)], completion: { vc in
                             
                             if let alert = UIStoryboard(name: "Settings", bundle: nil)
                                 .instantiateViewController(withIdentifier: "AlertController") as? AlertTextFieldViewController {
                                 
-                                alert.buttonTitle = "Confirm"
+                                alert.buttonTitle = SettingsPersonalDataStrings.confirm.text()
                                 alert.textFieldValue = profile.email ?? ""
-                                alert.placeholder = "Enter your e-mail"
+                                alert.placeholder = SettingsPersonalDataStrings.emailCellTitle.text()
                                 alert.buttonClickedCallback = { text in
                                     
-                                    ServerApi.shared.saveProfile(Profile(email: text)) { profile in
+                                    ServerApi.shared.saveProfile(Profile(email: text)) { profile, _ in
                                         if let _ = profile {
                                             self.fetchItems()
                                         } else {
-                                            AlertHelper.shared.alert(vc, title: "Error", message: "Please ensure that you enter your\ne-mail correctly.")
+                                            AlertHelper.shared.alert(vc, title: StringsHelper.alertErrorTitle.text(), message: StringsHelper.alertErrorDescription.text())
                                         }
                                     }
                                 }

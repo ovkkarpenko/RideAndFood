@@ -35,9 +35,14 @@ class BaseNetworkManager: NetworkManager {
         
         DispatchQueue.global().async {
             URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
-                guard let data = data, error == nil else {
-                    if !(self?.isSuccess(response: response) ?? false) {
-                        return completion(nil, RequestError.badRequest)
+                guard let data = data, error == nil
+                else {
+                    if let response = response as? HTTPURLResponse {
+                        if response.statusCode == 403 {
+                            return completion(nil, RequestError.forbidden)
+                        } else if !((200 ... 299) ~= response.statusCode) {
+                            return completion(nil, RequestError.badRequest)
+                        }
                     }
                     
                     return completion(nil, error)
@@ -45,7 +50,7 @@ class BaseNetworkManager: NetworkManager {
                 
                 guard let result = try? JSONDecoder().decode(V.self, from: data) else {
                     if let responseError = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
-                        return completion(nil, RequestError.serverError(responseError.error))
+                        return completion(nil, RequestError.serverError(message: responseError.error))
                     }
                     
                     return completion(nil, RequestError.badRequest)

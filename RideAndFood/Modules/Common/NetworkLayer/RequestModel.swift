@@ -19,7 +19,7 @@ class RequestModel<EncodeType: Codable> {
     
     var body: EncodeType?
     
-    init(path: String, method: HTTPMethod, parameters: [String : Any?] = [:], headers: [String : String] = [:], body: EncodeType?) {
+    init(path: String, method: HTTPMethod, parameters: [String : Any?] = [:], headers: [String : String] = [:], body: EncodeType? = nil) {
         self.path = path
         self.parameters = parameters
         self.headers = headers

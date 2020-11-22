@@ -10,6 +10,8 @@ import Foundation
 
 enum StringsHelper {
     case next
+    case alertErrorTitle
+    case alertErrorDescription
     case confirm
     case great
     case error
@@ -35,6 +37,10 @@ enum StringsHelper {
         switch self {
         case .next:
             return "Далее"
+        case .alertErrorTitle:
+            return "Ошибка"
+        case .alertErrorDescription:
+            return "Пожалуйста, убедитесь, что вы правильно ввели данные."
         case .confirm:
             return "Подтвердить"
         case .great:
@@ -64,6 +70,10 @@ enum StringsHelper {
         switch self {
         case .next:
             return "Next"
+        case .alertErrorTitle:
+            return "Error"
+        case .alertErrorDescription:
+            return "Please ensure that you enter the data correctly."
         case .confirm:
             return "Confirm"
         case .great:
