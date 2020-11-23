@@ -72,9 +72,20 @@ class ProfileViewController: UIViewController {
     private lazy var accountTableViewDataSource = ProfileTableViewDataSource(cellId: cellId) { [weak self] in
         return self?.phones ?? []
     }
-    private lazy var accountTableViewDelegate = ProfileTableViewDelegate(viewController: self) { [weak self] row in
-        self?.phoneNumberPressed(row: row)
-    }
+    private lazy var accountTableViewDelegate =
+        ProfileTableViewDelegate(viewController: self,
+                                 phoneNumberTappedBlock: { [weak self] row in
+                                    self?.phoneNumberPressed(row: row)
+                                 }, addressesTappedBlock: { [weak self] in
+                                    self?.presentAddresesViewController()
+                                 }, paymentHistoryTappedBlock: { [weak self] in
+                                    self?.presentPaymentsHistoryViewController()
+                                 }, ordersHistoryTappedBlock: { [weak self] in
+                                    self?.presentOrdersHistoryViewController()
+                                 },
+                                 paymentsTappedBlock: { [weak self] in
+                                    self?.presentPaymentsViewController()
+                                 })
     
     private var isAddingMode = false
     private var actionId: Int?
@@ -339,6 +350,26 @@ class ProfileViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             self?.tableView.reloadData()
         }
+    }
+    
+    private func presentAddresesViewController() {
+        let vc = AddressesViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func presentPaymentsHistoryViewController() {
+//        let vc = PaymentsHistoryViewController()
+//        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func presentOrdersHistoryViewController() {
+//        let vc = OrdersHistoryViewController()
+//        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func presentPaymentsViewController() {
+        let vc = PaymentViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func dismissSelf() {
