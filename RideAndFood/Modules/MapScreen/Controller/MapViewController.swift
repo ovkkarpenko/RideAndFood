@@ -280,6 +280,15 @@ class MapViewController: UIViewController {
         })
     }
     
+    private func initializeTaxiOrderView() {
+        self.view.addSubview(addressInputView)
+        cardView.isHidden = true
+        
+        (NSLayoutConstraint.activate([addressInputView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                      addressInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor), addressInputView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom), addressInputView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)]))
+        addressInputView.show()
+    }
+    
     private func dismissKeyboard() {
         if self.view.endEditing(false) {
             self.view.endEditing(true)
