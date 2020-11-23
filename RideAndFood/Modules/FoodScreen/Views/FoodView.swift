@@ -20,6 +20,7 @@ enum SelectedViewType {
 }
 
 protocol FoodViewDelegate {
+    func shopMap()
     func showShop(address: Address?)
     func showShopCategory(shop: FoodShop?)
     func showShopDetails()
@@ -28,6 +29,8 @@ protocol FoodViewDelegate {
 }
 
 class FoodView: UIView {
+    
+    var currentUserAddress: String?
     
     private lazy var backgroundView: UIView = {
         let view = UIView()
@@ -113,6 +116,7 @@ class FoodView: UIView {
         
         if !isLoaded {
             isLoaded = true
+            foodAddressView.addressTextField.text = currentUserAddress ?? ""
             toggle(false, view: foodAddressView, constraint: foodAddressViewTopConstraint)
         }
     }
@@ -260,13 +264,13 @@ extension FoodView: FoodViewDelegate {
             })
     }
     
+    func shopMap() {
+        toggle(true, view: foodAddressView, constraint: foodAddressViewTopConstraint, dismiss: true)
+    }
+    
     func showShop(address: Address?) {
         selectedView = .shop
-        
-        if let address = address {
-            foodShopView.addressTextField.text = address.address
-            foodShopView.addressNameLabel.text = address.name
-        }
+        foodShopView.address = address
         
         toggle(true, view: foodAddressView, constraint: foodAddressViewTopConstraint)
         toggle(true, view: shopCategoryView, constraint: shopCategoryViewTopConstraint)
