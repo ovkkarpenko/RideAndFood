@@ -86,7 +86,7 @@ class MapViewController: UIViewController {
     private lazy var personButton: UIButton = {
         let button = RoundButton(type: .system)
         button.bgImage = UIImage(named: "Person")
-//        button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
+        //        button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -94,8 +94,6 @@ class MapViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = Colors.getColor(.tapIndicatorGray)()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.isUserInteractionEnabled = true
-//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         return view
     }()
     
@@ -140,12 +138,10 @@ class MapViewController: UIViewController {
                                                                                     constant: sideMenuOffset)
     
     private lazy var backgroundLeftConstraint = backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor,
-                                                                                 constant: sideMenuOffset)
+                                                                                     constant: sideMenuOffset)
     private lazy var backgroundShownConstraint = backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor)
     private lazy var backgroundHiddenConstraint = backgroundView.rightAnchor.constraint(equalTo: view.leftAnchor,
-                                                                                    constant: sideMenuOffset)
-    private lazy var taxiOrderViewBottomConstraint = addressInputView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom)
-    private lazy var taxiOrderViewTopConstraintWithoutKeyboard = addressInputView.topAnchor.constraint(equalTo: myLocationButton.bottomAnchor, constant: padding)
+                                                                                        constant: sideMenuOffset)
     
     private let padding: CGFloat = 25
     private let sideMenuPadding: CGFloat = 42
@@ -217,7 +213,7 @@ class MapViewController: UIViewController {
             cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             myLocationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding),
+            myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding*3.5),
             menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             menuButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding),
             sideMenuView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -248,42 +244,6 @@ class MapViewController: UIViewController {
             }
             else {
                 completionHandler(nil)
-            }
-        }
-    }
-    
-    // нужно сделать эту функцию универсальной
-    private func toggleTaxiView(state: Bool, inpuView: OrderViewDirector) {
-        if self.view.endEditing(false) {
-            self.view.endEditing(true)
-        }
-        
-        if state { // appearance
-            inpuView.isHidden = false
-            taxiOrderViewBottomConstraint.isActive = true
-            taxiOrderViewTopConstraintWithoutKeyboard.isActive = true
-            inpuView.frame.origin.y = UIScreen.main.bounds.height
-            
-            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
-                guard let self = self else { return }
-                self.view.layoutIfNeeded()
-            }
-        } else { // disappearance
-            taxiOrderViewBottomConstraint.isActive = false
-            let defaultTopConstraint = taxiOrderViewTopConstraintWithoutKeyboard.constant
-            taxiOrderViewTopConstraintWithoutKeyboard.constant = inpuView.frame.height + padding
-            UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: .curveEaseOut) { [weak self] in
-                guard let self = self else { return }
-                self.view.layoutIfNeeded()
-            } completion: { [weak self] _ in
-                guard let self = self else { return }
-                self.cardView.isHidden = false
-                
-                inpuView.isHidden = true
-                self.taxiOrderViewTopConstraintWithoutKeyboard.constant = defaultTopConstraint
-                self.taxiOrderViewBottomConstraint.isActive = false
-                inpuView.frame.origin.y = UIScreen.main.bounds.height
-                self.taxiOrderViewTopConstraintWithoutKeyboard.isActive = false
             }
         }
     }
@@ -325,13 +285,12 @@ class MapViewController: UIViewController {
     }
     
     private func initializeTaxiOrderView() {
-        view.addSubview(addressInputView)
+        self.view.addSubview(addressInputView)
         cardView.isHidden = true
         
         (NSLayoutConstraint.activate([addressInputView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                      addressInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                      taxiOrderViewTopConstraintWithoutKeyboard, taxiOrderViewBottomConstraint]))
-        toggleTaxiView(state: true, inpuView: addressInputView)
+                                      addressInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor), addressInputView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom), addressInputView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)]))
+        addressInputView.show()
     }
     
     private func initializeBackButton() {
@@ -353,11 +312,15 @@ class MapViewController: UIViewController {
     
     @objc private func backButtonPressed() {
         if let currentView = view.subviews.last as? OrderViewDirector {
-            toggleTaxiView(state: false, inpuView: currentView)
+            currentView.dismiss()
+            if let indexOfCurrentView = view.subviews.firstIndex(of: currentView) {
+                view.subviews[indexOfCurrentView - 1].isHidden = false
+            }
             
             if let type = currentView.type, type == .addressInput {
                 backButton.removeFromSuperview()
                 menuButton.isHidden = false
+                cardView.isHidden = false
             }
         }
     }
@@ -367,22 +330,26 @@ class MapViewController: UIViewController {
         initializeTaxiOrderView()
     }
     
-//    @objc private func dismissKeyboard() {
-//        self.view.endEditing(true)
-//    }
+    private func dismissKeyboard() {
+        if self.view.endEditing(false) {
+            self.view.endEditing(true)
+        }
+    }
 }
 
 extension MapViewController: OrderViewDelegate {
     func buttonTapped(newSubview: OrderViewDirector?) {
+        dismissKeyboard()
+        
         if let newSubview = newSubview {
+            addressInputView.isHidden = true
             self.view.addSubview(newSubview)
+            newSubview.translatesAutoresizingMaskIntoConstraints = false
             
-//            newSubview.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-            newSubview.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            newSubview.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            (NSLayoutConstraint.activate([newSubview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                          newSubview.trailingAnchor.constraint(equalTo: view.trailingAnchor), newSubview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom), newSubview.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)]))
             
-            toggleTaxiView(state: false, inpuView: addressInputView)
-            toggleTaxiView(state: true, inpuView: newSubview)
+            newSubview.show()
         }
     }
     

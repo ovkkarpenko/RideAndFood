@@ -143,9 +143,6 @@ class OrderView: UIView {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-//    @objc private func hideOrderView() {
-//    }
-    
     @objc private func keyboardWillShow(notification: NSNotification) {
         guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
     
@@ -171,9 +168,7 @@ class OrderView: UIView {
     }
     
     @objc private func buttonTapped() {
-        print("all right")
         delegate?.buttonTapped(newSubview: buttonAction?())
-        // вернуть этот результат контроллеру
     }
     
     // MARK: -- public methods
@@ -201,6 +196,26 @@ class OrderView: UIView {
     func setCurrentAddress(address: String?) {
         if let address = address {
             self.currentAddress = address
+        }
+    }
+    
+    func show() {
+        self.backView.layer.frame.origin.y = UIScreen.main.bounds.height
+        
+        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
+            guard let self = self else { return }
+            self.backView.layer.frame.origin.y = UIScreen.main.bounds.height -
+                self.backView.frame.height
+        }
+    }
+    
+    func dismiss() {
+        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveLinear]) { [weak self] in
+            guard let self = self else { return }
+            self.backView.layer.frame.origin.y += self.backView.frame.height
+           
+        } completion: { [weak self] _ in
+            self?.removeFromSuperview()
         }
     }
 }

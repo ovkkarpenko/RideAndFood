@@ -44,19 +44,18 @@ class OrderViewDirector: OrderView {
         button.setTitle(TaxiOrderStrings.getString(.next)(), for: .normal)
         
         buttonAction = {
-            return OrderViewDirector(type: .orderPrice)
+            let view = OrderViewDirector(type: .orderPrice)
+            view.setCurrentAddress(address: self.currentAddress)
+            return view
         }
     }
     
     private func setupOrderPriceView() {
         firstTextView.isHidden = false
-        secondTextView.isHidden = false
         
         firstTextView.setTextViewType(.fromAddress)
-        secondTextView.setTextViewType(.toAddress)
         
         firstTextView.customTextViewDelegate = self
-        secondTextView.customTextViewDelegate = self
         
         button.setTitle(TaxiOrderStrings.getString(.next)(), for: .normal)
     }
