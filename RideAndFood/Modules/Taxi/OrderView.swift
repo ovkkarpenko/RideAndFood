@@ -241,6 +241,7 @@ extension OrderView: CustomTextViewDelegate {
 
 extension OrderView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(savedAddresses?[0].address)
         return savedAddresses == nil ? 0 : savedAddresses!.count
     }
     

@@ -9,6 +9,7 @@
 import UIKit
 
 public let generalCornerRaduis: CGFloat = 15
+public let generalAnimationDuration: TimeInterval = 0.3
 
 enum Colors {
     case buttonBlue
@@ -24,6 +25,8 @@ enum Colors {
     case shadowColor
     case locationOrange
     case tapIndicatorGray
+    case tapIndicatorOnDark
+    case tableViewBorderGray
     
     func getColor() -> UIColor {
         switch self {
@@ -53,6 +56,10 @@ enum Colors {
             return UIColor(hexString: "#FB8E50")
         case .tapIndicatorGray:
             return UIColor(hexString: "#000000", alpha: 0.5)
+        case .tapIndicatorOnDark:
+            return UIColor(hexString: "#FFFFFF", alpha: 0.5)
+        case .tableViewBorderGray:
+            return UIColor(hexString: "#C6C6C8")
         }
     }
 }

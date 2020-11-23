@@ -600,19 +600,19 @@
 		7286E5222542E7420027A69B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				F7AECA64256C326F00CA86AC /* Taxi */,
-				72F467D22559C4E200F8926E /* Profile */,
-				72FF3ACB253F46D60042B2A0 /* Common */,
-				72D60EF22548B35900052305 /* SettingsScreen */,
 				FAD0AFF225669B1F008C2794 /* AddressesScreen */,
+				72FF3ACB253F46D60042B2A0 /* Common */,
 				FAD0AFEB25669B1A008C2794 /* FoodScreen */,
-				FAA9494B25546F1B005C5B40 /* PaymentScreen */,
 				7240BF27253E167C00C00BB9 /* LoginScreen */,
-				F7FD685F253F72C600A67E07 /* SupportService */,
-				7286E5212542E7340027A69B /* TermsOfUseScreen */,
-				F7805C382552E3EB00D1BBAD /* Tariffs */,
 				72A1DBF02545D671005A047A /* MapScreen */,
+				FAA9494B25546F1B005C5B40 /* PaymentScreen */,
+				72F467D22559C4E200F8926E /* Profile */,
 				7270D0FA254F36FB00DE6BBC /* PromoCodes */,
+				72D60EF22548B35900052305 /* SettingsScreen */,
+				F7FD685F253F72C600A67E07 /* SupportService */,
+				F7805C382552E3EB00D1BBAD /* Tariffs */,
+				F7AECA64256C326F00CA86AC /* Taxi */,
+				7286E5212542E7340027A69B /* TermsOfUseScreen */,
 			);
 			path = Modules;
 			sourceTree = "<group>";

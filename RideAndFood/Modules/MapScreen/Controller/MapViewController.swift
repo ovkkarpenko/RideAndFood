@@ -91,6 +91,13 @@ class MapViewController: UIViewController {
         return button
     }()
     
+    private lazy var transparentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Colors.getColor(.tapIndicatorGray)()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private var isOrderViewInitialized = false
     private lazy var addressInputView: OrderViewDirector = {
         let view = OrderViewDirector(type: .addressInput)
