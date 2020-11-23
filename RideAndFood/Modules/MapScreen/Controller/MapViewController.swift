@@ -76,11 +76,30 @@ class MapViewController: UIViewController {
         return button
     }()
     
+    private lazy var backButton: UIButton = {
+        let button = RoundButton(type: .system)
+        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        button.tintColor = Colors.getColor(.textBlack)()
+        return button
+    }()
+    
     private lazy var personButton: UIButton = {
         let button = RoundButton(type: .system)
         button.bgImage = UIImage(named: "Person")
         button.addTarget(self, action: #selector(personButtonPressed), for: .touchUpInside)
         return button
+    }()
+    
+    private var isOrderViewInitialized = false
+    private lazy var addressInputView: OrderViewDirector = {
+        let view = OrderViewDirector(type: .addressInput)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.currentAddress = cuurentPlacemark?.name
+        isOrderViewInitialized = true
+        view.delegate = self
+        
+        return view
     }()
     
     // MARK: - Private properties
@@ -98,6 +117,9 @@ class MapViewController: UIViewController {
     private var cuurentPlacemark: CLPlacemark? {
         didSet {
             cardView.address = cuurentPlacemark?.name
+            if isOrderViewInitialized {
+                addressInputView.currentAddress = cuurentPlacemark?.name
+            }
         }
     }
     
@@ -185,7 +207,7 @@ class MapViewController: UIViewController {
             cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             myLocationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding),
+            myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding*3.5),
             menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             menuButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding),
             sideMenuView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -258,6 +280,20 @@ class MapViewController: UIViewController {
         })
     }
     
+    private func dismissKeyboard() {
+        if self.view.endEditing(false) {
+            self.view.endEditing(true)
+        }
+    }
+    
+    private func initializeBackButton() {
+        menuButton.isHidden = true
+        view.addSubview(backButton)
+        
+        backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding).isActive = true
+        backButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding).isActive = true
+    }
+    
     @objc private func myLocationButtonPressed() {
         guard let coordinate = accessManager.location?.coordinate else { return }
         centerViewOn(coordinate: coordinate)
@@ -268,7 +304,8 @@ class MapViewController: UIViewController {
     }
     
     @objc private func taxiButtonPressed() {
-//        initializeTaxiOrderView()
+        initializeBackButton()
+        initializeTaxiOrderView()
     }
     
     @objc private func foodButtonPressed() {
@@ -285,26 +322,56 @@ class MapViewController: UIViewController {
         ])
     }
     
-    @objc private func keyboardWillShow(notification: NSNotification) {
-        guard let _ = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-  
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            guard let self = self else { return }
-            self.view.layoutIfNeeded()
-        }
-    }
-
-    @objc private func keyboardWillHide(notification: NSNotification) {
-        
-    }
-    
-    @objc private func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
     @objc private func personButtonPressed() {
         let vc = UINavigationController(rootViewController: ProfileViewController())
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
+    }
+    
+    @objc private func backButtonPressed() {
+        if let currentView = view.subviews.last as? OrderViewDirector {
+            currentView.dismiss()
+            if let indexOfCurrentView = view.subviews.firstIndex(of: currentView) {
+                view.subviews[indexOfCurrentView - 1].isHidden = false
+            }
+            
+            if let type = currentView.type, type == .addressInput {
+                backButton.removeFromSuperview()
+                menuButton.isHidden = false
+                cardView.isHidden = false
+            }
+        }
+    }
+}
+
+extension MapViewController: OrderViewDelegate {
+    func buttonTapped(newSubview: OrderViewDirector?) {
+        dismissKeyboard()
+        
+        if let newSubview = newSubview {
+            addressInputView.isHidden = true
+            self.view.addSubview(newSubview)
+            newSubview.translatesAutoresizingMaskIntoConstraints = false
+            
+            (NSLayoutConstraint.activate([newSubview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                          newSubview.trailingAnchor.constraint(equalTo: view.trailingAnchor), newSubview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom), newSubview.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)]))
+            
+            newSubview.show()
+        }
+    }
+    
+    func shouldShowTranspatentView() {
+        if !self.view.contains(transparentView) {
+            view.insertSubview(transparentView, at: view.subviews.count - 1)
+            
+            NSLayoutConstraint.activate([transparentView.topAnchor.constraint(equalTo: view.topAnchor),
+                                         transparentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                         transparentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                         transparentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+        }
+    }
+    
+    func shouldRemoveTranspatentView() {
+        transparentView.removeFromSuperview()
     }
 }
