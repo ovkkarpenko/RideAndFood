@@ -147,9 +147,11 @@ class AddAddresViewController: UIViewController {
     var address: Address?
     
     private let padding: CGFloat = 20
+    private let shownPadding: CGFloat = 470
+    private let hiddenPadding: CGFloat = 1000
     
-    private lazy var scrollViewBottonConstraint = scrollView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-    private lazy var removeAddressViewHeightConstraint = removeAddressView.heightAnchor.constraint(equalToConstant: 0)
+    private lazy var scrollViewBottonConstraint = scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    private lazy var removeAddressViewTopConstraint = removeAddressView.topAnchor.constraint(equalTo: view.topAnchor, constant: hiddenPadding)
     
     func setupLayout() {
         scrollView.addSubview(backgroundView)
@@ -167,9 +169,9 @@ class AddAddresViewController: UIViewController {
             scrollView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollViewBottonConstraint,
             
-            removeAddressViewHeightConstraint,
-            removeAddressView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            removeAddressView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            removeAddressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            removeAddressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            removeAddressViewTopConstraint,
             removeAddressView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             backgroundAlertView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -226,14 +228,13 @@ class AddAddresViewController: UIViewController {
         var animateOption: UIView.AnimationOptions = .curveEaseIn
         
         if hide {
-            removeAddressViewHeightConstraint.constant = 0
+            removeAddressViewTopConstraint.constant = hiddenPadding
         } else {
             animateOption = .curveEaseOut
-            removeAddressViewHeightConstraint.constant = 200
+            removeAddressViewTopConstraint.constant = shownPadding
         }
         
         backgroundAlertView.isHidden = hide
-        navigationController?.setNavigationBarHidden(!hide, animated: true)
         
         UIView.animate(
             withDuration: ConstantsHelper.baseAnimationDuration.value(),
@@ -257,7 +258,7 @@ class AddAddresViewController: UIViewController {
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
-        scrollViewBottonConstraint.constant = -padding
+        scrollViewBottonConstraint.constant = 0
         
         UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
             self.view.layoutIfNeeded()
