@@ -65,10 +65,6 @@ class AddressesViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .gray
         setupLayout()
         setupTableView()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
         viewModel.fetchItems { [weak self] in
             self?.showAddressesTable()
@@ -92,7 +88,7 @@ class AddressesViewController: UIViewController {
             
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding+100),
             tableView.bottomAnchor.constraint(equalTo: backgroundImage.topAnchor, constant: -padding),
             
             alertLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
