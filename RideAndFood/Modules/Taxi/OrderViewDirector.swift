@@ -19,15 +19,15 @@ class OrderViewDirector: OrderView {
         case .addressInput:
             setupAddressInputView()
         case .currentAddressDetail:
-            break
+            setupCurrentAddressDetail()
         case .destinationAddressDetail:
-            break
+            setupDestinationAddressDetail()
         case .orderPrice:
             setupOrderPriceView()
         case .confirmationCode:
-            break
+            setupConfirmationCode()
         case .destinationAddressFromMap:
-            break
+            setupDestinationAddressFromMap()
         }
     }
     
@@ -35,8 +35,8 @@ class OrderViewDirector: OrderView {
         firstTextView.isHidden = false
         secondTextView.isHidden = false
         
-        firstTextView.setTextViewType(.fromAddress)
-        secondTextView.setTextViewType(.toAddress)
+        firstTextView.setTextViewType(.currentAddress)
+        secondTextView.setTextViewType(.destinationAddress)
         
         firstTextView.customTextViewDelegate = self
         secondTextView.customTextViewDelegate = self
@@ -44,19 +44,39 @@ class OrderViewDirector: OrderView {
         button.setTitle(TaxiOrderStrings.getString(.next)(), for: .normal)
         
         buttonAction = {
-            let view = OrderViewDirector(type: .orderPrice)
-            view.setCurrentAddress(address: self.currentAddress)
+            let view = OrderViewDirector(type: .currentAddressDetail)
+//            view.setCurrentAddress(address: self.currentAddress)
             return view
         }
     }
     
-    private func setupOrderPriceView() {
+    private func setupCurrentAddressDetail() {
         firstTextView.isHidden = false
-        
-        firstTextView.setTextViewType(.fromAddress)
-        
+        firstTextView.setTextViewType(.defaultBlue)
+        firstTextView.textField.placeholder = TaxiOrderStrings.getString(.currentAddressDetailPlaceholder)()
         firstTextView.customTextViewDelegate = self
+
+        button.setTitle(TaxiOrderStrings.getString(.confirm)(), for: .normal)
+    }
+    
+    private func setupDestinationAddressDetail() {
+        firstTextView.isHidden = false
+        firstTextView.setTextViewType(.defaultOrange)
+        firstTextView.textField.placeholder = TaxiOrderStrings.getString(.destinationAddressDetailPlaceholder)()
+        firstTextView.customTextViewDelegate = self
+
+        button.setTitle(TaxiOrderStrings.getString(.confirm)(), for: .normal)
+    }
+    
+    private func setupOrderPriceView() {
         
-        button.setTitle(TaxiOrderStrings.getString(.next)(), for: .normal)
+    }
+    
+    private func setupConfirmationCode() {
+        
+    }
+    
+    private func setupDestinationAddressFromMap() {
+        
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 public let generalCornerRaduis: CGFloat = 15
-public let generalAnimationDuration: TimeInterval = 0.3
+public let generalAnimationDuration: TimeInterval = 0.15
 
 enum Colors {
     case buttonBlue

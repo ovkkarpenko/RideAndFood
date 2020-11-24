@@ -19,7 +19,7 @@ import UIKit
 class CustomTextView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var textField: UITextField!
-    @IBOutlet weak var locationImage: UIButton!
+    @IBOutlet weak var locationButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     @IBOutlet weak var indicatorView: UIView!
     @IBOutlet weak var verticalSplitterView: UIView!
@@ -33,11 +33,13 @@ class CustomTextView: UIView {
         }
     }
     
-    private var isDestinationAddressAvailable = false {
+    private var isTextFieldEnable = false {
         didSet {
-            if isDestinationAddressAvailable != oldValue {
-                setToAddressParameters()
-//                customTextViewDelegate?.checkIfDestinationAddressAvailable(state: isDestinationAddressAvailable)
+            if isTextFieldEnable != oldValue {
+                customizeViews()
+                if let textViewType = textViewType {
+                    customTextViewDelegate?.isTextFieldFilled(state: isTextFieldEnable, senderType: textViewType)
+                }
             }
         }
     }
@@ -74,38 +76,62 @@ class CustomTextView: UIView {
     private func customizeViews() {
         if let type = textViewType {
             switch type {
-            case .fromAddress:
-                setFromAddressParameters()
-            case .toAddress:
-                setToAddressParameters()
+            case .currentAddress:
+                setCurrentAddressParameters()
+            case .destinationAddress:
+                setDestinationAddressParameters()
+            case .defaultBlue:
+                setDefaultBlueParameters()
+            case .defaultOrange:
+                setDefaultOrangeParameters()
             }
         }
     }
     
-    private func setFromAddressParameters() {
-        locationImage.tintColor = Colors.getColor(.buttonBlue)()
-        verticalSplitterView.isHidden = true
-        mapButton.isUserInteractionEnabled = false
-        mapButton.setImage(UIImage(named: "visa"), for: .normal)
-        indicatorView.backgroundColor = Colors.getColor(.buttonBlue)()
+    private func setDefaultBlueParameters() {
+        indicatorView.backgroundColor = isTextFieldEnable ? Colors.getColor(.buttonBlue)() : Colors.getColor(.disableGray)()
     }
     
-    private func setToAddressParameters() {
-        if isDestinationAddressAvailable {
-            locationImage.tintColor = Colors.getColor(.locationOrange)()
-            mapButton.isUserInteractionEnabled = true
-            mapButton.setImage(nil, for: .normal)
-            mapButton.setTitle(TaxiOrderStrings.getString(.map)(), for: .normal)
-            mapButton.setTitleColor(Colors.getColor(.textBlack)(), for: .normal)
-            verticalSplitterView.isHidden = false
+    private func setDefaultOrangeParameters() {
+        indicatorView.backgroundColor = isTextFieldEnable ? Colors.getColor(.locationOrange)() : Colors.getColor(.disableGray)()
+    }
+    
+    private func setCurrentAddressParameters() {
+        verticalSplitterView.isHidden = true
+        mapButton.isHidden = false
+        mapButton.isUserInteractionEnabled = false
+        mapButton.setImage(UIImage(named: "visa"), for: .normal)
+        locationButton.isHidden = false
+        
+        if isTextFieldEnable {
+            indicatorView.backgroundColor = Colors.getColor(.buttonBlue)()
+            locationButton.tintColor = Colors.getColor(.buttonBlue)()
+            locationButton.isUserInteractionEnabled = true
+        } else {
+            indicatorView.backgroundColor = Colors.getColor(.disableGray)()
+            locationButton.tintColor = Colors.getColor(.disableGray)()
+            locationButton.isUserInteractionEnabled = false
+        }
+
+    }
+    
+    private func setDestinationAddressParameters() {
+        mapButton.isHidden = false
+        mapButton.isUserInteractionEnabled = true
+        mapButton.setImage(nil, for: .normal)
+        mapButton.setTitle(TaxiOrderStrings.getString(.map)(), for: .normal)
+        mapButton.setTitleColor(Colors.getColor(.textBlack)(), for: .normal)
+        verticalSplitterView.isHidden = false
+        locationButton.isHidden = false
+        
+        
+        if isTextFieldEnable {
+            locationButton.tintColor = Colors.getColor(.locationOrange)()
+            locationButton.isUserInteractionEnabled = true
             indicatorView.backgroundColor = Colors.getColor(.locationOrange)()
         } else {
-            locationImage.tintColor = Colors.getColor(.disableGray)()
-            mapButton.isUserInteractionEnabled = true
-            mapButton.setImage(nil, for: .normal)
-            mapButton.setTitle(TaxiOrderStrings.getString(.map)(), for: .normal)
-            mapButton.setTitleColor(Colors.getColor(.textBlack)(), for: .normal)
-            verticalSplitterView.isHidden = false
+            locationButton.tintColor = Colors.getColor(.disableGray)()
+            locationButton.isUserInteractionEnabled = false
             indicatorView.backgroundColor = Colors.getColor(.disableGray)()
             textField.placeholder = TaxiOrderStrings.getString(.destinationPlaceholder)()
         }
@@ -113,7 +139,9 @@ class CustomTextView: UIView {
     
     // MARK: - actions
     @IBAction func tapLocationButton(_ sender: Any) {
-        customTextViewDelegate?.locationButtonTapped()
+        if let type = textViewType {
+            customTextViewDelegate?.locationButtonTapped(senderType: type)
+        }
     }
     
     @IBAction func tapMapButton(_ sender: Any) {
@@ -124,19 +152,14 @@ class CustomTextView: UIView {
 // MARK: - Extensions
 extension CustomTextView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        switch textViewType {
-        case .toAddress:
-            if let text = textField.text {
-                isDestinationAddressAvailable = text.count > 0 ? true : false
-            }
-        default:
-            break
+        if let text = textField.text {
+            isTextFieldEnable = text.count > 0 ? true : false
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textViewType {
-        case .toAddress:
+        case .destinationAddress:
             customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
         default:
             break
@@ -145,7 +168,7 @@ extension CustomTextView: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textViewType {
-        case .toAddress:
+        case .destinationAddress:
             customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
         default:
             break

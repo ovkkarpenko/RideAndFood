@@ -361,19 +361,37 @@ class MapViewController: UIViewController {
 }
 
 extension MapViewController: OrderViewDelegate {
+    func locationButtonTapped(senderType: TextViewType) {
+        switch senderType {
+        case .currentAddress:
+            addNewOrderView(newSubview: OrderViewDirector(type: .currentAddressDetail))
+        case .destinationAddress:
+            addNewOrderView(newSubview: OrderViewDirector(type: .destinationAddressDetail))
+        default:
+            break
+        }
+    }
+    
     func buttonTapped(newSubview: OrderViewDirector?) {
+        if let newSubview = newSubview {
+            addNewOrderView(newSubview: newSubview)
+        }
+    }
+    
+    private func addNewOrderView(newSubview: OrderViewDirector) {
         dismissKeyboard()
         
-        if let newSubview = newSubview {
-            addressInputView.isHidden = true
-            self.view.addSubview(newSubview)
-            newSubview.translatesAutoresizingMaskIntoConstraints = false
-            
-            (NSLayoutConstraint.activate([newSubview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                          newSubview.trailingAnchor.constraint(equalTo: view.trailingAnchor), newSubview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom), newSubview.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)]))
-            
-            newSubview.show()
+        if let currentView = view.subviews.last as? OrderViewDirector {
+            currentView.isHidden = true
         }
+        
+        self.view.addSubview(newSubview)
+        newSubview.translatesAutoresizingMaskIntoConstraints = false
+        
+        (NSLayoutConstraint.activate([newSubview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                      newSubview.trailingAnchor.constraint(equalTo: view.trailingAnchor), newSubview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom), newSubview.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)]))
+        
+        newSubview.show()
     }
     
     func shouldShowTranspatentView() {
