@@ -103,6 +103,10 @@ class AddressesViewController: UIViewController {
     func setupTableView() {
         tableView.register(AddressTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
+        tableView
+            .rx.setDelegate(self)
+            .disposed(by: bag)
+        
         tableView.rx
             .modelSelected(Address.self)
             .subscribe(onNext: { [weak self] address in
@@ -131,5 +135,12 @@ class AddressesViewController: UIViewController {
     @objc private func showAddAddresController() {
         let vc = AddAddresViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension AddressesViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
     }
 }
