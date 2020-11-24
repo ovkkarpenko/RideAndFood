@@ -326,6 +326,7 @@ class MapViewController: UIViewController {
     
     @objc private func foodButtonPressed() {
         let foodView = FoodView()
+        foodView.currentUserAddress = cardView.address
         foodView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(foodView)

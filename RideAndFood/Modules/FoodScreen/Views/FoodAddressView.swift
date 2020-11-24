@@ -21,7 +21,7 @@ class FoodAddressView: UIView {
         return imageView
     }()
     
-    private lazy var addressTextField: UITextField = {
+    lazy var addressTextField: UITextField = {
         let textField = MaskTextField()
         textField.keyboardType = .default
         textField.placeholder = FoodSelectAddressStrings.addressTextField.text()
@@ -41,7 +41,13 @@ class FoodAddressView: UIView {
         button.setTitle(AddAddressesStrings.mapButton.text(), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12)
         button.setTitleColor(ColorHelper.primaryText.color(), for: .normal)
-        button.addTarget(self, action: #selector(showMapButtonPressed), for: .touchUpInside)
+        
+        button.rx.tap
+            .subscribe(onNext: { _ in
+                
+                self.delegate?.shopMap()
+            }).disposed(by: bag)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         
         let image = UIImage(named: "rightArrow", in: Bundle.init(path: "Images/Icons"), with: .none)
@@ -65,7 +71,16 @@ class FoodAddressView: UIView {
     
     private lazy var confirmButton: UIButton = {
         let button = PrimaryButton(title: PaymentStrings.confirmButtonTitle.text())
-        //        button.addTarget(self, action: #selector(showAddAddresController), for: .touchUpInside)
+        
+        button.rx.tap
+            .subscribe(onNext: { _ in
+                
+                if let address = self.addressTextField.text,
+                   !address.isEmpty {
+                    self.delegate?.showShop(address: Address(address: address))
+                }
+            }).disposed(by: bag)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -142,9 +157,5 @@ class FoodAddressView: UIView {
             .disposed(by: bag)
         
         viewModel.fetchItems()
-    }
-    
-    @objc private func showMapButtonPressed() {
-        
     }
 }

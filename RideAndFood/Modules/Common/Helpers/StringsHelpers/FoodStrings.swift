@@ -10,6 +10,7 @@ import Foundation
 
 enum FoodSelectAddressStrings {
     case addressTextField
+    case backButton
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -24,6 +25,8 @@ enum FoodSelectAddressStrings {
         switch self {
         case .addressTextField:
             return "Введите адрес доставки"
+        case .backButton:
+            return "Назад"
         }
     }
     
@@ -31,6 +34,8 @@ enum FoodSelectAddressStrings {
         switch self {
         case .addressTextField:
             return "Enter delivery address"
+        case .backButton:
+            return "Back"
         }
     }
 }

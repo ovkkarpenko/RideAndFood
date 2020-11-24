@@ -8,9 +8,12 @@
 
 import UIKit
 import RxSwift
+import NVActivityIndicatorView
 
 class ShopProductsView: UIView {
     
+    var shopId: Int?
+    var categoryIds: [Int] = []
     var delegate: FoodViewDelegate?
     
     private lazy var backButton: UIButton = {
@@ -43,6 +46,21 @@ class ShopProductsView: UIView {
         return label
     }()
     
+    private lazy var breadcrumbsCollectionView: UICollectionView = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.itemSize = CGSize(width: 152, height: 35)
+        layout.scrollDirection = .horizontal
+        
+        let collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(ProductBreadcrumbCollectionViewCell.self, forCellWithReuseIdentifier: ProductBreadcrumbCollectionViewCell.cellIdentifier)
+        return collectionView
+    }()
+    
     private lazy var productsCollectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -53,6 +71,12 @@ class ShopProductsView: UIView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(ShopProductCollectionViewCell.self, forCellWithReuseIdentifier: ShopProductCollectionViewCell.cellIdentifier)
         return collectionView
+    }()
+    
+    private lazy var loaderView: NVActivityIndicatorView = {
+        let view = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40), type: .ballPulse, color: ColorHelper.controlBackground.color())
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private lazy var bottomLines: [CALayer] = [CALayer(), CALayer()]
@@ -80,13 +104,16 @@ class ShopProductsView: UIView {
     private let padding: CGFloat = 20
     
     private let bag = DisposeBag()
-    private let viewModel = ShopProductViewModel()
+    private let productsViewModel = ShopProductViewModel()
+    private let productBreadcrumbViewModel = ProductBreadcrumbViewModel()
     
     func setupLayout() {
         addSubview(backButton)
         addSubview(categoryLabel)
         addSubview(subCategoryLabel)
+        addSubview(breadcrumbsCollectionView)
         addSubview(productsCollectionView)
+        addSubview(loaderView)
         
         bottomLines.forEach { layer.addSublayer($0) }
         
@@ -100,10 +127,18 @@ class ShopProductsView: UIView {
             categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             categoryLabel.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: padding),
             
+            breadcrumbsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            breadcrumbsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            breadcrumbsCollectionView.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: padding+5),
+            breadcrumbsCollectionView.heightAnchor.constraint(equalToConstant: 40),
+            
             productsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             productsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            productsCollectionView.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: padding+70),
+            productsCollectionView.topAnchor.constraint(equalTo: breadcrumbsCollectionView.bottomAnchor, constant: padding),
             productsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            loaderView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            loaderView.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
         
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor
@@ -114,20 +149,69 @@ class ShopProductsView: UIView {
     }
     
     func setupCollectionView() {
-        productsCollectionView.rx
-            .modelSelected(FoodShop.self)
-            .subscribe(onNext: { item in
+        //        productsCollectionView.rx
+        //            .modelSelected(FoodShop.self)
+        //            .subscribe(onNext: { [weak self] item in
+        //
+        //                                self?.delegate?.showShopCategory(shop: item)
+        //            }).disposed(by: bag)
+        
+        breadcrumbsCollectionView.rx
+            .modelSelected(ShopProduct.self)
+            .subscribe(onNext: { [weak self] item in
                 
-                //                self?.delegate?.showShopCategory(shop: item)
+                if let shopId = self?.shopId {
+                    guard let self = self else { return }
+                    
+                    var categoryId: Int?
+                    
+                    if item.isBackButton && self.categoryIds.count > 1 {
+                        _ = self.categoryIds.popLast()
+                        categoryId = self.categoryIds.count == 1 ? nil : self.categoryIds.last
+                    } else if !item.isBackButton {
+                        categoryId = self.categoryIds.last
+                        self.categoryIds.append(item.id)
+                    }
+                    
+                    self.productBreadcrumbViewModel.fetchItems(
+                        shopId: shopId,
+                        subCategoryId: self.categoryIds.count == 1 ? self.categoryIds[0] : item.id,
+                        prevCategoryId: categoryId)
+                    
+                    self.toggleLoader(hide: false)
+                    self.productsViewModel.fetchItems(
+                        shopId: shopId,
+                        subCategoryId: self.categoryIds.count == 1
+                            ? self.categoryIds[0]
+                            : item.id) {
+                        
+                        self.toggleLoader(hide: true)
+                    }
+                }
             }).disposed(by: bag)
         
-        viewModel.itemsPublishSubject
-            .bind(to: productsCollectionView.rx.items(dataSource: viewModel.dataSource(cellIdentifier: ShopProductCollectionViewCell.cellIdentifier)))
+        productsViewModel.itemsPublishSubject
+            .bind(to: productsCollectionView.rx.items(dataSource: productsViewModel.dataSource(cellIdentifier: ShopProductCollectionViewCell.cellIdentifier)))
+            .disposed(by: bag)
+        
+        productBreadcrumbViewModel.itemsPublishSubject
+            .bind(to: breadcrumbsCollectionView.rx.items(dataSource: productBreadcrumbViewModel.dataSource(cellIdentifier: ProductBreadcrumbCollectionViewCell.cellIdentifier)))
             .disposed(by: bag)
     }
     
+    func toggleLoader(hide: Bool) {
+        if hide {
+            loaderView.stopAnimating()
+            productsCollectionView.isHidden = false
+        } else {
+            loaderView.startAnimating()
+            productsCollectionView.isHidden = true
+        }
+    }
+    
     func loadProducts(shopId: Int, subCategoryId: Int) {
-        viewModel.fetchItems(shopId: shopId, subCategoryId: subCategoryId)
+        productsViewModel.fetchItems(shopId: shopId, subCategoryId: subCategoryId)
+        productBreadcrumbViewModel.fetchItems(shopId: shopId, subCategoryId: subCategoryId, prevCategoryId: nil)
     }
     
     func setupLines() {

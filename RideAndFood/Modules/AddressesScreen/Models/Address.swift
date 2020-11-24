@@ -37,6 +37,10 @@ struct Address {
 
 extension Address: Codable {
     
+    init(address: String) {
+        self.address = address
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
