@@ -9,6 +9,8 @@
 import Foundation
 
 enum TextViewType {
-    case fromAddress
-    case toAddress
+    case currentAddress
+    case destinationAddress
+    case defaultOrange
+    case defaultBlue
 }

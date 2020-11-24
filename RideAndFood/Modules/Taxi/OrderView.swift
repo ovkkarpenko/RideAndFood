@@ -43,8 +43,29 @@ class OrderView: UIView {
     
     var currentAddress: String? {
         willSet {
-            if  let textViewType = firstTextView.textViewType, textViewType == .fromAddress {
+            if  let textViewType = firstTextView.textViewType, textViewType == .currentAddress {
                 firstTextView.textField.text = newValue
+                firstTextView.textField.becomeFirstResponder()
+            }
+        }
+    }
+    
+    private var isFirstTextFieldFilled = false {
+        didSet {
+            if secondTextView.isHidden {
+                button.isEnabled = isFirstTextFieldFilled
+            } else {
+                button.isEnabled = isFirstTextFieldFilled && isSecondTextFieldFilled ? true : false
+            }
+            
+        }
+    }
+    private var isSecondTextFieldFilled = false {
+        didSet {
+            if firstTextView.isHidden {
+                button.isEnabled = isSecondTextFieldFilled
+            } else {
+                button.isEnabled = isSecondTextFieldFilled && isFirstTextFieldFilled ? true : false
             }
         }
     }
@@ -102,7 +123,7 @@ class OrderView: UIView {
     }
     
     private func runAdditionalViewContainerTransitionAnimation(state: Bool) {
-        UIView.transition(with: additionalViewContainer, duration: 0.3, options: .curveLinear) { [weak self] in
+        UIView.transition(with: additionalViewContainer, duration: generalAnimationDuration, options: .curveLinear) { [weak self] in
             guard let self = self else { return }
             self.additionalViewContainer.isHidden = state
         }
@@ -175,6 +196,7 @@ class OrderView: UIView {
     
     func designGeneralViewElements() {
         button.customizeButton(type: .blueButton)
+        button.isEnabled = false
         customizeTapIndicator()
         customizePanelView()
         setGestureRecognizers()
@@ -222,6 +244,17 @@ class OrderView: UIView {
 
 // MARK: - Extensions
 extension OrderView: CustomTextViewDelegate {
+    func isTextFieldFilled(state: Bool, senderType: TextViewType) {
+        switch senderType {
+        case .currentAddress:
+            isFirstTextFieldFilled = state
+        case .destinationAddress:
+            isSecondTextFieldFilled = state
+        default:
+            button.isEnabled = state
+        }
+    }
+    
     func isDestinationAddressSelected(state: Bool) {
         if savedAddresses != nil, savedAddresses!.count != 0 {
             customizeAdditionalViewContainer()
@@ -234,14 +267,13 @@ extension OrderView: CustomTextViewDelegate {
         print("map Button Tapped")
     }
     
-    func locationButtonTapped() {
-        print("location Button Tapped")
+    func locationButtonTapped(senderType: TextViewType) {
+        delegate?.locationButtonTapped(senderType: senderType)
     }
 }
 
 extension OrderView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(savedAddresses?[0].address)
         return savedAddresses == nil ? 0 : savedAddresses!.count
     }
     

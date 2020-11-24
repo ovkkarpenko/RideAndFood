@@ -14,7 +14,7 @@
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="Cwx-BF-0cY"/>
                 <outlet property="indicatorView" destination="k5L-is-MZf" id="mNb-i1-nAL"/>
-                <outlet property="locationImage" destination="qPN-8j-Ydn" id="Lgc-qG-ycs"/>
+                <outlet property="locationButton" destination="qPN-8j-Ydn" id="Lgc-qG-ycs"/>
                 <outlet property="mapButton" destination="7dV-ye-QeM" id="9SC-GK-BEX"/>
                 <outlet property="textField" destination="JEF-pb-XWE" id="VQr-93-sXn"/>
                 <outlet property="verticalSplitterView" destination="1ox-ig-4Qy" id="Eha-cm-VIm"/>
@@ -31,7 +31,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7hR-zq-sRP">
                             <rect key="frame" x="0.0" y="0.0" width="325" height="34"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPN-8j-Ydn">
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPN-8j-Ydn">
                                     <rect key="frame" x="0.0" y="7.5" width="12" height="19"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="12" id="Go4-DW-AK0"/>
@@ -43,7 +43,7 @@
                                     </connections>
                                 </button>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JEF-pb-XWE">
-                                    <rect key="frame" x="22" y="0.0" width="232" height="34"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="325" height="34"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="34" id="CMG-zi-vET"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="250" id="y5J-SU-buL"/>
@@ -54,16 +54,16 @@
                                         <outlet property="delegate" destination="-1" id="f5S-wX-0Iv"/>
                                     </connections>
                                 </textField>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ox-ig-4Qy">
-                                    <rect key="frame" x="264" y="3.5" width="1" height="27"/>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ox-ig-4Qy">
+                                    <rect key="frame" x="0.0" y="3.5" width="1" height="27"/>
                                     <color key="backgroundColor" name="DisabledButton"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="27" id="4kI-4A-4q1"/>
                                         <constraint firstAttribute="width" constant="1" id="RhP-2k-pab"/>
                                     </constraints>
                                 </view>
-                                <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dV-ye-QeM">
-                                    <rect key="frame" x="275" y="12" width="50" height="10"/>
+                                <button hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dV-ye-QeM">
+                                    <rect key="frame" x="0.0" y="12" width="50" height="10"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="Bt2-ea-fs1"/>
                                         <constraint firstAttribute="width" constant="50" id="V3X-SG-GjF"/>
@@ -87,8 +87,8 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="k5L-is-MZf" secondAttribute="trailing" id="4M5-VS-Ipg"/>
                         <constraint firstAttribute="trailing" secondItem="7hR-zq-sRP" secondAttribute="trailing" id="8s0-y6-YwO"/>
-                        <constraint firstItem="k5L-is-MZf" firstAttribute="leading" secondItem="pZ1-DD-mTV" secondAttribute="leading" constant="15" id="9sH-SH-UQB"/>
                         <constraint firstItem="7hR-zq-sRP" firstAttribute="leading" secondItem="pZ1-DD-mTV" secondAttribute="leading" id="djV-Di-IPX"/>
+                        <constraint firstItem="k5L-is-MZf" firstAttribute="leading" secondItem="qPN-8j-Ydn" secondAttribute="leading" constant="15" id="wXk-6r-QTo"/>
                     </constraints>
                 </stackView>
             </subviews>
