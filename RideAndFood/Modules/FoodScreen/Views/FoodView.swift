@@ -322,6 +322,9 @@ extension FoodView: FoodViewDelegate {
         
         if let shopId = shopId,
            let subCategory = subCategory {
+            shopProductsView.shopId = shopId
+            shopProductsView.categoryIds.removeAll()
+            shopProductsView.categoryIds.append(subCategory.id)
             shopProductsView.subCategoryLabel.text = subCategory.name
             shopProductsView.loadProducts(shopId: shopId, subCategoryId: subCategory.id)
         }

@@ -6,4 +6,5 @@ target 'RideAndFood' do
     pod 'RxCocoa'
     pod 'RxDataSources'
     pod 'Kingfisher'
+    pod 'NVActivityIndicatorView'
 end
