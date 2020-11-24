@@ -25,7 +25,7 @@ class AddressViewModel {
         self.type = type
     }
     
-    func fetchItems(_ completion: (() -> ())? = nil) {
+    func fetchItems(_ completion: ((_ addresses: [Address]) -> ())? = nil) {
         
         ServerApi.shared.getAddresses{ [weak self] addresses, _ in
             
@@ -33,7 +33,7 @@ class AddressViewModel {
                 self?.addressesPublishSubject.onNext([SectionModel(model: "", items: addresses)])
                 
                 DispatchQueue.main.async {
-                    completion?()
+                    completion?(addresses)
                 }
             }
         }

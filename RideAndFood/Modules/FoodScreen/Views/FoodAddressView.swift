@@ -64,6 +64,7 @@ class FoodAddressView: UIView {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+//        tableView.isHidden = true
         tableView.tableFooterView = UIView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -105,6 +106,8 @@ class FoodAddressView: UIView {
     private let bag = DisposeBag()
     private let viewModel = AddressViewModel(type: .selectAddress)
     
+    private lazy var tableViewHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: 0)
+    
     func setupLayout() {
         addSubview(addressIcon)
         addSubview(addressTextField)
@@ -129,10 +132,11 @@ class FoodAddressView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.topAnchor.constraint(equalTo: addressTextField.bottomAnchor, constant: padding),
             tableView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -padding),
+            tableViewHeightConstraint,
             
             confirmButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             confirmButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            confirmButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
+            confirmButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: -padding),
         ])
         
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor
@@ -143,6 +147,7 @@ class FoodAddressView: UIView {
     }
     
     func setupTableView() {
+        tableView.delegate = self
         tableView.register(AddressTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
         tableView.rx
@@ -156,6 +161,17 @@ class FoodAddressView: UIView {
             .bind(to: tableView.rx.items(dataSource: viewModel.dataSource(cellIdentifier: cellIdentifier)))
             .disposed(by: bag)
         
-        viewModel.fetchItems()
+        viewModel.fetchItems { [weak self] addresses in
+            if addresses.count != 0 {
+                self?.tableViewHeightConstraint.constant = 300
+            }
+        }
+    }
+}
+
+extension FoodAddressView: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
     }
 }

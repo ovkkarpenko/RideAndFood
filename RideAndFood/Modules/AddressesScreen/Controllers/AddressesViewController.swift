@@ -66,9 +66,15 @@ class AddressesViewController: UIViewController {
         setupLayout()
         setupTableView()
         
-        viewModel.fetchItems { [weak self] in
+        viewModel.fetchItems { [weak self] _ in
             self?.showAddressesTable()
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.fetchItems()
     }
     
     func setupLayout() {
