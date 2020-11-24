@@ -14,13 +14,25 @@ class ProfileTableViewDelegate: NSObject, UITableViewDelegate {
     
     private weak var viewController: ProfileViewController?
     private let phoneNumberTappedBlock: (Int) -> Void
+    private let addressesTappedBlock: () -> Void
+    private let paymentHistoryTappedBlock: () -> Void
+    private let ordersHistoryTappedBlock: () -> Void
+    private let paymentsTappedBlock: () -> Void
     
     // MARK: - Initializer
     
     init(viewController: ProfileViewController?,
-         phoneNumberTappedBlock: @escaping (Int) -> Void) {
+         phoneNumberTappedBlock: @escaping (Int) -> Void,
+         addressesTappedBlock: @escaping () -> Void,
+         paymentHistoryTappedBlock: @escaping () -> Void,
+         ordersHistoryTappedBlock: @escaping () -> Void,
+         paymentsTappedBlock: @escaping () -> Void) {
         self.viewController = viewController
         self.phoneNumberTappedBlock = phoneNumberTappedBlock
+        self.addressesTappedBlock = addressesTappedBlock
+        self.paymentHistoryTappedBlock = paymentHistoryTappedBlock
+        self.ordersHistoryTappedBlock = ordersHistoryTappedBlock
+        self.paymentsTappedBlock = paymentsTappedBlock
         super.init()
     }
     
@@ -30,6 +42,19 @@ class ProfileTableViewDelegate: NSObject, UITableViewDelegate {
         switch indexPath.section {
         case 0:
             phoneNumberTappedBlock(indexPath.row)
+        case 1:
+            addressesTappedBlock()
+        case 2:
+            switch indexPath.item {
+            case 0:
+                paymentHistoryTappedBlock()
+            case 1:
+                ordersHistoryTappedBlock()
+            case 2:
+                paymentsTappedBlock()
+            default:
+                break
+            }
         default:
             break
         }
