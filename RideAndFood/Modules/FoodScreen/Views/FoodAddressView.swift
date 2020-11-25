@@ -106,7 +106,7 @@ class FoodAddressView: UIView {
     private let bag = DisposeBag()
     private let viewModel = AddressViewModel(type: .selectAddress)
     
-    private lazy var tableViewHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: 0)
+    lazy var tableViewHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: 165)
     
     func setupLayout() {
         addSubview(addressIcon)
@@ -162,8 +162,8 @@ class FoodAddressView: UIView {
             .disposed(by: bag)
         
         viewModel.fetchItems { [weak self] addresses in
-            if addresses.count != 0 {
-                self?.tableViewHeightConstraint.constant = 300
+            if addresses.count == 0 {
+                self?.tableViewHeightConstraint.constant = 0
             }
         }
     }
