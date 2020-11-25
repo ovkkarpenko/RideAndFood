@@ -12,10 +12,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderView" customModule="RideAndFood" customModuleProvider="target">
             <connections>
                 <outlet property="additionalViewContainer" destination="sUB-Tt-TNM" id="LYa-fX-lS8"/>
+                <outlet property="addressLabel" destination="38j-2M-3j5" id="Lkc-b7-iJU"/>
+                <outlet property="addressLabelPanelView" destination="HHq-e4-aGS" id="TCD-mt-4Hb"/>
                 <outlet property="backView" destination="BPW-pZ-GqF" id="U45-36-L5s"/>
                 <outlet property="button" destination="Nvu-Al-799" id="Aqg-oC-d2e"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="UlC-TU-6AU"/>
                 <outlet property="firstTextView" destination="y1d-YQ-NdU" id="UYR-iB-o3d"/>
+                <outlet property="labelImage" destination="h3Z-Jc-3vR" id="Ou3-bM-ylY"/>
                 <outlet property="panelView" destination="PS2-VA-Nc2" id="XkM-I4-37G"/>
                 <outlet property="secondTextView" destination="OJ3-TE-0DG" id="VJa-rA-pcB"/>
                 <outlet property="tapIndicator" destination="xaI-Ee-KsP" id="F5z-Fj-75J"/>
@@ -43,6 +46,35 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="QEk-ka-cB8">
                                     <rect key="frame" x="0.0" y="15" width="375" height="527"/>
                                     <subviews>
+                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HHq-e4-aGS">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3Z-Jc-3vR">
+                                                    <rect key="frame" x="167.5" y="12" width="12" height="19"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="19" id="V0u-EC-9XS"/>
+                                                        <constraint firstAttribute="width" constant="12" id="efB-5N-SQA"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Mark"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38j-2M-3j5">
+                                                    <rect key="frame" x="187.5" y="21.5" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="38j-2M-3j5" firstAttribute="centerY" secondItem="HHq-e4-aGS" secondAttribute="centerY" id="HSc-r5-1X6"/>
+                                                <constraint firstItem="h3Z-Jc-3vR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HHq-e4-aGS" secondAttribute="leading" constant="25" id="I3i-F0-iGZ"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="38j-2M-3j5" secondAttribute="trailing" constant="25" id="MVP-NG-ep6"/>
+                                                <constraint firstItem="38j-2M-3j5" firstAttribute="centerX" secondItem="HHq-e4-aGS" secondAttribute="centerX" id="W44-4r-bH5"/>
+                                                <constraint firstAttribute="height" constant="43" id="bSB-Az-Gbr"/>
+                                                <constraint firstItem="h3Z-Jc-3vR" firstAttribute="centerY" secondItem="HHq-e4-aGS" secondAttribute="centerY" id="ktH-u4-7v4"/>
+                                                <constraint firstItem="38j-2M-3j5" firstAttribute="leading" secondItem="h3Z-Jc-3vR" secondAttribute="trailing" constant="8" id="tvh-5I-A1i"/>
+                                            </constraints>
+                                        </view>
                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1d-YQ-NdU" customClass="CustomTextView" customModule="RideAndFood" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <color key="backgroundColor" systemColor="systemRedColor"/>
@@ -69,9 +101,11 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="sUB-Tt-TNM" secondAttribute="trailing" id="3cg-Z6-gpq"/>
                                         <constraint firstItem="sUB-Tt-TNM" firstAttribute="leading" secondItem="QEk-ka-cB8" secondAttribute="leading" id="8W2-AX-UQb"/>
+                                        <constraint firstItem="HHq-e4-aGS" firstAttribute="leading" secondItem="QEk-ka-cB8" secondAttribute="leading" id="Brg-OB-qOz"/>
                                         <constraint firstAttribute="trailing" secondItem="y1d-YQ-NdU" secondAttribute="trailing" id="VtJ-PF-iiq"/>
                                         <constraint firstAttribute="trailing" secondItem="OJ3-TE-0DG" secondAttribute="trailing" id="dMC-fi-XbO"/>
                                         <constraint firstItem="y1d-YQ-NdU" firstAttribute="leading" secondItem="QEk-ka-cB8" secondAttribute="leading" id="hkI-JK-Hha"/>
+                                        <constraint firstAttribute="trailing" secondItem="HHq-e4-aGS" secondAttribute="trailing" id="sbb-cw-mT4"/>
                                         <constraint firstItem="OJ3-TE-0DG" firstAttribute="leading" secondItem="QEk-ka-cB8" secondAttribute="leading" id="xZl-cb-D04"/>
                                     </constraints>
                                 </stackView>
@@ -118,6 +152,7 @@
         </view>
     </objects>
     <resources>
+        <image name="Mark" width="31" height="47.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
