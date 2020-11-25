@@ -14,6 +14,7 @@ class SideMenuView: UIView {
     
     var viewController: UIViewController?
     var hideSideMenuCallback: (() -> ())?
+    var currentLanguage = UserConfig.shared.settings.language
     
     // MARK: - UI
     
@@ -58,7 +59,7 @@ class SideMenuView: UIView {
         tableView.rx.setDelegate(self).disposed(by: bag)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
-        viewModel.items
+        viewModel.itemsPublishSubject
             .bind(to: tableView.rx.items(dataSource: viewModel.dataSource(cellIdentifier: cellIdentifier)))
             .disposed(by: bag)
         
@@ -72,6 +73,8 @@ class SideMenuView: UIView {
                     vc.performSegue(withIdentifier: segue, sender: nil)
                 }
             }).disposed(by: bag)
+        
+        viewModel.fetchItems()
         
         return tableView
     }()
@@ -131,6 +134,14 @@ class SideMenuView: UIView {
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor
         layer.shadowOpacity = 0.4
         layer.shadowRadius = 10
+    }
+    
+    func updateTexts() {
+        currentLanguage = UserConfig.shared.settings.language
+        
+        titleLabel.text = SideMenuStrings.title.text()
+        aboutLabel.text = SideMenuStrings.about("1").text()
+        viewModel.fetchItems()
     }
     
     @objc private func closeButtonPressed() {
