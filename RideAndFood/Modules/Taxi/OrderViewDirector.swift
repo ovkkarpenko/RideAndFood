@@ -18,6 +18,7 @@ class OrderViewDirector: OrderView {
         switch type {
         case .addressInput:
             setupAddressInputView()
+            getSavedAddresses()
         case .currentAddressDetail:
             setupCurrentAddressDetail()
         case .destinationAddressDetail:
@@ -48,6 +49,8 @@ class OrderViewDirector: OrderView {
 //            view.setCurrentAddress(address: self.currentAddress)
             return view
         }
+        
+        firstTextView.textField.becomeFirstResponder()
     }
     
     private func setupCurrentAddressDetail() {
@@ -55,8 +58,17 @@ class OrderViewDirector: OrderView {
         firstTextView.setTextViewType(.defaultBlue)
         firstTextView.textField.placeholder = TaxiOrderStrings.getString(.currentAddressDetailPlaceholder)()
         firstTextView.customTextViewDelegate = self
+        
+        addressLabelPanelView.isHidden = false
+        labelImage.tintColor = Colors.getColor(.buttonBlue)()
+        addressLabel.text = currentAddress
 
         button.setTitle(TaxiOrderStrings.getString(.confirm)(), for: .normal)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { [weak self] in
+            guard let self = self else { return }
+            self.firstTextView.textField.becomeFirstResponder()
+        }
     }
     
     private func setupDestinationAddressDetail() {
@@ -64,8 +76,17 @@ class OrderViewDirector: OrderView {
         firstTextView.setTextViewType(.defaultOrange)
         firstTextView.textField.placeholder = TaxiOrderStrings.getString(.destinationAddressDetailPlaceholder)()
         firstTextView.customTextViewDelegate = self
+        
+        addressLabelPanelView.isHidden = false
+        labelImage.tintColor = Colors.getColor(.locationOrange)()
+        addressLabel.text = currentAddress
 
         button.setTitle(TaxiOrderStrings.getString(.confirm)(), for: .normal)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) { [weak self] in
+            guard let self = self else { return }
+            self.firstTextView.textField.becomeFirstResponder()
+        }
     }
     
     private func setupOrderPriceView() {

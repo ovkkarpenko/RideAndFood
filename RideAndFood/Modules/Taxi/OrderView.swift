@@ -27,12 +27,15 @@ class OrderView: UIView {
     @IBOutlet weak var button: CustomButton!
     @IBOutlet weak var tapIndicator: UIView!
     @IBOutlet weak var panelView: UIView!
+    @IBOutlet weak var addressLabelPanelView: UIView!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var labelImage: UIButton!
     
     static let ORDER_VIEW = "OrderView"
     
     weak var delegate: OrderViewDelegate?
     
-    private lazy var backViewBottomConstraintWithKeyboard = backView.bottomAnchor.constraint(equalTo: bottomAnchor)
+    private lazy var backViewBottomConstraintWithKeyboard = backView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
     
     lazy var tableView: UITableView = {
         UITableView()
@@ -45,8 +48,12 @@ class OrderView: UIView {
         willSet {
             if  let textViewType = firstTextView.textViewType, textViewType == .currentAddress {
                 firstTextView.textField.text = newValue
-                firstTextView.textField.becomeFirstResponder()
             }
+            
+            if !addressLabelPanelView.isHidden {
+                addressLabel.text = newValue
+            }
+            
         }
     }
     
@@ -88,7 +95,6 @@ class OrderView: UIView {
         
         setKeyboardObserver()
         designGeneralViewElements()
-        getSavedAddresses()
     }
     
     deinit {
@@ -137,7 +143,7 @@ class OrderView: UIView {
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
-    private func getSavedAddresses() {
+    func getSavedAddresses() {
         let request = RequestModel<AddressModel>(path: addressPath, method: .get)
         let networker = Networker()
         
@@ -169,7 +175,7 @@ class OrderView: UIView {
     
         delegate?.shouldShowTranspatentView()
         tapIndicator.backgroundColor = Colors.getColor(.tapIndicatorOnDark)()
-        backViewBottomConstraintWithKeyboard.constant = -keyboardSize.height - safeAreaInsets.bottom
+        backViewBottomConstraintWithKeyboard.constant = -keyboardSize.height
         backViewBottomConstraintWithKeyboard.isActive = true
         
         UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
@@ -213,12 +219,6 @@ class OrderView: UIView {
         tableView.leadingAnchor.constraint(equalTo: additionalViewContainer.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: additionalViewContainer.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: additionalViewContainer.bottomAnchor).isActive = true
-    }
-    
-    func setCurrentAddress(address: String?) {
-        if let address = address {
-            self.currentAddress = address
-        }
     }
     
     func show() {

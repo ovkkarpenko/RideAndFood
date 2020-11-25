@@ -95,6 +95,7 @@ class MapViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = Colors.getColor(.tapIndicatorGray)()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
         return view
     }()
     
@@ -301,7 +302,7 @@ class MapViewController: UIViewController {
         addressInputView.show()
     }
     
-    private func dismissKeyboard() {
+    @objc private func dismissKeyboard() {
         if self.view.endEditing(false) {
             self.view.endEditing(true)
         }
@@ -370,9 +371,14 @@ extension MapViewController: OrderViewDelegate {
     func locationButtonTapped(senderType: TextViewType) {
         switch senderType {
         case .currentAddress:
-            addNewOrderView(newSubview: OrderViewDirector(type: .currentAddressDetail))
+            let currentAddressDetailView = OrderViewDirector(type: .currentAddressDetail)
+            currentAddressDetailView.currentAddress = cuurentPlacemark?.name
+            addNewOrderView(newSubview: currentAddressDetailView)
         case .destinationAddress:
-            addNewOrderView(newSubview: OrderViewDirector(type: .destinationAddressDetail))
+            let destinationAddressDetailView = OrderViewDirector(type: .destinationAddressDetail)
+            destinationAddressDetailView.currentAddress = cuurentPlacemark?.name
+            addNewOrderView(newSubview: destinationAddressDetailView)
+            
         default:
             break
         }

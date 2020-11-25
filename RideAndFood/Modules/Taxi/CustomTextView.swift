@@ -124,7 +124,6 @@ class CustomTextView: UIView {
         verticalSplitterView.isHidden = false
         locationButton.isHidden = false
         
-        
         if isTextFieldEnable {
             locationButton.tintColor = Colors.getColor(.locationOrange)()
             locationButton.isUserInteractionEnabled = true
@@ -158,15 +157,6 @@ extension CustomTextView: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        switch textViewType {
-        case .destinationAddress:
-            customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
-        default:
-            break
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
         switch textViewType {
         case .destinationAddress:
             customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
