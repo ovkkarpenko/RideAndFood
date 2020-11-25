@@ -54,7 +54,6 @@ class ShopCategoryView: UIView {
     
     private lazy var categoriesCollectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: 158, height: 120)
         
         let collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)

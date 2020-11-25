@@ -46,9 +46,8 @@ class ShopProductsView: UIView {
         return label
     }()
     
-    private lazy var breadcrumbsCollectionView: UICollectionView = {
+    lazy var breadcrumbsCollectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: 152, height: 35)
         layout.scrollDirection = .horizontal
         
@@ -57,13 +56,13 @@ class ShopProductsView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.clipsToBounds = false
         collectionView.register(ProductBreadcrumbCollectionViewCell.self, forCellWithReuseIdentifier: ProductBreadcrumbCollectionViewCell.cellIdentifier)
         return collectionView
     }()
     
     private lazy var productsCollectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: 158, height: 235)
         
         let collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
