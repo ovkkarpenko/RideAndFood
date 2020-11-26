@@ -9,15 +9,6 @@
 import UIKit
 import MapKit
 
-enum OrderViewType {
-    case addressInput
-    case currentAddressDetail
-    case destinationAddressDetail
-    case orderPrice
-    case confirmationCode
-    case destinationAddressFromMap
-}
-
 class OrderView: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var backView: UIView!
@@ -30,6 +21,7 @@ class OrderView: UIView {
     @IBOutlet weak var addressLabelPanelView: UIView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var labelImage: UIButton!
+    @IBOutlet weak var strokeImage: UIImageView!
     
     static let ORDER_VIEW = "OrderView"
     
@@ -42,18 +34,22 @@ class OrderView: UIView {
     }()
     
     private var savedAddresses: [AddressModel]?
-    var buttonAction: (()->OrderViewDirector)?
+//    var buttonAction: (()->(OrderViewType))?
+    var orderViewType: OrderViewType?
     
     var currentAddress: String? {
         willSet {
-            if  let textViewType = firstTextView.textViewType, textViewType == .currentAddress {
+            if firstTextView.isAddressListener {
                 firstTextView.textField.text = newValue
+            }
+            
+            if secondTextView.isAddressListener {
+                secondTextView.textField.text = newValue
             }
             
             if !addressLabelPanelView.isHidden {
                 addressLabel.text = newValue
             }
-            
         }
     }
     
@@ -63,6 +59,7 @@ class OrderView: UIView {
                 button.isEnabled = isFirstTextFieldFilled
             } else {
                 button.isEnabled = isFirstTextFieldFilled && isSecondTextFieldFilled ? true : false
+                strokeImage.isHidden = isFirstTextFieldFilled && isSecondTextFieldFilled ? false : true
             }
             
         }
@@ -73,6 +70,7 @@ class OrderView: UIView {
                 button.isEnabled = isSecondTextFieldFilled
             } else {
                 button.isEnabled = isSecondTextFieldFilled && isFirstTextFieldFilled ? true : false
+                strokeImage.isHidden = isSecondTextFieldFilled && isFirstTextFieldFilled ? false : true
             }
         }
     }
@@ -195,7 +193,10 @@ class OrderView: UIView {
     }
     
     @objc private func buttonTapped() {
-        delegate?.buttonTapped(newSubview: buttonAction?())
+        if let orderViewType = orderViewType {
+            delegate?.shouldRemoveTranspatentView()
+            delegate?.buttonTapped(senderType: orderViewType, addressInfo: firstTextView.textField.text)
+        }
     }
     
     // MARK: -- public methods
@@ -263,8 +264,8 @@ extension OrderView: CustomTextViewDelegate {
         }
     }
     
-    func mapButtonTapped() {
-        print("map Button Tapped")
+    func mapButtonTapped(senderType: TextViewType) {
+        delegate?.mapButtonTapped(senderType: senderType)
     }
     
     func locationButtonTapped(senderType: TextViewType) {
@@ -301,5 +302,11 @@ extension OrderView: UITableViewDataSource, UITableViewDelegate {
                 runAdditionalViewContainerTransitionAnimation(state: true)
             }
         }
+    }
+}
+
+extension OrderView: MapViewCurrentAddressDelegate {
+    func currentAddressChanged(newAddress: String?) {
+        currentAddress = newAddress
     }
 }

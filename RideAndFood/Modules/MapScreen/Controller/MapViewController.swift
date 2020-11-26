@@ -99,13 +99,12 @@ class MapViewController: UIViewController {
         return view
     }()
     
-    private var isOrderViewInitialized = false
     private lazy var addressInputView: OrderViewDirector = {
         let view = OrderViewDirector(type: .addressInput)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.currentAddress = cuurentPlacemark?.name
-        isOrderViewInitialized = true
         view.delegate = self
+        addressDelegate = view
         
         return view
     }()
@@ -125,11 +124,11 @@ class MapViewController: UIViewController {
     private var cuurentPlacemark: CLPlacemark? {
         didSet {
             cardView.address = cuurentPlacemark?.name
-            if isOrderViewInitialized {
-                addressInputView.currentAddress = cuurentPlacemark?.name
-            }
+            addressDelegate?.currentAddressChanged(newAddress: cuurentPlacemark?.name)
         }
     }
+    
+    private weak var addressDelegate: MapViewCurrentAddressDelegate?
     
     private lazy var sideMenuLeftConstraint = sideMenuView.leftAnchor.constraint(equalTo: view.leftAnchor,
                                                                                  constant: sideMenuOffset)
@@ -356,9 +355,10 @@ class MapViewController: UIViewController {
             currentView.dismiss()
             if let indexOfCurrentView = view.subviews.firstIndex(of: currentView) {
                 view.subviews[indexOfCurrentView - 1].isHidden = false
+                addressDelegate = view.subviews[indexOfCurrentView - 1] as? MapViewCurrentAddressDelegate
             }
             
-            if let type = currentView.type, type == .addressInput {
+            if let type = currentView.orderViewType, type == .addressInput {
                 backButton.removeFromSuperview()
                 menuButton.isHidden = false
                 cardView.isHidden = false
@@ -367,7 +367,16 @@ class MapViewController: UIViewController {
     }
 }
 
+// MARK: - Extensions
 extension MapViewController: OrderViewDelegate {
+    func mapButtonTapped(senderType: TextViewType) {
+        if senderType == .destinationAddress {
+            let destinationAddressFromMapView = OrderViewDirector(type: .destinationAddressFromMap)
+            destinationAddressFromMapView.currentAddress = cuurentPlacemark?.name
+            addNewOrderView(newSubview: destinationAddressFromMapView)
+        }
+    }
+    
     func locationButtonTapped(senderType: TextViewType) {
         switch senderType {
         case .currentAddress:
@@ -384,9 +393,23 @@ extension MapViewController: OrderViewDelegate {
         }
     }
     
-    func buttonTapped(newSubview: OrderViewDirector?) {
-        if let newSubview = newSubview {
-            addNewOrderView(newSubview: newSubview)
+    func buttonTapped(senderType: OrderViewType, addressInfo: String?) {
+        switch senderType {
+        case .addressInput:
+            break // describe behaviour of address input view's button
+        case .currentAddressDetail:
+            // add addressInfo to the post model
+            backButtonPressed()
+        case .destinationAddressDetail:
+            // add addressInfo to the post model
+            backButtonPressed()
+        case .orderPrice:
+            break // describe behaviour of order price view's button
+        case .confirmationCode:
+            break // describe behaviour of confirmation code view's button
+        case .destinationAddressFromMap:
+            addressInputView.secondTextView.textField.text = addressInfo
+            backButtonPressed()
         }
     }
     
@@ -399,6 +422,8 @@ extension MapViewController: OrderViewDelegate {
         
         self.view.addSubview(newSubview)
         newSubview.translatesAutoresizingMaskIntoConstraints = false
+        addressDelegate = newSubview
+        newSubview.delegate = self
         
         (NSLayoutConstraint.activate([newSubview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                       newSubview.trailingAnchor.constraint(equalTo: view.trailingAnchor), newSubview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom), newSubview.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)]))

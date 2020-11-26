@@ -11,6 +11,6 @@ import Foundation
 protocol CustomTextViewDelegate: class {
     func isTextFieldFilled(state: Bool, senderType: TextViewType)
     func isDestinationAddressSelected(state: Bool)
-    func mapButtonTapped()
+    func mapButtonTapped(senderType: TextViewType)
     func locationButtonTapped(senderType: TextViewType)
 }

@@ -9,11 +9,9 @@
 import UIKit
 
 class OrderViewDirector: OrderView {
-    var type: OrderViewType?
-    
     convenience init(type: OrderViewType) {
         self.init()
-        self.type = type
+        self.orderViewType = type
         
         switch type {
         case .addressInput:
@@ -40,15 +38,11 @@ class OrderViewDirector: OrderView {
         secondTextView.setTextViewType(.destinationAddress)
         
         firstTextView.customTextViewDelegate = self
+        firstTextView.isAddressListener = true
+        
         secondTextView.customTextViewDelegate = self
         
         button.setTitle(TaxiOrderStrings.getString(.next)(), for: .normal)
-        
-        buttonAction = {
-            let view = OrderViewDirector(type: .currentAddressDetail)
-//            view.setCurrentAddress(address: self.currentAddress)
-            return view
-        }
         
         firstTextView.textField.becomeFirstResponder()
     }
@@ -98,6 +92,16 @@ class OrderViewDirector: OrderView {
     }
     
     private func setupDestinationAddressFromMap() {
+        firstTextView.isHidden = false
+        firstTextView.setTextViewType(.defaultOrange)
+        firstTextView.locationButton.isHidden = false
+        firstTextView.customTextViewDelegate = self
+        firstTextView.locationButton.tintColor = Colors.getColor(.locationOrange)()
+        firstTextView.isAddressListener = true
+        firstTextView.locationButton.isUserInteractionEnabled = false
+        firstTextView.indicatorView.backgroundColor = Colors.getColor(.locationOrange)()
         
+        button.setTitle(TaxiOrderStrings.getString(.confirm)(), for: .normal)
+        button.isEnabled = true
     }
 }
