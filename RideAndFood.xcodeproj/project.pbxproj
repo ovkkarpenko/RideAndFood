@@ -87,6 +87,7 @@
 		72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */; };
 		72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3AD9253F58CD0042B2A0 /* LoginView.swift */; };
 		96D62A89E82A8316062BDE0E /* Pods_RideAndFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */; };
+		F707DBA0257030A0002C3F58 /* OrderViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F707DB9F257030A0002C3F58 /* OrderViewType.swift */; };
 		F73BC4F0254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */; };
 		F73BC4F4254ECE0A0018FC0A /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F3254ECE0A0018FC0A /* RequestModel.swift */; };
 		F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F7254ECF3D0018FC0A /* Networker.swift */; };
@@ -290,6 +291,7 @@
 		72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
 		72FF3AD9253F58CD0042B2A0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F707DB9F257030A0002C3F58 /* OrderViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewType.swift; sourceTree = "<group>"; };
 		F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportServiceStrings.swift; sourceTree = "<group>"; };
 		F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsOfSwiftTypes.swift; sourceTree = "<group>"; };
@@ -887,6 +889,7 @@
 				F7AECA65256C32DC00CA86AC /* CustomTextView.swift */,
 				F7AECA68256C336100CA86AC /* CustomTextViewDelegate.swift */,
 				F7AECA6B256C33B100CA86AC /* OrderView.swift */,
+				F707DB9F257030A0002C3F58 /* OrderViewType.swift */,
 				F7AECA6E256C33C700CA86AC /* OrderViewDelegate.swift */,
 				F7AECA71256C340500CA86AC /* OrderViewDirector.swift */,
 				F7AECA74256C342400CA86AC /* TaxiOrderStrings.swift */,
@@ -1487,6 +1490,7 @@
 				7238B4682562C8BB00609B92 /* ProfileService.swift in Sources */,
 				723958EE2561352800027FA8 /* PhoneTextFieldModel.swift in Sources */,
 				723230552551D94C00F238AF /* ActivatePromoCodeResult.swift in Sources */,
+				F707DBA0257030A0002C3F58 /* OrderViewType.swift in Sources */,
 				FA2C80BA254AED1200F82637 /* Promotion.swift in Sources */,
 				F73BC4FB254ECF900018FC0A /* ResponseModel.swift in Sources */,
 				F7E5E9C9254A17B40026ED71 /* SupportServiceStrings.swift in Sources */,

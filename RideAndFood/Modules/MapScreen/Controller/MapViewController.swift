@@ -358,7 +358,7 @@ class MapViewController: UIViewController {
                 addressDelegate = view.subviews[indexOfCurrentView - 1] as? MapViewCurrentAddressDelegate
             }
             
-            if let type = currentView.type, type == .addressInput {
+            if let type = currentView.orderViewType, type == .addressInput {
                 backButton.removeFromSuperview()
                 menuButton.isHidden = false
                 cardView.isHidden = false
@@ -393,9 +393,23 @@ extension MapViewController: OrderViewDelegate {
         }
     }
     
-    func buttonTapped(newSubview: OrderViewDirector?) {
-        if let newSubview = newSubview {
-            addNewOrderView(newSubview: newSubview)
+    func buttonTapped(senderType: OrderViewType, addressInfo: String?) {
+        switch senderType {
+        case .addressInput:
+            break // describe behaviour of address input view's button
+        case .currentAddressDetail:
+            // add addressInfo to the post model
+            backButtonPressed()
+        case .destinationAddressDetail:
+            // add addressInfo to the post model
+            backButtonPressed()
+        case .orderPrice:
+            break // describe behaviour of order price view's button
+        case .confirmationCode:
+            break // describe behaviour of confirmation code view's button
+        case .destinationAddressFromMap:
+            addressInputView.secondTextView.textField.text = addressInfo
+            backButtonPressed()
         }
     }
     
@@ -409,6 +423,7 @@ extension MapViewController: OrderViewDelegate {
         self.view.addSubview(newSubview)
         newSubview.translatesAutoresizingMaskIntoConstraints = false
         addressDelegate = newSubview
+        newSubview.delegate = self
         
         (NSLayoutConstraint.activate([newSubview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                                       newSubview.trailingAnchor.constraint(equalTo: view.trailingAnchor), newSubview.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom), newSubview.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: padding)]))

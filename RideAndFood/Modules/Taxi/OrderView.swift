@@ -9,15 +9,6 @@
 import UIKit
 import MapKit
 
-enum OrderViewType {
-    case addressInput
-    case currentAddressDetail
-    case destinationAddressDetail
-    case orderPrice
-    case confirmationCode
-    case destinationAddressFromMap
-}
-
 class OrderView: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var backView: UIView!
@@ -42,7 +33,8 @@ class OrderView: UIView {
     }()
     
     private var savedAddresses: [AddressModel]?
-    var buttonAction: (()->OrderViewDirector)?
+//    var buttonAction: (()->(OrderViewType))?
+    var orderViewType: OrderViewType?
     
     var currentAddress: String? {
         willSet {
@@ -198,7 +190,10 @@ class OrderView: UIView {
     }
     
     @objc private func buttonTapped() {
-        delegate?.buttonTapped(newSubview: buttonAction?())
+        if let orderViewType = orderViewType {
+            delegate?.shouldRemoveTranspatentView()
+            delegate?.buttonTapped(senderType: orderViewType, addressInfo: firstTextView.textField.text)
+        }
     }
     
     // MARK: -- public methods

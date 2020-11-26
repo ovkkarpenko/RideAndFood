@@ -9,11 +9,9 @@
 import UIKit
 
 class OrderViewDirector: OrderView {
-    var type: OrderViewType?
-    
     convenience init(type: OrderViewType) {
         self.init()
-        self.type = type
+        self.orderViewType = type
         
         switch type {
         case .addressInput:
@@ -45,12 +43,6 @@ class OrderViewDirector: OrderView {
         secondTextView.customTextViewDelegate = self
         
         button.setTitle(TaxiOrderStrings.getString(.next)(), for: .normal)
-        
-        buttonAction = {
-            let view = OrderViewDirector(type: .currentAddressDetail)
-//            view.setCurrentAddress(address: self.currentAddress)
-            return view
-        }
         
         firstTextView.textField.becomeFirstResponder()
     }
