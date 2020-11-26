@@ -161,6 +161,11 @@
 		FA6DDFEF256A5B0500244E94 /* ShopSubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6DDFEE256A5B0500244E94 /* ShopSubCategory.swift */; };
 		FA6DDFF2256A5D1700244E94 /* ShopProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6DDFF1256A5D1700244E94 /* ShopProductViewModel.swift */; };
 		FA707FA5256A60AC00D88F97 /* ShopProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA707FA4256A60AC00D88F97 /* ShopProductCollectionViewCell.swift */; };
+		FA730E44256FA2D7001F7AEB /* OrdersHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA730E43256FA2D7001F7AEB /* OrdersHistoryViewController.swift */; };
+		FA730E4B256FA594001F7AEB /* OrdersHistoryStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA730E4A256FA594001F7AEB /* OrdersHistoryStrings.swift */; };
+		FA730E4E256FAA23001F7AEB /* OrderHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA730E4D256FAA23001F7AEB /* OrderHistoryModel.swift */; };
+		FA730E52256FAB69001F7AEB /* OrdersHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA730E51256FAB69001F7AEB /* OrdersHistoryViewModel.swift */; };
+		FA730E56256FAC45001F7AEB /* OrdersHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA730E55256FAC45001F7AEB /* OrdersHistoryCollectionViewCell.swift */; };
 		FA8196AE2556A4D50053EE22 /* PaymentPointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8196AD2556A4D50053EE22 /* PaymentPointsView.swift */; };
 		FA8196B12556A7100053EE22 /* PaymentPointsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8196B02556A7100053EE22 /* PaymentPointsDetailsView.swift */; };
 		FA81AE73254B364F00B74182 /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81AE72254B364F00B74182 /* ServerConfig.swift */; };
@@ -365,6 +370,11 @@
 		FA6DDFEE256A5B0500244E94 /* ShopSubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopSubCategory.swift; sourceTree = "<group>"; };
 		FA6DDFF1256A5D1700244E94 /* ShopProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopProductViewModel.swift; sourceTree = "<group>"; };
 		FA707FA4256A60AC00D88F97 /* ShopProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA730E43256FA2D7001F7AEB /* OrdersHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersHistoryViewController.swift; sourceTree = "<group>"; };
+		FA730E4A256FA594001F7AEB /* OrdersHistoryStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersHistoryStrings.swift; sourceTree = "<group>"; };
+		FA730E4D256FAA23001F7AEB /* OrderHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryModel.swift; sourceTree = "<group>"; };
+		FA730E51256FAB69001F7AEB /* OrdersHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersHistoryViewModel.swift; sourceTree = "<group>"; };
+		FA730E55256FAC45001F7AEB /* OrdersHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersHistoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA8196AD2556A4D50053EE22 /* PaymentPointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPointsView.swift; sourceTree = "<group>"; };
 		FA8196B02556A7100053EE22 /* PaymentPointsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPointsDetailsView.swift; sourceTree = "<group>"; };
 		FA81AE72254B364F00B74182 /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
@@ -604,6 +614,7 @@
 		7286E5222542E7420027A69B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				FA730E3C256F9EA6001F7AEB /* OrdersHistoryScreen */,
 				FAD0AFF225669B1F008C2794 /* AddressesScreen */,
 				72FF3ACB253F46D60042B2A0 /* Common */,
 				FAD0AFEB25669B1A008C2794 /* FoodScreen */,
@@ -942,6 +953,7 @@
 				7286E51325423A160027A69B /* LoginStrings.swift */,
 				726353E3254F464500AF868D /* PromoCodesStrings.swift */,
 				72F467D42559C52D00F8926E /* ProfileStrings.swift */,
+				FA730E4A256FA594001F7AEB /* OrdersHistoryStrings.swift */,
 			);
 			path = StringsHelpers;
 			sourceTree = "<group>";
@@ -1001,6 +1013,57 @@
 				FA1800002569648000148FAB /* CategoryCollectionViewCell.swift */,
 				FA707FA4256A60AC00D88F97 /* ShopProductCollectionViewCell.swift */,
 				FA32C9C0256CEF8C00B64F89 /* ProductBreadcrumbCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		FA730E3C256F9EA6001F7AEB /* OrdersHistoryScreen */ = {
+			isa = PBXGroup;
+			children = (
+				FA730E42256FA2C9001F7AEB /* Controllers */,
+				FA730E3E256F9EC0001F7AEB /* ViewModels */,
+				FA730E3D256F9EBE001F7AEB /* Views */,
+				FA730E40256F9ECA001F7AEB /* Models */,
+			);
+			path = OrdersHistoryScreen;
+			sourceTree = "<group>";
+		};
+		FA730E3D256F9EBE001F7AEB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA730E54256FAC32001F7AEB /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FA730E3E256F9EC0001F7AEB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				FA730E51256FAB69001F7AEB /* OrdersHistoryViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FA730E40256F9ECA001F7AEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA730E4D256FAA23001F7AEB /* OrderHistoryModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		FA730E42256FA2C9001F7AEB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA730E43256FA2D7001F7AEB /* OrdersHistoryViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FA730E54256FAC32001F7AEB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FA730E55256FAC45001F7AEB /* OrdersHistoryCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1328,9 +1391,11 @@
 				72A1DBD62545A764005A047A /* BaseNetworkManager.swift in Sources */,
 				72E30EFB254EEFF50037E4B4 /* RoundButton.swift in Sources */,
 				72A1DBE92545BF24005A047A /* CodeConfirmationModel.swift in Sources */,
+				FA730E56256FAC45001F7AEB /* OrdersHistoryCollectionViewCell.swift in Sources */,
 				F73D1B0E25568E440001F7FC /* TariffViewController.swift in Sources */,
 				FA180004256964CD00148FAB /* ShopCategoryViewModel.swift in Sources */,
 				FA6DDFE2256A488400244E94 /* ShopDetailsView.swift in Sources */,
+				FA730E44256FA2D7001F7AEB /* OrdersHistoryViewController.swift in Sources */,
 				FAD0AFF025669B1A008C2794 /* FoodView.swift in Sources */,
 				FAD0B00325669B1F008C2794 /* AddressesViewController.swift in Sources */,
 				72E93405255F0BF700CED717 /* ProfilePhoneModel.swift in Sources */,
@@ -1456,6 +1521,7 @@
 				FAD0B00A25669B1F008C2794 /* AddressTableViewCell.swift in Sources */,
 				F73BC50B254EDB3E0018FC0A /* MediaResponseModel.swift in Sources */,
 				FA8CA7802546D531001FDE5E /* AlertTextFieldViewController.swift in Sources */,
+				FA730E4B256FA594001F7AEB /* OrdersHistoryStrings.swift in Sources */,
 				FA8CA7752546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift in Sources */,
 				FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */,
 				FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */,
@@ -1471,10 +1537,12 @@
 				FA6DDFEC256A590C00244E94 /* ShopProductsView.swift in Sources */,
 				FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */,
 				F7805C432552F26400D1BBAD /* TariffModel.swift in Sources */,
+				FA730E52256FAB69001F7AEB /* OrdersHistoryViewModel.swift in Sources */,
 				FAB9706F256988E600FD6563 /* ShopSubCategoryViewModel.swift in Sources */,
 				FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */,
 				72B3CE432554951D0081B1CD /* PromoCodeCellModel.swift in Sources */,
 				F73BC502254ED19D0018FC0A /* AddressModel.swift in Sources */,
+				FA730E4E256FAA23001F7AEB /* OrderHistoryModel.swift in Sources */,
 				FA3A05702548128600C55447 /* PromotionsViewController.swift in Sources */,
 				FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */,
 				FA449611254C0BE40071E76F /* DateTimeHelper.swift in Sources */,
