@@ -363,8 +363,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func presentOrdersHistoryViewController() {
-//        let vc = OrdersHistoryViewController()
-//        navigationController?.pushViewController(vc, animated: true)
+        let vc = OrdersHistoryViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func presentPaymentsViewController() {
