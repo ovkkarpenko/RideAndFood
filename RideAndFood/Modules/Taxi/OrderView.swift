@@ -21,6 +21,7 @@ class OrderView: UIView {
     @IBOutlet weak var addressLabelPanelView: UIView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var labelImage: UIButton!
+    @IBOutlet weak var strokeImage: UIImageView!
     
     static let ORDER_VIEW = "OrderView"
     
@@ -58,6 +59,7 @@ class OrderView: UIView {
                 button.isEnabled = isFirstTextFieldFilled
             } else {
                 button.isEnabled = isFirstTextFieldFilled && isSecondTextFieldFilled ? true : false
+                strokeImage.isHidden = isFirstTextFieldFilled && isSecondTextFieldFilled ? false : true
             }
             
         }
@@ -68,6 +70,7 @@ class OrderView: UIView {
                 button.isEnabled = isSecondTextFieldFilled
             } else {
                 button.isEnabled = isSecondTextFieldFilled && isFirstTextFieldFilled ? true : false
+                strokeImage.isHidden = isSecondTextFieldFilled && isFirstTextFieldFilled ? false : true
             }
         }
     }
