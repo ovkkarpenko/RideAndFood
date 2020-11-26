@@ -40,6 +40,8 @@ class OrderViewDirector: OrderView {
         secondTextView.setTextViewType(.destinationAddress)
         
         firstTextView.customTextViewDelegate = self
+        firstTextView.isAddressListener = true
+        
         secondTextView.customTextViewDelegate = self
         
         button.setTitle(TaxiOrderStrings.getString(.next)(), for: .normal)
@@ -98,6 +100,16 @@ class OrderViewDirector: OrderView {
     }
     
     private func setupDestinationAddressFromMap() {
+        firstTextView.isHidden = false
+        firstTextView.setTextViewType(.defaultOrange)
+        firstTextView.locationButton.isHidden = false
+        firstTextView.customTextViewDelegate = self
+        firstTextView.locationButton.tintColor = Colors.getColor(.locationOrange)()
+        firstTextView.isAddressListener = true
+        firstTextView.locationButton.isUserInteractionEnabled = false
+        firstTextView.indicatorView.backgroundColor = Colors.getColor(.locationOrange)()
         
+        button.setTitle(TaxiOrderStrings.getString(.confirm)(), for: .normal)
+        button.isEnabled = true
     }
 }

@@ -33,6 +33,8 @@ class CustomTextView: UIView {
         }
     }
     
+    var isAddressListener = false
+    
     private var isTextFieldEnable = false {
         didSet {
             if isTextFieldEnable != oldValue {
@@ -144,7 +146,9 @@ class CustomTextView: UIView {
     }
     
     @IBAction func tapMapButton(_ sender: Any) {
-        customTextViewDelegate?.mapButtonTapped()
+        if let type = textViewType {
+            customTextViewDelegate?.mapButtonTapped(senderType: type)
+        }
     }
 }
 

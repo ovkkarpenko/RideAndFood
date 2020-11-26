@@ -32,3 +32,7 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
         }
     }
 }
+
+protocol MapViewCurrentAddressDelegate: class{
+    func currentAddressChanged(newAddress: String?)
+}

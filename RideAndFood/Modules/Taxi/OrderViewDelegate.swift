@@ -13,4 +13,5 @@ protocol OrderViewDelegate: class {
     func shouldRemoveTranspatentView()
     func buttonTapped(newSubview: OrderViewDirector?)
     func locationButtonTapped(senderType: TextViewType)
+    func mapButtonTapped(senderType: TextViewType)
 }

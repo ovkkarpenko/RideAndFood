@@ -46,14 +46,17 @@ class OrderView: UIView {
     
     var currentAddress: String? {
         willSet {
-            if  let textViewType = firstTextView.textViewType, textViewType == .currentAddress {
+            if firstTextView.isAddressListener {
                 firstTextView.textField.text = newValue
+            }
+            
+            if secondTextView.isAddressListener {
+                secondTextView.textField.text = newValue
             }
             
             if !addressLabelPanelView.isHidden {
                 addressLabel.text = newValue
             }
-            
         }
     }
     
@@ -263,8 +266,8 @@ extension OrderView: CustomTextViewDelegate {
         }
     }
     
-    func mapButtonTapped() {
-        print("map Button Tapped")
+    func mapButtonTapped(senderType: TextViewType) {
+        delegate?.mapButtonTapped(senderType: senderType)
     }
     
     func locationButtonTapped(senderType: TextViewType) {
@@ -301,5 +304,11 @@ extension OrderView: UITableViewDataSource, UITableViewDelegate {
                 runAdditionalViewContainerTransitionAnimation(state: true)
             }
         }
+    }
+}
+
+extension OrderView: MapViewCurrentAddressDelegate {
+    func currentAddressChanged(newAddress: String?) {
+        currentAddress = newAddress
     }
 }
