@@ -23,6 +23,8 @@ enum StringsHelper {
     case days
     case daysSecond
     case delete
+    case emptyMessage
+    case cancel
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -63,6 +65,10 @@ enum StringsHelper {
             return "дня"
         case .delete:
             return "Удалить"
+        case .emptyMessage:
+            return "Здесь пока пусто..."
+        case .cancel:
+            return "Отмена"
         }
     }
     
@@ -96,6 +102,10 @@ enum StringsHelper {
             return "days"
         case .delete:
             return "delete"
+        case .emptyMessage:
+            return "It's empty here for now..."
+        case .cancel:
+            return "Cancel"
         }
     }
 }

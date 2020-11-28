@@ -9,16 +9,20 @@
 import UIKit
 
 enum FontHelper {
+    case regular8
     case regular10
     case regular12
     case regular15
     case regular17
+    case regular26
     case semibold12
     case semibold15
     case semibold17
     
     func font() -> UIFont? {
         switch self {
+        case .regular8:
+            return .systemFont(ofSize: 8)
         case .regular10:
             return .systemFont(ofSize: 10)
         case .regular12:
@@ -33,6 +37,8 @@ enum FontHelper {
             return .systemFont(ofSize: 15, weight: .semibold)
         case .semibold17:
             return .systemFont(ofSize: 17, weight: .semibold)
+        case .regular26:
+            return .systemFont(ofSize: 26)
         }
     }
 }

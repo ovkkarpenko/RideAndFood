@@ -14,4 +14,5 @@ protocol IProfileService {
     func deletePhone(id: Int, completion: @escaping (Result<[Phone], ServiceError>) -> Void)
     func confirmPhone(actionId: Int, code: Int, completion: @escaping (Result<[Phone], ServiceError>) -> Void)
     func changePhone(phone: Phone, completion: @escaping (Result<PhoneConfirmationCode, ServiceError>) -> Void)
+    func logout(completion: @escaping () -> Void)
 }

@@ -85,6 +85,11 @@ class ProfileService: IProfileService {
             completion(.success(responseData))
         }
     }
+    
+    func logout(completion: @escaping () -> Void) {
+        UserConfig.shared.userId = 0
+        completion()
+    }
 }
 
 // MARK: - Error
