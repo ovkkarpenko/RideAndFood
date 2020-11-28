@@ -64,7 +64,6 @@ class UserConfig {
         get {
             var settings = Settings()
             settings.language = Language(rawValue: UserDefaults.standard.value(forKey: settingsLanguageKey) as? String ?? "rus") ?? Language.rus
-            settings.language = Language.eng
             settings.doNotCall = UserDefaults.standard.value(forKey: settingsDoNotCallKey) as? Bool ?? false
             settings.notificationDiscount = UserDefaults.standard.value(forKey: settingsNotificationDiscountKey) as? Bool ?? false
             settings.updateMobileNetwork = UserDefaults.standard.value(forKey: settingsUpdateMobileNetworkKey) as? Bool ?? false

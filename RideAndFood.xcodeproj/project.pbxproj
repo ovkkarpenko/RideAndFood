@@ -697,7 +697,6 @@
 				FA730E3C256F9EA6001F7AEB /* OrdersHistoryScreen */,
 				FAD0AFF225669B1F008C2794 /* AddressesScreen */,
 				720AA0E8256C2AE60065BFED /* PaymentsHistory */,
-				72F467D22559C4E200F8926E /* Profile */,
 				72FF3ACB253F46D60042B2A0 /* Common */,
 				FAD0AFEB25669B1A008C2794 /* FoodScreen */,
 				7240BF27253E167C00C00BB9 /* LoginScreen */,
@@ -1798,7 +1797,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = sanyakarpenko.RideAndFood;
+				PRODUCT_BUNDLE_IDENTIFIER = skillbox.RideAndFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1820,7 +1819,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = sanyakarpenko.RideAndFood;
+				PRODUCT_BUNDLE_IDENTIFIER = skillbox.RideAndFood;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -192,6 +192,6 @@ class OrdersHistoryViewController: UIViewController {
 extension OrdersHistoryViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.cellForItem(at: indexPath)?.
+//        collectionView.cellForItem(at: indexPath)?.
     }
 }
