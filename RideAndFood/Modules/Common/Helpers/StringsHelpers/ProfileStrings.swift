@@ -19,6 +19,7 @@ enum ProfileStrings {
     case changePhoneNumber
     case setAsDefault
     case isDefault
+    case doLogOut
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -51,6 +52,8 @@ enum ProfileStrings {
             return "Назначить основным"
         case .isDefault:
             return "Основной"
+        case .doLogOut:
+            return "Выйти из приложения?"
         }
     }
     
@@ -76,6 +79,8 @@ enum ProfileStrings {
             return "Set as default"
         case .isDefault:
             return "Default"
+        case .doLogOut:
+            return "Log out of the app?"
         }
     }
 }

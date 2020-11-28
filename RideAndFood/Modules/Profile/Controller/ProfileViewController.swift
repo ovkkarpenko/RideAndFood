@@ -60,7 +60,18 @@ class ProfileViewController: UIViewController {
         return view
     }
     
-    private let hideCardViewConstant: CGFloat = 200
+    private var logoutButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = ColorHelper.background.color()
+        button.setTitle(ProfileStrings.logOut.text(), for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.setTitleColor(ColorHelper.error.color(), for: .normal)
+        button.addTarget(self, action: #selector(logoutButtonPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let hideCardViewConstant: CGFloat = 250
     private lazy var cardViewBottomConstraint = cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
                                                                                  constant: hideCardViewConstant)
     // MARK: - Private properties
@@ -116,6 +127,7 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = ColorHelper.secondaryBackground.color()
         view.addSubview(backgroundImageView)
         view.addSubview(tableView)
+        view.addSubview(logoutButton)
         view.addSubview(dimmerView)
         view.addSubview(cardView)
         NSLayoutConstraint.activate([
@@ -131,7 +143,12 @@ class ProfileViewController: UIViewController {
             dimmerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             dimmerView.topAnchor.constraint(equalTo: view.topAnchor),
             dimmerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dimmerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            dimmerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            logoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            logoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                               constant: -10),
+            logoutButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     
@@ -358,8 +375,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func presentPaymentsHistoryViewController() {
-//        let vc = PaymentsHistoryViewController()
-//        navigationController?.pushViewController(vc, animated: true)
+        let vc = PaymentsHistoryViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func presentOrdersHistoryViewController() {
@@ -396,8 +413,46 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func dimmerPressed() {
+        view.endEditing(false)
         cardViewBottomConstraint.constant = hideCardViewConstant
         dimmerView.hide()
         animateConstraints()
+    }
+    
+    @objc private func logoutButtonPressed() {
+        let label = UILabel()
+        label.textColor = ColorHelper.error.color()
+        label.text = ProfileStrings.doLogOut.text()
+        label.textAlignment = .center
+        let buttonsStackView = ButtonsStackView()
+        let contentView = UIStackView(arrangedSubviews: [
+            label,
+            buttonsStackView
+        ])
+        contentView.axis = .vertical
+        contentView.spacing = 27
+        let buttonsStackViewModel = ButtonsStackViewModel(primaryTitle: ProfileStrings.logOut.text(),
+                                      secondaryTitle: StringsHelper.cancel.text(),
+                                      primaryButtonPressedBlock: { [weak self] in
+                                        self?.logout()
+                                      },
+                                      secondaryButtonPressedBlock: { [weak self] in
+                                        self?.hideCardView()
+                                      })
+        buttonsStackView.configure(with: buttonsStackViewModel)
+        cardView.configure(with: .init(contentView: contentView,
+                                       style: .light,
+                                       paddingBottom: 5,
+                                       didSwipeDownCallback: { [weak self] in
+                                        self?.hideCardView()
+                                       }))
+        view.layoutIfNeeded()
+        showCardView()
+    }
+    
+    private func logout() {
+        service.logout { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
     }
 }
