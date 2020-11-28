@@ -14,6 +14,17 @@ class FoodShopView: UIView {
     
     var delegate: FoodViewDelegate?
     
+    var address: Address? {
+        didSet {
+            if let address = address {
+                if address.name.isEmpty { addressNameLabelTopConstraint.constant = padding }
+                
+                addressNameLabel.text = address.name
+                addressTextField.text = address.address
+            }
+        }
+    }
+    
     private lazy var addressIcon: UIImageView = {
         let image = UIImage(named: "LocationIconActive", in: Bundle.init(path: "Images/MapScreen"), with: .none)
         let imageView = UIImageView(image: image)
@@ -41,7 +52,6 @@ class FoodShopView: UIView {
     
     private lazy var shopsCollectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: 158, height: 80)
         
         let collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
@@ -70,6 +80,8 @@ class FoodShopView: UIView {
     private let bag = DisposeBag()
     private let viewModel = FoodShopViewModel()
     
+    private lazy var addressNameLabelTopConstraint = addressNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding-8)
+    
     func setupLayout() {
         addSubview(addressIcon)
         addSubview(addressNameLabel)
@@ -81,7 +93,7 @@ class FoodShopView: UIView {
             addressIcon.topAnchor.constraint(equalTo: topAnchor, constant: padding),
             
             addressNameLabel.leadingAnchor.constraint(equalTo: addressIcon.leadingAnchor, constant: padding),
-            addressNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: padding-8),
+            addressNameLabelTopConstraint,
             
             addressTextField.leadingAnchor.constraint(equalTo: addressIcon.leadingAnchor, constant: padding),
             addressTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),

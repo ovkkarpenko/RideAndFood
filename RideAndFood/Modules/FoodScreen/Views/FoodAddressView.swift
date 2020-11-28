@@ -21,7 +21,7 @@ class FoodAddressView: UIView {
         return imageView
     }()
     
-    private lazy var addressTextField: UITextField = {
+    lazy var addressTextField: UITextField = {
         let textField = MaskTextField()
         textField.keyboardType = .default
         textField.placeholder = FoodSelectAddressStrings.addressTextField.text()
@@ -41,7 +41,13 @@ class FoodAddressView: UIView {
         button.setTitle(AddAddressesStrings.mapButton.text(), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12)
         button.setTitleColor(ColorHelper.primaryText.color(), for: .normal)
-        button.addTarget(self, action: #selector(showMapButtonPressed), for: .touchUpInside)
+        
+        button.rx.tap
+            .subscribe(onNext: { _ in
+                
+                self.delegate?.shopMap()
+            }).disposed(by: bag)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         
         let image = UIImage(named: "rightArrow", in: Bundle.init(path: "Images/Icons"), with: .none)
@@ -58,6 +64,7 @@ class FoodAddressView: UIView {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+//        tableView.isHidden = true
         tableView.tableFooterView = UIView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -65,7 +72,16 @@ class FoodAddressView: UIView {
     
     private lazy var confirmButton: UIButton = {
         let button = PrimaryButton(title: PaymentStrings.confirmButtonTitle.text())
-        //        button.addTarget(self, action: #selector(showAddAddresController), for: .touchUpInside)
+        
+        button.rx.tap
+            .subscribe(onNext: { _ in
+                
+                if let address = self.addressTextField.text,
+                   !address.isEmpty {
+                    self.delegate?.showShop(address: Address(address: address))
+                }
+            }).disposed(by: bag)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -89,6 +105,8 @@ class FoodAddressView: UIView {
     
     private let bag = DisposeBag()
     private let viewModel = AddressViewModel(type: .selectAddress)
+    
+    lazy var tableViewHeightConstraint = tableView.heightAnchor.constraint(equalToConstant: 165)
     
     func setupLayout() {
         addSubview(addressIcon)
@@ -114,10 +132,11 @@ class FoodAddressView: UIView {
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.topAnchor.constraint(equalTo: addressTextField.bottomAnchor, constant: padding),
             tableView.bottomAnchor.constraint(equalTo: confirmButton.topAnchor, constant: -padding),
+            tableViewHeightConstraint,
             
             confirmButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             confirmButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            confirmButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
+            confirmButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: -padding),
         ])
         
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor
@@ -128,6 +147,7 @@ class FoodAddressView: UIView {
     }
     
     func setupTableView() {
+        tableView.delegate = self
         tableView.register(AddressTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
         tableView.rx
@@ -141,10 +161,17 @@ class FoodAddressView: UIView {
             .bind(to: tableView.rx.items(dataSource: viewModel.dataSource(cellIdentifier: cellIdentifier)))
             .disposed(by: bag)
         
-        viewModel.fetchItems()
+        viewModel.fetchItems { [weak self] addresses in
+            if addresses.count == 0 {
+                self?.tableViewHeightConstraint.constant = 0
+            }
+        }
     }
+}
+
+extension FoodAddressView: UITableViewDelegate {
     
-    @objc private func showMapButtonPressed() {
-        
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
     }
 }

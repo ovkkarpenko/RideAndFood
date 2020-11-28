@@ -118,6 +118,11 @@ class MapCardView: UIView {
         }
     }
     
+    func updateTexts() {
+        taxiButton.title = MapStrings.taxi.text()
+        foodButton.title = MapStrings.food.text()
+    }
+    
     // MARK: - Initializers
     
     override init(frame: CGRect) {

@@ -11,7 +11,7 @@ import Foundation
 
 class DeliveryAddressView: UIView {
     
-    lazy var apartmentTextField: UITextField = {
+    lazy var apartmentTextField: MaskTextField = {
         let textField = MaskTextField()
         textField.keyboardType = .default
         textField.placeholder = AddAddressesStrings.apartment.text()
@@ -19,7 +19,7 @@ class DeliveryAddressView: UIView {
         return textField
     }()
     
-    lazy var doorphoneTextField: UITextField = {
+    lazy var doorphoneTextField: MaskTextField = {
         let textField = MaskTextField()
         textField.keyboardType = .default
         textField.placeholder = AddAddressesStrings.doorphone.text()
@@ -27,7 +27,7 @@ class DeliveryAddressView: UIView {
         return textField
     }()
     
-    lazy var entranceTextField: UITextField = {
+    lazy var entranceTextField: MaskTextField = {
         let textField = MaskTextField()
         textField.keyboardType = .default
         textField.placeholder = AddAddressesStrings.entrance.text()
@@ -35,7 +35,7 @@ class DeliveryAddressView: UIView {
         return textField
     }()
     
-    lazy var floorTextField: UITextField = {
+    lazy var floorTextField: MaskTextField = {
         let textField = MaskTextField()
         textField.keyboardType = .default
         textField.placeholder = AddAddressesStrings.floor.text()
@@ -43,7 +43,7 @@ class DeliveryAddressView: UIView {
         return textField
     }()
     
-    lazy var commentForCourierTextField: UITextField = {
+    lazy var commentForCourierTextField: MaskTextField = {
         let textField = MaskTextField()
         textField.keyboardType = .default
         textField.placeholder = AddAddressesStrings.commentForCourier.text()

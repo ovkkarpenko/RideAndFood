@@ -20,7 +20,7 @@ struct AddressModel: Codable {
     var floor: Int?
     var destination: Bool?
     
-    private enum CodingKeys: String, CodingKey {
+    private enum AddressCodingKeys: String, CodingKey {
         case commentDriver = "comment_driver"
         case commentCourier = "comment_courier"
     }

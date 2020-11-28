@@ -63,8 +63,6 @@ class AddressTableViewCell: UITableViewCell {
         addSubview(addressLabel)
         
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 55),
-            
             iconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
             iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             iconImageView.widthAnchor.constraint(equalToConstant: 14),

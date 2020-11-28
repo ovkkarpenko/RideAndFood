@@ -18,7 +18,7 @@ class ShopProductViewModel {
         ServerApi.shared.getShopProducts(shopId: shopId, subCategoryId: subCategoryId) { [weak self] items, _ in
             
             if let items = items {
-                self?.itemsPublishSubject.onNext([SectionModel(model: "", items: items)])
+                self?.itemsPublishSubject.onNext([SectionModel(model: "", items: items.filter { !$0.isCategory })])
                 
                 DispatchQueue.main.async {
                     completion?()

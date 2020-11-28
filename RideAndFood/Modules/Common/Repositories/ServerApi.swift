@@ -87,6 +87,10 @@ class ServerApi {
         sendRequest(apiConfig: ApiConfig<[ShopProduct]>.getShopProducts(shopId, subCategoryId), completion: completion)
     }
     
+    func getOrdersHistory(status: String, completion: (([OrderHistoryModel]?, Error?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<[OrderHistoryModel]>.getOrdersHistory(status), completion: completion)
+    }
+    
     private func sendRequest<T: Codable, V: Codable>(apiConfig: ApiConfig<T>, completion: ((V?, Error?) -> ())?) {
         let request = apiConfig.createRequest()
         

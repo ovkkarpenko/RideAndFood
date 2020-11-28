@@ -65,14 +65,16 @@ class AddressesViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .gray
         setupLayout()
         setupTableView()
+        
+        viewModel.fetchItems { [weak self] _ in
+            self?.showAddressesTable()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        viewModel.fetchItems { [weak self] in
-            self?.showAddressesTable()
-        }
+        viewModel.fetchItems()
     }
     
     func setupLayout() {
@@ -92,7 +94,7 @@ class AddressesViewController: UIViewController {
             
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding+100),
             tableView.bottomAnchor.constraint(equalTo: backgroundImage.topAnchor, constant: -padding),
             
             alertLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -106,6 +108,10 @@ class AddressesViewController: UIViewController {
     
     func setupTableView() {
         tableView.register(AddressTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        
+        tableView
+            .rx.setDelegate(self)
+            .disposed(by: bag)
         
         tableView.rx
             .modelSelected(Address.self)
@@ -135,5 +141,12 @@ class AddressesViewController: UIViewController {
     @objc private func showAddAddresController() {
         let vc = AddAddresViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension AddressesViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
     }
 }
