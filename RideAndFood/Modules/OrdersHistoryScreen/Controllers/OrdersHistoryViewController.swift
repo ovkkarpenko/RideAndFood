@@ -92,6 +92,7 @@ class OrdersHistoryViewController: UIViewController {
     private let padding: CGFloat = 20
     
     private lazy var completedCollectionViewTrailingAnchorConstraint = completedCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+    private lazy var completedCollectionViewLeadingAnchorConstraint = completedCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding)
     private lazy var cenceledCollectionViewLeadingAnchorConstraint = cenceledCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width)
     
     func setupUI() {
@@ -119,7 +120,7 @@ class OrdersHistoryViewController: UIViewController {
             segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             segmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: padding+100),
             
-            completedCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            completedCollectionViewLeadingAnchorConstraint,
             completedCollectionViewTrailingAnchorConstraint,
             completedCollectionView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: padding),
             completedCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
@@ -132,6 +133,12 @@ class OrdersHistoryViewController: UIViewController {
     }
     
     func setupCollectionView() {
+        completedCollectionView.rx
+            .modelSelected(OrderHistoryModel.self)
+            .subscribe(onNext: { item in
+                
+            }).disposed(by: bag)
+        
         viewModel.doneOrdersPublishSubject
             .bind(to: completedCollectionView.rx.items(dataSource: viewModel.dataSource(cellIdentifier: OrdersHistoryCollectionViewCell.cellIdentifier)))
             .disposed(by: bag)
@@ -168,9 +175,11 @@ class OrdersHistoryViewController: UIViewController {
     
     private func toggle(hide: Bool) {
         if hide {
+            completedCollectionViewLeadingAnchorConstraint.constant = -view.frame.width*2
             completedCollectionViewTrailingAnchorConstraint.constant = -view.frame.width
             cenceledCollectionViewLeadingAnchorConstraint.constant = padding
         } else {
+            completedCollectionViewLeadingAnchorConstraint.constant = padding
             completedCollectionViewTrailingAnchorConstraint.constant = -padding
             cenceledCollectionViewLeadingAnchorConstraint.constant = view.frame.width
         }
