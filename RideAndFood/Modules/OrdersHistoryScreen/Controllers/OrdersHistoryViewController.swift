@@ -43,7 +43,6 @@ class OrdersHistoryViewController: UIViewController {
         layout.itemSize = CGSize(width: view.frame.width-padding*2, height: 125)
         
         let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        collectionView.delegate = self
         collectionView.alpha = 0
         collectionView.isHidden = true
         collectionView.backgroundColor = .white
@@ -78,6 +77,14 @@ class OrdersHistoryViewController: UIViewController {
         return segmentedControl
     }()
     
+    private lazy var taxiDetailsView: OrderHistoryTaxiDetailsView = {
+        let view = OrderHistoryTaxiDetailsView()
+        view.alpha = 0
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = OrdersHistoryStrings.title.text()
@@ -102,6 +109,7 @@ class OrdersHistoryViewController: UIViewController {
         view.addSubview(segmentedControl)
         view.addSubview(completedCollectionView)
         view.addSubview(cenceledCollectionView)
+        view.addSubview(taxiDetailsView)
         
         NSLayoutConstraint.activate([
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -129,14 +137,20 @@ class OrdersHistoryViewController: UIViewController {
             cenceledCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             cenceledCollectionView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: padding),
             cenceledCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            
+            taxiDetailsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            taxiDetailsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            taxiDetailsView.topAnchor.constraint(equalTo: view.topAnchor),
+            taxiDetailsView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
     func setupCollectionView() {
         completedCollectionView.rx
             .modelSelected(OrderHistoryModel.self)
-            .subscribe(onNext: { item in
+            .subscribe(onNext: { [weak self] item in
                 
+                self?.taxiDetailsView.toggle(hide: false)
             }).disposed(by: bag)
         
         viewModel.doneOrdersPublishSubject
@@ -193,14 +207,11 @@ class OrdersHistoryViewController: UIViewController {
             })
     }
     
+    private func animateLayout(_ hide: Bool, completion: @escaping () -> ()) {
+        
+    }
+    
     @objc private func changeStatusType(_ sender: UISegmentedControl) {
         toggle(hide: sender.selectedSegmentIndex == 1)
-    }
-}
-
-extension OrdersHistoryViewController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        collectionView.cellForItem(at: indexPath)?.
     }
 }
