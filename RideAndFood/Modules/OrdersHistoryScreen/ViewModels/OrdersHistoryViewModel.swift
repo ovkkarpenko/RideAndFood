@@ -11,6 +11,8 @@ import RxDataSources
 
 class OrdersHistoryViewModel {
     
+    var doneOrders: [OrderHistoryModel] = []
+    
     var doneOrdersPublishSubject = PublishSubject<[SectionModel<String, OrderHistoryModel>]>()
     var cenceledOrdersPublishSubject = PublishSubject<[SectionModel<String, OrderHistoryModel>]>()
     
@@ -19,6 +21,7 @@ class OrdersHistoryViewModel {
         ServerApi.shared.getOrdersHistory(status: "done") { [weak self] orders, _ in
             
             if let orders = orders {
+                self?.doneOrders = orders
                 self?.doneOrdersPublishSubject.onNext([SectionModel(model: "", items: orders)])
                 
                 DispatchQueue.main.async {

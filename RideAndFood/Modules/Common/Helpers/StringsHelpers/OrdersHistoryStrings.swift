@@ -17,6 +17,9 @@ enum OrdersHistoryStrings {
     case completedButton
     case cenceledButton
     case cancellationReason
+    case paymentId(Int)
+    case fromLabel
+    case toLabel
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -49,6 +52,12 @@ enum OrdersHistoryStrings {
             return "Отменённые"
         case .cancellationReason:
             return "Причина отмены: "
+        case .paymentId(let id):
+            return "Платёж № \(id)"
+        case .fromLabel:
+            return "От:"
+        case .toLabel:
+            return "До:"
         }
     }
     
@@ -74,6 +83,12 @@ enum OrdersHistoryStrings {
             return "Canceled"
         case .cancellationReason:
             return "Reason for cancellation: "
+        case .paymentId(let id):
+            return "Payment # \(id)"
+        case .fromLabel:
+            return "From:"
+        case .toLabel:
+            return "To:"
         }
     }
 }

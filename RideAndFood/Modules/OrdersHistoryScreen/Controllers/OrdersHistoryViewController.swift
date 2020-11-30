@@ -11,6 +11,15 @@ import RxSwift
 
 class OrdersHistoryViewController: UIViewController {
     
+    private lazy var transparentView: UIView = {
+        let view = UIView()
+        view.alpha = 0
+        view.isHidden = true
+        view.backgroundColor = .black
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private lazy var backgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = ColorHelper.background.color()
@@ -43,6 +52,7 @@ class OrdersHistoryViewController: UIViewController {
         layout.itemSize = CGSize(width: view.frame.width-padding*2, height: 125)
         
         let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        collectionView.delegate = self
         collectionView.alpha = 0
         collectionView.isHidden = true
         collectionView.backgroundColor = .white
@@ -77,13 +87,8 @@ class OrdersHistoryViewController: UIViewController {
         return segmentedControl
     }()
     
-    private lazy var taxiDetailsView: OrderHistoryTaxiDetailsView = {
-        let view = OrderHistoryTaxiDetailsView()
-        view.alpha = 0
-        view.isHidden = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private lazy var taxiDetailsView = OrderHistoryTaxiDetailsView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +106,9 @@ class OrdersHistoryViewController: UIViewController {
     private lazy var completedCollectionViewTrailingAnchorConstraint = completedCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
     private lazy var completedCollectionViewLeadingAnchorConstraint = completedCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding)
     private lazy var cenceledCollectionViewLeadingAnchorConstraint = cenceledCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width)
+    private lazy var taxiDetailsViewHeightAnchorConstraint = taxiDetailsView.heightAnchor.constraint(equalToConstant: 125)
+    
+    private var completedCollectionViewMiddleConstraint: NSLayoutConstraint?
     
     func setupUI() {
         view.addSubview(backgroundView)
@@ -109,9 +117,14 @@ class OrdersHistoryViewController: UIViewController {
         view.addSubview(segmentedControl)
         view.addSubview(completedCollectionView)
         view.addSubview(cenceledCollectionView)
-        view.addSubview(taxiDetailsView)
+        view.addSubview(transparentView)
         
         NSLayoutConstraint.activate([
+            transparentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            transparentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            transparentView.topAnchor.constraint(equalTo: view.topAnchor),
+            transparentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -126,7 +139,7 @@ class OrdersHistoryViewController: UIViewController {
             
             segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            segmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: padding+100),
+            segmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: padding+130),
             
             completedCollectionViewLeadingAnchorConstraint,
             completedCollectionViewTrailingAnchorConstraint,
@@ -136,23 +149,11 @@ class OrdersHistoryViewController: UIViewController {
             cenceledCollectionViewLeadingAnchorConstraint,
             cenceledCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             cenceledCollectionView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: padding),
-            cenceledCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-            
-            taxiDetailsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            taxiDetailsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            taxiDetailsView.topAnchor.constraint(equalTo: view.topAnchor),
-            taxiDetailsView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            cenceledCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding)
         ])
     }
     
     func setupCollectionView() {
-        completedCollectionView.rx
-            .modelSelected(OrderHistoryModel.self)
-            .subscribe(onNext: { [weak self] item in
-                
-                self?.taxiDetailsView.toggle(hide: false)
-            }).disposed(by: bag)
-        
         viewModel.doneOrdersPublishSubject
             .bind(to: completedCollectionView.rx.items(dataSource: viewModel.dataSource(cellIdentifier: OrdersHistoryCollectionViewCell.cellIdentifier)))
             .disposed(by: bag)
@@ -207,11 +208,47 @@ class OrdersHistoryViewController: UIViewController {
             })
     }
     
-    private func animateLayout(_ hide: Bool, completion: @escaping () -> ()) {
+    private func showTaxiDetails(order: OrderHistoryModel, indexPath: IndexPath) {
+        guard let cell = completedCollectionView.cellForItem(at: indexPath) else {
+            return
+        }
         
+        taxiDetailsView = OrderHistoryTaxiDetailsView()
+        taxiDetailsView.configure(order: order)
+        taxiDetailsView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(taxiDetailsView)
+        let middleConstraint = taxiDetailsView.centerYAnchor.constraint(equalTo: cell.centerYAnchor)
+        completedCollectionViewMiddleConstraint = taxiDetailsView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        
+        NSLayoutConstraint.activate([
+            taxiDetailsView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+            taxiDetailsView.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+            middleConstraint,
+            taxiDetailsViewHeightAnchorConstraint
+        ])
+        
+        view.layoutIfNeeded()
+        cell.alpha = 0
+        transparentView.isHidden = false
+        
+        taxiDetailsView.expand { [weak self] in
+            guard let self = self else { return }
+            middleConstraint.isActive = false
+            self.transparentView.alpha = 0.3
+            self.completedCollectionViewMiddleConstraint?.isActive = true
+            self.taxiDetailsViewHeightAnchorConstraint.constant = 390
+            self.view.layoutIfNeeded()
+        }
     }
     
     @objc private func changeStatusType(_ sender: UISegmentedControl) {
         toggle(hide: sender.selectedSegmentIndex == 1)
+    }
+}
+
+extension OrdersHistoryViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showTaxiDetails(order: viewModel.doneOrders[indexPath.row], indexPath: indexPath)
     }
 }
