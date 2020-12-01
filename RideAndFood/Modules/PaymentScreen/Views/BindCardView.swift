@@ -21,6 +21,7 @@ class BindCardView: UIView {
         })
         textField.placeholder = PaymentStrings.bindCardNumberTitle.text()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.becomeFirstResponder()
         return textField
     }()
     
@@ -68,8 +69,6 @@ class BindCardView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        cardNumberTextField.becomeFirstResponder()
         
         layer.cornerRadius = 15
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -129,22 +128,22 @@ class BindCardView: UIView {
         bindCardButton.rx
             .tap
             .withLatestFrom(viewModel.userInputs())
-            .subscribe { card in
+            .subscribe { [weak self] card in
                 
-                self.viewModel.addCard(card) { cardDetails in
+                self?.viewModel.addCard(card) { cardDetails in
                     if let cardDetails = cardDetails {
                         DispatchQueue.main.async {
-                            self.confirmCallback?(cardDetails)
+                            self?.confirmCallback?(cardDetails)
                         }
                     } else {
-                        self.showErrorAlert?()
+                        self?.showErrorAlert?()
                     }
                 }
             }.disposed(by: bag)
         
         viewModel.isCompleted()
-            .subscribe { isCompleted in
-                self.bindCardButton.isEnabled = isCompleted
+            .subscribe { [weak self] isCompleted in
+                self?.bindCardButton.isEnabled = isCompleted
             }.disposed(by: bag)
     }
 }

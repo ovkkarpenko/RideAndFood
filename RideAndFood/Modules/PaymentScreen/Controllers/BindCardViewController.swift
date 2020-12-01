@@ -37,7 +37,7 @@ class BindCardViewController: UIViewController {
             self.toggleBindCardView(true)
             self.toggleConfirmBindCardView(false)
         }
-        view.showErrorAlert = {
+        view.showErrorAlert = { [weak self] in
             AlertHelper.shared.alert(self, title: PaymentStrings.errorTitle.text(), message: PaymentStrings.errorDescription.text())
         }
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -123,6 +123,7 @@ class BindCardViewController: UIViewController {
         
         if hide {
             bindCardViewHeightConstraint.constant = 0
+            self.view.endEditing(true)
         } else {
             animateOption = .curveEaseOut
             bindCardViewHeightConstraint.constant = 220
@@ -159,16 +160,16 @@ class BindCardViewController: UIViewController {
         
         bindCardViewBottomConstraint.constant = -keyboardSize.height + view.safeAreaInsets.bottom
         
-        UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) { [weak self] in
+            self?.view.layoutIfNeeded()
         }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
         bindCardViewBottomConstraint.constant = 0
         
-        UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) { [weak self] in
+            self?.view.layoutIfNeeded()
         }
     }
 }
