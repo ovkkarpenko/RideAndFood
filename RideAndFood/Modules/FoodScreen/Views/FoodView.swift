@@ -19,7 +19,7 @@ enum SelectedViewType {
     case productCategory
 }
 
-protocol FoodViewDelegate {
+protocol FoodViewDelegate: class {
     func shopMap()
     func showShop(address: Address?)
     func showShopCategory(shop: FoodShop?)

@@ -12,7 +12,7 @@ import RxSwift
 
 class FoodShopView: UIView {
     
-    var delegate: FoodViewDelegate?
+    weak var delegate: FoodViewDelegate?
     
     var address: Address? {
         didSet {
