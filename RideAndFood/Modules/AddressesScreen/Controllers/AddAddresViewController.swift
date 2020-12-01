@@ -130,10 +130,14 @@ class AddAddresViewController: UIViewController {
                                                object: nil)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        saveAddressButtonPressed()
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        saveAddressButtonPressed()
+//    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -150,7 +154,7 @@ class AddAddresViewController: UIViewController {
     private let shownPadding: CGFloat = 470
     private let hiddenPadding: CGFloat = 1000
     
-    private lazy var scrollViewBottonConstraint = scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    private lazy var scrollViewBottonConstraint = scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.safeAreaInsets.bottom)
     private lazy var removeAddressViewTopConstraint = removeAddressView.topAnchor.constraint(equalTo: view.topAnchor, constant: hiddenPadding)
     
     func setupLayout() {
@@ -249,19 +253,21 @@ class AddAddresViewController: UIViewController {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
            keyboardSize.height > 0 {
             
-            scrollViewBottonConstraint.constant = -keyboardSize.height - view.safeAreaInsets.bottom
+            scrollViewBottonConstraint.constant = -2*padding
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
             
-            UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
-                self.view.layoutIfNeeded()
+            UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) { [weak self] in
+                self?.view.layoutIfNeeded()
             }
         }
     }
     
     @objc private func keyboardWillHide(notification: NSNotification) {
         scrollViewBottonConstraint.constant = 0
+        scrollView.contentInset = UIEdgeInsets.zero
         
-        UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) { [weak self] in
+            self?.view.layoutIfNeeded()
         }
     }
     
