@@ -20,6 +20,14 @@ enum OrdersHistoryStrings {
     case paymentId(Int)
     case fromLabel
     case toLabel
+    case driverLabel
+    case carLabel
+    case carNumberLabel
+    case travelTimeLabel
+    case minutes(Int)
+    case shopLabel
+    case courierLabel
+    case orderList
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -39,7 +47,7 @@ enum OrdersHistoryStrings {
         case .taxiService:
             return " / Услуги такси"
         case .foodService:
-            return " / Услуги еды"
+            return " / Доставка еды"
         case .taxi:
             return "Такси"
         case .food:
@@ -58,6 +66,22 @@ enum OrdersHistoryStrings {
             return "От:"
         case .toLabel:
             return "До:"
+        case .driverLabel:
+            return "Водитель:"
+        case .carLabel:
+            return "Автомобиль:"
+        case .carNumberLabel:
+            return "Номер:"
+        case .travelTimeLabel:
+            return "Время в пути:"
+        case .minutes(let value):
+            return "\(value) минут"
+        case .shopLabel:
+            return "Магазин:"
+        case .courierLabel:
+            return "Курьер:"
+        case .orderList:
+            return "Состав заказа:"
         }
     }
     
@@ -89,6 +113,22 @@ enum OrdersHistoryStrings {
             return "From:"
         case .toLabel:
             return "To:"
+        case .driverLabel:
+            return "Driver:"
+        case .carLabel:
+            return "Car:"
+        case .carNumberLabel:
+            return "Car number:"
+        case .travelTimeLabel:
+            return "Travel time:"
+        case .minutes(let value):
+            return "\(value) minutes"
+        case .shopLabel:
+            return "Shop:"
+        case .courierLabel:
+            return "Courier:"
+        case .orderList:
+            return "Order list:"
         }
     }
 }

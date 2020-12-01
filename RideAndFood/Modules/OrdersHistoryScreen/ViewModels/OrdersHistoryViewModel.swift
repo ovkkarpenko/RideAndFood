@@ -56,12 +56,12 @@ class OrdersHistoryViewModel {
                     cell.initCanceledView(cancellationReason: "Без указания причины")
                 }
                 
-                if item.type == "taxi" {
+                if item.type == .taxi {
                     cell.typeLabel.text = OrdersHistoryStrings.taxi.text()
                     cell.serviceTypeLabel.text = OrdersHistoryStrings.taxiService.text()
                     cell.imageView.image = UIImage(named: "car")
                     cell.imageViewBottomConstraint.constant = -20
-                } else if item.type == "food" {
+                } else if item.type == .food {
                     cell.typeLabel.text = OrdersHistoryStrings.food.text()
                     cell.serviceTypeLabel.text = OrdersHistoryStrings.foodService.text()
                     cell.imageView.image = UIImage(named: "packet")
