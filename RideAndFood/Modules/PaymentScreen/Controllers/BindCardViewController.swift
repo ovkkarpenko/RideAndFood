@@ -81,6 +81,11 @@ class BindCardViewController: UIViewController {
                                                object: nil)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         toggleBindCardView(false)
@@ -150,14 +155,12 @@ class BindCardViewController: UIViewController {
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-           keyboardSize.height > 0 {
-            
-            bindCardViewBottomConstraint.constant = -keyboardSize.height + view.safeAreaInsets.bottom
-            
-            UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
-                self.view.layoutIfNeeded()
-            }
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        bindCardViewBottomConstraint.constant = -keyboardSize.height + view.safeAreaInsets.bottom
+        
+        UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
+            self.view.layoutIfNeeded()
         }
     }
     
