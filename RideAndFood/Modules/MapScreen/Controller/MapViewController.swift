@@ -153,6 +153,7 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
+        TariffViewController.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -444,5 +445,12 @@ extension MapViewController: OrderViewDelegate {
     
     func shouldRemoveTranspatentView() {
         transparentView.removeFromSuperview()
+    }
+}
+
+extension MapViewController: TariffDelegate {
+    func tariffOrderButtonTapped(tariff: TariffModel) {
+        toggleSideMenu(hide: true)
+        taxiButtonPressed()
     }
 }

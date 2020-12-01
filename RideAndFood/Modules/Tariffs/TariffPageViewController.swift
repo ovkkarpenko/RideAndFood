@@ -11,6 +11,7 @@ import UIKit
 class TariffPageViewController: UIPageViewController {
     private var pages: [UIViewController] = []
     private var tariffModel: [TariffModel] = []
+    static weak var tariffPageDelegate: TariffPageDelegate?
     
     required init?(coder: NSCoder) {
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -36,6 +37,7 @@ class TariffPageViewController: UIPageViewController {
 
                 if let firstViewController = self.pages.first {
                     self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
+                    TariffPageViewController.tariffPageDelegate?.selectedTariff(tariff: self.tariffModel[0])
                 }
             }
             
@@ -65,6 +67,8 @@ extension TariffPageViewController: UIPageViewControllerDataSource {
             return nil
         }
         
+        TariffPageViewController.tariffPageDelegate?.selectedTariff(tariff: tariffModel[currentIndex])
+        
         return currentIndex == 0 ? nil : pages[currentIndex - 1]
     }
     
@@ -72,6 +76,8 @@ extension TariffPageViewController: UIPageViewControllerDataSource {
         guard let currentIndex = pages.firstIndex(of: viewController) else {
             return nil
         }
+        
+        TariffPageViewController.tariffPageDelegate?.selectedTariff(tariff: tariffModel[currentIndex])
         
         return currentIndex == pages.count - 1 ? nil : pages[currentIndex + 1]
     }

@@ -99,6 +99,8 @@
 		72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3AD9253F58CD0042B2A0 /* LoginView.swift */; };
 		96D62A89E82A8316062BDE0E /* Pods_RideAndFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */; };
 		F707DBA0257030A0002C3F58 /* OrderViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F707DB9F257030A0002C3F58 /* OrderViewType.swift */; };
+		F72D0AD925764146000952AF /* TariffDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72D0AD825764146000952AF /* TariffDelegate.swift */; };
+		F72D0ADC257643C6000952AF /* TariffPageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */; };
 		F73BC4F0254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */; };
 		F73BC4F4254ECE0A0018FC0A /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F3254ECE0A0018FC0A /* RequestModel.swift */; };
 		F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F7254ECF3D0018FC0A /* Networker.swift */; };
@@ -321,6 +323,8 @@
 		F707DB9F257030A0002C3F58 /* OrderViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewType.swift; sourceTree = "<group>"; };
 		F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportServiceStrings.swift; sourceTree = "<group>"; };
+		F72D0AD825764146000952AF /* TariffDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffDelegate.swift; sourceTree = "<group>"; };
+		F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPageDelegate.swift; sourceTree = "<group>"; };
 		F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsOfSwiftTypes.swift; sourceTree = "<group>"; };
 		F73BC4F3254ECE0A0018FC0A /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		F73BC4F7254ECF3D0018FC0A /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
@@ -966,7 +970,9 @@
 			children = (
 				F7805C392552E41500D1BBAD /* Tariff.storyboard */,
 				F73D1B0925568DAD0001F7FC /* TariffPageViewController.swift */,
+				F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */,
 				F73D1B0D25568E440001F7FC /* TariffViewController.swift */,
+				F72D0AD825764146000952AF /* TariffDelegate.swift */,
 				F795DF3225547A50005A607C /* TariffPage.swift */,
 				F795DF3525547A58005A607C /* TariffPage.xib */,
 				F7805C3F2552EFBE00D1BBAD /* TariffStrings.swift */,
@@ -1504,6 +1510,7 @@
 				FA8196AE2556A4D50053EE22 /* PaymentPointsView.swift in Sources */,
 				FAD0B00925669B1F008C2794 /* AddressView.swift in Sources */,
 				7286E5122542398F0027A69B /* FontsHelper.swift in Sources */,
+				F72D0ADC257643C6000952AF /* TariffPageDelegate.swift in Sources */,
 				F7AECA78256C345300CA86AC /* TextViewType.swift in Sources */,
 				FA8196B12556A7100053EE22 /* PaymentPointsDetailsView.swift in Sources */,
 				FAA9495125546F73005C5B40 /* PaymentViewController.swift in Sources */,
@@ -1560,6 +1567,7 @@
 				F77DE253254A1928001338D8 /* GeneralGUISettings.swift in Sources */,
 				723958E82561347600027FA8 /* ProfilePhoneEnteringView.swift in Sources */,
 				720AA0F4256C2BB70065BFED /* PaymentsHistoryTableViewDelegate.swift in Sources */,
+				F72D0AD925764146000952AF /* TariffDelegate.swift in Sources */,
 				72F467DF255AFFEA00F8926E /* ProfileTableViewCell.swift in Sources */,
 				72280184255F033F00C75841 /* ButtonsStackView.swift in Sources */,
 				726353E4254F464500AF868D /* PromoCodesStrings.swift in Sources */,
