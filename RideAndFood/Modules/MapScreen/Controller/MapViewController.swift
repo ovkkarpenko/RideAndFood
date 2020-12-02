@@ -153,8 +153,10 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
+        
         TariffViewController.delegate = self
         PromotionDetailsViewController.delegate = self
+        AddAddresViewController.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -467,5 +469,15 @@ extension MapViewController: PromotionDetailDelegate {
         case .taxi:
             taxiButtonPressed()
         }
+    }
+}
+
+extension MapViewController: AddAddressViewControllerDelegate {
+    func didSelectedAddressAsDestination(address: Address?) {
+        if !self.view.subviews.contains(addressInputView) {
+            taxiButtonPressed()
+        }
+        
+        addressInputView.secondTextView.setText(address?.address)
     }
 }

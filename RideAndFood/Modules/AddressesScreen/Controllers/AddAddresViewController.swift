@@ -91,7 +91,7 @@ class AddAddresViewController: UIViewController {
         
         let button = PrimaryButton(title: AddAddressesStrings.chooseDestination.text())
         button.isHidden = true
-        button.addTarget(self, action: #selector(saveAddressButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(chooseDestinationButtonPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -149,6 +149,7 @@ class AddAddresViewController: UIViewController {
     }
     
     var address: Address?
+    static weak var delegate: AddAddressViewControllerDelegate?
     
     private let padding: CGFloat = 20
     private let shownPadding: CGFloat = 470
@@ -269,6 +270,11 @@ class AddAddresViewController: UIViewController {
         UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) { [weak self] in
             self?.view.layoutIfNeeded()
         }
+    }
+    
+    @objc private func chooseDestinationButtonPressed() {
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        AddAddresViewController.delegate?.didSelectedAddressAsDestination(address: address)
     }
     
     @objc private func saveAddressButtonPressed() {

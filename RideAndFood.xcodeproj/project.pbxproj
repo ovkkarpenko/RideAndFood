@@ -121,6 +121,7 @@
 		F795DF3325547A50005A607C /* TariffPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F795DF3225547A50005A607C /* TariffPage.swift */; };
 		F795DF3625547A58005A607C /* TariffPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = F795DF3525547A58005A607C /* TariffPage.xib */; };
 		F79DD3BF2577BA9900E82B73 /* PromotionDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79DD3BE2577BA9900E82B73 /* PromotionDetailDelegate.swift */; };
+		F79DD3D42577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79DD3D32577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift */; };
 		F7AECA66256C32DC00CA86AC /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AECA65256C32DC00CA86AC /* CustomTextView.swift */; };
 		F7AECA69256C336100CA86AC /* CustomTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AECA68256C336100CA86AC /* CustomTextViewDelegate.swift */; };
 		F7AECA6C256C33B100CA86AC /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AECA6B256C33B100CA86AC /* OrderView.swift */; };
@@ -349,6 +350,7 @@
 		F795DF3225547A50005A607C /* TariffPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPage.swift; sourceTree = "<group>"; };
 		F795DF3525547A58005A607C /* TariffPage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TariffPage.xib; sourceTree = "<group>"; };
 		F79DD3BE2577BA9900E82B73 /* PromotionDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailDelegate.swift; sourceTree = "<group>"; };
+		F79DD3D32577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewControllerDelegate.swift; sourceTree = "<group>"; };
 		F7AECA65256C32DC00CA86AC /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		F7AECA68256C336100CA86AC /* CustomTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextViewDelegate.swift; sourceTree = "<group>"; };
 		F7AECA6B256C33B100CA86AC /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
@@ -1288,6 +1290,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD0AFF625669B1F008C2794 /* Address.swift */,
+				F79DD3D32577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1667,6 +1670,7 @@
 				FA730E52256FAB69001F7AEB /* OrdersHistoryViewModel.swift in Sources */,
 				FAB9706F256988E600FD6563 /* ShopSubCategoryViewModel.swift in Sources */,
 				722D5B552572D5F10026A9D8 /* PaymentView.swift in Sources */,
+				F79DD3D42577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift in Sources */,
 				FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */,
 				72B3CE432554951D0081B1CD /* PromoCodeCellModel.swift in Sources */,
 				F73BC502254ED19D0018FC0A /* AddressModel.swift in Sources */,
@@ -1826,7 +1830,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LMGHP5L64B;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RideAndFood/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1847,7 +1851,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LMGHP5L64B;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RideAndFood/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
