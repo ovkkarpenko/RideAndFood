@@ -45,6 +45,12 @@
 		723958EE2561352800027FA8 /* PhoneTextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723958ED2561352800027FA8 /* PhoneTextFieldModel.swift */; };
 		723958FB25613DD400027FA8 /* ProfilePhoneEnteringViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723958FA25613DD400027FA8 /* ProfilePhoneEnteringViewModel.swift */; };
 		723DE27F2548A8F200E39743 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723DE27E2548A8F200E39743 /* LoginViewController.swift */; };
+		72450AD22578041400F2D1FD /* RideAndFood.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 72450AD02578041400F2D1FD /* RideAndFood.xcdatamodeld */; };
+		72450AD525780A8A00F2D1FD /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72450AD425780A8A00F2D1FD /* CoreDataManager.swift */; };
+		72450AD82578100500F2D1FD /* ICoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72450AD72578100500F2D1FD /* ICoreDataManager.swift */; };
+		72450ADB257810BA00F2D1FD /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72450ADA257810BA00F2D1FD /* CartModel.swift */; };
+		72450ADF2578182100F2D1FD /* CartRowDB+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72450ADE2578182100F2D1FD /* CartRowDB+init.swift */; };
+		72450AE22578190800F2D1FD /* NSManagedObject+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72450AE12578190800F2D1FD /* NSManagedObject+init.swift */; };
 		726353E4254F464500AF868D /* PromoCodesStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726353E3254F464500AF868D /* PromoCodesStrings.swift */; };
 		726353E7254F49C800AF868D /* PromoCodesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 726353E6254F49C800AF868D /* PromoCodesCell.swift */; };
 		7270D100254F377800DE6BBC /* PromoCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7270D0FF254F377800DE6BBC /* PromoCodesViewController.swift */; };
@@ -282,6 +288,12 @@
 		723958FA25613DD400027FA8 /* ProfilePhoneEnteringViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePhoneEnteringViewModel.swift; sourceTree = "<group>"; };
 		723DE27E2548A8F200E39743 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7240BF0F253E0E7600C00BB9 /* RideAndFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RideAndFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72450AD12578041400F2D1FD /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		72450AD425780A8A00F2D1FD /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		72450AD72578100500F2D1FD /* ICoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICoreDataManager.swift; sourceTree = "<group>"; };
+		72450ADA257810BA00F2D1FD /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
+		72450ADE2578182100F2D1FD /* CartRowDB+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartRowDB+init.swift"; sourceTree = "<group>"; };
+		72450AE12578190800F2D1FD /* NSManagedObject+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+init.swift"; sourceTree = "<group>"; };
 		726353E3254F464500AF868D /* PromoCodesStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesStrings.swift; sourceTree = "<group>"; };
 		726353E6254F49C800AF868D /* PromoCodesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesCell.swift; sourceTree = "<group>"; };
 		7270D0FF254F377800DE6BBC /* PromoCodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesViewController.swift; sourceTree = "<group>"; };
@@ -618,6 +630,7 @@
 		7240BF11253E0E7600C00BB9 /* RideAndFood */ = {
 			isa = PBXGroup;
 			children = (
+				72450ACE2578027D00F2D1FD /* CoreData */,
 				7286E5222542E7420027A69B /* Modules */,
 				F7CAAC032540B1440049390C /* Helpers */,
 				72BA017725489E0600197485 /* SupportingFiles */,
@@ -634,6 +647,26 @@
 				7286E5192542B96F0027A69B /* Helpers */,
 			);
 			path = LoginScreen;
+			sourceTree = "<group>";
+		};
+		72450ACE2578027D00F2D1FD /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				72450ADD2578180F00F2D1FD /* Extensions */,
+				72450AD02578041400F2D1FD /* RideAndFood.xcdatamodeld */,
+				72450AD425780A8A00F2D1FD /* CoreDataManager.swift */,
+				72450AD72578100500F2D1FD /* ICoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		72450ADD2578180F00F2D1FD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				72450ADE2578182100F2D1FD /* CartRowDB+init.swift */,
+				72450AE12578190800F2D1FD /* NSManagedObject+init.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7270D0FA254F36FB00DE6BBC /* PromoCodes */ = {
@@ -1353,6 +1386,7 @@
 				FA6DDFEE256A5B0500244E94 /* ShopSubCategory.swift */,
 				722D69AD2573B40F00A8432D /* ProductDetailModel.swift */,
 				722D69B32573EF6B00A8432D /* ProductDetail.swift */,
+				72450ADA257810BA00F2D1FD /* CartModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1535,8 +1569,10 @@
 				FA02B89F2573CBBC00692C65 /* OrderHistoryFoodDetailsView.swift in Sources */,
 				FA44960A254C01000071E76F /* PromotionDetails.swift in Sources */,
 				FA18FFF025690C7100148FAB /* FoodShopView.swift in Sources */,
+				72450AD82578100500F2D1FD /* ICoreDataManager.swift in Sources */,
 				FAE8E5EF254ABA0C000DF2F7 /* ApiConfig.swift in Sources */,
 				FAC0661025556592003CC6AA /* BindCardView.swift in Sources */,
+				72450ADB257810BA00F2D1FD /* CartModel.swift in Sources */,
 				72A1DBE72545BF19005A047A /* CodeModel.swift in Sources */,
 				72A1DBDC2545AC65005A047A /* HTTPMethod.swift in Sources */,
 				F73BC50E254EDF320018FC0A /* SupportResponseModel.swift in Sources */,
@@ -1577,6 +1613,7 @@
 				FAACAAA0254B0C13005C3084 /* PromotionDetailsViewModel.swift in Sources */,
 				7232305B2552B34400F238AF /* PromoCodeActivatedViewController.swift in Sources */,
 				FA6DDFEF256A5B0500244E94 /* ShopSubCategory.swift in Sources */,
+				72450AD22578041400F2D1FD /* RideAndFood.xcdatamodeld in Sources */,
 				722D69B12573DB7200A8432D /* ProductDetailsStrings.swift in Sources */,
 				FA6100AC255715C700ED0CD5 /* PaymentType.swift in Sources */,
 				72A1DBE02545B424005A047A /* LoginInteractor.swift in Sources */,
@@ -1639,6 +1676,7 @@
 				72A1DBED2545BFA2005A047A /* SettingsModel.swift in Sources */,
 				72D3E8D9256AAD37008167FF /* ErrorResponse.swift in Sources */,
 				72F467E4255B1EC100F8926E /* String+Format.swift in Sources */,
+				72450AE22578190800F2D1FD /* NSManagedObject+init.swift in Sources */,
 				720AA102256C30C80065BFED /* PaymentsHistoryStrings.swift in Sources */,
 				720AA0ED256C2B360065BFED /* PaymentsHistoryViewController.swift in Sources */,
 				F7E5E9C7254A17AA0026ED71 /* SupportMessageViewController.swift in Sources */,
@@ -1674,6 +1712,7 @@
 				FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */,
 				FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */,
 				723230642552CFED00F238AF /* FormatHelper.swift in Sources */,
+				72450AD525780A8A00F2D1FD /* CoreDataManager.swift in Sources */,
 				72280188255F042800C75841 /* IConfigurableView.swift in Sources */,
 				FA43AE902544937D00766652 /* TableHelper.swift in Sources */,
 				72E93408255F0F1700CED717 /* ProfileCellModel.swift in Sources */,
@@ -1690,6 +1729,7 @@
 				FA730E52256FAB69001F7AEB /* OrdersHistoryViewModel.swift in Sources */,
 				FAB9706F256988E600FD6563 /* ShopSubCategoryViewModel.swift in Sources */,
 				722D5B552572D5F10026A9D8 /* PaymentView.swift in Sources */,
+				72450ADF2578182100F2D1FD /* CartRowDB+init.swift in Sources */,
 				F79DD3D42577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift in Sources */,
 				FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */,
 				72B3CE432554951D0081B1CD /* PromoCodeCellModel.swift in Sources */,
@@ -1927,6 +1967,19 @@
 			productName = InputMask;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		72450AD02578041400F2D1FD /* RideAndFood.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				72450AD12578041400F2D1FD /* Model.xcdatamodel */,
+			);
+			currentVersion = 72450AD12578041400F2D1FD /* Model.xcdatamodel */;
+			path = RideAndFood.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 7240BF07253E0E7600C00BB9 /* Project object */;
 }

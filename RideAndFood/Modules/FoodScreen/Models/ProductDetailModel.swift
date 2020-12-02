@@ -10,15 +10,18 @@ import Foundation
 
 struct ProductDetailModel {
     
+    let id: Int
     let name: String
     let composition: NSAttributedString
     var producer: NSAttributedString
     let country: NSAttributedString
     let imageUrl: URL?
-    let price: String
+    let price: Double
+    let priceString: String
     let closeBlock: () -> Void
     
     init(model: ProductDetail, closeBlock: @escaping () -> Void) {
+        id = model.id
         name = "\(model.name) \(model.weight) \(model.unit)"
         
         let compositionTitle = ProductDetailsStrings.composition.text()
@@ -48,7 +51,8 @@ struct ProductDetailModel {
         self.country = countryString
         
         self.imageUrl = URL(string: "\(baseUrl)\(model.image)")
-        self.price = "\(model.price)"
+        self.price = model.price
+        self.priceString = "\(model.price)"
         self.closeBlock = closeBlock
     }
 }

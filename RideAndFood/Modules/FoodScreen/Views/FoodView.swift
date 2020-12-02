@@ -350,7 +350,7 @@ extension FoodView: FoodViewDelegate {
     
     func showProductDetails(_ shopProduct: ShopProduct?) {
         guard let shopProduct = shopProduct else { return }
-        productDetailsView.configure(with: .init(model: .init(id: 1,
+        productDetailsView.configure(with: .init(model: .init(id: shopProduct.id,
                                                               name: shopProduct.name,
                                                               price: Double(shopProduct.price ?? 0),
                                                               sale: 0,

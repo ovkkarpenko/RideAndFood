@@ -98,6 +98,8 @@ class ProductDetailsView: UIView {
     
     // MARK: - Private properties
     
+    private let model = CartModel()
+    private var productModel: ProductDetailModel?
     private var closeBlock: (() -> Void)?
     
     // MARK: - Initializers
@@ -142,11 +144,16 @@ class ProductDetailsView: UIView {
     }
     
     @objc private func addToCardButtonPressed() {
-        print(counterView.count)
+        guard let product = productModel else { return }
+        model.addToCart(product: product, count: counterView.count)
     }
     
     @objc private func closeButtonPressed() {
         closeBlock?()
+        
+        let cart = model.getCart()
+        print("CART CONTAIN \(cart.1) ITEMS: ")
+        cart.0.forEach { print("\n \($0.productName) - \($0.productPrice) - \($0.count)") }
     }
 }
 
@@ -155,6 +162,7 @@ class ProductDetailsView: UIView {
 extension ProductDetailsView: IConfigurableView {
     
     func configure(with model: ProductDetailModel) {
+        self.productModel = model
         counterView.count = 1
         addToCartButton.setAttributedTitle(nil, for: .normal)
         if let imageUrl = model.imageUrl {
