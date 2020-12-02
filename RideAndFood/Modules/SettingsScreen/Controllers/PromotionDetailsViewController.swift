@@ -36,8 +36,8 @@ class PromotionDetailsViewController: UIViewController {
         
         closeButton.rx
             .controlEvent(.touchUpInside)
-            .subscribe { _ in
-                self.dismiss(animated: true)
+            .subscribe { [weak self] _ in
+                self?.dismiss(animated: true)
             }.disposed(by: bag)
     }
     
@@ -50,8 +50,8 @@ class PromotionDetailsViewController: UIViewController {
             
             actionButton.rx
                 .tap
-                .subscribe { _ in
-                    self.dismiss(animated: true)
+                .subscribe { [weak self] _ in
+                    self?.dismiss(animated: true)
                 }.disposed(by: bag)
             
             if promotion.media.count >= 2,
@@ -59,7 +59,8 @@ class PromotionDetailsViewController: UIViewController {
                 imageView.imageByUrl(from: url)
             }
             
-            viewModel.item.subscribe(onNext: { promotionDetails in
+            viewModel.item.subscribe(onNext: { [weak self] promotionDetails in
+                guard let self = self else { return }
                 let now = Date()
                 
                 if let date = promotionDetails.dateTo,

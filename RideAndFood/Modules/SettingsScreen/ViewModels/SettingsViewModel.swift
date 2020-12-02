@@ -63,9 +63,9 @@ class SettingsViewModel {
                 TableItem(
                     title: SettingsStrings.pushNotification.text(),
                     cellTypes: [
-                        .switch(settings?.doNotCall ?? false, { isOn in
-                            if let _ = self.settings {
-                                self.settings?.doNotCall = isOn
+                        .switch(settings?.doNotCall ?? false, { [weak self] isOn in
+                            if let _ = self?.settings {
+                                self?.settings?.doNotCall = isOn
                                 if let settings = settings { ServerApi.shared.saveSettings(settings) }
                             }
                         })
@@ -76,9 +76,9 @@ class SettingsViewModel {
                 TableItem(
                     title: SettingsStrings.stockNotifications.text(),
                     cellTypes: [
-                        .switch(settings?.notificationDiscount ?? false, { isOn in
-                            if let _ = self.settings {
-                                self.settings?.notificationDiscount = isOn
+                        .switch(settings?.notificationDiscount ?? false, { [weak self] isOn in
+                            if let _ = self?.settings {
+                                self?.settings?.notificationDiscount = isOn
                                 if let settings = settings { ServerApi.shared.saveSettings(settings) }
                             }
                         })
@@ -90,9 +90,9 @@ class SettingsViewModel {
                 TableItem(
                     title: SettingsStrings.refreshNetwork.text(),
                     cellTypes: [
-                        .switch(settings?.updateMobileNetwork ?? false, { isOn in
-                            if let _ = self.settings {
-                                self.settings?.updateMobileNetwork = isOn
+                        .switch(settings?.updateMobileNetwork ?? false, { [weak self] isOn in
+                            if let _ = self?.settings {
+                                self?.settings?.updateMobileNetwork = isOn
                                 if let settings = settings { ServerApi.shared.saveSettings(settings) }
                             }
                         })

@@ -66,14 +66,15 @@ class AlertTextFieldViewController: UIViewController {
         textField.rx
             .controlEvent(.editingChanged)
             .withLatestFrom(textField.rx.text.orEmpty)
-            .subscribe(onNext: { text in
-                self.button.buttonState = !text.isEmpty
+            .subscribe(onNext: { [weak self] text in
+                self?.button.buttonState = !text.isEmpty
             }).disposed(by: bag)
         
         button.rx
             .controlEvent(.touchUpInside)
             .withLatestFrom(textField.rx.value)
-            .subscribe(onNext: { text in
+            .subscribe(onNext: { [weak self] text in
+                guard let self = self else { return }
                 if let text = text {
                     self.buttonClickedCallback?(text)
                 }
