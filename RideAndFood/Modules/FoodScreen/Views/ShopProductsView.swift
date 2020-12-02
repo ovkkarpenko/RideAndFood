@@ -148,12 +148,11 @@ class ShopProductsView: UIView {
     }
     
     func setupCollectionView() {
-        //        productsCollectionView.rx
-        //            .modelSelected(FoodShop.self)
-        //            .subscribe(onNext: { [weak self] item in
-        //
-        //                                self?.delegate?.showShopCategory(shop: item)
-        //            }).disposed(by: bag)
+        productsCollectionView.rx
+            .modelSelected(ShopProduct.self)
+            .subscribe(onNext: { [weak self] item in
+                self?.delegate?.showProductDetails(item)
+            }).disposed(by: bag)
         
         breadcrumbsCollectionView.rx
             .modelSelected(ShopProduct.self)

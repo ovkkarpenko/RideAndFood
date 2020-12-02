@@ -17,6 +17,7 @@ enum SelectedViewType {
     case shopDetails
     case shopProducts
     case productCategory
+    case cardView
 }
 
 protocol FoodViewDelegate: class {
@@ -26,6 +27,7 @@ protocol FoodViewDelegate: class {
     func showShopDetails()
     func showShopProducts(shopId: Int?, subCategory: ShopSubCategory?)
     func showProductCategory(category: ShopCategory?)
+    func showProductDetails(_ shopProduct: ShopProduct?)
 }
 
 class FoodView: UIView {
@@ -88,6 +90,14 @@ class FoodView: UIView {
         return view
     }()
     
+    private lazy var productDetailsView = ProductDetailsView()
+    
+    private lazy var cardView: CardView = {
+        let cardView = CardView()
+        cardView.translatesAutoresizingMaskIntoConstraints = false
+        return cardView
+    }()
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
@@ -108,6 +118,7 @@ class FoodView: UIView {
             toggle(true, view: shopSubCategoryView, constraint: shopSubCategoryViewHeightConstraint, dismiss: selectedView == .productCategory)
             toggle(true, view: shopDetailsView, constraint: shopDetailsViewHeightConstraint, dismiss: selectedView == .shopDetails)
             toggle(true, view: shopProductsView, constraint: shopProductsViewHeightConstraint, dismiss: selectedView == .shopProducts)
+            toggle(true, view: cardView, constraint: cardViewBottomConstraint, dismiss: true)
         }
     }
     
@@ -133,6 +144,9 @@ class FoodView: UIView {
     private lazy var shopSubCategoryViewHeightConstraint = shopSubCategoryView.heightAnchor.constraint(equalToConstant: 0)
     private lazy var shopDetailsViewHeightConstraint = shopDetailsView.heightAnchor.constraint(equalToConstant: 0)
     private lazy var shopProductsViewHeightConstraint = shopProductsView.heightAnchor.constraint(equalToConstant: 0)
+    private let hideCardViewConstant: CGFloat = 1000
+    private lazy var cardViewBottomConstraint = cardView.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                                                                 constant: hideCardViewConstant)
     
     func setupLayout() {
         addSubview(backgroundView)
@@ -142,6 +156,7 @@ class FoodView: UIView {
         addSubview(shopSubCategoryView)
         addSubview(shopDetailsView)
         addSubview(shopProductsView)
+        addSubview(cardView)
         
         NSLayoutConstraint.activate([
             backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -178,6 +193,10 @@ class FoodView: UIView {
             shopProductsView.trailingAnchor.constraint(equalTo: trailingAnchor),
             shopProductsViewHeightConstraint,
             shopProductsView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            cardView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            cardView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            cardViewBottomConstraint,
         ])
         
         NotificationCenter.default.addObserver(self,
@@ -217,19 +236,23 @@ extension FoodView: FoodViewDelegate {
     
     func toggle(_ hide: Bool, view: UIView, constraint: NSLayoutConstraint, dismiss: Bool = false) {
         if hide {
-            constraint.constant = 0
+            switch selectedView {
+            case .cardView:
+                constraint.constant = hideCardViewConstant
+            default:
+                constraint.constant = 0
+            }
         } else {
-            if selectedView == .address {
+            switch selectedView {
+            case .address:
                 constraint.constant = 330
-            } else if selectedView == .shop {
+            case .shop:
                 constraint.constant = 450
-            } else if selectedView == .shopCategory {
+            case .shopCategory, .productCategory, .shopProducts:
                 constraint.constant = 620
-            } else if selectedView == .productCategory {
-                constraint.constant = 620
-            } else if selectedView == .shopProducts {
-                constraint.constant = 620
-            } else {
+            case .cardView:
+                constraint.constant = 0
+            default:
                 constraint.constant = 400
             }
         }
@@ -240,8 +263,8 @@ extension FoodView: FoodViewDelegate {
             options: hide ? .curveEaseIn : .curveEaseOut,
             animations: { [weak self] in
                 
-                if hide {
-                    if dismiss { self?.backgroundView.alpha = 0 }
+                if hide && dismiss {
+                    self?.backgroundView.alpha = 0
                 } else {
                     self?.backgroundView.alpha = 0.3
                 }
@@ -323,5 +346,50 @@ extension FoodView: FoodViewDelegate {
         
         toggle(true, view: shopSubCategoryView, constraint: shopSubCategoryViewHeightConstraint)
         toggle(false, view: shopProductsView, constraint: shopProductsViewHeightConstraint)
+    }
+    
+    func showProductDetails(_ shopProduct: ShopProduct?) {
+        guard let shopProduct = shopProduct else { return }
+        productDetailsView.configure(with: .init(model: .init(id: shopProduct.id,
+                                                              name: shopProduct.name,
+                                                              price: Double(shopProduct.price ?? 0),
+                                                              sale: 0,
+                                                              hit: false,
+                                                              composition: "вода, овсяная мука, напиток чайный (зеленый чай матча), соль.",
+                                                              weight: "\(shopProduct.weight ?? 0)",
+                                                              unit: "г",
+                                                              producing: "Сады Придонья",
+                                                              image: shopProduct.icon,
+                                                              country: "Россия")) { [weak self] in
+            guard let self = self else { return }
+            self.toggle(true,
+                        view: self.cardView,
+                        constraint: self.cardViewBottomConstraint)
+            self.selectedView = .shopProducts
+            self.toggle(false,
+                        view: self.shopProductsView,
+                        constraint: self.shopProductsViewHeightConstraint)
+            
+        })
+        
+        cardView.configure(with: .init(contentView: productDetailsView,
+                                       style: .light,
+                                       paddingTop: 0,
+                                       paddingBottom: padding,
+                                       paddingX: 0,
+                                       didSwipeDownCallback: { [weak self] in
+                                        guard let self = self else { return }
+                                        self.toggle(true,
+                                                    view: self.cardView,
+                                                    constraint: self.cardViewBottomConstraint)
+                                        self.selectedView = .shopProducts
+                                        self.toggle(false,
+                                                    view: self.shopProductsView,
+                                                    constraint: self.shopProductsViewHeightConstraint)
+                                       }))
+        layoutIfNeeded()
+        toggle(true, view: shopProductsView, constraint: shopProductsViewHeightConstraint)
+        selectedView = .cardView
+        toggle(false, view: cardView, constraint: cardViewBottomConstraint)
     }
 }

@@ -20,7 +20,7 @@ class PrimaryButton: UIButton {
         }
     }
     
-    lazy var widthConstraint = heightAnchor.constraint(equalToConstant: heightConstant)
+    lazy var heightConstraint = heightAnchor.constraint(equalToConstant: heightConstant)
     
     // MARK: - Private properties
     
@@ -54,7 +54,7 @@ class PrimaryButton: UIButton {
         setTitleColor(ColorHelper.primaryButtonText.color(), for: .normal)
         titleLabel?.font = FontHelper.regular17.font()
         translatesAutoresizingMaskIntoConstraints = false
-        widthConstraint.isActive = true
+        heightConstraint.isActive = true
         layer.cornerRadius = cornerRadius
     }
 }
