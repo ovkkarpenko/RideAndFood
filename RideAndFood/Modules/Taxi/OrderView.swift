@@ -40,11 +40,11 @@ class OrderView: UIView {
     var currentAddress: String? {
         willSet {
             if firstTextView.isAddressListener {
-                firstTextView.textField.text = newValue
+                firstTextView.setText(newValue)
             }
             
             if secondTextView.isAddressListener {
-                secondTextView.textField.text = newValue
+                secondTextView.setText(newValue)
             }
             
             if !addressLabelPanelView.isHidden {

@@ -360,7 +360,6 @@ class MapViewController: UIViewController {
             } else {
                 if let indexOfCurrentView = view.subviews.firstIndex(of: currentView) {
                     view.subviews[indexOfCurrentView - 1].isHidden = false
-                    print(type(of: view.subviews[indexOfCurrentView - 1]))
                     addressDelegate = view.subviews[indexOfCurrentView - 1] as? MapViewCurrentAddressDelegate
                 }
             }
@@ -411,7 +410,7 @@ extension MapViewController: OrderViewDelegate {
         case .confirmationCode:
             break // describe behaviour of confirmation code view's button
         case .destinationAddressFromMap:
-            addressInputView.secondTextView.textField.text = addressInfo
+            addressInputView.secondTextView.setText(addressInfo)
             backButtonPressed()
         }
     }

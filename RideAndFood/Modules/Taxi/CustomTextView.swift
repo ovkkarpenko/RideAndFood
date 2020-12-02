@@ -74,6 +74,13 @@ class CustomTextView: UIView {
         self.textViewType = textViewType
     }
     
+    func setText(_ text: String?) {
+        if let text = text, text.count > 0 {
+            textField.text = text
+            isTextFieldEnable = true
+        }
+    }
+    
     //MARK: - private methods
     private func customizeViews() {
         if let type = textViewType {
@@ -157,15 +164,17 @@ extension CustomTextView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         if let text = textField.text {
             isTextFieldEnable = text.count > 0 ? true : false
+            let state = text.count > 0 ? false : true
+            customTextViewDelegate?.isDestinationAddressSelected(state: state)
         }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textViewType {
         case .destinationAddress:
-            customTextViewDelegate?.isDestinationAddressSelected(state: textField.isFirstResponder)
+            customTextViewDelegate?.isDestinationAddressSelected(state: true)
         default:
-            break
+            customTextViewDelegate?.isDestinationAddressSelected(state: false)
         }
     }
 }
