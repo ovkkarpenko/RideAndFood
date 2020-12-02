@@ -80,7 +80,7 @@ class PaymentView: UIView {
         let button = PrimaryButton()
         button.setTitle(PaymentsHistoryStrings.sendEmail.text(), for: .normal)
         button.alpha = 0
-        button.widthConstraint.isActive = false
+        button.heightConstraint.isActive = false
         return button
     }()
     

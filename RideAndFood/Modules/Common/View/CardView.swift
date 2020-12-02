@@ -27,7 +27,8 @@ class CardView: UIView {
     private let pickerLineWidth: CGFloat = 40
     private let pickerLineHeight: CGFloat = 5
     private let pickerLineMargin: CGFloat = 10
-    private let padding: CGFloat = 25
+    private var paddingX: CGFloat = 25
+    private var paddingTop: CGFloat = 25
     private var paddingBottom: CGFloat = 25
     private let cornerRadius: CGFloat = 15
     private let shadowOpacity: Float = 0.2
@@ -84,9 +85,9 @@ class CardView: UIView {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(contentView)
         NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: padding),
-            contentView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: padding),
-            contentView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -padding),
+            contentView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: paddingX),
+            contentView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: paddingTop),
+            contentView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -paddingX),
             contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -paddingBottom)
         ])
     }
@@ -111,6 +112,8 @@ extension CardView: IConfigurableView {
     func configure(with model: CardContainerViewModel) {
         didSwipeDownCallback = model.didSwipeDownCallback
         paddingBottom = model.paddingBottom
+        paddingTop = model.paddingTop
+        paddingX = model.paddingX
         updateStyle(model.style)
         contentView?.removeFromSuperview()
         contentView = model.contentView

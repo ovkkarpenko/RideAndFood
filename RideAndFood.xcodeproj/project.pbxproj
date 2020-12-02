@@ -25,6 +25,10 @@
 		7228018E255F050400C75841 /* ButtonsStackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7228018D255F050400C75841 /* ButtonsStackViewModel.swift */; };
 		722C7CB325456F630086198C /* ResendCodeTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722C7CB225456F630086198C /* ResendCodeTextViewDelegate.swift */; };
 		722D5B552572D5F10026A9D8 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D5B542572D5F10026A9D8 /* PaymentView.swift */; };
+		722D69AB2573B2FC00A8432D /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D69AA2573B2FC00A8432D /* ProductDetailsView.swift */; };
+		722D69AE2573B40F00A8432D /* ProductDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D69AD2573B40F00A8432D /* ProductDetailModel.swift */; };
+		722D69B12573DB7200A8432D /* ProductDetailsStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D69B02573DB7200A8432D /* ProductDetailsStrings.swift */; };
+		722D69B42573EF6B00A8432D /* ProductDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722D69B32573EF6B00A8432D /* ProductDetail.swift */; };
 		7232304A2551C47400F238AF /* PromoCodesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723230492551C47400F238AF /* PromoCodesInteractor.swift */; };
 		7232304D2551CDAC00F238AF /* PromoCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7232304C2551CDAC00F238AF /* PromoCode.swift */; };
 		723230512551D94300F238AF /* ActivatePromoCodeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723230502551D94300F238AF /* ActivatePromoCodeRequest.swift */; };
@@ -74,6 +78,7 @@
 		72A1DBF32545D693005A047A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBF22545D693005A047A /* MapViewController.swift */; };
 		72A1DBF62545D8A5005A047A /* AccessLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A1DBF52545D8A5005A047A /* AccessLocationManager.swift */; };
 		72B3CE432554951D0081B1CD /* PromoCodeCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72B3CE422554951D0081B1CD /* PromoCodeCellModel.swift */; };
+		72C6CCBC25758790003D85FD /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C6CCBB25758790003D85FD /* CounterView.swift */; };
 		72D132A825642B8700A4505F /* PhoneConfirmationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D132A725642B8700A4505F /* PhoneConfirmationCode.swift */; };
 		72D3E8D9256AAD37008167FF /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D3E8D8256AAD37008167FF /* ErrorResponse.swift */; };
 		72E30EF5254EE2F40037E4B4 /* ServiceButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E30EF4254EE2F40037E4B4 /* ServiceButtonView.swift */; };
@@ -246,6 +251,10 @@
 		7228018D255F050400C75841 /* ButtonsStackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsStackViewModel.swift; sourceTree = "<group>"; };
 		722C7CB225456F630086198C /* ResendCodeTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResendCodeTextViewDelegate.swift; sourceTree = "<group>"; };
 		722D5B542572D5F10026A9D8 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		722D69AA2573B2FC00A8432D /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
+		722D69AD2573B40F00A8432D /* ProductDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailModel.swift; sourceTree = "<group>"; };
+		722D69B02573DB7200A8432D /* ProductDetailsStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsStrings.swift; sourceTree = "<group>"; };
+		722D69B32573EF6B00A8432D /* ProductDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetail.swift; sourceTree = "<group>"; };
 		723230492551C47400F238AF /* PromoCodesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodesInteractor.swift; sourceTree = "<group>"; };
 		7232304C2551CDAC00F238AF /* PromoCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCode.swift; sourceTree = "<group>"; };
 		723230502551D94300F238AF /* ActivatePromoCodeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivatePromoCodeRequest.swift; sourceTree = "<group>"; };
@@ -296,6 +305,7 @@
 		72A1DBF22545D693005A047A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		72A1DBF52545D8A5005A047A /* AccessLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessLocationManager.swift; sourceTree = "<group>"; };
 		72B3CE422554951D0081B1CD /* PromoCodeCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeCellModel.swift; sourceTree = "<group>"; };
+		72C6CCBB25758790003D85FD /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		72D132A725642B8700A4505F /* PhoneConfirmationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConfirmationCode.swift; sourceTree = "<group>"; };
 		72D3E8D8256AAD37008167FF /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		72E30EF4254EE2F40037E4B4 /* ServiceButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceButtonView.swift; sourceTree = "<group>"; };
@@ -1038,6 +1048,7 @@
 				72F467D42559C52D00F8926E /* ProfileStrings.swift */,
 				720AA101256C30C80065BFED /* PaymentsHistoryStrings.swift */,
 				FA730E4A256FA594001F7AEB /* OrdersHistoryStrings.swift */,
+				722D69B02573DB7200A8432D /* ProductDetailsStrings.swift */,
 			);
 			path = StringsHelpers;
 			sourceTree = "<group>";
@@ -1234,6 +1245,8 @@
 				FA48B7712569777D007DD7C3 /* ShopSubCategoryView.swift */,
 				FA6DDFE1256A488400244E94 /* ShopDetailsView.swift */,
 				FA6DDFEB256A590C00244E94 /* ShopProductsView.swift */,
+				722D69AA2573B2FC00A8432D /* ProductDetailsView.swift */,
+				72C6CCBB25758790003D85FD /* CounterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1308,6 +1321,8 @@
 				FA1800062569654E00148FAB /* ShopCategory.swift */,
 				FA6DDFE7256A582E00244E94 /* ShopProduct.swift */,
 				FA6DDFEE256A5B0500244E94 /* ShopSubCategory.swift */,
+				722D69AD2573B40F00A8432D /* ProductDetailModel.swift */,
+				722D69B32573EF6B00A8432D /* ProductDetail.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1500,6 +1515,7 @@
 				FAC0661C255585AB003CC6AA /* ConfirmBindCardView.swift in Sources */,
 				FA050B7F2549AA9200CF363D /* AppDelegate.swift in Sources */,
 				FA18FFF3256917D900148FAB /* FoodShopViewModel.swift in Sources */,
+				722D69AE2573B40F00A8432D /* ProductDetailModel.swift in Sources */,
 				FA983C2B2555D5B5006EE969 /* PaymentCongratulationsView.swift in Sources */,
 				FA8196AE2556A4D50053EE22 /* PaymentPointsView.swift in Sources */,
 				FAD0B00925669B1F008C2794 /* AddressView.swift in Sources */,
@@ -1509,10 +1525,12 @@
 				FAA9495125546F73005C5B40 /* PaymentViewController.swift in Sources */,
 				7286E52A2542ECA70027A69B /* CodeConfirmationView.swift in Sources */,
 				72F79E0725475AEE00F4E6AC /* MapViewDelegate.swift in Sources */,
+				722D69AB2573B2FC00A8432D /* ProductDetailsView.swift in Sources */,
 				7286E51B2542B9CB0027A69B /* ConstantsHelper.swift in Sources */,
 				FA2C80C4254AF8BD00F82637 /* PromotionsStrings.swift in Sources */,
 				FAD0B00125669B1F008C2794 /* AddressViewModel.swift in Sources */,
 				72E93400255F093500CED717 /* ProfileTableViewDelegate.swift in Sources */,
+				72C6CCBC25758790003D85FD /* CounterView.swift in Sources */,
 				7228018E255F050400C75841 /* ButtonsStackViewModel.swift in Sources */,
 				F73BC4FE254ECFF10018FC0A /* RequestErrorModel.swift in Sources */,
 				FA2C80CD254AFA4200F82637 /* PromotionCollectionViewCell.swift in Sources */,
@@ -1525,6 +1543,7 @@
 				FAACAAA0254B0C13005C3084 /* PromotionDetailsViewModel.swift in Sources */,
 				7232305B2552B34400F238AF /* PromoCodeActivatedViewController.swift in Sources */,
 				FA6DDFEF256A5B0500244E94 /* ShopSubCategory.swift in Sources */,
+				722D69B12573DB7200A8432D /* ProductDetailsStrings.swift in Sources */,
 				FA6100AC255715C700ED0CD5 /* PaymentType.swift in Sources */,
 				72A1DBE02545B424005A047A /* LoginInteractor.swift in Sources */,
 				7286E51D2542BA940027A69B /* Checkbox.swift in Sources */,
@@ -1605,6 +1624,7 @@
 				F7AECA6F256C33C700CA86AC /* OrderViewDelegate.swift in Sources */,
 				FAC0660D2555607C003CC6AA /* BindCardViewController.swift in Sources */,
 				720AA0F8256C2D0D0065BFED /* PaymentTableViewCell.swift in Sources */,
+				722D69B42573EF6B00A8432D /* ProductDetail.swift in Sources */,
 				FA44F2AF25459B080004A1C9 /* SettingsLanguageViewController.swift in Sources */,
 				FA43AE942544981E00766652 /* SettingsViewModel.swift in Sources */,
 				FAA0B6C925496D1D0020ACE7 /* SettingsViewController.swift in Sources */,
