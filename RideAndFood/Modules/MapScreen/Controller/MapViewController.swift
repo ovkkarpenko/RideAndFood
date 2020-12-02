@@ -353,17 +353,19 @@ class MapViewController: UIViewController {
     
     @objc private func backButtonPressed() {
         if let currentView = view.subviews.last as? OrderViewDirector {
-            currentView.dismiss()
-            if let indexOfCurrentView = view.subviews.firstIndex(of: currentView) {
-                view.subviews[indexOfCurrentView - 1].isHidden = false
-                addressDelegate = view.subviews[indexOfCurrentView - 1] as? MapViewCurrentAddressDelegate
-            }
-            
             if let type = currentView.orderViewType, type == .addressInput {
                 backButton.removeFromSuperview()
                 menuButton.isHidden = false
                 cardView.isHidden = false
+            } else {
+                if let indexOfCurrentView = view.subviews.firstIndex(of: currentView) {
+                    view.subviews[indexOfCurrentView - 1].isHidden = false
+                    print(type(of: view.subviews[indexOfCurrentView - 1]))
+                    addressDelegate = view.subviews[indexOfCurrentView - 1] as? MapViewCurrentAddressDelegate
+                }
             }
+            
+            currentView.dismiss()
         }
     }
 }
