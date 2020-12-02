@@ -154,6 +154,7 @@ class MapViewController: UIViewController {
         
         setupLayout()
         TariffViewController.delegate = self
+        PromotionDetailsViewController.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -453,5 +454,18 @@ extension MapViewController: TariffDelegate {
     func tariffOrderButtonTapped(tariff: TariffModel) {
         toggleSideMenu(hide: true)
         taxiButtonPressed()
+    }
+}
+
+extension MapViewController: PromotionDetailDelegate {
+    func didPromotionSelected(type: PromotionType) {
+        toggleSideMenu(hide: true)
+        
+        switch type {
+        case .food:
+            foodButtonPressed()
+        case .taxi:
+            taxiButtonPressed()
+        }
     }
 }

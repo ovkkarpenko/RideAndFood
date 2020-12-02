@@ -120,6 +120,7 @@
 		F7891733254A14FD00849D27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA050B9B2549ACE100CF363D /* LaunchScreen.storyboard */; };
 		F795DF3325547A50005A607C /* TariffPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F795DF3225547A50005A607C /* TariffPage.swift */; };
 		F795DF3625547A58005A607C /* TariffPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = F795DF3525547A58005A607C /* TariffPage.xib */; };
+		F79DD3BF2577BA9900E82B73 /* PromotionDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79DD3BE2577BA9900E82B73 /* PromotionDetailDelegate.swift */; };
 		F7AECA66256C32DC00CA86AC /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AECA65256C32DC00CA86AC /* CustomTextView.swift */; };
 		F7AECA69256C336100CA86AC /* CustomTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AECA68256C336100CA86AC /* CustomTextViewDelegate.swift */; };
 		F7AECA6C256C33B100CA86AC /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AECA6B256C33B100CA86AC /* OrderView.swift */; };
@@ -347,6 +348,7 @@
 		F7805C422552F26400D1BBAD /* TariffModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffModel.swift; sourceTree = "<group>"; };
 		F795DF3225547A50005A607C /* TariffPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPage.swift; sourceTree = "<group>"; };
 		F795DF3525547A58005A607C /* TariffPage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TariffPage.xib; sourceTree = "<group>"; };
+		F79DD3BE2577BA9900E82B73 /* PromotionDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailDelegate.swift; sourceTree = "<group>"; };
 		F7AECA65256C32DC00CA86AC /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		F7AECA68256C336100CA86AC /* CustomTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextViewDelegate.swift; sourceTree = "<group>"; };
 		F7AECA6B256C33B100CA86AC /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
@@ -1091,6 +1093,7 @@
 				FA050B6825499CF300CF363D /* Profile.swift */,
 				FA2C80B9254AED1200F82637 /* Promotion.swift */,
 				FA449609254C01000071E76F /* PromotionDetails.swift */,
+				F79DD3BE2577BA9900E82B73 /* PromotionDetailDelegate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1572,6 +1575,7 @@
 				72A1DBE22545B472005A047A /* Response.swift in Sources */,
 				7286E52C254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift in Sources */,
 				FA2C80C0254AF8A000F82637 /* SettingsStrings.swift in Sources */,
+				F79DD3BF2577BA9900E82B73 /* PromotionDetailDelegate.swift in Sources */,
 				7232304A2551C47400F238AF /* PromoCodesInteractor.swift in Sources */,
 				72280181255EFE7C00C75841 /* SecondaryButton.swift in Sources */,
 				F77DE255254A192C001338D8 /* BaseCustomUIComponents.swift in Sources */,

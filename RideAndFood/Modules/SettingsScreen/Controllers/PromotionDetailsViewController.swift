@@ -21,6 +21,7 @@ class PromotionDetailsViewController: UIViewController {
     
     let bag = DisposeBag()
     let viewModel = PromotionDetailsViewModel()
+    static weak var delegate: PromotionDetailDelegate?
     
     var promotion: Promotion?
     
@@ -51,7 +52,9 @@ class PromotionDetailsViewController: UIViewController {
             actionButton.rx
                 .tap
                 .subscribe { [weak self] _ in
-                    self?.dismiss(animated: true)
+                    guard let self = self else { return }
+                    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                    PromotionDetailsViewController.delegate?.didPromotionSelected(type: promotion.type)
                 }.disposed(by: bag)
             
             if promotion.media.count >= 2,
