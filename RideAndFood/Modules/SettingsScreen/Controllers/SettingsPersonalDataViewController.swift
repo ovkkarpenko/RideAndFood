@@ -55,7 +55,8 @@ class SettingsPersonalDataViewController: UIViewController {
             .disposed(by: bag)
         
         tableView.rx.modelSelected(TableItem.self)
-            .subscribe(onNext: { item in
+            .subscribe(onNext: { [weak self] item in
+                guard let self = self else { return }
                 item.completion?(self)
                 if let segue = item.segue {
                     self.performSegue(withIdentifier: segue, sender: nil)

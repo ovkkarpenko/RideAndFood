@@ -12,7 +12,7 @@ import RxSwift
 
 class FoodAddressView: UIView {
     
-    var delegate: FoodViewDelegate?
+    weak var delegate: FoodViewDelegate?
     
     private lazy var addressIcon: UIImageView = {
         let image = UIImage(named: "LocationIconActive", in: Bundle.init(path: "Images/MapScreen"), with: .none)

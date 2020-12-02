@@ -40,9 +40,14 @@ class SettingsAvailableSharesViewController: UIViewController {
             .disposed(by: bag)
         
         tableView.rx.modelSelected(TableItem.self)
-            .subscribe(onNext: { item in
-                item.completion?(self)
+            .subscribe(onNext: { [weak self] item in
+                item.completion?(self!)
             }).disposed(by: bag)
+        
+        tableView.rx.itemSelected
+          .subscribe(onNext: { [weak self] indexPath in
+            self?.tableView.deselectRow(at: indexPath, animated: true)
+          }).disposed(by: bag)
     }
     
     @IBAction func close(_ sender: Any) {

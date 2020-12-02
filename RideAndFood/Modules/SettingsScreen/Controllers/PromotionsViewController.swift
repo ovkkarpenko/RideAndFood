@@ -39,8 +39,8 @@ class PromotionsViewController: UIViewController {
             .disposed(by: bag)
         
         collectionView.rx.modelSelected(Promotion.self)
-            .subscribe(onNext: { item in
-                self.performSegue(withIdentifier: "PromotionDetailsSegue", sender: item)
+            .subscribe(onNext: { [weak self] item in
+                self?.performSegue(withIdentifier: "PromotionDetailsSegue", sender: item)
             }).disposed(by: bag)
         
         if let promotionType = promotionType {

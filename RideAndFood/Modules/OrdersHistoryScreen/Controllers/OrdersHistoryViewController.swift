@@ -9,7 +9,22 @@
 import UIKit
 import RxSwift
 
+protocol DetailsViewProtocol: UIView {
+    func configure(order: OrderHistoryModel)
+    func expand(with animation: (() -> ())?)
+    func shrink(with animation: (() -> Void)?, completion: (() -> Void)?)
+}
+
 class OrdersHistoryViewController: UIViewController {
+    
+    private lazy var transparentView: UIView = {
+        let view = UIView()
+        view.alpha = 0
+        view.isHidden = true
+        view.backgroundColor = .black
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private lazy var backgroundView: UIView = {
         let view = UIView()
@@ -78,6 +93,8 @@ class OrdersHistoryViewController: UIViewController {
         return segmentedControl
     }()
     
+    private var detailsView: DetailsViewProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = OrdersHistoryStrings.title.text()
@@ -86,13 +103,26 @@ class OrdersHistoryViewController: UIViewController {
         setupCollectionView()
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        if touches.first?.view == transparentView {
+            hideTaxiDetails()
+        }
+    }
+    
     private let bag = DisposeBag()
     private let viewModel = OrdersHistoryViewModel()
     
     private let padding: CGFloat = 20
     
     private lazy var completedCollectionViewTrailingAnchorConstraint = completedCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+    private lazy var completedCollectionViewLeadingAnchorConstraint = completedCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding)
     private lazy var cenceledCollectionViewLeadingAnchorConstraint = cenceledCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.width)
+    
+    private var selectedIndexPath: IndexPath?
+    private var completedCollectionViewMiddleConstraint: NSLayoutConstraint?
+    private var detailsViewHeightAnchorConstraint: NSLayoutConstraint?
     
     func setupUI() {
         view.addSubview(backgroundView)
@@ -101,8 +131,14 @@ class OrdersHistoryViewController: UIViewController {
         view.addSubview(segmentedControl)
         view.addSubview(completedCollectionView)
         view.addSubview(cenceledCollectionView)
+        view.addSubview(transparentView)
         
         NSLayoutConstraint.activate([
+            transparentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            transparentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            transparentView.topAnchor.constraint(equalTo: view.topAnchor),
+            transparentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -117,9 +153,9 @@ class OrdersHistoryViewController: UIViewController {
             
             segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            segmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: padding+100),
+            segmentedControl.topAnchor.constraint(equalTo: view.topAnchor, constant: padding+130),
             
-            completedCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            completedCollectionViewLeadingAnchorConstraint,
             completedCollectionViewTrailingAnchorConstraint,
             completedCollectionView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: padding),
             completedCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
@@ -127,7 +163,7 @@ class OrdersHistoryViewController: UIViewController {
             cenceledCollectionViewLeadingAnchorConstraint,
             cenceledCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             cenceledCollectionView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: padding),
-            cenceledCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            cenceledCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding)
         ])
     }
     
@@ -168,9 +204,11 @@ class OrdersHistoryViewController: UIViewController {
     
     private func toggle(hide: Bool) {
         if hide {
+            completedCollectionViewLeadingAnchorConstraint.constant = -view.frame.width*2
             completedCollectionViewTrailingAnchorConstraint.constant = -view.frame.width
             cenceledCollectionViewLeadingAnchorConstraint.constant = padding
         } else {
+            completedCollectionViewLeadingAnchorConstraint.constant = padding
             completedCollectionViewTrailingAnchorConstraint.constant = -padding
             cenceledCollectionViewLeadingAnchorConstraint.constant = view.frame.width
         }
@@ -192,6 +230,68 @@ class OrdersHistoryViewController: UIViewController {
 extension OrdersHistoryViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        collectionView.cellForItem(at: indexPath)?.
+        selectedIndexPath = indexPath
+        
+        let item = viewModel.doneOrders[indexPath.row]
+        showTaxiDetails(order: item, indexPath: indexPath)
+    }
+    
+    func showTaxiDetails(order: OrderHistoryModel, indexPath: IndexPath) {
+        detailsView = order.type == .taxi ? OrderHistoryTaxiDetailsView() : OrderHistoryFoodDetailsView()
+        
+        guard let detailsView = detailsView,
+            let cell = completedCollectionView.cellForItem(at: indexPath) else {
+            return
+        }
+        
+        detailsView.configure(order: order)
+        detailsView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(detailsView)
+        let middleConstraint = detailsView.centerYAnchor.constraint(equalTo: cell.centerYAnchor)
+        completedCollectionViewMiddleConstraint = detailsView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        detailsViewHeightAnchorConstraint = detailsView.heightAnchor.constraint(equalToConstant: 125)
+        detailsViewHeightAnchorConstraint?.isActive = true
+        
+        NSLayoutConstraint.activate([
+            detailsView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+            detailsView.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+            middleConstraint
+        ])
+        
+        view.layoutIfNeeded()
+        cell.alpha = 0
+        transparentView.isHidden = false
+        
+        detailsView.expand { [weak self] in
+            guard let self = self else { return }
+            middleConstraint.isActive = false
+            self.transparentView.alpha = 0.3
+            self.completedCollectionViewMiddleConstraint?.isActive = true
+            self.detailsViewHeightAnchorConstraint?.constant = 390
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func hideTaxiDetails() {
+        guard let selectedIndexPath = selectedIndexPath,
+              let cell = completedCollectionView.cellForItem(at: selectedIndexPath) else {
+            return
+        }
+        
+        completedCollectionViewMiddleConstraint?.isActive = false
+        detailsView?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        detailsViewHeightAnchorConstraint?.constant = 125
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+        
+        detailsView?.shrink(with: { [weak self] in
+            cell.alpha = 1
+            self?.transparentView.alpha = 0
+        }, completion: { [weak self] in
+            self?.transparentView.isHidden = true
+            self?.detailsView?.removeFromSuperview()
+        })
     }
 }

@@ -44,8 +44,8 @@ class SettingsViewController: UIViewController {
     }
     
     func setupLayout() {
-        backButton.rx.tap.subscribe(onNext: {
-            self.dismiss(animated: true)
+        backButton.rx.tap.subscribe(onNext: { [weak self] in
+            self?.dismiss(animated: true)
         }).disposed(by: bag)
     }
     
@@ -58,7 +58,8 @@ class SettingsViewController: UIViewController {
             .disposed(by: bag)
         
         tableView.rx.modelSelected(TableItem.self)
-            .subscribe(onNext: { item in
+            .subscribe(onNext: { [weak self] item in
+                guard let self = self else { return }
                 item.completion?(self)
                 if let segue = item.segue {
                     self.performSegue(withIdentifier: segue, sender: nil)

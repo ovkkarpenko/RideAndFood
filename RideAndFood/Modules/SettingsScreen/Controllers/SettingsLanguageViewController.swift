@@ -31,8 +31,8 @@ class SettingsLanguageViewController: UIViewController {
             .disposed(by: bag)
         
         tableView.rx.modelSelected(TableItem.self)
-            .subscribe(onNext: { item in
-                self.viewModel.selectLanguage(checkedItem: item)
+            .subscribe(onNext: { [weak self] item in
+                self?.viewModel.selectLanguage(checkedItem: item)
             }).disposed(by: bag)
         
         viewModel.fetchItems()

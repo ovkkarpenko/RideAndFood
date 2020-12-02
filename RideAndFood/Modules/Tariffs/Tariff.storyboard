@@ -83,7 +83,6 @@
         <!--Tariff Page View Controller-->
         <scene sceneID="e6r-iJ-QvQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gxV-bw-HaZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController modalTransitionStyle="crossDissolve" id="3g4-3j-E8G" customClass="TariffPageViewController" customModule="RideAndFood" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vPg-i2-3TE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
@@ -92,6 +91,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxV-bw-HaZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1169" y="17"/>
         </scene>

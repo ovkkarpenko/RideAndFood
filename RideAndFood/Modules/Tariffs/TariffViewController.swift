@@ -10,11 +10,15 @@ import UIKit
 
 class TariffViewController: UIViewController {
     @IBOutlet weak var orderButton: CustomButton!
+
+    private var selectedTariff: TariffModel?
+    static weak var delegate: TariffDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = TariffStrings.getString(.storyboardTitle)()
         setOrderButtonParameters()
+        TariffPageViewController.tariffPageDelegate = self
     }
     
     @IBAction func back(_ sender: Any) {
@@ -22,12 +26,20 @@ class TariffViewController: UIViewController {
     }
     
     @IBAction func order(_ sender: Any) {
-        // some order logic
+        if let selectedTariff = selectedTariff {
+            TariffViewController.delegate?.tariffOrderButtonTapped(tariff: selectedTariff)
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     private func setOrderButtonParameters() {
         orderButton.customizeButton(type: .blueButton)
         orderButton.setTitle(TariffStrings.getString(.orderTaxiButton)(), for: .normal)
     }
-    
+}
+
+extension TariffViewController: TariffPageDelegate {
+    func selectedTariff(tariff: TariffModel) {
+        selectedTariff = tariff
+    }
 }

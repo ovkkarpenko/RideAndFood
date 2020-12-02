@@ -42,7 +42,8 @@ class SettingsPersonalDataViewModel {
                 SectionModel(model: SettingsPersonalDataStrings.name.text(), items: [
                     TableItem(
                         title: isNameEmpty ? SettingsPersonalDataStrings.nameCellTitle.text() : profile.name!,
-                        cellTypes: [.default(isNameEmpty ? .gray : .black)], completion: { vc in
+                        cellTypes: [.default(isNameEmpty ? .gray : .black)], completion: { [weak self] vc in
+                            guard let self = self else { return }
                             
                             if let alert = UIStoryboard(name: "Settings", bundle: nil)
                                 .instantiateViewController(withIdentifier: "AlertController") as? AlertTextFieldViewController {
@@ -52,9 +53,9 @@ class SettingsPersonalDataViewModel {
                                 alert.placeholder = SettingsPersonalDataStrings.nameCellTitle.text()
                                 alert.buttonClickedCallback = { text in
                                     
-                                    ServerApi.shared.saveProfile(Profile(name: text)) { profile, _ in
+                                    ServerApi.shared.saveProfile(Profile(name: text)) { [weak self] profile, _ in
                                         if let _ = profile {
-                                            self.fetchItems()
+                                            self?.fetchItems()
                                         } else {
                                             AlertHelper.shared.alert(vc, title: StringsHelper.alertErrorTitle.text(), message: StringsHelper.alertErrorDescription.text())
                                         }
@@ -71,7 +72,8 @@ class SettingsPersonalDataViewModel {
                 SectionModel(model: "E-main", items: [
                     TableItem(
                         title: isEmailEmpty ? SettingsPersonalDataStrings.emailCellTitle.text() : profile.email!,
-                        cellTypes: [.default(isEmailEmpty ? .gray : .black)], completion: { vc in
+                        cellTypes: [.default(isEmailEmpty ? .gray : .black)], completion: { [weak self] vc in
+                            guard let self = self else { return }
                             
                             if let alert = UIStoryboard(name: "Settings", bundle: nil)
                                 .instantiateViewController(withIdentifier: "AlertController") as? AlertTextFieldViewController {
@@ -81,9 +83,9 @@ class SettingsPersonalDataViewModel {
                                 alert.placeholder = SettingsPersonalDataStrings.emailCellTitle.text()
                                 alert.buttonClickedCallback = { text in
                                     
-                                    ServerApi.shared.saveProfile(Profile(email: text)) { profile, _ in
+                                    ServerApi.shared.saveProfile(Profile(email: text)) { [weak self] profile, _ in
                                         if let _ = profile {
-                                            self.fetchItems()
+                                            self?.fetchItems()
                                         } else {
                                             AlertHelper.shared.alert(vc, title: StringsHelper.alertErrorTitle.text(), message: StringsHelper.alertErrorDescription.text())
                                         }

@@ -104,6 +104,8 @@
 		72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3AD9253F58CD0042B2A0 /* LoginView.swift */; };
 		96D62A89E82A8316062BDE0E /* Pods_RideAndFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */; };
 		F707DBA0257030A0002C3F58 /* OrderViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F707DB9F257030A0002C3F58 /* OrderViewType.swift */; };
+		F72D0AD925764146000952AF /* TariffDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72D0AD825764146000952AF /* TariffDelegate.swift */; };
+		F72D0ADC257643C6000952AF /* TariffPageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */; };
 		F73BC4F0254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */; };
 		F73BC4F4254ECE0A0018FC0A /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F3254ECE0A0018FC0A /* RequestModel.swift */; };
 		F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F7254ECF3D0018FC0A /* Networker.swift */; };
@@ -123,6 +125,8 @@
 		F7891733254A14FD00849D27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA050B9B2549ACE100CF363D /* LaunchScreen.storyboard */; };
 		F795DF3325547A50005A607C /* TariffPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F795DF3225547A50005A607C /* TariffPage.swift */; };
 		F795DF3625547A58005A607C /* TariffPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = F795DF3525547A58005A607C /* TariffPage.xib */; };
+		F79DD3BF2577BA9900E82B73 /* PromotionDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79DD3BE2577BA9900E82B73 /* PromotionDetailDelegate.swift */; };
+		F79DD3D42577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79DD3D32577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift */; };
 		F7AECA66256C32DC00CA86AC /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AECA65256C32DC00CA86AC /* CustomTextView.swift */; };
 		F7AECA69256C336100CA86AC /* CustomTextViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AECA68256C336100CA86AC /* CustomTextViewDelegate.swift */; };
 		F7AECA6C256C33B100CA86AC /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AECA6B256C33B100CA86AC /* OrderView.swift */; };
@@ -136,10 +140,15 @@
 		F7E5E9C9254A17B40026ED71 /* SupportServiceStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */; };
 		F7E5E9CB254A17B60026ED71 /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */; };
 		F7FD685D253F72BD00A67E07 /* SupportService.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7FD685C253F72BD00A67E07 /* SupportService.storyboard */; };
+		FA02B89B2573C59100692C65 /* OrderHistoryTaxiDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02B89A2573C59100692C65 /* OrderHistoryTaxiDetailsView.swift */; };
+		FA02B89F2573CBBC00692C65 /* OrderHistoryFoodDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02B89E2573CBBC00692C65 /* OrderHistoryFoodDetailsView.swift */; };
+		FA02B8A225750A3800692C65 /* TaxiDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02B8A125750A3800692C65 /* TaxiDestinationView.swift */; };
 		FA050B6925499CF300CF363D /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA050B6825499CF300CF363D /* Profile.swift */; };
 		FA050B6C2549A72E00CF363D /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA050B6B2549A72E00CF363D /* AlertHelper.swift */; };
 		FA050B7F2549AA9200CF363D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA050B7E2549AA9200CF363D /* AppDelegate.swift */; };
 		FA050B862549AB0500CF363D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA050B852549AB0500CF363D /* Assets.xcassets */; };
+		FA16206F25766BC4008A239D /* FoodDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16206E25766BC4008A239D /* FoodDestinationView.swift */; };
+		FA16207225766E06008A239D /* FoodInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16207125766E06008A239D /* FoodInfoView.swift */; };
 		FA1800012569648000148FAB /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1800002569648000148FAB /* CategoryCollectionViewCell.swift */; };
 		FA180004256964CD00148FAB /* ShopCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180003256964CD00148FAB /* ShopCategoryViewModel.swift */; };
 		FA1800072569654E00148FAB /* ShopCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1800062569654E00148FAB /* ShopCategory.swift */; };
@@ -208,6 +217,7 @@
 		FAC0661325556B16003CC6AA /* MaskTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0661225556B16003CC6AA /* MaskTextField.swift */; };
 		FAC066192555717B003CC6AA /* BindCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC066182555717B003CC6AA /* BindCardViewModel.swift */; };
 		FAC0661C255585AB003CC6AA /* ConfirmBindCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0661B255585AB003CC6AA /* ConfirmBindCardView.swift */; };
+		FACF06B22575560700F429F3 /* TaxiInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACF06B12575560700F429F3 /* TaxiInfoView.swift */; };
 		FAD0AFEF25669B1A008C2794 /* FoodAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0AFED25669B1A008C2794 /* FoodAddressView.swift */; };
 		FAD0AFF025669B1A008C2794 /* FoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0AFEE25669B1A008C2794 /* FoodView.swift */; };
 		FAD0B00125669B1F008C2794 /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD0AFF425669B1F008C2794 /* AddressViewModel.swift */; };
@@ -331,6 +341,8 @@
 		F707DB9F257030A0002C3F58 /* OrderViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewType.swift; sourceTree = "<group>"; };
 		F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportServiceStrings.swift; sourceTree = "<group>"; };
+		F72D0AD825764146000952AF /* TariffDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffDelegate.swift; sourceTree = "<group>"; };
+		F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPageDelegate.swift; sourceTree = "<group>"; };
 		F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsOfSwiftTypes.swift; sourceTree = "<group>"; };
 		F73BC4F3254ECE0A0018FC0A /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		F73BC4F7254ECF3D0018FC0A /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
@@ -347,6 +359,8 @@
 		F7805C422552F26400D1BBAD /* TariffModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffModel.swift; sourceTree = "<group>"; };
 		F795DF3225547A50005A607C /* TariffPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPage.swift; sourceTree = "<group>"; };
 		F795DF3525547A58005A607C /* TariffPage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TariffPage.xib; sourceTree = "<group>"; };
+		F79DD3BE2577BA9900E82B73 /* PromotionDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailDelegate.swift; sourceTree = "<group>"; };
+		F79DD3D32577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewControllerDelegate.swift; sourceTree = "<group>"; };
 		F7AECA65256C32DC00CA86AC /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		F7AECA68256C336100CA86AC /* CustomTextViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextViewDelegate.swift; sourceTree = "<group>"; };
 		F7AECA6B256C33B100CA86AC /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
@@ -360,12 +374,17 @@
 		F7FD685C253F72BD00A67E07 /* SupportService.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SupportService.storyboard; sourceTree = "<group>"; };
 		F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportMessageViewController.swift; sourceTree = "<group>"; };
 		F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCustomUIComponents.swift; sourceTree = "<group>"; };
+		FA02B89A2573C59100692C65 /* OrderHistoryTaxiDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryTaxiDetailsView.swift; sourceTree = "<group>"; };
+		FA02B89E2573CBBC00692C65 /* OrderHistoryFoodDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryFoodDetailsView.swift; sourceTree = "<group>"; };
+		FA02B8A125750A3800692C65 /* TaxiDestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiDestinationView.swift; sourceTree = "<group>"; };
 		FA050B6825499CF300CF363D /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		FA050B6B2549A72E00CF363D /* AlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHelper.swift; sourceTree = "<group>"; };
 		FA050B7E2549AA9200CF363D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA050B822549AADA00CF363D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA050B852549AB0500CF363D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA050B9B2549ACE100CF363D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FA16206E25766BC4008A239D /* FoodDestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDestinationView.swift; sourceTree = "<group>"; };
+		FA16207125766E06008A239D /* FoodInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInfoView.swift; sourceTree = "<group>"; };
 		FA1800002569648000148FAB /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA180003256964CD00148FAB /* ShopCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategoryViewModel.swift; sourceTree = "<group>"; };
 		FA1800062569654E00148FAB /* ShopCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategory.swift; sourceTree = "<group>"; };
@@ -434,6 +453,7 @@
 		FAC0661225556B16003CC6AA /* MaskTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskTextField.swift; sourceTree = "<group>"; };
 		FAC066182555717B003CC6AA /* BindCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindCardViewModel.swift; sourceTree = "<group>"; };
 		FAC0661B255585AB003CC6AA /* ConfirmBindCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmBindCardView.swift; sourceTree = "<group>"; };
+		FACF06B12575560700F429F3 /* TaxiInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiInfoView.swift; sourceTree = "<group>"; };
 		FAD0AFED25669B1A008C2794 /* FoodAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodAddressView.swift; sourceTree = "<group>"; };
 		FAD0AFEE25669B1A008C2794 /* FoodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodView.swift; sourceTree = "<group>"; };
 		FAD0AFF425669B1F008C2794 /* AddressViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
@@ -976,7 +996,9 @@
 			children = (
 				F7805C392552E41500D1BBAD /* Tariff.storyboard */,
 				F73D1B0925568DAD0001F7FC /* TariffPageViewController.swift */,
+				F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */,
 				F73D1B0D25568E440001F7FC /* TariffViewController.swift */,
+				F72D0AD825764146000952AF /* TariffDelegate.swift */,
 				F795DF3225547A50005A607C /* TariffPage.swift */,
 				F795DF3525547A58005A607C /* TariffPage.xib */,
 				F7805C3F2552EFBE00D1BBAD /* TariffStrings.swift */,
@@ -1084,6 +1106,7 @@
 				FA050B6825499CF300CF363D /* Profile.swift */,
 				FA2C80B9254AED1200F82637 /* Promotion.swift */,
 				FA449609254C01000071E76F /* PromotionDetails.swift */,
+				F79DD3BE2577BA9900E82B73 /* PromotionDetailDelegate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1127,6 +1150,12 @@
 			isa = PBXGroup;
 			children = (
 				FA730E54256FAC32001F7AEB /* Cells */,
+				FA02B89A2573C59100692C65 /* OrderHistoryTaxiDetailsView.swift */,
+				FA02B89E2573CBBC00692C65 /* OrderHistoryFoodDetailsView.swift */,
+				FA02B8A125750A3800692C65 /* TaxiDestinationView.swift */,
+				FACF06B12575560700F429F3 /* TaxiInfoView.swift */,
+				FA16206E25766BC4008A239D /* FoodDestinationView.swift */,
+				FA16207125766E06008A239D /* FoodInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1274,6 +1303,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD0AFF625669B1F008C2794 /* Address.swift */,
+				F79DD3D32577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1478,12 +1508,14 @@
 				720AA115256D68820065BFED /* PaymentCardShort.swift in Sources */,
 				72F79E0125474DC900F4E6AC /* BaseUserDefaultsManager.swift in Sources */,
 				FA050B6C2549A72E00CF363D /* AlertHelper.swift in Sources */,
+				FA02B8A225750A3800692C65 /* TaxiDestinationView.swift in Sources */,
 				FA32C9C5256CF0D600B64F89 /* ProductBreadcrumbViewModel.swift in Sources */,
 				FA983C2F2555DA9C006EE969 /* PaymentPointsViewController.swift in Sources */,
 				FAACAA9D254B0973005C3084 /* PromotionDetailsViewController.swift in Sources */,
 				7270D100254F377800DE6BBC /* PromoCodesViewController.swift in Sources */,
 				723DE27F2548A8F200E39743 /* LoginViewController.swift in Sources */,
 				FA1800012569648000148FAB /* CategoryCollectionViewCell.swift in Sources */,
+				FACF06B22575560700F429F3 /* TaxiInfoView.swift in Sources */,
 				FAC066192555717B003CC6AA /* BindCardViewModel.swift in Sources */,
 				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
 				F7AECA72256C340500CA86AC /* OrderViewDirector.swift in Sources */,
@@ -1500,6 +1532,7 @@
 				FAD0AFF025669B1A008C2794 /* FoodView.swift in Sources */,
 				FAD0B00325669B1F008C2794 /* AddressesViewController.swift in Sources */,
 				72E93405255F0BF700CED717 /* ProfilePhoneModel.swift in Sources */,
+				FA02B89F2573CBBC00692C65 /* OrderHistoryFoodDetailsView.swift in Sources */,
 				FA44960A254C01000071E76F /* PromotionDetails.swift in Sources */,
 				FA18FFF025690C7100148FAB /* FoodShopView.swift in Sources */,
 				FAE8E5EF254ABA0C000DF2F7 /* ApiConfig.swift in Sources */,
@@ -1520,6 +1553,7 @@
 				FA8196AE2556A4D50053EE22 /* PaymentPointsView.swift in Sources */,
 				FAD0B00925669B1F008C2794 /* AddressView.swift in Sources */,
 				7286E5122542398F0027A69B /* FontsHelper.swift in Sources */,
+				F72D0ADC257643C6000952AF /* TariffPageDelegate.swift in Sources */,
 				F7AECA78256C345300CA86AC /* TextViewType.swift in Sources */,
 				FA8196B12556A7100053EE22 /* PaymentPointsDetailsView.swift in Sources */,
 				FAA9495125546F73005C5B40 /* PaymentViewController.swift in Sources */,
@@ -1563,6 +1597,7 @@
 				72A1DBE22545B472005A047A /* Response.swift in Sources */,
 				7286E52C254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift in Sources */,
 				FA2C80C0254AF8A000F82637 /* SettingsStrings.swift in Sources */,
+				F79DD3BF2577BA9900E82B73 /* PromotionDetailDelegate.swift in Sources */,
 				7232304A2551C47400F238AF /* PromoCodesInteractor.swift in Sources */,
 				72280181255EFE7C00C75841 /* SecondaryButton.swift in Sources */,
 				F77DE255254A192C001338D8 /* BaseCustomUIComponents.swift in Sources */,
@@ -1579,6 +1614,7 @@
 				F77DE253254A1928001338D8 /* GeneralGUISettings.swift in Sources */,
 				723958E82561347600027FA8 /* ProfilePhoneEnteringView.swift in Sources */,
 				720AA0F4256C2BB70065BFED /* PaymentsHistoryTableViewDelegate.swift in Sources */,
+				F72D0AD925764146000952AF /* TariffDelegate.swift in Sources */,
 				72F467DF255AFFEA00F8926E /* ProfileTableViewCell.swift in Sources */,
 				72280184255F033F00C75841 /* ButtonsStackView.swift in Sources */,
 				726353E4254F464500AF868D /* PromoCodesStrings.swift in Sources */,
@@ -1617,6 +1653,7 @@
 				FAA9495625546F80005C5B40 /* PaymentViewModel.swift in Sources */,
 				FA18FFF62569180800148FAB /* FoodShop.swift in Sources */,
 				72A1DBE52545B5A9005A047A /* PhoneModel.swift in Sources */,
+				FA16207225766E06008A239D /* FoodInfoView.swift in Sources */,
 				72E933FD255F083000CED717 /* ProfileTableViewDataSource.swift in Sources */,
 				FAA9495A25546F9F005C5B40 /* PaymentCard.swift in Sources */,
 				72FBDC6325488F3F00727C12 /* MapStrings.swift in Sources */,
@@ -1653,18 +1690,21 @@
 				FA730E52256FAB69001F7AEB /* OrdersHistoryViewModel.swift in Sources */,
 				FAB9706F256988E600FD6563 /* ShopSubCategoryViewModel.swift in Sources */,
 				722D5B552572D5F10026A9D8 /* PaymentView.swift in Sources */,
+				F79DD3D42577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift in Sources */,
 				FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */,
 				72B3CE432554951D0081B1CD /* PromoCodeCellModel.swift in Sources */,
 				F73BC502254ED19D0018FC0A /* AddressModel.swift in Sources */,
 				FA730E4E256FAA23001F7AEB /* OrderHistoryModel.swift in Sources */,
 				FA3A05702548128600C55447 /* PromotionsViewController.swift in Sources */,
 				FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */,
+				FA02B89B2573C59100692C65 /* OrderHistoryTaxiDetailsView.swift in Sources */,
 				FA449611254C0BE40071E76F /* DateTimeHelper.swift in Sources */,
 				72736D1F2561744D0094DBC5 /* CodeConfirmationViewModel.swift in Sources */,
 				72F467D52559C52D00F8926E /* ProfileStrings.swift in Sources */,
 				F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */,
 				FAD0B01B2566D427008C2794 /* FoodStrings.swift in Sources */,
 				FAC0660825553FFB003CC6AA /* PaymentStrings.swift in Sources */,
+				FA16206F25766BC4008A239D /* FoodDestinationView.swift in Sources */,
 				FA44960D254C0AC80071E76F /* Throwable.swift in Sources */,
 				7238B4682562C8BB00609B92 /* ProfileService.swift in Sources */,
 				723958EE2561352800027FA8 /* PhoneTextFieldModel.swift in Sources */,
@@ -1810,7 +1850,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LMGHP5L64B;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RideAndFood/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1831,7 +1871,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LMGHP5L64B;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = RideAndFood/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

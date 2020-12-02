@@ -153,6 +153,10 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         setupLayout()
+        
+        TariffViewController.delegate = self
+        PromotionDetailsViewController.delegate = self
+        AddAddresViewController.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -352,17 +356,18 @@ class MapViewController: UIViewController {
     
     @objc private func backButtonPressed() {
         if let currentView = view.subviews.last as? OrderViewDirector {
-            currentView.dismiss()
-            if let indexOfCurrentView = view.subviews.firstIndex(of: currentView) {
-                view.subviews[indexOfCurrentView - 1].isHidden = false
-                addressDelegate = view.subviews[indexOfCurrentView - 1] as? MapViewCurrentAddressDelegate
-            }
-            
             if let type = currentView.orderViewType, type == .addressInput {
                 backButton.removeFromSuperview()
                 menuButton.isHidden = false
                 cardView.isHidden = false
+            } else {
+                if let indexOfCurrentView = view.subviews.firstIndex(of: currentView) {
+                    view.subviews[indexOfCurrentView - 1].isHidden = false
+                    addressDelegate = view.subviews[indexOfCurrentView - 1] as? MapViewCurrentAddressDelegate
+                }
             }
+            
+            currentView.dismiss()
         }
     }
 }
@@ -408,7 +413,7 @@ extension MapViewController: OrderViewDelegate {
         case .confirmationCode:
             break // describe behaviour of confirmation code view's button
         case .destinationAddressFromMap:
-            addressInputView.secondTextView.textField.text = addressInfo
+            addressInputView.secondTextView.setText(addressInfo)
             backButtonPressed()
         }
     }
@@ -444,5 +449,35 @@ extension MapViewController: OrderViewDelegate {
     
     func shouldRemoveTranspatentView() {
         transparentView.removeFromSuperview()
+    }
+}
+
+extension MapViewController: TariffDelegate {
+    func tariffOrderButtonTapped(tariff: TariffModel) {
+        toggleSideMenu(hide: true)
+        taxiButtonPressed()
+    }
+}
+
+extension MapViewController: PromotionDetailDelegate {
+    func didPromotionSelected(type: PromotionType) {
+        toggleSideMenu(hide: true)
+        
+        switch type {
+        case .food:
+            foodButtonPressed()
+        case .taxi:
+            taxiButtonPressed()
+        }
+    }
+}
+
+extension MapViewController: AddAddressViewControllerDelegate {
+    func didSelectedAddressAsDestination(address: Address?) {
+        if !self.view.subviews.contains(addressInputView) {
+            taxiButtonPressed()
+        }
+        
+        addressInputView.secondTextView.setText(address?.address)
     }
 }

@@ -33,6 +33,11 @@ class PaymentViewController: UIViewController {
         
         viewModel.fetchItems()
         
+        tableView.rx.itemSelected
+          .subscribe(onNext: { [weak self] indexPath in
+            tableView.deselectRow(at: indexPath, animated: true)
+          }).disposed(by: bag)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
