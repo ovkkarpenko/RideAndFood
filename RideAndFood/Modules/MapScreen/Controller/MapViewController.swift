@@ -109,6 +109,13 @@ class MapViewController: UIViewController {
         return view
     }()
     
+    private lazy var selectTariffView: SelectTariffViewDirector = {
+        let view = SelectTariffViewDirector(type: .tariffInput)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.delegate = self
+        return view
+    }()
+    
     // MARK: - Private properties
     
     private let accessManager = AccessLocationManager()
@@ -305,6 +312,18 @@ class MapViewController: UIViewController {
         addressInputView.show()
     }
     
+    private func initializeSelectTariffView() {
+        view.addSubview(selectTariffView)
+        
+        NSLayoutConstraint.activate([selectTariffView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                      selectTariffView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                      selectTariffView.topAnchor.constraint(equalTo: view.topAnchor),
+                                      selectTariffView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+        view.layoutIfNeeded()
+        
+        selectTariffView.show()
+    }
+    
     @objc private func dismissKeyboard() {
         if self.view.endEditing(false) {
             self.view.endEditing(true)
@@ -370,6 +389,13 @@ class MapViewController: UIViewController {
             currentView.dismiss()
         }
     }
+    
+    @objc private func confirmAddressButtonPressed() {
+        if let currentView = view.subviews.last as? OrderViewDirector {
+            currentView.dismiss()
+            initializeSelectTariffView()
+        }
+    }
 }
 
 // MARK: - Extensions
@@ -401,7 +427,7 @@ extension MapViewController: OrderViewDelegate {
     func buttonTapped(senderType: OrderViewType, addressInfo: String?) {
         switch senderType {
         case .addressInput:
-            break // describe behaviour of address input view's button
+            confirmAddressButtonPressed()
         case .currentAddressDetail:
             // add addressInfo to the post model
             backButtonPressed()
@@ -480,4 +506,9 @@ extension MapViewController: AddAddressViewControllerDelegate {
         
         addressInputView.secondTextView.setText(address?.address)
     }
+}
+
+extension MapViewController: SelectTariffViewDelegate {
+    
+    
 }
