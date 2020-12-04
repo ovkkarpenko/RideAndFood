@@ -155,8 +155,6 @@
 		FA050B862549AB0500CF363D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA050B852549AB0500CF363D /* Assets.xcassets */; };
 		FA16206F25766BC4008A239D /* FoodDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16206E25766BC4008A239D /* FoodDestinationView.swift */; };
 		FA16207225766E06008A239D /* FoodInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA16207125766E06008A239D /* FoodInfoView.swift */; };
-		FA17FA002579442C009553C4 /* SelectTariffViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA17F9FF2579442C009553C4 /* SelectTariffViewType.swift */; };
-		FA17FA0425794498009553C4 /* SelectTariffViewDirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA17FA0325794498009553C4 /* SelectTariffViewDirector.swift */; };
 		FA17FA07257944B4009553C4 /* SelectTariffView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA17FA06257944B4009553C4 /* SelectTariffView.swift */; };
 		FA1800012569648000148FAB /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1800002569648000148FAB /* CategoryCollectionViewCell.swift */; };
 		FA180004256964CD00148FAB /* ShopCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180003256964CD00148FAB /* ShopCategoryViewModel.swift */; };
@@ -178,7 +176,6 @@
 		FA3A05702548128600C55447 /* PromotionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3A056F2548128600C55447 /* PromotionsViewController.swift */; };
 		FA3FD465254D846500769610 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3FD464254D846500769610 /* SideMenuViewModel.swift */; };
 		FA3FD468254D84BE00769610 /* SideMenuStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3FD467254D84BE00769610 /* SideMenuStrings.swift */; };
-		FA43663C257948610043B7DF /* SelectTariffViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43663B257948610043B7DF /* SelectTariffViewDelegate.swift */; };
 		FA43AE8B2544911000766652 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA43AE8A2544911000766652 /* Settings.storyboard */; };
 		FA43AE902544937D00766652 /* TableHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43AE8F2544937D00766652 /* TableHelper.swift */; };
 		FA43AE942544981E00766652 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43AE932544981E00766652 /* SettingsViewModel.swift */; };
@@ -401,8 +398,6 @@
 		FA050B9B2549ACE100CF363D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA16206E25766BC4008A239D /* FoodDestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDestinationView.swift; sourceTree = "<group>"; };
 		FA16207125766E06008A239D /* FoodInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodInfoView.swift; sourceTree = "<group>"; };
-		FA17F9FF2579442C009553C4 /* SelectTariffViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTariffViewType.swift; sourceTree = "<group>"; };
-		FA17FA0325794498009553C4 /* SelectTariffViewDirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTariffViewDirector.swift; sourceTree = "<group>"; };
 		FA17FA06257944B4009553C4 /* SelectTariffView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTariffView.swift; sourceTree = "<group>"; };
 		FA1800002569648000148FAB /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA180003256964CD00148FAB /* ShopCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategoryViewModel.swift; sourceTree = "<group>"; };
@@ -424,7 +419,6 @@
 		FA3A056F2548128600C55447 /* PromotionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionsViewController.swift; sourceTree = "<group>"; };
 		FA3FD464254D846500769610 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		FA3FD467254D84BE00769610 /* SideMenuStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuStrings.swift; sourceTree = "<group>"; };
-		FA43663B257948610043B7DF /* SelectTariffViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTariffViewDelegate.swift; sourceTree = "<group>"; };
 		FA43AE8A2544911000766652 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		FA43AE8F2544937D00766652 /* TableHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHelper.swift; sourceTree = "<group>"; };
 		FA43AE932544981E00766652 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -1101,10 +1095,7 @@
 		FA17F9F9257943C6009553C4 /* SelectTariff */ = {
 			isa = PBXGroup;
 			children = (
-				FA17F9FF2579442C009553C4 /* SelectTariffViewType.swift */,
-				FA17FA0325794498009553C4 /* SelectTariffViewDirector.swift */,
-				FA17FA06257944B4009553C4 /* SelectTariffView.swift */,
-				FA43663B257948610043B7DF /* SelectTariffViewDelegate.swift */,
+				FA436640257961130043B7DF /* Views */,
 			);
 			path = SelectTariff;
 			sourceTree = "<group>";
@@ -1126,6 +1117,14 @@
 				722D69B02573DB7200A8432D /* ProductDetailsStrings.swift */,
 			);
 			path = StringsHelpers;
+			sourceTree = "<group>";
+		};
+		FA436640257961130043B7DF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA17FA06257944B4009553C4 /* SelectTariffView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		FA43AE84254490C300766652 /* Views */ = {
@@ -1574,7 +1573,6 @@
 				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
 				F7AECA72256C340500CA86AC /* OrderViewDirector.swift in Sources */,
 				723958FB25613DD400027FA8 /* ProfilePhoneEnteringViewModel.swift in Sources */,
-				FA43663C257948610043B7DF /* SelectTariffViewDelegate.swift in Sources */,
 				72A1DBD62545A764005A047A /* BaseNetworkManager.swift in Sources */,
 				72E30EFB254EEFF50037E4B4 /* RoundButton.swift in Sources */,
 				72A1DBE92545BF24005A047A /* CodeConfirmationModel.swift in Sources */,
@@ -1713,7 +1711,6 @@
 				FAA9495625546F80005C5B40 /* PaymentViewModel.swift in Sources */,
 				FA18FFF62569180800148FAB /* FoodShop.swift in Sources */,
 				72A1DBE52545B5A9005A047A /* PhoneModel.swift in Sources */,
-				FA17FA0425794498009553C4 /* SelectTariffViewDirector.swift in Sources */,
 				FA16207225766E06008A239D /* FoodInfoView.swift in Sources */,
 				72E933FD255F083000CED717 /* ProfileTableViewDataSource.swift in Sources */,
 				FAA9495A25546F9F005C5B40 /* PaymentCard.swift in Sources */,
@@ -1764,7 +1761,6 @@
 				FA449611254C0BE40071E76F /* DateTimeHelper.swift in Sources */,
 				72736D1F2561744D0094DBC5 /* CodeConfirmationViewModel.swift in Sources */,
 				72F467D52559C52D00F8926E /* ProfileStrings.swift in Sources */,
-				FA17FA002579442C009553C4 /* SelectTariffViewType.swift in Sources */,
 				F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */,
 				FAD0B01B2566D427008C2794 /* FoodStrings.swift in Sources */,
 				FAC0660825553FFB003CC6AA /* PaymentStrings.swift in Sources */,

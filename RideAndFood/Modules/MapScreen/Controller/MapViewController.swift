@@ -109,10 +109,9 @@ class MapViewController: UIViewController {
         return view
     }()
     
-    private lazy var selectTariffView: SelectTariffViewDirector = {
-        let view = SelectTariffViewDirector(type: .tariffInput)
+    private lazy var selectTariffView: SelectTariffView = {
+        let view = SelectTariffView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.delegate = self
         return view
     }()
     
@@ -312,7 +311,9 @@ class MapViewController: UIViewController {
         addressInputView.show()
     }
     
-    private func initializeSelectTariffView() {
+    private func initializeSelectTariffView(_ firstTextFieldText: String?, _ secondTextFieldText: String?) {
+        selectTariffView.firstTextField.textField.text = firstTextFieldText
+        selectTariffView.secondTextField.textField.text = secondTextFieldText
         view.addSubview(selectTariffView)
         
         NSLayoutConstraint.activate([selectTariffView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -393,7 +394,7 @@ class MapViewController: UIViewController {
     @objc private func confirmAddressButtonPressed() {
         if let currentView = view.subviews.last as? OrderViewDirector {
             currentView.dismiss()
-            initializeSelectTariffView()
+            initializeSelectTariffView(currentView.firstTextView.textField.text, currentView.secondTextView.textField.text)
         }
     }
 }
@@ -506,9 +507,4 @@ extension MapViewController: AddAddressViewControllerDelegate {
         
         addressInputView.secondTextView.setText(address?.address)
     }
-}
-
-extension MapViewController: SelectTariffViewDelegate {
-    
-    
 }
