@@ -78,7 +78,7 @@ class SelectTariffView: UIView {
     
     private lazy var collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 102, height: 90)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width/3-padding, height: 90)
         
         let collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
@@ -242,12 +242,12 @@ class SelectTariffView: UIView {
             
             promoCodeView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             promoCodeView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: padding),
-            promoCodeView.widthAnchor.constraint(equalToConstant: 158),
+            promoCodeView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width/2-padding-10),
             promoCodeView.heightAnchor.constraint(equalToConstant: 50),
             
             pointsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             pointsView.topAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: padding),
-            pointsView.widthAnchor.constraint(equalToConstant: 158),
+            pointsView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width/2-padding-10),
             pointsView.heightAnchor.constraint(equalToConstant: 50),
             
             orderButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
