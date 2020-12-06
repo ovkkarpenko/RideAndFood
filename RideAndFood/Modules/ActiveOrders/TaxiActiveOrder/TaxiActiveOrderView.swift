@@ -58,6 +58,7 @@ class TaxiActiveOrderView: UIView {
         addShadow()
     }
     
+    // MARK: - private methods
     private func addShadow() {
         layer.masksToBounds = false
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -75,9 +76,21 @@ class TaxiActiveOrderView: UIView {
     private func setupLayout() {
         self.addSubview(activeOrderView)
         
-        NSLayoutConstraint.activate([activeOrderView.topAnchor.constraint(equalTo: topAnchor, constant: padding), activeOrderView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: sidePadding), activeOrderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: sidePadding), activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
+        NSLayoutConstraint.activate([activeOrderView.topAnchor.constraint(equalTo: topAnchor, constant: padding), activeOrderView.leadingAnchor.constraint(equalTo: leadingAnchor), activeOrderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: sidePadding), activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
     }
     
+    @objc func showMore() {
+        print("sfdfsd")
+        self.layer.frame.origin.y = UIScreen.main.bounds.height
+        
+        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
+            guard let self = self else { return }
+            self.layer.frame.origin.y = UIScreen.main.bounds.height -
+                2*self.frame.height
+        }
+    }
+    
+    // MARK: - public methods
     func show() {
         self.layer.frame.origin.y = UIScreen.main.bounds.height
         

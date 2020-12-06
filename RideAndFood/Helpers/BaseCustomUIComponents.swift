@@ -54,3 +54,9 @@ class CustomButton: UIButton {
         }
     }
 }
+
+class InsetLabel: UILabel {
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: CGRect(x: 25, y: 0, width: rect.width, height: rect.height))
+    }
+}

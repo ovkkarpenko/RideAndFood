@@ -139,9 +139,11 @@ class MapViewController: UIViewController {
         didSet {
             if let cardViewIndex = view.subviews.firstIndex(of: cardView) {
                 myLocationButton.isHidden = true
+                locationImageView.isHidden = true
+                
                 taxiActiveOrderView.isLastView = true
                 view.insertSubview(taxiActiveOrderView, at: cardViewIndex - 1)
-                taxiActiveOrderView.show()
+                taxiActiveOrderView.showMore()
             }
         }
     }

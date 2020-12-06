@@ -14,49 +14,41 @@ class ActiveOrderView: UIView
     @IBOutlet weak var firstTextLabel: UILabel!
     @IBOutlet weak var secondTextLabel: UILabel!
     @IBOutlet weak var taxiMiniCarImageView: UIImageView!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timeLabel: InsetLabel!
     @IBOutlet weak var strokeImageView: UIImageView!
     @IBOutlet weak var firstLabelImage: UIImageView!
     @IBOutlet weak var secondLabelImage: UIImageView!
     
-    static let ORDER_VIEW = "ActiveOrderView"
-    var activeOrderViewType: ActiveOrderViewType? {
-        didSet {
-            customizeActiveOrderView()
-        }
-    }
+    static let ACTIVE_ORDER_VIEW = "ActiveOrderView"
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initWithNib()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        initWithNib()
-    }
+    var activeOrderViewType: ActiveOrderViewType
     
     fileprivate func initWithNib() {
-        Bundle.main.loadNibNamed(ActiveOrderView.ORDER_VIEW, owner: self, options: nil)
+        Bundle.main.loadNibNamed(ActiveOrderView.ACTIVE_ORDER_VIEW, owner: self, options: nil)
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView)
     }
     
-    convenience init(type: ActiveOrderViewType) {
-        self.init()
+    init(type: ActiveOrderViewType) {
         self.activeOrderViewType = type
+        super.init(frame: CGRect())
+        
+        initWithNib()
+        customizeActiveOrderView()
     }
     
     private func customizeActiveOrderView() {
-        if let type = activeOrderViewType {
-            switch type {
-            case .taxiActiveOrderView:
-                customizeTaxiActiveOrderView()
-            case .foodActiveOrderView:
-                customizeFoodActiveOrderView()
-            }
+        switch activeOrderViewType {
+        case .taxiActiveOrderView:
+            customizeTaxiActiveOrderView()
+        case .foodActiveOrderView:
+            customizeFoodActiveOrderView()
         }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func customizeTaxiActiveOrderView() {
@@ -68,6 +60,8 @@ class ActiveOrderView: UIView
         secondLabelImage.image = UIImage(named: CustomImagesNames.mark.rawValue)
         secondLabelImage.tintColor = Colors.getColor(.locationOrange)()
         
+        timeLabel.backgroundColor = Colors.getColor(.backgroundGray)()
+        
         taxiMiniCarImageView.isHidden = false
     }
     
@@ -78,6 +72,8 @@ class ActiveOrderView: UIView
         
         secondLabelImage.image = UIImage(named: CustomImagesNames.mark.rawValue)
         secondLabelImage.tintColor = Colors.getColor(.buttonBlue)()
+        
+        timeLabel.backgroundColor = Colors.getColor(.backgroundGray)()
         
         taxiMiniCarImageView.isHidden = true
     }
