@@ -128,6 +128,24 @@ class MapViewController: UIViewController {
         }
     }
     
+    private lazy var taxiActiveOrderView: TaxiActiveOrderView = {
+        // здесь нужно проверять, есть ли активный заказ еды и тогда отступ фрейма делать от еды. То же самое нужно делать для вьюшки еды. И тап индикатор тоже в зависимости от того последняя ли это вьюшка ставится.
+        let taxiActiveOrderView = TaxiActiveOrderView()
+        taxiActiveOrderView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.width, height: cardView.frame.height + 10)
+        return taxiActiveOrderView
+    }()
+    
+    private var activeOrders: Int? {
+        didSet {
+            if let cardViewIndex = view.subviews.firstIndex(of: cardView) {
+                myLocationButton.isHidden = true
+                taxiActiveOrderView.isLastView = true
+                view.insertSubview(taxiActiveOrderView, at: cardViewIndex - 1)
+                taxiActiveOrderView.show()
+            }
+        }
+    }
+    
     private weak var addressDelegate: MapViewCurrentAddressDelegate?
     
     private lazy var sideMenuLeftConstraint = sideMenuView.leftAnchor.constraint(equalTo: view.leftAnchor,
@@ -329,8 +347,9 @@ class MapViewController: UIViewController {
     }
     
     @objc private func taxiButtonPressed() {
-        initializeBackButton()
-        initializeTaxiOrderView()
+        activeOrders = 1
+//        initializeBackButton()
+//        initializeTaxiOrderView()
     }
     
     @objc private func foodButtonPressed() {

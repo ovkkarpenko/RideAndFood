@@ -69,3 +69,11 @@ enum CustomButtonType {
     case whiteButton
     case greenButton
 }
+
+enum CustomImagesNames: String {
+    case stroke = "Stroke"
+    case reversedStroke = "ReversedStroke"
+    case bag = "Bag"
+    case mark = "Mark"
+    case miniCar = "MiniCar"
+}
