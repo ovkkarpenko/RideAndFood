@@ -143,9 +143,17 @@ class MapViewController: UIViewController {
                 
                 taxiActiveOrderView.isLastView = true
                 view.insertSubview(taxiActiveOrderView, at: cardViewIndex - 1)
-                taxiActiveOrderView.showMore()
+                taxiActiveOrderView.show()
+                
+                let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(showActiveOrderView))
+                swipeGesture.direction = .up
+                cardView.addGestureRecognizer(swipeGesture)
             }
         }
+    }
+    
+    @objc private func showActiveOrderView() {
+        taxiActiveOrderView.showMore()
     }
     
     private weak var addressDelegate: MapViewCurrentAddressDelegate?

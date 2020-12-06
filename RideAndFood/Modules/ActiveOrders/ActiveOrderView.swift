@@ -55,10 +55,8 @@ class ActiveOrderView: UIView
         strokeImageView.image = UIImage(named: CustomImagesNames.stroke.rawValue)
         
         firstLabelImage.image = UIImage(named: CustomImagesNames.mark.rawValue)
-        firstLabelImage.tintColor = Colors.getColor(.buttonBlue)()
         
-        secondLabelImage.image = UIImage(named: CustomImagesNames.mark.rawValue)
-        secondLabelImage.tintColor = Colors.getColor(.locationOrange)()
+        secondLabelImage.image = UIImage(named: CustomImagesNames.orangeMark.rawValue)
         
         timeLabel.backgroundColor = Colors.getColor(.backgroundGray)()
         
@@ -71,7 +69,6 @@ class ActiveOrderView: UIView
         firstLabelImage.image = UIImage(named: CustomImagesNames.bag.rawValue)
         
         secondLabelImage.image = UIImage(named: CustomImagesNames.mark.rawValue)
-        secondLabelImage.tintColor = Colors.getColor(.buttonBlue)()
         
         timeLabel.backgroundColor = Colors.getColor(.backgroundGray)()
         

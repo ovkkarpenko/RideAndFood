@@ -77,17 +77,14 @@ class TaxiActiveOrderView: UIView {
         self.addSubview(activeOrderView)
         
         NSLayoutConstraint.activate([activeOrderView.topAnchor.constraint(equalTo: topAnchor, constant: padding), activeOrderView.leadingAnchor.constraint(equalTo: leadingAnchor), activeOrderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: sidePadding), activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
+        
+        addGestures() 
     }
     
-    @objc func showMore() {
-        print("sfdfsd")
-        self.layer.frame.origin.y = UIScreen.main.bounds.height
-        
-        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
-            guard let self = self else { return }
-            self.layer.frame.origin.y = UIScreen.main.bounds.height -
-                2*self.frame.height
-        }
+    private func addGestures() {
+        let dismissGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismiss))
+        dismissGesture.direction = .down
+        addGestureRecognizer(dismissGesture)
     }
     
     // MARK: - public methods
@@ -98,6 +95,23 @@ class TaxiActiveOrderView: UIView {
             guard let self = self else { return }
             self.layer.frame.origin.y = UIScreen.main.bounds.height -
                 self.frame.height
+        }
+    }
+    
+    @objc func dismiss() {
+        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveLinear]) { [weak self] in
+            guard let self = self else { return }
+            self.layer.frame.origin.y += self.frame.height
+        }
+    }
+    
+    @objc func showMore() {
+        self.layer.frame.origin.y = UIScreen.main.bounds.height
+        
+        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
+            guard let self = self else { return }
+            self.layer.frame.origin.y = UIScreen.main.bounds.height -
+                2*self.frame.height
         }
     }
 }
