@@ -357,6 +357,10 @@ class MapViewController: UIViewController {
     }
     
     @objc private func taxiButtonPressed() {
+//        let taxiOrderModel = OrderTaxiModelHandler()
+//        taxiOrderModel.removeTaxiOrder(withId: 1)
+//        print(taxiOrderModel.getTaxiOrder())
+//        taxiOrderModel.addToTaxiOrder(order: OrderTaxiModel(id: 1, from: "fsdfsd", to: "dfsddfs"))
         activeOrders = 1
 //        initializeBackButton()
 //        initializeTaxiOrderView()
