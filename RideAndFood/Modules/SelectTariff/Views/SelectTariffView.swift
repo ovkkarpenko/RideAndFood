@@ -11,6 +11,8 @@ import RxSwift
 
 class SelectTariffView: UIView {
     
+    weak var delegate: SelectTariffViewDelegate?
+    
     private lazy var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = ColorHelper.background.color()
@@ -21,6 +23,15 @@ class SelectTariffView: UIView {
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    private lazy var backButton: UIButton = {
+        let button = RoundButton(type: .system)
+        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        button.tintColor = Colors.getColor(.textBlack)()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private lazy var tripDurationView: UIView = {
@@ -205,6 +216,7 @@ class SelectTariffView: UIView {
     
     private func setupUI() {
         addSubview(contentView)
+        addSubview(backButton)
         addSubview(tripDurationView)
         contentView.addSubview(firstTextField)
         contentView.addSubview(secondTextField)
@@ -219,6 +231,9 @@ class SelectTariffView: UIView {
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentViewTopAnchorConstraint,
             contentViewBottomAnchorConstraint,
+            
+            backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding+5),
+            backButton.safeAreaLayoutGuide.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: padding+5),
             
             tripDurationViewTopAnchorConstraint,
             tripDurationView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -20),
@@ -258,9 +273,16 @@ class SelectTariffView: UIView {
     
     func setupCollectionView() {
         collectionView.rx
-            .modelSelected(TariffModel.self)
-            .subscribe(onNext: { [weak self] item in
+            .itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self else { return }
                 
+                for i in 0..<self.collectionView.numberOfItems(inSection: indexPath.section) {
+                    
+                    if let cell = self.collectionView.cellForItem(at: .init(row: i, section: indexPath.section)) as? TaxiTariffCollectionViewCell {
+                        cell.setStatus(i == indexPath.row)
+                    }
+                }
             }).disposed(by: bag)
         
         viewModel.tariffsPublishSubject
@@ -293,14 +315,21 @@ class SelectTariffView: UIView {
         
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseIn]) { [weak self] in
             self?.layoutIfNeeded()
+        } completion: { [weak self] _ in
+            self?.removeFromSuperview()
         }
     }
     
     @objc private func promoCodeButtonPressed() {
-        dismiss()
+        delegate?.promoCodeButtonPressed()
     }
     
     @objc private func pointsButtonPressed() {
+        delegate?.pointsButtonPressed()
+    }
+    
+    @objc private func backButtonPressed() {
         dismiss()
+        delegate?.backSubButtonPressed()
     }
 }

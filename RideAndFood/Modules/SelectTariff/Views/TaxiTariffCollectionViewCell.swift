@@ -12,9 +12,12 @@ class TaxiTariffCollectionViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "TaxiTariffCell"
     
+    var tariff: TariffModel?
+    
     private lazy var backgroundShadow: UIView = {
         let view = UIView()
         view.backgroundColor = .white
+        view.alpha = 0
         view.layer.shadowColor = ColorHelper.shadow.color()?.cgColor
         view.layer.shadowOpacity = 0.1
         view.layer.shadowRadius = 3
@@ -99,15 +102,18 @@ class TaxiTariffCollectionViewCell: UICollectionViewCell {
     }
     
     func configurate(tariff: TariffModel) {
+        self.tariff = tariff
+        
         if tariff.id == 1 {
+            backgroundShadow.alpha = 1
             carImaveView.image = UIImage(named: "tariff-car-green")
             tripDurationLabel.textColor = UIColor(red: 0.6, green: 0.8, blue: 0.2, alpha: 1)
         } else if tariff.id == 2 {
-            backgroundShadow.isHidden = true
+            backgroundShadow.alpha = 0
             tripPriceLabel.textColor = ColorHelper.secondaryText.color()
             backgroundColor = UIColor(red: 0.942, green: 0.942, blue: 0.942, alpha: 1)
         } else if tariff.id == 3 {
-            backgroundShadow.isHidden = true
+            backgroundShadow.alpha = 0
             carImaveView.image = UIImage(named: "tariff-rocket")
             tripPriceLabel.textColor = ColorHelper.secondaryText.color()
             backgroundColor = UIColor(red: 0.942, green: 0.942, blue: 0.942, alpha: 1)
@@ -116,5 +122,65 @@ class TaxiTariffCollectionViewCell: UICollectionViewCell {
         tariffTitleLabel.text = tariff.name
         tripDurationLabel.text = "3 мин"
         tripPriceLabel.text = "100 руб"
+    }
+    
+    func setStatus(_ active: Bool) {
+        if active {
+            UIView.animate(
+                withDuration: ConstantsHelper.baseAnimationDuration.value(),
+                delay: 0,
+                options: .curveEaseOut,
+                animations: { [weak self] in
+                self?.showCell()
+            })
+        } else {
+            UIView.animate(
+                withDuration: ConstantsHelper.baseAnimationDuration.value(),
+                delay: 0,
+                options: .curveEaseIn,
+                animations: { [weak self] in
+                self?.hideCell()
+            })
+        }
+    }
+    
+    private func showCell() {
+        guard let tariff = tariff else { return }
+        if tariff.id == 1 {
+            backgroundShadow.alpha = 1
+            carImaveView.image = UIImage(named: "tariff-car-green")
+            tripDurationLabel.textColor = UIColor(red: 0.6, green: 0.8, blue: 0.2, alpha: 1)
+            tripPriceLabel.textColor = .black
+            backgroundColor = .white
+        } else if tariff.id == 2 {
+            backgroundShadow.alpha = 1
+            carImaveView.image = UIImage(named: "tariff-car-purple")
+            tripDurationLabel.textColor = UIColor(red: 0.77, green: 0.257, blue: 0.95, alpha: 1)
+            tripPriceLabel.textColor = .black
+            backgroundColor = .white
+        } else if tariff.id == 3 {
+            backgroundShadow.alpha = 1
+            carImaveView.image = UIImage(named: "tariff-rocket-gold")
+            tripDurationLabel.textColor = UIColor(red: 0.831, green: 0.741, blue: 0.502, alpha: 1)
+            tripPriceLabel.textColor = .black
+            backgroundColor = .white
+        }
+    }
+    
+    private func hideCell() {
+        guard let tariff = tariff else { return }
+        if tariff.id == 1 || tariff.id == 2 {
+            backgroundShadow.alpha = 0
+            carImaveView.image = UIImage(named: "tariff-car")
+            tripDurationLabel.textColor = ColorHelper.secondaryText.color()
+            tripPriceLabel.textColor = ColorHelper.secondaryText.color()
+            backgroundColor = UIColor(red: 0.942, green: 0.942, blue: 0.942, alpha: 1)
+        } else if tariff.id == 3 {
+            backgroundShadow.alpha = 0
+            carImaveView.image = UIImage(named: "tariff-rocket")
+            tripDurationLabel.textColor = ColorHelper.secondaryText.color()
+            tripPriceLabel.textColor = ColorHelper.secondaryText.color()
+            backgroundColor = UIColor(red: 0.942, green: 0.942, blue: 0.942, alpha: 1)
+        }
     }
 }

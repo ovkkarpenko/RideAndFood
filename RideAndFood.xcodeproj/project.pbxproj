@@ -160,6 +160,10 @@
 		FA1800012569648000148FAB /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1800002569648000148FAB /* CategoryCollectionViewCell.swift */; };
 		FA180004256964CD00148FAB /* ShopCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180003256964CD00148FAB /* ShopCategoryViewModel.swift */; };
 		FA1800072569654E00148FAB /* ShopCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1800062569654E00148FAB /* ShopCategory.swift */; };
+		FA186CA9257E503300903339 /* TariffPromoCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA186CA8257E503300903339 /* TariffPromoCodeView.swift */; };
+		FA186CAC257E54C600903339 /* TariffPointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA186CAB257E54C600903339 /* TariffPointsView.swift */; };
+		FA186CB0257E558700903339 /* SelectTariffViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA186CAF257E558700903339 /* SelectTariffViewDelegate.swift */; };
+		FA186CB3257E55A000903339 /* CustromViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA186CB2257E55A000903339 /* CustromViewProtocol.swift */; };
 		FA18FFF025690C7100148FAB /* FoodShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18FFEF25690C7100148FAB /* FoodShopView.swift */; };
 		FA18FFF3256917D900148FAB /* FoodShopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18FFF2256917D900148FAB /* FoodShopViewModel.swift */; };
 		FA18FFF62569180800148FAB /* FoodShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18FFF52569180800148FAB /* FoodShop.swift */; };
@@ -406,6 +410,10 @@
 		FA1800002569648000148FAB /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA180003256964CD00148FAB /* ShopCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategoryViewModel.swift; sourceTree = "<group>"; };
 		FA1800062569654E00148FAB /* ShopCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCategory.swift; sourceTree = "<group>"; };
+		FA186CA8257E503300903339 /* TariffPromoCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPromoCodeView.swift; sourceTree = "<group>"; };
+		FA186CAB257E54C600903339 /* TariffPointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPointsView.swift; sourceTree = "<group>"; };
+		FA186CAF257E558700903339 /* SelectTariffViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTariffViewDelegate.swift; sourceTree = "<group>"; };
+		FA186CB2257E55A000903339 /* CustromViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustromViewProtocol.swift; sourceTree = "<group>"; };
 		FA18FFEF25690C7100148FAB /* FoodShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodShopView.swift; sourceTree = "<group>"; };
 		FA18FFF2256917D900148FAB /* FoodShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodShopViewModel.swift; sourceTree = "<group>"; };
 		FA18FFF52569180800148FAB /* FoodShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodShop.swift; sourceTree = "<group>"; };
@@ -1101,10 +1109,20 @@
 		FA17F9F9257943C6009553C4 /* SelectTariff */ = {
 			isa = PBXGroup;
 			children = (
+				FA186CAE257E557B00903339 /* Protocols */,
 				FA53E564257AAEA300B87385 /* ViewModels */,
 				FA436640257961130043B7DF /* Views */,
 			);
 			path = SelectTariff;
+			sourceTree = "<group>";
+		};
+		FA186CAE257E557B00903339 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				FA186CAF257E558700903339 /* SelectTariffViewDelegate.swift */,
+				FA186CB2257E55A000903339 /* CustromViewProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		FA2C80BE254AF88E00F82637 /* StringsHelpers */ = {
@@ -1132,6 +1150,8 @@
 			children = (
 				FA17FA06257944B4009553C4 /* SelectTariffView.swift */,
 				FA0938C9257AAB820061ACF5 /* TaxiTariffCollectionViewCell.swift */,
+				FA186CA8257E503300903339 /* TariffPromoCodeView.swift */,
+				FA186CAB257E54C600903339 /* TariffPointsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1585,6 +1605,7 @@
 				7270D100254F377800DE6BBC /* PromoCodesViewController.swift in Sources */,
 				723DE27F2548A8F200E39743 /* LoginViewController.swift in Sources */,
 				FA1800012569648000148FAB /* CategoryCollectionViewCell.swift in Sources */,
+				FA186CB0257E558700903339 /* SelectTariffViewDelegate.swift in Sources */,
 				FACF06B22575560700F429F3 /* TaxiInfoView.swift in Sources */,
 				FAC066192555717B003CC6AA /* BindCardViewModel.swift in Sources */,
 				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
@@ -1642,6 +1663,7 @@
 				F73BC4FE254ECFF10018FC0A /* RequestErrorModel.swift in Sources */,
 				FA53E566257AAEB000B87385 /* SelectTariffViewModel.swift in Sources */,
 				FA2C80CD254AFA4200F82637 /* PromotionCollectionViewCell.swift in Sources */,
+				FA186CB3257E55A000903339 /* CustromViewProtocol.swift in Sources */,
 				F7AECA6C256C33B100CA86AC /* OrderView.swift in Sources */,
 				7286E5202542DEA40027A69B /* TermsOfUseTextViewDelegate.swift in Sources */,
 				FAD0B01025669BB0008C2794 /* SelectAddressMapViewController.swift in Sources */,
@@ -1704,6 +1726,7 @@
 				FA3FD465254D846500769610 /* SideMenuViewModel.swift in Sources */,
 				72F79DFC25474BED00F4E6AC /* LocationError.swift in Sources */,
 				72A1DBF32545D693005A047A /* MapViewController.swift in Sources */,
+				FA186CAC257E54C600903339 /* TariffPointsView.swift in Sources */,
 				7232305E2552BB6000F238AF /* PromoCodesListViewController.swift in Sources */,
 				722C7CB325456F630086198C /* ResendCodeTextViewDelegate.swift in Sources */,
 				FAE8E5EC254AB8CE000DF2F7 /* UserConfig.swift in Sources */,
@@ -1754,6 +1777,7 @@
 				723230642552CFED00F238AF /* FormatHelper.swift in Sources */,
 				72450AD525780A8A00F2D1FD /* CoreDataManager.swift in Sources */,
 				72280188255F042800C75841 /* IConfigurableView.swift in Sources */,
+				FA186CA9257E503300903339 /* TariffPromoCodeView.swift in Sources */,
 				FA43AE902544937D00766652 /* TableHelper.swift in Sources */,
 				72E93408255F0F1700CED717 /* ProfileCellModel.swift in Sources */,
 				F7AECA66256C32DC00CA86AC /* CustomTextView.swift in Sources */,

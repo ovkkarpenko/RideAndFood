@@ -312,8 +312,11 @@ class MapViewController: UIViewController {
     }
     
     private func initializeSelectTariffView(_ firstTextFieldText: String?, _ secondTextFieldText: String?) {
+        backButton.removeFromSuperview()
+        selectTariffView.delegate = self
         selectTariffView.firstTextField.textField.text = firstTextFieldText
         selectTariffView.secondTextField.textField.text = secondTextFieldText
+        
         view.addSubview(selectTariffView)
         
         NSLayoutConstraint.activate([selectTariffView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -321,7 +324,6 @@ class MapViewController: UIViewController {
                                       selectTariffView.topAnchor.constraint(equalTo: view.topAnchor),
                                       selectTariffView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
         view.layoutIfNeeded()
-        
         selectTariffView.show()
     }
     
@@ -476,6 +478,34 @@ extension MapViewController: OrderViewDelegate {
     
     func shouldRemoveTranspatentView() {
         transparentView.removeFromSuperview()
+    }
+}
+
+extension MapViewController: SelectTariffViewDelegate {
+    
+    func backSubButtonPressed() {
+        menuButton.isHidden = false
+        cardView.isHidden = false
+    }
+    
+    func promoCodeButtonPressed() {
+        addNewView(TariffPromoCodeView())
+    }
+    
+    func pointsButtonPressed() {
+        addNewView(TariffPointsView())
+    }
+    
+    func addNewView(_ view: CustromViewProtocol) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+        
+        NSLayoutConstraint.activate([view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                                     view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                                     view.topAnchor.constraint(equalTo: self.view.topAnchor),
+                                     view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)])
+        view.layoutIfNeeded()
+        view.show()
     }
 }
 
