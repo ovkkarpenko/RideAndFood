@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaxiActiveOrderView: UIView {
+class TaxiActiveOrderView: CustomViewWithAnimation {
     private lazy var activeOrderView: ActiveOrderView = {
         let view = ActiveOrderView(type: .taxiActiveOrderView)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -85,33 +85,5 @@ class TaxiActiveOrderView: UIView {
         let dismissGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismiss))
         dismissGesture.direction = .down
         addGestureRecognizer(dismissGesture)
-    }
-    
-    // MARK: - public methods
-    func show() {
-        self.layer.frame.origin.y = UIScreen.main.bounds.height
-        
-        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
-            guard let self = self else { return }
-            self.layer.frame.origin.y = UIScreen.main.bounds.height -
-                self.frame.height
-        }
-    }
-    
-    @objc func dismiss() {
-        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveLinear]) { [weak self] in
-            guard let self = self else { return }
-            self.layer.frame.origin.y += self.frame.height
-        }
-    }
-    
-    @objc func showMore() {
-        self.layer.frame.origin.y = UIScreen.main.bounds.height
-        
-        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
-            guard let self = self else { return }
-            self.layer.frame.origin.y = UIScreen.main.bounds.height -
-                2*self.frame.height
-        }
     }
 }

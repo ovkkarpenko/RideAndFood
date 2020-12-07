@@ -60,3 +60,32 @@ class InsetLabel: UILabel {
         super.drawText(in: CGRect(x: 25, y: 0, width: rect.width, height: rect.height))
     }
 }
+
+class CustomViewWithAnimation: UIView {
+    @objc func show() {
+        self.layer.frame.origin.y = UIScreen.main.bounds.height
+        
+        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
+            guard let self = self else { return }
+            self.layer.frame.origin.y = UIScreen.main.bounds.height -
+                self.frame.height
+        }
+    }
+    
+    @objc func dismiss() {
+        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveLinear]) { [weak self] in
+            guard let self = self else { return }
+            self.layer.frame.origin.y += self.frame.height
+        }
+    }
+    
+    @objc func showMore() {
+        self.layer.frame.origin.y = UIScreen.main.bounds.height
+        
+        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
+            guard let self = self else { return }
+            self.layer.frame.origin.y = UIScreen.main.bounds.height -
+                2*self.frame.height
+        }
+    }
+}
