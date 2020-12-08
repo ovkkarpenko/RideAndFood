@@ -86,4 +86,13 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
         dismissGesture.direction = .down
         addGestureRecognizer(dismissGesture)
     }
+    
+    // MARK: - public methods
+    func setFromAddress(address: String?) {
+        activeOrderView.firstTextLabel.text = address
+    }
+    
+    func setToAddress(address: String?) {
+        activeOrderView.secondTextLabel.text = address
+    }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class MapViewController: UIViewController {
     
@@ -128,16 +129,20 @@ class MapViewController: UIViewController {
         }
     }
     
+    private lazy var taxiOrderModelHandler: OrderTaxiModelHandler = OrderTaxiModelHandler()
+    
     private lazy var taxiActiveOrderView: TaxiActiveOrderView = {
         // здесь нужно проверять, есть ли активный заказ еды и тогда отступ фрейма делать от еды. То же самое нужно делать для вьюшки еды. И тап индикатор тоже в зависимости от того последняя ли это вьюшка ставится.
         let taxiActiveOrderView = TaxiActiveOrderView()
         taxiActiveOrderView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.width, height: cardView.frame.height + 10)
+        taxiActiveOrderView.setToAddress(address: taxiOrderModelHandler.getTaxiOrder()?.to)
+        taxiActiveOrderView.setFromAddress(address: taxiOrderModelHandler.getTaxiOrder()?.from )
         return taxiActiveOrderView
     }()
     
-    private var activeOrders: Int? {
+    private var activeOrders: Bool? {
         didSet {
-            if let cardViewIndex = view.subviews.firstIndex(of: cardView) {
+            if let cardViewIndex = view.subviews.firstIndex(of: cardView), taxiOrderModelHandler.getTaxiOrder() != nil {
                 myLocationButton.isHidden = true
                 locationImageView.isHidden = true
                 
@@ -150,10 +155,6 @@ class MapViewController: UIViewController {
                 cardView.addGestureRecognizer(swipeGesture)
             }
         }
-    }
-    
-    @objc private func showActiveOrderView() {
-        taxiActiveOrderView.showMore()
     }
     
     private weak var addressDelegate: MapViewCurrentAddressDelegate?
@@ -185,6 +186,8 @@ class MapViewController: UIViewController {
         TariffViewController.delegate = self
         PromotionDetailsViewController.delegate = self
         AddAddresViewController.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -357,13 +360,8 @@ class MapViewController: UIViewController {
     }
     
     @objc private func taxiButtonPressed() {
-//        let taxiOrderModel = OrderTaxiModelHandler()
-//        taxiOrderModel.removeTaxiOrder(withId: 1)
-//        print(taxiOrderModel.getTaxiOrder())
-//        taxiOrderModel.addToTaxiOrder(order: OrderTaxiModel(id: 1, from: "fsdfsd", to: "dfsddfs"))
-        activeOrders = 1
-//        initializeBackButton()
-//        initializeTaxiOrderView()
+        initializeBackButton()
+        initializeTaxiOrderView()
     }
     
     @objc private func foodButtonPressed() {
@@ -403,6 +401,35 @@ class MapViewController: UIViewController {
             currentView.dismiss()
         }
     }
+    
+    @objc private func showActiveOrderView() {
+        taxiActiveOrderView.showMore()
+    }
+    
+    @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        let timeInterval = 0.001 // 'cos core data needs time to update a db.
+
+        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval) { [weak self] in
+                if self?.taxiOrderModelHandler.getTaxiOrder() != nil {
+                    self?.activeOrders = true
+                }
+            }
+        }
+
+        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updates.count > 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval) { [weak self] in
+                if self?.taxiOrderModelHandler.getTaxiOrder() != nil {
+                    self?.activeOrders = true
+                }
+            }
+        }
+
+        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
+            
+        }
+    }
 }
 
 // MARK: - Extensions
@@ -434,7 +461,11 @@ extension MapViewController: OrderViewDelegate {
     func buttonTapped(senderType: OrderViewType, addressInfo: String?) {
         switch senderType {
         case .addressInput:
-            break // describe behaviour of address input view's button
+//            taxiOrderModelHandler.addToTaxiOrder(order: OrderTaxiModel(id: 1, from: addressInputView.firstTextView.textField.text, to: addressInputView.secondTextView.textField.text))
+//            cardView.isTaxiButtonEnable = false
+            backButtonPressed()
+//            taxiOrderModelHandler.removeTaxiOrder(withId: 1)
+//            print(taxiOrderModelHandler.getTaxiOrder())
         case .currentAddressDetail:
             // add addressInfo to the post model
             backButtonPressed()

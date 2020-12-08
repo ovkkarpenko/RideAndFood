@@ -80,4 +80,6 @@ enum CustomImagesNames: String {
     case mark = "Mark"
     case miniCar = "MiniCar"
     case orangeMark = "OrangeMark"
+    case disableTaxiButton = "DisableTaxiButton"
+    case taxiButton = "TaxiButton"
 }

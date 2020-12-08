@@ -16,7 +16,7 @@ struct OrderTaxiModelHandler {
     func getTaxiOrder() -> OrderTaxiRowModel? {
         let taxiOrderRows = coreDataManager.fetchEntities(withName: entityName) as? [TaxiOrderDB]
         let orderTaxiRowModel = taxiOrderRows?.compactMap { OrderTaxiRowModel(db: $0) }
-        return orderTaxiRowModel?.first ?? nil
+        return orderTaxiRowModel?.last ?? nil
     }
     
     func addToTaxiOrder(order: OrderTaxiModel) {
