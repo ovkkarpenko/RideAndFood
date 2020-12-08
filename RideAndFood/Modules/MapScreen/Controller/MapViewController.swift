@@ -109,6 +109,12 @@ class MapViewController: UIViewController {
         return view
     }()
     
+    private lazy var selectTariffView: SelectTariffView = {
+        let view = SelectTariffView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: - Private properties
     
     private let accessManager = AccessLocationManager()
@@ -305,6 +311,23 @@ class MapViewController: UIViewController {
         addressInputView.show()
     }
     
+    private func initializeSelectTariffView(_ firstTextFieldText: String?, _ secondTextFieldText: String?) {
+        backButton.removeFromSuperview()
+        personButton.isHidden = true
+        selectTariffView.delegate = self
+        selectTariffView.firstTextField.textField.text = firstTextFieldText
+        selectTariffView.secondTextField.textField.text = secondTextFieldText
+        
+        view.addSubview(selectTariffView)
+        
+        NSLayoutConstraint.activate([selectTariffView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                      selectTariffView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                      selectTariffView.topAnchor.constraint(equalTo: view.topAnchor),
+                                      selectTariffView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+        view.layoutIfNeeded()
+        selectTariffView.show()
+    }
+    
     @objc private func dismissKeyboard() {
         if self.view.endEditing(false) {
             self.view.endEditing(true)
@@ -370,6 +393,13 @@ class MapViewController: UIViewController {
             currentView.dismiss()
         }
     }
+    
+    @objc private func confirmAddressButtonPressed() {
+        if let currentView = view.subviews.last as? OrderViewDirector {
+            currentView.dismiss()
+            initializeSelectTariffView(currentView.firstTextView.textField.text, currentView.secondTextView.textField.text)
+        }
+    }
 }
 
 // MARK: - Extensions
@@ -401,7 +431,7 @@ extension MapViewController: OrderViewDelegate {
     func buttonTapped(senderType: OrderViewType, addressInfo: String?) {
         switch senderType {
         case .addressInput:
-            break // describe behaviour of address input view's button
+            confirmAddressButtonPressed()
         case .currentAddressDetail:
             // add addressInfo to the post model
             backButtonPressed()
@@ -449,6 +479,44 @@ extension MapViewController: OrderViewDelegate {
     
     func shouldRemoveTranspatentView() {
         transparentView.removeFromSuperview()
+    }
+}
+
+extension MapViewController: SelectTariffViewDelegate {
+    
+    func backSubButtonPressed() {
+        menuButton.isHidden = false
+        cardView.isHidden = false
+        personButton.isHidden = false
+    }
+    
+    func promoCodeButtonPressed(_ dismissCallback: ((String?) -> ())?) {
+        let view = TariffPromoCodeView()
+        view.promoCodeActivetedView.ifPromoCodeIsValidCallback = dismissCallback
+        addNewView(view)
+    }
+    
+    func pointsButtonPressed(_ dismissCallback: ((Int?) -> ())?) {
+        let view = TariffPointsView()
+        view.dismissCallback = dismissCallback
+        addNewView(view)
+    }
+    
+    func orderButtonPressed() {
+        let view = LookingForDriverView()
+        addNewView(view)
+    }
+    
+    func addNewView(_ view: CustromViewProtocol) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+        
+        NSLayoutConstraint.activate([view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                                     view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                                     view.topAnchor.constraint(equalTo: self.view.topAnchor),
+                                     view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)])
+        view.layoutIfNeeded()
+        view.show()
     }
 }
 
