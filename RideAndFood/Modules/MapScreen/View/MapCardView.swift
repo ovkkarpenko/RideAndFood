@@ -118,6 +118,18 @@ class MapCardView: UIView {
         }
     }
     
+    var isTaxiButtonEnable: Bool? {
+        didSet {
+            if isTaxiButtonEnable! {
+                taxiButton.isUserInteractionEnabled = true
+                taxiButton.bgImage = UIImage(named: CustomImagesNames.taxiButton.rawValue)
+            } else {
+                taxiButton.isUserInteractionEnabled = false
+                taxiButton.bgImage = UIImage(named: CustomImagesNames.disableTaxiButton.rawValue)
+            }
+        }
+    }
+    
     func updateTexts() {
         taxiButton.title = MapStrings.taxi.text()
         foodButton.title = MapStrings.food.text()

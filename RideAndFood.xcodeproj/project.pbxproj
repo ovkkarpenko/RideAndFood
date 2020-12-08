@@ -110,8 +110,11 @@
 		72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3AD9253F58CD0042B2A0 /* LoginView.swift */; };
 		96D62A89E82A8316062BDE0E /* Pods_RideAndFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */; };
 		F707DBA0257030A0002C3F58 /* OrderViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F707DB9F257030A0002C3F58 /* OrderViewType.swift */; };
+		F72ADFCA257C15F900B9AC03 /* ActiveOrderViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72ADFC9257C15F900B9AC03 /* ActiveOrderViewType.swift */; };
 		F72D0AD925764146000952AF /* TariffDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72D0AD825764146000952AF /* TariffDelegate.swift */; };
 		F72D0ADC257643C6000952AF /* TariffPageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */; };
+		F73AE214257EB3AF00963196 /* OrderTaxiRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73AE213257EB3AF00963196 /* OrderTaxiRowModel.swift */; };
+		F73AE217257EB6EB00963196 /* TaxiOrderDB+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73AE216257EB6EB00963196 /* TaxiOrderDB+init.swift */; };
 		F73BC4F0254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */; };
 		F73BC4F4254ECE0A0018FC0A /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F3254ECE0A0018FC0A /* RequestModel.swift */; };
 		F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F7254ECF3D0018FC0A /* Networker.swift */; };
@@ -123,6 +126,9 @@
 		F73BC50E254EDF320018FC0A /* SupportResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC50D254EDF320018FC0A /* SupportResponseModel.swift */; };
 		F73D1B0A25568DAD0001F7FC /* TariffPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73D1B0925568DAD0001F7FC /* TariffPageViewController.swift */; };
 		F73D1B0E25568E440001F7FC /* TariffViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73D1B0D25568E440001F7FC /* TariffViewController.swift */; };
+		F74AE859257CFF39001833EC /* TaxiActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74AE858257CFF39001833EC /* TaxiActiveOrderView.swift */; };
+		F76F67AD257A5F5B00E16A53 /* ActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76F67AC257A5F5B00E16A53 /* ActiveOrderView.swift */; };
+		F76F67B1257A5F8300E16A53 /* ActiveOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76F67B0257A5F8300E16A53 /* ActiveOrderView.xib */; };
 		F77DE253254A1928001338D8 /* GeneralGUISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CAAC002540A5000049390C /* GeneralGUISettings.swift */; };
 		F77DE255254A192C001338D8 /* BaseCustomUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */; };
 		F7805C3A2552E41500D1BBAD /* Tariff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7805C392552E41500D1BBAD /* Tariff.storyboard */; };
@@ -367,8 +373,11 @@
 		F707DB9F257030A0002C3F58 /* OrderViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewType.swift; sourceTree = "<group>"; };
 		F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportServiceStrings.swift; sourceTree = "<group>"; };
+		F72ADFC9257C15F900B9AC03 /* ActiveOrderViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderViewType.swift; sourceTree = "<group>"; };
 		F72D0AD825764146000952AF /* TariffDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffDelegate.swift; sourceTree = "<group>"; };
 		F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPageDelegate.swift; sourceTree = "<group>"; };
+		F73AE213257EB3AF00963196 /* OrderTaxiRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTaxiRowModel.swift; sourceTree = "<group>"; };
+		F73AE216257EB6EB00963196 /* TaxiOrderDB+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaxiOrderDB+init.swift"; sourceTree = "<group>"; };
 		F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsOfSwiftTypes.swift; sourceTree = "<group>"; };
 		F73BC4F3254ECE0A0018FC0A /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		F73BC4F7254ECF3D0018FC0A /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
@@ -380,6 +389,9 @@
 		F73BC50D254EDF320018FC0A /* SupportResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportResponseModel.swift; sourceTree = "<group>"; };
 		F73D1B0925568DAD0001F7FC /* TariffPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPageViewController.swift; sourceTree = "<group>"; };
 		F73D1B0D25568E440001F7FC /* TariffViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffViewController.swift; sourceTree = "<group>"; };
+		F74AE858257CFF39001833EC /* TaxiActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiActiveOrderView.swift; sourceTree = "<group>"; };
+		F76F67AC257A5F5B00E16A53 /* ActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderView.swift; sourceTree = "<group>"; };
+		F76F67B0257A5F8300E16A53 /* ActiveOrderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveOrderView.xib; sourceTree = "<group>"; };
 		F7805C392552E41500D1BBAD /* Tariff.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tariff.storyboard; sourceTree = "<group>"; };
 		F7805C3F2552EFBE00D1BBAD /* TariffStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffStrings.swift; sourceTree = "<group>"; };
 		F7805C422552F26400D1BBAD /* TariffModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffModel.swift; sourceTree = "<group>"; };
@@ -693,6 +705,7 @@
 			children = (
 				72450ADE2578182100F2D1FD /* CartRowDB+init.swift */,
 				72450AE12578190800F2D1FD /* NSManagedObject+init.swift */,
+				F73AE216257EB6EB00963196 /* TaxiOrderDB+init.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -785,6 +798,7 @@
 		7286E5222542E7420027A69B /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				F76F67AA257A5F1700E16A53 /* ActiveOrders */,
 				FA730E3C256F9EA6001F7AEB /* OrdersHistoryScreen */,
 				FAD0AFF225669B1F008C2794 /* AddressesScreen */,
 				720AA0E8256C2AE60065BFED /* PaymentsHistory */,
@@ -858,6 +872,7 @@
 				F73BC50A254EDB3E0018FC0A /* MediaResponseModel.swift */,
 				F73BC50D254EDF320018FC0A /* SupportResponseModel.swift */,
 				F7805C422552F26400D1BBAD /* TariffModel.swift */,
+				F73AE213257EB3AF00963196 /* OrderTaxiRowModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1051,6 +1066,25 @@
 				F73BC4FA254ECF900018FC0A /* ResponseModel.swift */,
 			);
 			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		F76F67AA257A5F1700E16A53 /* ActiveOrders */ = {
+			isa = PBXGroup;
+			children = (
+				F76F67AC257A5F5B00E16A53 /* ActiveOrderView.swift */,
+				F72ADFC9257C15F900B9AC03 /* ActiveOrderViewType.swift */,
+				F76F67B0257A5F8300E16A53 /* ActiveOrderView.xib */,
+				F76F67AB257A5F3100E16A53 /* TaxiActiveOrder */,
+			);
+			path = ActiveOrders;
+			sourceTree = "<group>";
+		};
+		F76F67AB257A5F3100E16A53 /* TaxiActiveOrder */ = {
+			isa = PBXGroup;
+			children = (
+				F74AE858257CFF39001833EC /* TaxiActiveOrderView.swift */,
+			);
+			path = TaxiActiveOrder;
 			sourceTree = "<group>";
 		};
 		F7805C382552E3EB00D1BBAD /* Tariffs */ = {
@@ -1563,6 +1597,7 @@
 				F795DF3625547A58005A607C /* TariffPage.xib in Resources */,
 				FA43AE8B2544911000766652 /* Settings.storyboard in Resources */,
 				F7805C3A2552E41500D1BBAD /* Tariff.storyboard in Resources */,
+				F76F67B1257A5F8300E16A53 /* ActiveOrderView.xib in Resources */,
 				F7AECA7F256C36A000CA86AC /* CustomTextView.xib in Resources */,
 				FA050B862549AB0500CF363D /* Assets.xcassets in Resources */,
 			);
@@ -1665,6 +1700,7 @@
 				F7E5E9CB254A17B60026ED71 /* AddPhotoViewController.swift in Sources */,
 				FAC0661325556B16003CC6AA /* MaskTextField.swift in Sources */,
 				7286E5282542E79D0027A69B /* TermsOfUseStrings.swift in Sources */,
+				F76F67AD257A5F5B00E16A53 /* ActiveOrderView.swift in Sources */,
 				FAC0661C255585AB003CC6AA /* ConfirmBindCardView.swift in Sources */,
 				FA050B7F2549AA9200CF363D /* AppDelegate.swift in Sources */,
 				FA0938CA257AAB820061ACF5 /* TaxiTariffCollectionViewCell.swift in Sources */,
@@ -1764,6 +1800,8 @@
 				FA17FA07257944B4009553C4 /* SelectTariffView.swift in Sources */,
 				7286E51625423A640027A69B /* StringsHelper.swift in Sources */,
 				72A1DBF62545D8A5005A047A /* AccessLocationManager.swift in Sources */,
+				F73AE214257EB3AF00963196 /* OrderTaxiRowModel.swift in Sources */,
+				F73AE217257EB6EB00963196 /* TaxiOrderDB+init.swift in Sources */,
 				72A1DBED2545BFA2005A047A /* SettingsModel.swift in Sources */,
 				72D3E8D9256AAD37008167FF /* ErrorResponse.swift in Sources */,
 				72F467E4255B1EC100F8926E /* String+Format.swift in Sources */,
@@ -1804,6 +1842,7 @@
 				FA8CA7752546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift in Sources */,
 				FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */,
 				FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */,
+				F74AE859257CFF39001833EC /* TaxiActiveOrderView.swift in Sources */,
 				723230642552CFED00F238AF /* FormatHelper.swift in Sources */,
 				72450AD525780A8A00F2D1FD /* CoreDataManager.swift in Sources */,
 				72280188255F042800C75841 /* IConfigurableView.swift in Sources */,
