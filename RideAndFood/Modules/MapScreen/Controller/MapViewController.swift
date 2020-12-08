@@ -429,6 +429,9 @@ class MapViewController: UIViewController {
         if let currentView = view.subviews.last as? OrderViewDirector {
             currentView.dismiss()
             initializeSelectTariffView(currentView.firstTextView.textField.text, currentView.secondTextView.textField.text)
+        }
+    }
+    
     @objc private func showActiveOrderView() {
         taxiActiveOrderView.showMore()
     }
@@ -436,7 +439,7 @@ class MapViewController: UIViewController {
     @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
         let timeInterval = 0.001 // 'cos core data needs time to update a db.
-
+        
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval) { [weak self] in
                 if self?.taxiOrderModelHandler.getTaxiOrder() != nil {
@@ -444,7 +447,7 @@ class MapViewController: UIViewController {
                 }
             }
         }
-
+        
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updates.count > 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval) { [weak self] in
                 if self?.taxiOrderModelHandler.getTaxiOrder() != nil {
@@ -452,13 +455,11 @@ class MapViewController: UIViewController {
                 }
             }
         }
-
+        
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
             
         }
     }
-    
-    
 }
 
 // MARK: - Extensions
@@ -488,7 +489,11 @@ extension MapViewController: OrderViewDelegate {
     }
     
     func buttonTapped(senderType: OrderViewType, addressInfo: String?) {
+        switch senderType {
+        case .addressInput:
             confirmAddressButtonPressed()
+            backButtonPressed()
+        case .currentAddressDetail:
             backButtonPressed()
         case .destinationAddressDetail:
             // add addressInfo to the post model

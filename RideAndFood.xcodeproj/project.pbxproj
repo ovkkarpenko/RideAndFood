@@ -110,7 +110,6 @@
 		72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3AD9253F58CD0042B2A0 /* LoginView.swift */; };
 		96D62A89E82A8316062BDE0E /* Pods_RideAndFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */; };
 		F707DBA0257030A0002C3F58 /* OrderViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F707DB9F257030A0002C3F58 /* OrderViewType.swift */; };
-		F72ADFCA257C15F900B9AC03 /* ActiveOrderViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72ADFC9257C15F900B9AC03 /* ActiveOrderViewType.swift */; };
 		F72D0AD925764146000952AF /* TariffDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72D0AD825764146000952AF /* TariffDelegate.swift */; };
 		F72D0ADC257643C6000952AF /* TariffPageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */; };
 		F73AE214257EB3AF00963196 /* OrderTaxiRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73AE213257EB3AF00963196 /* OrderTaxiRowModel.swift */; };
@@ -137,6 +136,7 @@
 		F7891733254A14FD00849D27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA050B9B2549ACE100CF363D /* LaunchScreen.storyboard */; };
 		F795DF3325547A50005A607C /* TariffPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F795DF3225547A50005A607C /* TariffPage.swift */; };
 		F795DF3625547A58005A607C /* TariffPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = F795DF3525547A58005A607C /* TariffPage.xib */; };
+		F797ACD525801AA600421284 /* ActiveOrderViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72ADFC9257C15F900B9AC03 /* ActiveOrderViewType.swift */; };
 		F79DD3BF2577BA9900E82B73 /* PromotionDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79DD3BE2577BA9900E82B73 /* PromotionDetailDelegate.swift */; };
 		F79DD3D42577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79DD3D32577D6DE00E82B73 /* AddAddressViewControllerDelegate.swift */; };
 		F7AECA66256C32DC00CA86AC /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AECA65256C32DC00CA86AC /* CustomTextView.swift */; };
@@ -1701,6 +1701,7 @@
 				FAC0661325556B16003CC6AA /* MaskTextField.swift in Sources */,
 				7286E5282542E79D0027A69B /* TermsOfUseStrings.swift in Sources */,
 				F76F67AD257A5F5B00E16A53 /* ActiveOrderView.swift in Sources */,
+				F797ACD525801AA600421284 /* ActiveOrderViewType.swift in Sources */,
 				FAC0661C255585AB003CC6AA /* ConfirmBindCardView.swift in Sources */,
 				FA050B7F2549AA9200CF363D /* AppDelegate.swift in Sources */,
 				FA0938CA257AAB820061ACF5 /* TaxiTariffCollectionViewCell.swift in Sources */,
