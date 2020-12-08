@@ -12,6 +12,9 @@ enum SelectTariffStrings {
     case pointsTitle
     case promoCodeActivatedTitle
     case promoCodeActivatedDescription
+    case spendAllPoints
+    case otherQuantity
+    case lookingForDriver
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -34,6 +37,12 @@ enum SelectTariffStrings {
             return "Промокод активирован"
         case .promoCodeActivatedDescription:
             return "По этому промокоду для вас действует скидка 10% на поездку по тарифу Premium."
+        case .spendAllPoints:
+            return "Потратить все баллы сразу"
+        case .otherQuantity:
+            return "Другое количество"
+        case .lookingForDriver:
+            return "Ищем подходящий вариант"
         }
     }
     
@@ -49,6 +58,12 @@ enum SelectTariffStrings {
             return "Promo code activated"
         case .promoCodeActivatedDescription:
             return "With this promo code, you get a 10% discount on your Premium fare."
+        case .spendAllPoints:
+            return "Spend all points at once"
+        case .otherQuantity:
+            return "Other quantity"
+        case .lookingForDriver:
+            return "We are looking for a suitable option"
         }
     }
 }

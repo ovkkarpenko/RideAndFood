@@ -13,6 +13,12 @@ class SelectTariffViewModel {
     
     var tariffsPublishSubject = PublishSubject<[SectionModel<String, TariffModel>]>()
     
+    func getPointsCount(_ completion: ((Int) -> ())?) {
+        ServerApi.shared.getCredits(completion: { item, _ in
+            completion?(item?.credit ?? 0)
+        })
+    }
+    
     func fetchData() {
         let request = RequestModel<TariffModel>(path: tariffPath, method: .get)
         let networker = Networker()

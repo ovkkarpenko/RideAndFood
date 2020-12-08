@@ -31,7 +31,9 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
     }()
     
     private lazy var promoCodeTextField: MaskTextField = {
-        let textField = MaskTextField(format: "[A]-[000000]", valueChangedCallback: nil)
+        let textField = MaskTextField(format: "[A]-[000000]", valueChangedCallback: { [weak self] isCompleted in
+            if isCompleted { self?.confirmButton.isEnabled = true }
+        })
         textField.placeholder = "R-123456"
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -39,6 +41,7 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
     
     private lazy var confirmButton: PrimaryButton = {
         let button = PrimaryButton()
+        button.isEnabled = false
         button.setTitle(PaymentStrings.confirmButtonTitle.text(), for: .normal)
         button.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -144,6 +147,7 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
         ])
         
         layoutIfNeeded()
+        promoCodeActivetedView.promoCode = promoCodeTextField.text
         promoCodeActivetedView.show()
     }
 }

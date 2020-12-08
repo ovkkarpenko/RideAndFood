@@ -98,13 +98,14 @@ class SelectTariffView: UIView {
         return collectionView
     }()
     
-    private lazy var promoCodeView: UIView = {
+    private lazy var promoCodeView: PromoCodeButtonView = {
         let view = PromoCodeButtonView()
         view.buttonPressedCallback = { [weak self] in
-            self?.activatedTariffCell = self?.collectionView.cellForItem(at: .init(row: 0, section: 0)) as? TaxiTariffCollectionViewCell
+            if self?.activatedTariffCell == nil { self?.activatedTariffCell = self?.collectionView.cellForItem(at: .init(row: 0, section: 0)) as? TaxiTariffCollectionViewCell }
             
-            self?.delegate?.promoCodeButtonPressed {
+            self?.delegate?.promoCodeButtonPressed { promoCode in
                 self?.activatedTariffCell?.tripPriceLabel.isHidden = false
+                self?.promoCode = promoCode ?? ""
                 view.disable()
             }
         }
@@ -112,11 +113,15 @@ class SelectTariffView: UIView {
         return view
     }()
     
-    lazy var pointsView: UIView = {
+    lazy var pointsView: PointsButtonView = {
         let view = PointsButtonView()
         view.buttonPressedCallback = { [weak self] in
-            self?.delegate?.pointsButtonPressed {
-                view.disable()
+            if self?.activatedTariffCell == nil { self?.activatedTariffCell = self?.collectionView.cellForItem(at: .init(row: 0, section: 0)) as? TaxiTariffCollectionViewCell }
+            
+            self?.delegate?.pointsButtonPressed { points in
+                self?.activatedTariffCell?.tripPriceLabel.isHidden = false
+                self?.points = points ?? 0
+                view.disable(points)
             }
         }
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -125,6 +130,7 @@ class SelectTariffView: UIView {
     
     private lazy var orderButton: PrimaryButton = {
         let button = PrimaryButton(title: SelectTariffStrings.order.text())
+        button.addTarget(self, action: #selector(orderButtonPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -141,6 +147,8 @@ class SelectTariffView: UIView {
         setupCollectionView()
     }
     
+    private var points = 0
+    private var promoCode = ""
     private var activatedTariffCell: TaxiTariffCollectionViewCell?
     
     private let padding: CGFloat = 20
@@ -273,5 +281,29 @@ class SelectTariffView: UIView {
     @objc private func backButtonPressed() {
         dismiss()
         delegate?.backSubButtonPressed()
+    }
+    
+    @objc private func orderButtonPressed() {
+        if activatedTariffCell == nil { activatedTariffCell = collectionView.cellForItem(at: .init(row: 0, section: 0)) as? TaxiTariffCollectionViewCell }
+        
+        if let tariffId = activatedTariffCell?.tariff?.id,
+           let from = firstTextField.textField.text,
+           let to = secondTextField.textField.text {
+            
+            let order = TaxiOrder(
+                tariff: tariffId,
+                from: from, to: to,
+                paymentCard: 0, paymentMethod: PaymentType.cash.rawValue,
+                promoCodes: [promoCode],
+                credit: points)
+            
+            ServerApi.shared.orderTaxi(order, completion: { [weak self] result, error in
+                
+                DispatchQueue.main.async {
+                    self?.dismiss()
+                    self?.delegate?.orderButtonPressed()
+                }
+            })
+        }
     }
 }

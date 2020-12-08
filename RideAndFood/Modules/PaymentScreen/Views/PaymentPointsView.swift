@@ -14,32 +14,13 @@ class PaymentPointsView: UIView {
     
     var delegate: PointsAlertDelegate?
     
-    private lazy var subTitleTextView: UITextView = {
-        let textView = UITextView()
-        textView.text = PaymentStrings.pointsFullTitle("10").text()
-        textView.isScrollEnabled = false
-        textView.isEditable = false
-        textView.isSelectable = false
-        textView.font = .systemFont(ofSize: 17)
-        textView.textAlignment = .center
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .center
-        
-        let attributedString = NSMutableAttributedString(string: PaymentStrings.pointsFullTitle("10").text(),
-                                                         attributes: [
-                                                            .foregroundColor: ColorHelper.primaryText.color() as Any,
-                                                            .font: FontHelper.regular17.font() as Any])
-        
-        attributedString.addAttribute(.foregroundColor,
-                                      value: UIColor.orange,
-                                      range: (attributedString.string as NSString).range(of: PaymentStrings.pointsTitle("10").text()))
-        
-        attributedString.addAttribute(.paragraphStyle, value: paragraph, range: (attributedString.string as NSString).range(of: PaymentStrings.pointsFullTitle("10").text()))
-        
-        textView.attributedText = attributedString
-        return textView
+    private lazy var subTitleTextView: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = PaymentStrings.pointsFullTitle("0").text()
+        label.font = .systemFont(ofSize: 17)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var newOrderButton: PrimaryButton = {
@@ -74,6 +55,8 @@ class PaymentPointsView: UIView {
     private let padding: CGFloat = 25
     private let marginTop: CGFloat = 8
     
+    private let viewModel = SelectTariffViewModel()
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -102,6 +85,14 @@ class PaymentPointsView: UIView {
             detailsButton.leftAnchor.constraint(equalTo: leftAnchor, constant: padding),
             detailsButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -padding),
         ])
+        
+        viewModel.getPointsCount { [weak self] credits in
+            DispatchQueue.main.async {
+                self?.subTitleTextView.attributedText =
+                    PaymentStrings.pointsFullTitle("\(credits)").text()
+                    .changeTextPathColor(PaymentStrings.pointsTitle("\(credits)").text(), color: .orange)
+            }
+        }
         
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor
         layer.shadowOpacity = 0.2

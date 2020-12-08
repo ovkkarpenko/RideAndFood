@@ -7,7 +7,8 @@
 //
 
 protocol SelectTariffViewDelegate: class {
-    func promoCodeButtonPressed(_ ifPromoCodeIsValidCallback: (() -> ())?)
-    func pointsButtonPressed(_ ifEnteredPointsCallback: (() -> ())?)
+    func promoCodeButtonPressed(_ dismissCallback: ((String?) -> ())?)
+    func pointsButtonPressed(_ dismissCallback: ((Int?) -> ())?)
     func backSubButtonPressed()
+    func orderButtonPressed()
 }

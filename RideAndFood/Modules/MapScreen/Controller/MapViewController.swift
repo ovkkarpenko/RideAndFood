@@ -313,6 +313,7 @@ class MapViewController: UIViewController {
     
     private func initializeSelectTariffView(_ firstTextFieldText: String?, _ secondTextFieldText: String?) {
         backButton.removeFromSuperview()
+        personButton.isHidden = true
         selectTariffView.delegate = self
         selectTariffView.firstTextField.textField.text = firstTextFieldText
         selectTariffView.secondTextField.textField.text = secondTextFieldText
@@ -486,16 +487,23 @@ extension MapViewController: SelectTariffViewDelegate {
     func backSubButtonPressed() {
         menuButton.isHidden = false
         cardView.isHidden = false
+        personButton.isHidden = false
     }
     
-    func promoCodeButtonPressed(_ ifPromoCodeIsValidCallback: (() -> ())?) {
+    func promoCodeButtonPressed(_ dismissCallback: ((String?) -> ())?) {
         let view = TariffPromoCodeView()
-        view.promoCodeActivetedView.ifPromoCodeIsValidCallback = ifPromoCodeIsValidCallback
+        view.promoCodeActivetedView.ifPromoCodeIsValidCallback = dismissCallback
         addNewView(view)
     }
     
-    func pointsButtonPressed(_ ifEnteredPointsCallback: (() -> ())?) {
+    func pointsButtonPressed(_ dismissCallback: ((Int?) -> ())?) {
         let view = TariffPointsView()
+        view.dismissCallback = dismissCallback
+        addNewView(view)
+    }
+    
+    func orderButtonPressed() {
+        let view = LookingForDriverView()
         addNewView(view)
     }
     

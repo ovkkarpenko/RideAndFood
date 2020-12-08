@@ -58,7 +58,7 @@ class PromotionDetailsViewController: UIViewController {
                 }.disposed(by: bag)
             
             if promotion.media.count >= 2,
-               let url = URL(string: baseUrl + promotion.media[0].url) {
+               let url = URL(string: promotion.media[0].url) {
                 imageView.imageByUrl(from: url)
             }
             

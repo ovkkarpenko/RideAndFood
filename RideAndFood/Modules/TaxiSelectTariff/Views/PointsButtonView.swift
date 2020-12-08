@@ -19,6 +19,15 @@ class PointsButtonView: UIView {
         return imageView
     }()
     
+    private lazy var saleLabel: UILabel = {
+        let salelabel = UILabel()
+        salelabel.alpha = 0
+        salelabel.textColor = UIColor(red: 0.204, green: 0.78, blue: 0.349, alpha: 1)
+        salelabel.translatesAutoresizingMaskIntoConstraints = false
+        salelabel.font = .boldSystemFont(ofSize: 15)
+        return salelabel
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -46,8 +55,11 @@ class PointsButtonView: UIView {
     
     private let padding: CGFloat = 20
     
+    private lazy var titleLabelLeadingAnchorConstraint = titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 5)
+    
     private func setupUI() {
         addSubview(iconImageView)
+        addSubview(saleLabel)
         addSubview(titleLabel)
         addSubview(button)
         
@@ -56,9 +68,12 @@ class PointsButtonView: UIView {
             iconImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 1),
             iconImageView.widthAnchor.constraint(equalToConstant: 20),
             
-            titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 5),
+            titleLabelLeadingAnchorConstraint,
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: padding),
             titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            
+            saleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            saleLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             button.leadingAnchor.constraint(equalTo: leadingAnchor),
             button.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -73,11 +88,19 @@ class PointsButtonView: UIView {
         layer.cornerRadius = 15
     }
     
-    func disable() {
+    func disable(_ points: Int?) {
+        titleLabelLeadingAnchorConstraint.isActive = false
+        titleLabel.leadingAnchor.constraint(equalTo: saleLabel.trailingAnchor, constant: 5).isActive = true
+        
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseIn]) { [weak self] in
             self?.backgroundColor = UIColor(red: 0.942, green: 0.942, blue: 0.942, alpha: 1)
             self?.layer.shadowOpacity = 0
-            
+            self?.titleLabel.textColor = ColorHelper.secondaryText.color()
+            if let points = points {
+                self?.saleLabel.text = "-\(points)"
+                self?.saleLabel.alpha = 1
+                self?.iconImageView.alpha = 0
+            }
             self?.layoutIfNeeded()
         }
         

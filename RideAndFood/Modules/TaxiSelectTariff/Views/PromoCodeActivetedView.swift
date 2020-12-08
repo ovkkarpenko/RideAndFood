@@ -10,8 +10,10 @@ import UIKit
 
 class PromoCodeActivetedView: UIView {
     
+    var promoCode: String?
+    
     var dismissCallback: (() -> ())?
-    var ifPromoCodeIsValidCallback: (() -> ())?
+    var ifPromoCodeIsValidCallback: ((String?) -> ())?
     
     private lazy var contentView: UIView = {
         let view = UIView()
@@ -122,7 +124,7 @@ class PromoCodeActivetedView: UIView {
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseIn]) { [weak self] in
             self?.layoutIfNeeded()
         } completion: { [weak self] _ in
-            self?.ifPromoCodeIsValidCallback?()
+            self?.ifPromoCodeIsValidCallback?(self?.promoCode)
             completion?()
         }
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-let baseUrl = "http://85.119.145.2"
+let baseUrl = "https://skillbox.cc"
 let baseApiUrl = "\(baseUrl)/api"
 let supportPath = "/user/\(UserConfig.shared.userId)/support"
 let tariffPath = "/user/\(UserConfig.shared.userId)/tariff"

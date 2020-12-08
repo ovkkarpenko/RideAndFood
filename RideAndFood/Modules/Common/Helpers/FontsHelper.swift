@@ -44,13 +44,20 @@ enum FontHelper {
 }
 
 extension String {
-    func strikethrough(_ text:String) -> NSAttributedString{
-            //strikethrough
-            let range = (self as NSString).range(of: text)
-            let attributedString = NSMutableAttributedString(string:self)
-            attributedString.addAttribute(NSAttributedString.Key.strikethroughColor, value: UIColor.gray, range: range)
-            attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: range)
-            
-            return attributedString
+    func strikethrough(_ text: String) -> NSAttributedString{
+        let range = (self as NSString).range(of: text)
+        let attributedString = NSMutableAttributedString(string:self)
+        attributedString.addAttribute(NSAttributedString.Key.strikethroughColor, value: UIColor.gray, range: range)
+        attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: range)
+        
+        return attributedString
+    }
+    
+    func changeTextPathColor(_ text: String, color: UIColor) -> NSAttributedString{
+        let range = (self as NSString).range(of: text)
+        let attributedString = NSMutableAttributedString(string:self)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+        
+        return attributedString
     }
 }
