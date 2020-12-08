@@ -30,6 +30,32 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
         return view
     }()
     
+    private lazy var promoCodeTextField: MaskTextField = {
+        let textField = MaskTextField(format: "[A]-[000000]", valueChangedCallback: nil)
+        textField.placeholder = "R-123456"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private lazy var confirmButton: PrimaryButton = {
+        let button = PrimaryButton()
+        button.setTitle(PaymentStrings.confirmButtonTitle.text(), for: .normal)
+        button.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var promoCodeActivetedView: PromoCodeActivetedView = {
+        let view = PromoCodeActivetedView()
+        view.dismissCallback = { [weak self] in
+            self?.dismiss { [weak self] in
+                self?.removeFromSuperview()
+            }
+        }
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -44,20 +70,24 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
         super.touchesEnded(touches, with: event)
         
         if touches.first?.view == transparentView {
-            dismiss()
+            dismiss { [weak self] in
+                self?.removeFromSuperview()
+            }
         }
     }
     
-    private let offset: CGFloat = UIScreen.main.bounds.height-200
+    private let offset: CGFloat = UIScreen.main.bounds.height-150
     private let padding: CGFloat = 20
     private let screenHeight = UIScreen.main.bounds.height
     
     private lazy var contentViewTopAnchorConstraint = contentView.topAnchor.constraint(equalTo: topAnchor, constant: screenHeight+offset)
     private lazy var contentViewBottomAnchorConstraint = contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -screenHeight-offset)
-    
+ 
     private func setupUI() {
         addSubview(transparentView)
         addSubview(contentView)
+        contentView.addSubview(promoCodeTextField)
+        contentView.addSubview(confirmButton)
         
         NSLayoutConstraint.activate([
             transparentView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -69,6 +99,14 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentViewTopAnchorConstraint,
             contentViewBottomAnchorConstraint,
+            
+            promoCodeTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            promoCodeTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            promoCodeTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            
+            confirmButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            confirmButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            confirmButton.topAnchor.constraint(equalTo: promoCodeTextField.bottomAnchor, constant: padding)
         ])
     }
     
@@ -82,15 +120,30 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
         }
     }
     
-    func dismiss() {
+    func dismiss(_ completion: (() -> ())? = nil) {
         contentViewTopAnchorConstraint.constant = screenHeight+offset
         contentViewBottomAnchorConstraint.constant = -screenHeight-offset
         
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseIn]) { [weak self] in
-            self?.transparentView.alpha = 0
+            if completion != nil { self?.transparentView.alpha = 0 }
             self?.layoutIfNeeded()
-        } completion: { [weak self] _ in
-            self?.removeFromSuperview()
+        } completion: { _ in
+            completion?()
         }
+    }
+    
+    @objc private func confirmButtonPressed() {
+        dismiss()
+        
+        addSubview(promoCodeActivetedView)
+        NSLayoutConstraint.activate([
+            promoCodeActivetedView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            promoCodeActivetedView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            promoCodeActivetedView.topAnchor.constraint(equalTo: topAnchor),
+            promoCodeActivetedView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
+        
+        layoutIfNeeded()
+        promoCodeActivetedView.show()
     }
 }

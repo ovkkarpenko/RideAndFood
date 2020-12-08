@@ -44,7 +44,9 @@ class TariffPointsView: UIView, CustromViewProtocol {
         super.touchesEnded(touches, with: event)
         
         if touches.first?.view == transparentView {
-            dismiss()
+            dismiss { [weak self] in
+                self?.removeFromSuperview()
+            }
         }
     }
     
@@ -82,15 +84,15 @@ class TariffPointsView: UIView, CustromViewProtocol {
         }
     }
     
-    func dismiss() {
+    func dismiss(_ completion: (() -> ())? = nil) {
         contentViewTopAnchorConstraint.constant = screenHeight+offset
         contentViewBottomAnchorConstraint.constant = -screenHeight-offset
         
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseIn]) { [weak self] in
             self?.transparentView.alpha = 0
             self?.layoutIfNeeded()
-        } completion: { [weak self] _ in
-            self?.removeFromSuperview()
+        } completion: { _ in
+            completion?()
         }
     }
 }

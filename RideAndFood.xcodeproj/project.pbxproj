@@ -164,6 +164,9 @@
 		FA186CAC257E54C600903339 /* TariffPointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA186CAB257E54C600903339 /* TariffPointsView.swift */; };
 		FA186CB0257E558700903339 /* SelectTariffViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA186CAF257E558700903339 /* SelectTariffViewDelegate.swift */; };
 		FA186CB3257E55A000903339 /* CustromViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA186CB2257E55A000903339 /* CustromViewProtocol.swift */; };
+		FA186CB6257F651200903339 /* PromoCodeActivetedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA186CB5257F651200903339 /* PromoCodeActivetedView.swift */; };
+		FA186CB9257F715E00903339 /* PromoCodeButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA186CB8257F715E00903339 /* PromoCodeButtonView.swift */; };
+		FA186CBC257F7A7500903339 /* PointsButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA186CBB257F7A7500903339 /* PointsButtonView.swift */; };
 		FA18FFF025690C7100148FAB /* FoodShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18FFEF25690C7100148FAB /* FoodShopView.swift */; };
 		FA18FFF3256917D900148FAB /* FoodShopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18FFF2256917D900148FAB /* FoodShopViewModel.swift */; };
 		FA18FFF62569180800148FAB /* FoodShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18FFF52569180800148FAB /* FoodShop.swift */; };
@@ -414,6 +417,9 @@
 		FA186CAB257E54C600903339 /* TariffPointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPointsView.swift; sourceTree = "<group>"; };
 		FA186CAF257E558700903339 /* SelectTariffViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTariffViewDelegate.swift; sourceTree = "<group>"; };
 		FA186CB2257E55A000903339 /* CustromViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustromViewProtocol.swift; sourceTree = "<group>"; };
+		FA186CB5257F651200903339 /* PromoCodeActivetedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeActivetedView.swift; sourceTree = "<group>"; };
+		FA186CB8257F715E00903339 /* PromoCodeButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeButtonView.swift; sourceTree = "<group>"; };
+		FA186CBB257F7A7500903339 /* PointsButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsButtonView.swift; sourceTree = "<group>"; };
 		FA18FFEF25690C7100148FAB /* FoodShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodShopView.swift; sourceTree = "<group>"; };
 		FA18FFF2256917D900148FAB /* FoodShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodShopViewModel.swift; sourceTree = "<group>"; };
 		FA18FFF52569180800148FAB /* FoodShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodShop.swift; sourceTree = "<group>"; };
@@ -1152,6 +1158,9 @@
 				FA0938C9257AAB820061ACF5 /* TaxiTariffCollectionViewCell.swift */,
 				FA186CA8257E503300903339 /* TariffPromoCodeView.swift */,
 				FA186CAB257E54C600903339 /* TariffPointsView.swift */,
+				FA186CB5257F651200903339 /* PromoCodeActivetedView.swift */,
+				FA186CB8257F715E00903339 /* PromoCodeButtonView.swift */,
+				FA186CBB257F7A7500903339 /* PointsButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1644,6 +1653,7 @@
 				FA18FFF3256917D900148FAB /* FoodShopViewModel.swift in Sources */,
 				722D69AE2573B40F00A8432D /* ProductDetailModel.swift in Sources */,
 				FA983C2B2555D5B5006EE969 /* PaymentCongratulationsView.swift in Sources */,
+				FA186CBC257F7A7500903339 /* PointsButtonView.swift in Sources */,
 				FA8196AE2556A4D50053EE22 /* PaymentPointsView.swift in Sources */,
 				FAD0B00925669B1F008C2794 /* AddressView.swift in Sources */,
 				7286E5122542398F0027A69B /* FontsHelper.swift in Sources */,
@@ -1722,6 +1732,7 @@
 				FAD0B00425669B1F008C2794 /* AddAddresViewController.swift in Sources */,
 				F7AECA75256C342400CA86AC /* TaxiOrderStrings.swift in Sources */,
 				FAD0B00725669B1F008C2794 /* SelectAddressView.swift in Sources */,
+				FA186CB6257F651200903339 /* PromoCodeActivetedView.swift in Sources */,
 				7286E5102542380D0027A69B /* ColorHelper.swift in Sources */,
 				FA3FD465254D846500769610 /* SideMenuViewModel.swift in Sources */,
 				72F79DFC25474BED00F4E6AC /* LocationError.swift in Sources */,
@@ -1825,6 +1836,7 @@
 				FAA9495D25546FA8005C5B40 /* PaymentCardDetails.swift in Sources */,
 				72E933FA255F067000CED717 /* CardContainerViewModel.swift in Sources */,
 				FA3A056825480A1900C55447 /* SettingsAvailableSharesViewModel.swift in Sources */,
+				FA186CB9257F715E00903339 /* PromoCodeButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

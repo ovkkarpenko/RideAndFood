@@ -49,9 +49,19 @@ class TaxiTariffCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var tripPriceLabel: UILabel = {
+    private lazy var tripSalePriceLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var tripPriceLabel: UILabel = {
+        let label = UILabel()
+        label.attributedText = "100 руб".strikethrough("100 руб")
+        label.font = .systemFont(ofSize: 10)
+        label.textColor = ColorHelper.secondaryText.color()
+        label.isHidden = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -74,6 +84,7 @@ class TaxiTariffCollectionViewCell: UICollectionViewCell {
         addSubview(carImaveView)
         addSubview(tripDurationLabel)
         addSubview(tripPriceLabel)
+        addSubview(tripSalePriceLabel)
         
         NSLayoutConstraint.activate([
             backgroundShadow.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 3),
@@ -95,7 +106,11 @@ class TaxiTariffCollectionViewCell: UICollectionViewCell {
             
             tripPriceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             tripPriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            tripPriceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding)
+            tripPriceLabel.bottomAnchor.constraint(equalTo: tripSalePriceLabel.topAnchor, constant: 5),
+            
+            tripSalePriceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            tripSalePriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            tripSalePriceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
         
         layer.cornerRadius = 15
@@ -110,18 +125,18 @@ class TaxiTariffCollectionViewCell: UICollectionViewCell {
             tripDurationLabel.textColor = UIColor(red: 0.6, green: 0.8, blue: 0.2, alpha: 1)
         } else if tariff.id == 2 {
             backgroundShadow.alpha = 0
-            tripPriceLabel.textColor = ColorHelper.secondaryText.color()
+            tripSalePriceLabel.textColor = ColorHelper.secondaryText.color()
             backgroundColor = UIColor(red: 0.942, green: 0.942, blue: 0.942, alpha: 1)
         } else if tariff.id == 3 {
             backgroundShadow.alpha = 0
             carImaveView.image = UIImage(named: "tariff-rocket")
-            tripPriceLabel.textColor = ColorHelper.secondaryText.color()
+            tripSalePriceLabel.textColor = ColorHelper.secondaryText.color()
             backgroundColor = UIColor(red: 0.942, green: 0.942, blue: 0.942, alpha: 1)
         }
         
         tariffTitleLabel.text = tariff.name
         tripDurationLabel.text = "3 мин"
-        tripPriceLabel.text = "100 руб"
+        tripSalePriceLabel.text = "100 руб"
     }
     
     func setStatus(_ active: Bool) {
@@ -150,19 +165,19 @@ class TaxiTariffCollectionViewCell: UICollectionViewCell {
             backgroundShadow.alpha = 1
             carImaveView.image = UIImage(named: "tariff-car-green")
             tripDurationLabel.textColor = UIColor(red: 0.6, green: 0.8, blue: 0.2, alpha: 1)
-            tripPriceLabel.textColor = .black
+            tripSalePriceLabel.textColor = .black
             backgroundColor = .white
         } else if tariff.id == 2 {
             backgroundShadow.alpha = 1
             carImaveView.image = UIImage(named: "tariff-car-purple")
             tripDurationLabel.textColor = UIColor(red: 0.77, green: 0.257, blue: 0.95, alpha: 1)
-            tripPriceLabel.textColor = .black
+            tripSalePriceLabel.textColor = .black
             backgroundColor = .white
         } else if tariff.id == 3 {
             backgroundShadow.alpha = 1
             carImaveView.image = UIImage(named: "tariff-rocket-gold")
             tripDurationLabel.textColor = UIColor(red: 0.831, green: 0.741, blue: 0.502, alpha: 1)
-            tripPriceLabel.textColor = .black
+            tripSalePriceLabel.textColor = .black
             backgroundColor = .white
         }
     }
@@ -173,13 +188,13 @@ class TaxiTariffCollectionViewCell: UICollectionViewCell {
             backgroundShadow.alpha = 0
             carImaveView.image = UIImage(named: "tariff-car")
             tripDurationLabel.textColor = ColorHelper.secondaryText.color()
-            tripPriceLabel.textColor = ColorHelper.secondaryText.color()
+            tripSalePriceLabel.textColor = ColorHelper.secondaryText.color()
             backgroundColor = UIColor(red: 0.942, green: 0.942, blue: 0.942, alpha: 1)
         } else if tariff.id == 3 {
             backgroundShadow.alpha = 0
             carImaveView.image = UIImage(named: "tariff-rocket")
             tripDurationLabel.textColor = ColorHelper.secondaryText.color()
-            tripPriceLabel.textColor = ColorHelper.secondaryText.color()
+            tripSalePriceLabel.textColor = ColorHelper.secondaryText.color()
             backgroundColor = UIColor(red: 0.942, green: 0.942, blue: 0.942, alpha: 1)
         }
     }

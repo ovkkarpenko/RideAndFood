@@ -488,12 +488,15 @@ extension MapViewController: SelectTariffViewDelegate {
         cardView.isHidden = false
     }
     
-    func promoCodeButtonPressed() {
-        addNewView(TariffPromoCodeView())
+    func promoCodeButtonPressed(_ ifPromoCodeIsValidCallback: (() -> ())?) {
+        let view = TariffPromoCodeView()
+        view.promoCodeActivetedView.ifPromoCodeIsValidCallback = ifPromoCodeIsValidCallback
+        addNewView(view)
     }
     
-    func pointsButtonPressed() {
-        addNewView(TariffPointsView())
+    func pointsButtonPressed(_ ifEnteredPointsCallback: (() -> ())?) {
+        let view = TariffPointsView()
+        addNewView(view)
     }
     
     func addNewView(_ view: CustromViewProtocol) {

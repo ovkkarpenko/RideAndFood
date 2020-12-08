@@ -10,5 +10,5 @@ import UIKit
 
 protocol CustromViewProtocol: UIView {
     func show()
-    func dismiss()
+    func dismiss(_ completion: (() -> ())?)
 }

@@ -99,90 +99,27 @@ class SelectTariffView: UIView {
     }()
     
     private lazy var promoCodeView: UIView = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(promoCodeButtonPressed), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        let image = UIImage(named: "promo")
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 15)
-        label.text = SelectTariffStrings.promoCodeTitle.text()
-        
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.shadowColor = ColorHelper.shadow.color()?.cgColor
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 3
-        view.layer.cornerRadius = 15
+        let view = PromoCodeButtonView()
+        view.buttonPressedCallback = { [weak self] in
+            self?.activatedTariffCell = self?.collectionView.cellForItem(at: .init(row: 0, section: 0)) as? TaxiTariffCollectionViewCell
+            
+            self?.delegate?.promoCodeButtonPressed {
+                self?.activatedTariffCell?.tripPriceLabel.isHidden = false
+                view.disable()
+            }
+        }
         view.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(imageView)
-        view.addSubview(label)
-        view.addSubview(button)
-        
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 1),
-            imageView.widthAnchor.constraint(equalToConstant: 20),
-            
-            label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: padding),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            button.topAnchor.constraint(equalTo: view.topAnchor),
-            button.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-        
         return view
     }()
     
-    private lazy var pointsView: UIView = {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(pointsButtonPressed), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        
-        let image = UIImage(named: "points")
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 15)
-        label.text = SelectTariffStrings.pointsTitle.text()
-        
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.shadowColor = ColorHelper.shadow.color()?.cgColor
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 3
-        view.layer.cornerRadius = 15
+    lazy var pointsView: UIView = {
+        let view = PointsButtonView()
+        view.buttonPressedCallback = { [weak self] in
+            self?.delegate?.pointsButtonPressed {
+                view.disable()
+            }
+        }
         view.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(imageView)
-        view.addSubview(label)
-        view.addSubview(button)
-        
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 1),
-            imageView.widthAnchor.constraint(equalToConstant: 20),
-            
-            label.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: padding),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            button.topAnchor.constraint(equalTo: view.topAnchor),
-            button.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-        
         return view
     }()
     
@@ -204,9 +141,12 @@ class SelectTariffView: UIView {
         setupCollectionView()
     }
     
-    private let offset: CGFloat = UIScreen.main.bounds.height-430
+    private var activatedTariffCell: TaxiTariffCollectionViewCell?
+    
     private let padding: CGFloat = 20
+    private let offset: CGFloat = UIScreen.main.bounds.height-430
     private let screenHeight = UIScreen.main.bounds.height
+    
     private let bag = DisposeBag()
     private let viewModel = SelectTariffViewModel()
     
@@ -280,7 +220,17 @@ class SelectTariffView: UIView {
                 for i in 0..<self.collectionView.numberOfItems(inSection: indexPath.section) {
                     
                     if let cell = self.collectionView.cellForItem(at: .init(row: i, section: indexPath.section)) as? TaxiTariffCollectionViewCell {
-                        cell.setStatus(i == indexPath.row)
+                        if i == indexPath.row {
+                            if let activatedTariffCell = self.activatedTariffCell, !activatedTariffCell.tripPriceLabel.isHidden {
+                                cell.tripPriceLabel.isHidden = false
+                                activatedTariffCell.tripPriceLabel.isHidden = true
+                            }
+                            
+                            cell.setStatus(true)
+                            self.activatedTariffCell = cell
+                        } else {
+                            cell.setStatus(false)
+                        }
                     }
                 }
             }).disposed(by: bag)
@@ -318,14 +268,6 @@ class SelectTariffView: UIView {
         } completion: { [weak self] _ in
             self?.removeFromSuperview()
         }
-    }
-    
-    @objc private func promoCodeButtonPressed() {
-        delegate?.promoCodeButtonPressed()
-    }
-    
-    @objc private func pointsButtonPressed() {
-        delegate?.pointsButtonPressed()
     }
     
     @objc private func backButtonPressed() {
