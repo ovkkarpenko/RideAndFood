@@ -65,7 +65,7 @@ class OtherQuantityPointsView: UIView, CustromViewProtocol {
         
         if touches.first?.view == self {
             dismiss { [weak self] in
-                self?.dismissCallback?(nil)
+                self?.dismissCallback?(0)
                 self?.removeFromSuperview()
             }
         }
