@@ -50,10 +50,24 @@ class TariffPointsView: UIView, CustromViewProtocol {
     
     private lazy var otherQuantityButton: PrimaryButton = {
         let button = PrimaryButton(title: SelectTariffStrings.otherQuantity.text())
+        button.addTarget(self, action: #selector(otherQuantityButtonPressed), for: .touchUpInside)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private lazy var otherQuantityPointsView: OtherQuantityPointsView = {
+        let view = OtherQuantityPointsView()
+        view.maxPoints = points
+        view.dismissCallback = { [weak self] points in
+            self?.dismiss { [weak self] in
+                self?.dismissCallback?(points)
+                self?.removeFromSuperview()
+            }
+        }
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -76,8 +90,8 @@ class TariffPointsView: UIView, CustromViewProtocol {
         }
     }
     
-    private let offset: CGFloat = UIScreen.main.bounds.height-200
     private let padding: CGFloat = 20
+    private let offset: CGFloat = UIScreen.main.bounds.height-200
     private let screenHeight = UIScreen.main.bounds.height
     
     private var points: Int?
@@ -143,7 +157,7 @@ class TariffPointsView: UIView, CustromViewProtocol {
         contentViewBottomAnchorConstraint.constant = -screenHeight-offset
         
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseIn]) { [weak self] in
-            self?.transparentView.alpha = 0
+            if completion != nil { self?.transparentView.alpha = 0 }
             self?.layoutIfNeeded()
         } completion: { _ in
             completion?()
@@ -155,5 +169,20 @@ class TariffPointsView: UIView, CustromViewProtocol {
         dismiss { [weak self] in
             self?.removeFromSuperview()
         }
+    }
+    
+    @objc private func otherQuantityButtonPressed() {
+        dismiss()
+        
+        addSubview(otherQuantityPointsView)
+        NSLayoutConstraint.activate([
+            otherQuantityPointsView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            otherQuantityPointsView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            otherQuantityPointsView.topAnchor.constraint(equalTo: topAnchor),
+            otherQuantityPointsView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
+        
+        layoutIfNeeded()
+        otherQuantityPointsView.show()
     }
 }

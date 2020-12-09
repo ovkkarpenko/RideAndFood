@@ -15,6 +15,7 @@ enum SelectTariffStrings {
     case spendAllPoints
     case otherQuantity
     case lookingForDriver
+    case pointsCountTitle
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -43,6 +44,8 @@ enum SelectTariffStrings {
             return "Другое количество"
         case .lookingForDriver:
             return "Ищем подходящий вариант"
+        case .pointsCountTitle:
+            return "Введите количество баллов"
         }
     }
     
@@ -64,6 +67,8 @@ enum SelectTariffStrings {
             return "Other quantity"
         case .lookingForDriver:
             return "We are looking for a suitable option"
+        case .pointsCountTitle:
+            return "Enter the number of points"
         }
     }
 }

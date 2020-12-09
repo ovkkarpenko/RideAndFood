@@ -116,12 +116,16 @@ class SelectTariffView: UIView {
     lazy var pointsView: PointsButtonView = {
         let view = PointsButtonView()
         view.buttonPressedCallback = { [weak self] in
-            if self?.activatedTariffCell == nil { self?.activatedTariffCell = self?.collectionView.cellForItem(at: .init(row: 0, section: 0)) as? TaxiTariffCollectionViewCell }
+            guard let self = self else { return }
             
-            self?.delegate?.pointsButtonPressed { points in
-                self?.activatedTariffCell?.tripPriceLabel.isHidden = false
-                self?.points = points ?? 0
-                view.disable(points)
+            if self.activatedTariffCell == nil { self.activatedTariffCell = self.collectionView.cellForItem(at: .init(row: 0, section: 0)) as? TaxiTariffCollectionViewCell }
+            
+            self.delegate?.pointsButtonPressed { points in
+                if points != 0 {
+                    self.activatedTariffCell?.tripPriceLabel.isHidden = false
+                    self.points = points ?? 0
+                    view.disable(points)
+                }
             }
         }
         view.translatesAutoresizingMaskIntoConstraints = false
