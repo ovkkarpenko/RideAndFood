@@ -146,6 +146,7 @@ class MapViewController: UIViewController {
         return taxiActiveOrderView
     }()
     
+    // Нужно будет добавить проверку на наличие активных заказов при появлении главного меню
     private var activeOrders: Bool? {
         didSet {
             if let cardViewIndex = view.subviews.firstIndex(of: cardView), taxiOrderModelHandler.getTaxiOrder() != nil {
@@ -159,6 +160,8 @@ class MapViewController: UIViewController {
                 let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(showActiveOrderView))
                 swipeGesture.direction = .up
                 cardView.addGestureRecognizer(swipeGesture)
+                
+                cardView.isTaxiButtonEnable = false
             }
         }
     }
@@ -491,7 +494,12 @@ extension MapViewController: OrderViewDelegate {
     func buttonTapped(senderType: OrderViewType, addressInfo: String?) {
         switch senderType {
         case .addressInput:
-            confirmAddressButtonPressed()
+            let taxiOrderModel = OrderTaxiModelHandler()
+//            taxiOrderModel.removeTaxiOrder(withId: 1)
+//            print(taxiOrderModel.getTaxiOrder())
+            taxiOrderModel.addToTaxiOrder(order: OrderTaxiModel(id: 1, from: addressInputView.firstTextView.textField.text, to: addressInputView.secondTextView.textField.text))
+            taxiActiveOrderView.setDeliveryTime(value: 10)
+//            confirmAddressButtonPressed() // вернуть это
             backButtonPressed()
         case .currentAddressDetail:
             backButtonPressed()

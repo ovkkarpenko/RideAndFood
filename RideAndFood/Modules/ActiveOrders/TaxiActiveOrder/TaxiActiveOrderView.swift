@@ -95,4 +95,11 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
     func setToAddress(address: String?) {
         activeOrderView.secondTextLabel.text = address
     }
+    
+    func setDeliveryTime(value: Int) {
+        let text = NSMutableAttributedString(string: ActiveTaxiOrderStrings.getString(.deliveryTime)())
+        text.append(NSAttributedString(string: "≈ \(value) мин", attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.locationOrange)()]))
+        
+        activeOrderView.timeLabel.attributedText = text
+    }
 }
