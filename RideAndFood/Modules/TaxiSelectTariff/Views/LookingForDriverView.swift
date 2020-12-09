@@ -23,7 +23,7 @@ class LookingForDriverView: UIView, CustromViewProtocol {
     }()
     
     private lazy var searchImageView: UIImageView = {
-        let image = UIImage(named: "search")
+        let image = UIImage.gif(name: "loading3")
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -78,6 +78,8 @@ class LookingForDriverView: UIView, CustromViewProtocol {
             
             searchImageView.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -5),
             searchImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            searchImageView.widthAnchor.constraint(equalToConstant: 31),
+            searchImageView.heightAnchor.constraint(equalToConstant: 22),
             
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 30),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),

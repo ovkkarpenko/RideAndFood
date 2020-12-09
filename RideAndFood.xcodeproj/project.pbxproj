@@ -222,6 +222,7 @@
 		FA8196B12556A7100053EE22 /* PaymentPointsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8196B02556A7100053EE22 /* PaymentPointsDetailsView.swift */; };
 		FA81AE73254B364F00B74182 /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA81AE72254B364F00B74182 /* ServerConfig.swift */; };
 		FA8517F42580C6CC000C7674 /* OtherQuantityPointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8517F32580C6CC000C7674 /* OtherQuantityPointsView.swift */; };
+		FA8517F72580D1D2000C7674 /* GifImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8517F62580D1D2000C7674 /* GifImage.swift */; };
 		FA8CA7722546C873001FDE5E /* SettingsPersonalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7712546C873001FDE5E /* SettingsPersonalDataViewController.swift */; };
 		FA8CA7752546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7742546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift */; };
 		FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8CA7782546D0F8001FDE5E /* AlertButton.swift */; };
@@ -237,6 +238,7 @@
 		FAACAA93254B02CC005C3084 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAACAA92254B02CC005C3084 /* UIImage.swift */; };
 		FAACAA9D254B0973005C3084 /* PromotionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAACAA9C254B0973005C3084 /* PromotionDetailsViewController.swift */; };
 		FAACAAA0254B0C13005C3084 /* PromotionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAACAA9F254B0C13005C3084 /* PromotionDetailsViewModel.swift */; };
+		FAB14FDA25811151007BC55E /* loading3.gif in Resources */ = {isa = PBXBuildFile; fileRef = FAB14FD925811151007BC55E /* loading3.gif */; };
 		FAB9706F256988E600FD6563 /* ShopSubCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB9706E256988E600FD6563 /* ShopSubCategoryViewModel.swift */; };
 		FAC0660825553FFB003CC6AA /* PaymentStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0660725553FFB003CC6AA /* PaymentStrings.swift */; };
 		FAC0660D2555607C003CC6AA /* BindCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0660C2555607C003CC6AA /* BindCardViewController.swift */; };
@@ -485,6 +487,7 @@
 		FA8196B02556A7100053EE22 /* PaymentPointsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPointsDetailsView.swift; sourceTree = "<group>"; };
 		FA81AE72254B364F00B74182 /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
 		FA8517F32580C6CC000C7674 /* OtherQuantityPointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherQuantityPointsView.swift; sourceTree = "<group>"; };
+		FA8517F62580D1D2000C7674 /* GifImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifImage.swift; sourceTree = "<group>"; };
 		FA8CA7712546C873001FDE5E /* SettingsPersonalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPersonalDataViewController.swift; sourceTree = "<group>"; };
 		FA8CA7742546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPersonalDataViewModel.swift; sourceTree = "<group>"; };
 		FA8CA7782546D0F8001FDE5E /* AlertButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertButton.swift; sourceTree = "<group>"; };
@@ -500,6 +503,7 @@
 		FAACAA92254B02CC005C3084 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		FAACAA9C254B0973005C3084 /* PromotionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailsViewController.swift; sourceTree = "<group>"; };
 		FAACAA9F254B0C13005C3084 /* PromotionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotionDetailsViewModel.swift; sourceTree = "<group>"; };
+		FAB14FD925811151007BC55E /* loading3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading3.gif; sourceTree = "<group>"; };
 		FAB9706E256988E600FD6563 /* ShopSubCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopSubCategoryViewModel.swift; sourceTree = "<group>"; };
 		FAC0660725553FFB003CC6AA /* PaymentStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStrings.swift; sourceTree = "<group>"; };
 		FAC0660C2555607C003CC6AA /* BindCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindCardViewController.swift; sourceTree = "<group>"; };
@@ -988,6 +992,7 @@
 			children = (
 				72F467E3255B1EC100F8926E /* String+Format.swift */,
 				720AA10B256D543A0065BFED /* Date+Format.swift */,
+				FA8517F62580D1D2000C7674 /* GifImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1157,6 +1162,7 @@
 		FA17F9F9257943C6009553C4 /* TaxiSelectTariff */ = {
 			isa = PBXGroup;
 			children = (
+				FAB14FCC25810E1B007BC55E /* Images */,
 				FA186CD1257FA43900903339 /* Models */,
 				FA186CAE257E557B00903339 /* Protocols */,
 				FA53E564257AAEA300B87385 /* ViewModels */,
@@ -1405,6 +1411,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		FAB14FCC25810E1B007BC55E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FAB14FD925811151007BC55E /* loading3.gif */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		FAD0AFEB25669B1A008C2794 /* FoodScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1595,6 +1609,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7FD685D253F72BD00A67E07 /* SupportService.storyboard in Resources */,
+				FAB14FDA25811151007BC55E /* loading3.gif in Resources */,
 				F7AECA7C256C365000CA86AC /* OrderView.xib in Resources */,
 				F7891733254A14FD00849D27 /* LaunchScreen.storyboard in Resources */,
 				F795DF3625547A58005A607C /* TariffPage.xib in Resources */,
@@ -1715,6 +1730,7 @@
 				FA186CBC257F7A7500903339 /* PointsButtonView.swift in Sources */,
 				FA8196AE2556A4D50053EE22 /* PaymentPointsView.swift in Sources */,
 				FAD0B00925669B1F008C2794 /* AddressView.swift in Sources */,
+				FA8517F72580D1D2000C7674 /* GifImage.swift in Sources */,
 				7286E5122542398F0027A69B /* FontsHelper.swift in Sources */,
 				F72D0ADC257643C6000952AF /* TariffPageDelegate.swift in Sources */,
 				F7AECA78256C345300CA86AC /* TextViewType.swift in Sources */,
