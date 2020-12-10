@@ -78,14 +78,14 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
         
         NSLayoutConstraint.activate([activeOrderView.topAnchor.constraint(equalTo: topAnchor, constant: padding), activeOrderView.leadingAnchor.constraint(equalTo: leadingAnchor), activeOrderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: sidePadding), activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
         
-        addGestures() 
+//        addGestures() 
     }
     
-    private func addGestures() {
-        let dismissGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismiss))
-        dismissGesture.direction = .down
-        addGestureRecognizer(dismissGesture)
-    }
+//    private func addGestures() {
+//        let dismissGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismiss))
+//        dismissGesture.direction = .down
+//        addGestureRecognizer(dismissGesture)
+//    }
     
     // MARK: - public methods
     func setFromAddress(address: String?) {
