@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import NVActivityIndicatorView
 
-class ShopProductsView: UIView {
+class ShopProductsView: BaseFoodView {
     
     var shopId: Int?
     var categoryIds: [Int] = []
@@ -134,7 +134,7 @@ class ShopProductsView: UIView {
             productsCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             productsCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             productsCollectionView.topAnchor.constraint(equalTo: breadcrumbsCollectionView.bottomAnchor, constant: padding),
-            productsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            productsCollectionView.bottomAnchor.constraint(equalTo: makeOrderButton.topAnchor, constant: -padding),
             
             loaderView.centerYAnchor.constraint(equalTo: centerYAnchor),
             loaderView.centerXAnchor.constraint(equalTo: centerXAnchor),

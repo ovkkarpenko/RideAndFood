@@ -10,15 +10,19 @@ import CoreData
 
 protocol ICoreDataManager {
     
-    func addEntity<T: NSManagedObject>(_ type: T.Type, properties: [String: Any])
+    func addEntity<T: NSManagedObject>(_ type: T.Type,
+                                       properties: [String: Any],
+                                       completion: (() -> Void)?)
     
     func fetchEntities(withName name: String,
                        withPredicate predicate: NSPredicate?) -> [NSManagedObject]?
     
     func updateEntity(entityWithName name: String,
                 keyedValues: [String: Any],
-                predicate: NSPredicate)
+                predicate: NSPredicate,
+                completion: (() -> Void)?)
     
     func deleteRange(entityName name: String,
-                     predicate: NSPredicate)
+                     predicate: NSPredicate?,
+                     completion: (() -> Void)?)
 }

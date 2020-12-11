@@ -26,6 +26,7 @@ enum StringsHelper {
     case emptyMessage
     case cancel
     case rub
+    case minutes
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -72,6 +73,8 @@ enum StringsHelper {
             return "Отмена"
         case .rub:
             return "руб"
+        case .minutes:
+            return "мин"
         }
     }
     
@@ -111,6 +114,8 @@ enum StringsHelper {
             return "Cancel"
         case .rub:
             return "rub"
+        case .minutes:
+            return "min"
         }
     }
 }

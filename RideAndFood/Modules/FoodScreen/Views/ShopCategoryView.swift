@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class ShopCategoryView: UIView {
+class ShopCategoryView: BaseFoodView {
     
     weak var delegate: FoodViewDelegate?
     
@@ -112,7 +112,7 @@ class ShopCategoryView: UIView {
             categoriesCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             categoriesCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
             categoriesCollectionView.topAnchor.constraint(equalTo: shopNameLabel.bottomAnchor, constant: padding+20),
-            categoriesCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding),
+            categoriesCollectionView.bottomAnchor.constraint(equalTo: makeOrderButton.topAnchor, constant: -padding),
         ])
         
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor

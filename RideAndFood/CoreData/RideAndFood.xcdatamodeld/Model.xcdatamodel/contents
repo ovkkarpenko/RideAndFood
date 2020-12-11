@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CartRowDB" representedClassName="CartRowDB" syncable="YES" codeGenerationType="class">
-        <attribute name="count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="productId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="productName" optional="YES" attributeType="String"/>
-        <attribute name="productPrice" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="count" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="productName" attributeType="String"/>
+        <attribute name="productPrice" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ShopDB" representedClassName="ShopDB" syncable="YES" codeGenerationType="class">
+        <attribute name="shopId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="shopName" attributeType="String"/>
     </entity>
     <elements>
         <element name="CartRowDB" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="ShopDB" positionX="-63" positionY="9" width="128" height="59"/>
     </elements>
 </model>

@@ -11,16 +11,20 @@ import Foundation
 struct ProductDetailModel {
     
     let id: Int
+    let shop: FoodShop
     let name: String
     let composition: NSAttributedString
     var producer: NSAttributedString
     let country: NSAttributedString
     let imageUrl: URL?
-    let price: Double
+    let price: Float
     let priceString: String
     let closeBlock: () -> Void
     
-    init(model: ProductDetail, closeBlock: @escaping () -> Void) {
+    init(model: ProductDetail,
+         shop: FoodShop,
+         closeBlock: @escaping () -> Void) {
+        self.shop = shop
         id = model.id
         name = "\(model.name) \(model.weight) \(model.unit)"
         

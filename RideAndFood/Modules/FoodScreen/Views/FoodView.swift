@@ -97,17 +97,22 @@ class FoodView: UIView {
         cardView.translatesAutoresizingMaskIntoConstraints = false
         return cardView
     }()
+    
+    private var selectedShop: FoodShop?
+    private var currentShopId: Int?
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
         setupLayout()
+        CartModel.shared.observers.append(self)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupLayout()
+        CartModel.shared.observers.append(self)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -207,6 +212,7 @@ class FoodView: UIView {
                                                selector: #selector(keyboardWillHide),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
+        updateMakeOrderButton()
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -235,6 +241,14 @@ class FoodView: UIView {
 extension FoodView: FoodViewDelegate {
     
     func toggle(_ hide: Bool, view: UIView, constraint: NSLayoutConstraint, dismiss: Bool = false) {
+        if let baseFoodView = view as? BaseFoodView {
+            switch hide {
+            case true:
+                baseFoodView.viewWillHide()
+            case false:
+                baseFoodView.viewWillShow()
+            }
+        }
         if hide {
             switch selectedView {
             case .cardView:
@@ -293,6 +307,14 @@ extension FoodView: FoodViewDelegate {
     }
     
     func showShopCategory(shop: FoodShop?) {
+        guard currentShopId == shop?.id || currentShopId == nil || shop == nil else {
+            showEmptyDescriptionView()
+            return
+        }
+        
+        if (shop != nil) {
+            selectedShop = shop
+        }
         selectedView = .shopCategory
         
         if let shop = shop {
@@ -349,10 +371,10 @@ extension FoodView: FoodViewDelegate {
     }
     
     func showProductDetails(_ shopProduct: ShopProduct?) {
-        guard let shopProduct = shopProduct else { return }
+        guard let shopProduct = shopProduct, let shop = selectedShop else { return }
         productDetailsView.configure(with: .init(model: .init(id: shopProduct.id,
                                                               name: shopProduct.name,
-                                                              price: Double(shopProduct.price ?? 0),
+                                                              price: Float(shopProduct.price ?? 0),
                                                               sale: 0,
                                                               hit: false,
                                                               composition: "вода, овсяная мука, напиток чайный (зеленый чай матча), соль.",
@@ -360,36 +382,105 @@ extension FoodView: FoodViewDelegate {
                                                               unit: "г",
                                                               producing: "Сады Придонья",
                                                               image: shopProduct.icon,
-                                                              country: "Россия")) { [weak self] in
-            guard let self = self else { return }
-            self.toggle(true,
-                        view: self.cardView,
-                        constraint: self.cardViewBottomConstraint)
-            self.selectedView = .shopProducts
-            self.toggle(false,
-                        view: self.shopProductsView,
-                        constraint: self.shopProductsViewHeightConstraint)
-            
-        })
+                                                              country: "Россия"),
+                                                 shop: shop) { [weak self] in
+                                                    self?.dismissProductDetails()
+                                                 })
         
         cardView.configure(with: .init(contentView: productDetailsView,
                                        style: .light,
                                        paddingTop: 0,
-                                       paddingBottom: padding,
+                                       paddingBottom: 0,
                                        paddingX: 0,
                                        didSwipeDownCallback: { [weak self] in
-                                        guard let self = self else { return }
-                                        self.toggle(true,
-                                                    view: self.cardView,
-                                                    constraint: self.cardViewBottomConstraint)
-                                        self.selectedView = .shopProducts
-                                        self.toggle(false,
-                                                    view: self.shopProductsView,
-                                                    constraint: self.shopProductsViewHeightConstraint)
+                                        self?.dismissProductDetails()
                                        }))
-        layoutIfNeeded()
         toggle(true, view: shopProductsView, constraint: shopProductsViewHeightConstraint)
         selectedView = .cardView
         toggle(false, view: cardView, constraint: cardViewBottomConstraint)
+    }
+    
+    private func dismissProductDetails() {
+        toggle(true,
+               view: cardView,
+               constraint: cardViewBottomConstraint)
+        selectedView = .shopProducts
+        toggle(false,
+               view: shopProductsView,
+               constraint: shopProductsViewHeightConstraint)
+    }
+    
+    private func updateMakeOrderButton() {
+        let cart = CartModel.getCart()
+        let sumText = cart.sum > 0 ? cart.sum.currencyString() : nil
+        [
+            shopCategoryView,
+            shopSubCategoryView,
+            shopProductsView
+        ].forEach { $0.updateMakeOrderButton(sum: sumText) }
+        currentShopId = cart.shopId
+    }
+    
+    private func showEmptyDescriptionView() {
+        let contentView = TitledButtonsStackView()
+        contentView.configure(with: .init(buttonsStackViewModel: .init(primaryTitle: FoodStrings.emptyCartConfirmation.text(),
+                                                                       secondaryTitle: StringsHelper.cancel.text(),
+                                                                       primaryButtonPressedBlock: { [weak self] in
+                                                                        CartModel.shared.emptyCart()
+                                                                        self?.hideCardView(completion: {
+                                                                            self?.showEmptyCartView()
+                                                                        })
+                                                                       },
+                                                                       secondaryButtonPressedBlock: { [weak self] in
+                                                                        self?.hideCardView()
+                                                                       }),
+                                          titleColor: ColorHelper.secondaryText.color(),
+                                          title: FoodStrings.emptyCartDescription.text()))
+        cardView.configure(with: .init(contentView: contentView,
+                                       paddingBottom: 5,
+                                       didSwipeDownCallback: { [weak self] in
+                                        self?.hideCardView()
+                                       }))
+        layoutIfNeeded()
+        cardViewBottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.2) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    private func showEmptyCartView() {
+        let contentView = EmptyCartView()
+        contentView.configure(with: .init(backButtonTappedBlock: { [weak self] in
+            self?.hideCardView()
+        }))
+        cardView.configure(with: .init(contentView: contentView,
+                                       paddingBottom: 5,
+                                       didSwipeDownCallback: { [weak self] in
+                                        self?.hideCardView()
+                                       }))
+        layoutIfNeeded()
+        cardViewBottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.2) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    private func hideCardView(completion: (() -> Void)? = nil) {
+        cardViewBottomConstraint.constant = hideCardViewConstant
+        UIView.animate(withDuration: 0.2) {
+            self.layoutIfNeeded()
+        } completion: { _ in
+            completion?()
+        }
+    }
+}
+
+// MARK: - ICartChangesObserver
+
+extension FoodView: ICartChangesObserver {
+    func cartUpdated() {
+        DispatchQueue.main.async {
+            self.updateMakeOrderButton()
+        }
     }
 }

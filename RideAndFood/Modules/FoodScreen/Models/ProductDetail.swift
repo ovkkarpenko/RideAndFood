@@ -11,8 +11,8 @@ import Foundation
 struct ProductDetail: Codable {
     let id: Int
     let name: String
-    let price: Double
-    let sale: Double
+    let price: Float
+    let sale: Int
     let hit: Bool
     let composition: String
     let weight: String
