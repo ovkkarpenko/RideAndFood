@@ -11,8 +11,6 @@ import RxSwift
 
 class ShopCategoryView: BaseFoodView {
     
-    weak var delegate: FoodViewDelegate?
-    
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
         

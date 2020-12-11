@@ -28,6 +28,7 @@ protocol FoodViewDelegate: class {
     func showShopProducts(shopId: Int?, subCategory: ShopSubCategory?)
     func showProductCategory(category: ShopCategory?)
     func showProductDetails(_ shopProduct: ShopProduct?)
+    func showCartView()
 }
 
 class FoodView: UIView {
@@ -92,6 +93,8 @@ class FoodView: UIView {
     
     private lazy var productDetailsView = ProductDetailsView()
     
+    private lazy var cartView = CartView()
+    
     private lazy var cardView: CardView = {
         let cardView = CardView()
         cardView.translatesAutoresizingMaskIntoConstraints = false
@@ -139,6 +142,7 @@ class FoodView: UIView {
     
     private var isLoaded: Bool = false
     private var selectedView: SelectedViewType = .address
+    private var previousSelectedView: SelectedViewType = .address
     
     private let padding: CGFloat = 20
     
@@ -400,6 +404,34 @@ extension FoodView: FoodViewDelegate {
         toggle(false, view: cardView, constraint: cardViewBottomConstraint)
     }
     
+    func showCartView() {
+        let cart = CartModel.getCart()
+        
+        cartView.configure(with: .init(cartRows: cart.rows,
+                                       sum: cart.sum,
+                                       deliveryTimeInMinutes: 45,
+                                       deliveryCost: 0,
+                                       shopName: cart.shopName,
+                                       backButtonTappedBlock: { [weak self] in
+                                        self?.dismissCart()
+                                       }))
+        
+        cardView.configure(with: .init(contentView: cartView,
+                                       style: .light,
+                                       paddingTop: 0,
+                                       paddingBottom: 0,
+                                       paddingX: 0,
+                                       didSwipeDownCallback: { [weak self] in
+                                        self?.dismissCart()
+                                       }))
+        toggle(true, view: shopCategoryView, constraint: shopCategoryViewHeightConstraint)
+        toggle(true, view: shopProductsView, constraint: shopProductsViewHeightConstraint)
+        toggle(true, view: shopSubCategoryView, constraint: shopSubCategoryViewHeightConstraint)
+        previousSelectedView = selectedView
+        selectedView = .cardView
+        toggle(false, view: cardView, constraint: cardViewBottomConstraint)
+    }
+    
     private func dismissProductDetails() {
         toggle(true,
                view: cardView,
@@ -408,6 +440,23 @@ extension FoodView: FoodViewDelegate {
         toggle(false,
                view: shopProductsView,
                constraint: shopProductsViewHeightConstraint)
+    }
+    
+    private func dismissCart() {
+        toggle(true, view: cardView, constraint: cardViewBottomConstraint)
+        selectedView = previousSelectedView
+        switch previousSelectedView {
+        case .shopCategory:
+            toggle(false, view: shopCategoryView, constraint: shopCategoryViewHeightConstraint)
+        case .shopProducts:
+            toggle(false, view: shopProductsView, constraint: shopProductsViewHeightConstraint)
+        case .productCategory:
+            toggle(false, view: shopSubCategoryView, constraint: shopSubCategoryViewHeightConstraint)
+        default:
+            selectedView = .address
+            toggle(false, view: foodAddressView, constraint: foodAddressViewHeightConstraint)
+            return
+        }
     }
     
     private func updateMakeOrderButton() {

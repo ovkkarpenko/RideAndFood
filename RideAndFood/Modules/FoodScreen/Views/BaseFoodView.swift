@@ -16,6 +16,7 @@ class BaseFoodView: UIView {
         let button = PrimaryButton()
         button.heightConstraint.constant = 0
         button.setTitleColor(ColorHelper.primaryButtonText.color(), for: .normal)
+        button.addTarget(self, action: #selector(makeOrderButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -24,6 +25,8 @@ class BaseFoodView: UIView {
     private let horizontalPadding: CGFloat = 25
     private var isShown: Bool = false
     private var sumText: String?
+    
+    weak var delegate: FoodViewDelegate?
     
     // MARK: - Initializers
     
@@ -103,5 +106,9 @@ class BaseFoodView: UIView {
             self.makeOrderButton.setAttributedTitle(nil, for: .normal)
             self.layoutIfNeeded()
         }
+    }
+    
+    @objc private func makeOrderButtonTapped() {
+        delegate?.showCartView()
     }
 }

@@ -14,7 +14,6 @@ class ShopProductsView: BaseFoodView {
     
     var shopId: Int?
     var categoryIds: [Int] = []
-    weak var delegate: FoodViewDelegate?
     
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
