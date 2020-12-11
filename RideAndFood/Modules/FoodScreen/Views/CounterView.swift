@@ -19,6 +19,7 @@ class CounterView: UIView {
         button.backgroundColor = ColorHelper.controlSecondaryBackground.color()
         button.titleLabel?.font = FontHelper.semibold17.font()
         button.addTarget(self, action: #selector(increase), for: .touchUpInside)
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return button
     }()
     
@@ -29,11 +30,13 @@ class CounterView: UIView {
         button.backgroundColor = ColorHelper.controlSecondaryBackground.color()
         button.titleLabel?.font = FontHelper.semibold17.font()
         button.addTarget(self, action: #selector(decrease), for: .touchUpInside)
+        button.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return button
     }()
     
     private lazy var countLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         label.text = "1"
         return label
     }()
@@ -43,7 +46,7 @@ class CounterView: UIView {
     lazy var count = 1 {
         didSet {
             countLabel.text = "\(count)"
-            if count == 0 {
+            if count == 1 {
                 minusButton.isEnabled = false
             } else {
                 minusButton.isEnabled = true

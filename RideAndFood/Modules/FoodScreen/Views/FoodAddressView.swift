@@ -24,7 +24,7 @@ class FoodAddressView: UIView {
     lazy var addressTextField: UITextField = {
         let textField = MaskTextField()
         textField.keyboardType = .default
-        textField.placeholder = FoodSelectAddressStrings.addressTextField.text()
+        textField.placeholder = FoodStrings.addressTextField.text()
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()

@@ -19,7 +19,7 @@ class ProductBreadcrumbViewModel {
             
             if var items = items {
                 if let prevCategoryId = prevCategoryId {
-                    items.insert(ShopProduct(id: prevCategoryId, name: FoodSelectAddressStrings.backButton.text()), at: 0)
+                    items.insert(ShopProduct(id: prevCategoryId, name: FoodStrings.backButton.text()), at: 0)
                 }
                 
                 self?.itemsPublishSubject.onNext([SectionModel(model: "", items: items.filter { $0.isCategory })])

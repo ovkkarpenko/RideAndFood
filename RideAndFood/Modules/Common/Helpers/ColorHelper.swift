@@ -25,6 +25,7 @@ enum ColorHelper {
     case transparentBlack
     case transparentWhite
     case controlSecondaryBackground
+    case notification
     
     func color() -> UIColor? {
         switch self {
@@ -58,6 +59,8 @@ enum ColorHelper {
             return UIColor(named: "TransparentWhite")
         case .controlSecondaryBackground:
             return UIColor(named: "ControllSecondaryBackground")
+        case .notification:
+            return UIColor(named: "Notification")
         }
     }
 }

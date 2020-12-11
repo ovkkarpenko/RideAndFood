@@ -9,9 +9,8 @@
 import UIKit
 import RxSwift
 
-class ShopSubCategoryView: UIView {
+class ShopSubCategoryView: BaseFoodView {
     
-    weak var delegate: FoodViewDelegate?
     var shopId: Int?
     
     private lazy var backButton: UIButton = {
@@ -104,7 +103,7 @@ class ShopSubCategoryView: UIView {
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: padding),
-            tableView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding),
+            tableView.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: makeOrderButton.topAnchor, constant: -padding),
         ])
         
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor
