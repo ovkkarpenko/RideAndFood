@@ -27,13 +27,13 @@ class DimmerView: UIView {
     // MARK: - Public methods
     
     func hide() {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.2) {
             self.alpha = 0
         }
     }
     
     func show() {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.2) {
             self.alpha = 1
         }
     }

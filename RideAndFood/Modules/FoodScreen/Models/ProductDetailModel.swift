@@ -54,7 +54,7 @@ struct ProductDetailModel {
                                                     length: model.country.count))
         self.country = countryString
         
-        self.imageUrl = URL(string: "\(baseUrl)\(model.image)")
+        self.imageUrl = URL(string: "\(model.image)")
         self.price = model.price
         self.priceString = "\(model.price)"
         self.closeBlock = closeBlock

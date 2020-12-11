@@ -103,6 +103,12 @@ class FoodView: UIView {
     
     private var selectedShop: FoodShop?
     private var currentShopId: Int?
+    
+    private lazy var dimmerView: DimmerView = {
+        let view = DimmerView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -165,6 +171,7 @@ class FoodView: UIView {
         addSubview(shopSubCategoryView)
         addSubview(shopDetailsView)
         addSubview(shopProductsView)
+        addSubview(dimmerView)
         addSubview(cardView)
         
         NSLayoutConstraint.activate([
@@ -206,6 +213,11 @@ class FoodView: UIView {
             cardView.leadingAnchor.constraint(equalTo: leadingAnchor),
             cardView.trailingAnchor.constraint(equalTo: trailingAnchor),
             cardViewBottomConstraint,
+            
+            dimmerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            dimmerView.topAnchor.constraint(equalTo: topAnchor),
+            dimmerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            dimmerView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
         NotificationCenter.default.addObserver(self,
@@ -486,12 +498,14 @@ extension FoodView: FoodViewDelegate {
                                           titleColor: ColorHelper.secondaryText.color(),
                                           title: FoodStrings.emptyCartDescription.text()))
         cardView.configure(with: .init(contentView: contentView,
+                                       style: .light,
                                        paddingBottom: 5,
                                        didSwipeDownCallback: { [weak self] in
                                         self?.hideCardView()
                                        }))
         layoutIfNeeded()
         cardViewBottomConstraint.constant = 0
+        dimmerView.show()
         UIView.animate(withDuration: 0.2) {
             self.layoutIfNeeded()
         }
@@ -503,12 +517,14 @@ extension FoodView: FoodViewDelegate {
             self?.hideCardView()
         }))
         cardView.configure(with: .init(contentView: contentView,
+                                       style: .light,
                                        paddingBottom: 5,
                                        didSwipeDownCallback: { [weak self] in
                                         self?.hideCardView()
                                        }))
         layoutIfNeeded()
         cardViewBottomConstraint.constant = 0
+        dimmerView.show()
         UIView.animate(withDuration: 0.2) {
             self.layoutIfNeeded()
         }
@@ -516,6 +532,7 @@ extension FoodView: FoodViewDelegate {
     
     private func hideCardView(completion: (() -> Void)? = nil) {
         cardViewBottomConstraint.constant = hideCardViewConstant
+        dimmerView.hide()
         UIView.animate(withDuration: 0.2) {
             self.layoutIfNeeded()
         } completion: { _ in
