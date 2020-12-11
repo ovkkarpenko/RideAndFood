@@ -34,7 +34,7 @@ class ShopCategoryViewModel {
             configureCell: { (_, tv, indexPath, item) in
                 
                 let cell = tv.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! CategoryCollectionViewCell
-                cell.imageView.imageByUrl(from: URL(string: "\(baseUrl)\(item.icon)")!)
+                cell.imageView.imageByUrl(from: URL(string: "\(item.icon)")!)
                 cell.nameLabel.text = item.name
                 return cell
             }

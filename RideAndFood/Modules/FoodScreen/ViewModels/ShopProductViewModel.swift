@@ -33,7 +33,7 @@ class ShopProductViewModel {
             configureCell: { (_, tv, indexPath, item) in
                 
                 let cell = tv.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ShopProductCollectionViewCell
-                cell.imageView.imageByUrl(from: URL(string: "\(baseUrl)\(item.icon)")!)
+                cell.imageView.imageByUrl(from: URL(string: "\(item.icon)")!)
                 cell.nameLabel.text = item.name
                 if let price = item.price { cell.priceLabel.text = "\(price) руб" }
                 if let weight = item.weight { cell.weightLabel.text = "\(weight) г" }
