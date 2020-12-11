@@ -50,6 +50,10 @@ enum ApiConfig<T> where T: Codable {
     
     case getOrdersHistory(String)
     
+    case getCredits
+    
+    case orderTaxi(data: T)
+    
     func createRequest() -> (method: HTTPMethod, url: String, data: T?) {
         let baseUrl = baseApiUrl
         let userId = UserConfig.shared.userId
@@ -115,6 +119,10 @@ enum ApiConfig<T> where T: Codable {
             return (.get, "\(baseUrl)/user/\(userId)/history/payments", nil)
         case .getOrdersHistory(let status):
             return (.get, "\(baseUrl)/user/\(userId)/history/order/all/status/\(status)", nil)
+        case .getCredits:
+            return (.get, "\(baseUrl)/user/\(userId)/credit", nil)
+        case .orderTaxi(let data):
+            return (.post, "\(baseUrl)/user/\(userId)/order/taxi", data)
         }
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class MapViewController: UIViewController {
     
@@ -135,6 +136,12 @@ class MapViewController: UIViewController {
         return view
     }()
     
+    private lazy var selectTariffView: SelectTariffView = {
+        let view = SelectTariffView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: - Private properties
     
     private let accessManager = AccessLocationManager()
@@ -151,6 +158,34 @@ class MapViewController: UIViewController {
         didSet {
             cardView.address = cuurentPlacemark?.name
             addressDelegate?.currentAddressChanged(newAddress: cuurentPlacemark?.name)
+        }
+    }
+    
+    private lazy var taxiOrderModelHandler: OrderTaxiModelHandler = OrderTaxiModelHandler()
+    
+    private lazy var taxiActiveOrderView: TaxiActiveOrderView = {
+        // здесь нужно проверять, есть ли активный заказ еды и тогда отступ фрейма делать от еды. То же самое нужно делать для вьюшки еды. И тап индикатор тоже в зависимости от того последняя ли это вьюшка ставится.
+        let taxiActiveOrderView = TaxiActiveOrderView()
+        taxiActiveOrderView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.width, height: cardView.frame.height + 10)
+        taxiActiveOrderView.setToAddress(address: taxiOrderModelHandler.getTaxiOrder()?.to)
+        taxiActiveOrderView.setFromAddress(address: taxiOrderModelHandler.getTaxiOrder()?.from )
+        return taxiActiveOrderView
+    }()
+    
+    private var activeOrders: Bool? {
+        didSet {
+            if let cardViewIndex = view.subviews.firstIndex(of: cardView), taxiOrderModelHandler.getTaxiOrder() != nil {
+                myLocationButton.isHidden = true
+                locationImageView.isHidden = true
+                
+                taxiActiveOrderView.isLastView = true
+                view.insertSubview(taxiActiveOrderView, at: cardViewIndex - 1)
+                taxiActiveOrderView.show()
+                
+                let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(showActiveOrderView))
+                swipeGesture.direction = .up
+                cardView.addGestureRecognizer(swipeGesture)
+            }
         }
     }
     
@@ -185,6 +220,7 @@ class MapViewController: UIViewController {
         PromotionDetailsViewController.delegate = self
         AddAddresViewController.delegate = self
         CartModel.shared.observers.append(self)
+        NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -337,6 +373,23 @@ class MapViewController: UIViewController {
         addressInputView.show()
     }
     
+    private func initializeSelectTariffView(_ firstTextFieldText: String?, _ secondTextFieldText: String?) {
+        backButton.removeFromSuperview()
+        personButton.isHidden = true
+        selectTariffView.delegate = self
+        selectTariffView.firstTextField.textField.text = firstTextFieldText
+        selectTariffView.secondTextField.textField.text = secondTextFieldText
+        
+        view.addSubview(selectTariffView)
+        
+        NSLayoutConstraint.activate([selectTariffView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                                      selectTariffView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                      selectTariffView.topAnchor.constraint(equalTo: view.topAnchor),
+                                      selectTariffView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+        view.layoutIfNeeded()
+        selectTariffView.show()
+    }
+    
     @objc private func dismissKeyboard() {
         if self.view.endEditing(false) {
             self.view.endEditing(true)
@@ -477,6 +530,42 @@ class MapViewController: UIViewController {
             currentView.dismiss()
         }
     }
+    
+    @objc private func confirmAddressButtonPressed() {
+        if let currentView = view.subviews.last as? OrderViewDirector {
+            currentView.dismiss()
+            initializeSelectTariffView(currentView.firstTextView.textField.text, currentView.secondTextView.textField.text)
+        }
+    }
+    
+    @objc private func showActiveOrderView() {
+        taxiActiveOrderView.showMore()
+    }
+    
+    @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else { return }
+        let timeInterval = 0.001 // 'cos core data needs time to update a db.
+        
+        if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval) { [weak self] in
+                if self?.taxiOrderModelHandler.getTaxiOrder() != nil {
+                    self?.activeOrders = true
+                }
+            }
+        }
+        
+        if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updates.count > 0 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval) { [weak self] in
+                if self?.taxiOrderModelHandler.getTaxiOrder() != nil {
+                    self?.activeOrders = true
+                }
+            }
+        }
+        
+        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
+            
+        }
+    }
 }
 
 // MARK: - Extensions
@@ -508,9 +597,9 @@ extension MapViewController: OrderViewDelegate {
     func buttonTapped(senderType: OrderViewType, addressInfo: String?) {
         switch senderType {
         case .addressInput:
-            break // describe behaviour of address input view's button
+            confirmAddressButtonPressed()
+            backButtonPressed()
         case .currentAddressDetail:
-            // add addressInfo to the post model
             backButtonPressed()
         case .destinationAddressDetail:
             // add addressInfo to the post model
@@ -556,6 +645,44 @@ extension MapViewController: OrderViewDelegate {
     
     func shouldRemoveTranspatentView() {
         transparentView.removeFromSuperview()
+    }
+}
+
+extension MapViewController: SelectTariffViewDelegate {
+    
+    func backSubButtonPressed() {
+        menuButton.isHidden = false
+        cardView.isHidden = false
+        personButton.isHidden = false
+    }
+    
+    func promoCodeButtonPressed(_ dismissCallback: ((String?) -> ())?) {
+        let view = TariffPromoCodeView()
+        view.promoCodeActivetedView.ifPromoCodeIsValidCallback = dismissCallback
+        addNewView(view)
+    }
+    
+    func pointsButtonPressed(_ dismissCallback: ((Int?) -> ())?) {
+        let view = TariffPointsView()
+        view.dismissCallback = dismissCallback
+        addNewView(view)
+    }
+    
+    func orderButtonPressed() {
+        let view = LookingForDriverView()
+        addNewView(view)
+    }
+    
+    func addNewView(_ view: CustromViewProtocol) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+        
+        NSLayoutConstraint.activate([view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                                     view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                                     view.topAnchor.constraint(equalTo: self.view.topAnchor),
+                                     view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)])
+        view.layoutIfNeeded()
+        view.show()
     }
 }
 

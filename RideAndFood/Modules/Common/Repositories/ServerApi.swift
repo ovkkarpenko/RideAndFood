@@ -91,6 +91,14 @@ class ServerApi {
         sendRequest(apiConfig: ApiConfig<[OrderHistoryModel]>.getOrdersHistory(status), completion: completion)
     }
     
+    func getCredits(completion: ((Credit?, Error?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<Credit>.getCredits, completion: completion)
+    }
+    
+    func orderTaxi(_ order: TaxiOrder, completion: ((OrderHistoryModel?, Error?) -> ())?) {
+        sendRequest(apiConfig: ApiConfig<TaxiOrder>.orderTaxi(data: order), completion: completion)
+    }
+    
     private func sendRequest<T: Codable, V: Codable>(apiConfig: ApiConfig<T>, completion: ((V?, Error?) -> ())?) {
         let request = apiConfig.createRequest()
         

@@ -27,6 +27,7 @@ enum Colors {
     case tapIndicatorGray
     case tapIndicatorOnDark
     case tableViewBorderGray
+    case backgroundGray
     
     func getColor() -> UIColor {
         switch self {
@@ -60,6 +61,8 @@ enum Colors {
             return UIColor(hexString: "#FFFFFF", alpha: 0.5)
         case .tableViewBorderGray:
             return UIColor(hexString: "#C6C6C8")
+        case .backgroundGray:
+            return UIColor(hexString: "#F0F0F0")
         }
     }
 }
@@ -68,4 +71,15 @@ enum CustomButtonType {
     case blueButton
     case whiteButton
     case greenButton
+}
+
+enum CustomImagesNames: String {
+    case stroke = "Stroke"
+    case reversedStroke = "ReversedStroke"
+    case bag = "Bag"
+    case mark = "Mark"
+    case miniCar = "MiniCar"
+    case orangeMark = "OrangeMark"
+    case disableTaxiButton = "DisableTaxiButton"
+    case taxiButton = "TaxiButton"
 }

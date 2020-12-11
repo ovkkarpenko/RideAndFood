@@ -104,4 +104,8 @@ class OrderViewDirector: OrderView {
         button.setTitle(TaxiOrderStrings.getString(.confirm)(), for: .normal)
         button.isEnabled = true
     }
+    
+    private func setupSelectTariffView() {
+        
+    }
 }
