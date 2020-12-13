@@ -25,8 +25,8 @@ class ActiveOrderView: UIView
     
     fileprivate func initWithNib() {
         Bundle.main.loadNibNamed(ActiveOrderView.ACTIVE_ORDER_VIEW, owner: self, options: nil)
-        contentView.frame = bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        contentView.frame = bounds
+//        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView)
     }
     

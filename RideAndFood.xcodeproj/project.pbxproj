@@ -129,6 +129,7 @@
 		F7551129258103CB0030AF24 /* ActiveTaxiOrderStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7551128258103CB0030AF24 /* ActiveTaxiOrderStrings.swift */; };
 		F755112D25810A4F0030AF24 /* FoodActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F755112C25810A4F0030AF24 /* FoodActiveOrderView.swift */; };
 		F755113125810B830030AF24 /* FoodActiveOrderStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F755113025810B830030AF24 /* FoodActiveOrderStrings.swift */; };
+		F75DB6082584EE0700C0A710 /* ExpandedFoodActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75DB6072584EE0700C0A710 /* ExpandedFoodActiveOrderView.swift */; };
 		F76F67AD257A5F5B00E16A53 /* ActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76F67AC257A5F5B00E16A53 /* ActiveOrderView.swift */; };
 		F76F67B1257A5F8300E16A53 /* ActiveOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76F67B0257A5F8300E16A53 /* ActiveOrderView.xib */; };
 		F77DE253254A1928001338D8 /* GeneralGUISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CAAC002540A5000049390C /* GeneralGUISettings.swift */; };
@@ -397,6 +398,7 @@
 		F7551128258103CB0030AF24 /* ActiveTaxiOrderStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTaxiOrderStrings.swift; sourceTree = "<group>"; };
 		F755112C25810A4F0030AF24 /* FoodActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodActiveOrderView.swift; sourceTree = "<group>"; };
 		F755113025810B830030AF24 /* FoodActiveOrderStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodActiveOrderStrings.swift; sourceTree = "<group>"; };
+		F75DB6072584EE0700C0A710 /* ExpandedFoodActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedFoodActiveOrderView.swift; sourceTree = "<group>"; };
 		F76F67AC257A5F5B00E16A53 /* ActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderView.swift; sourceTree = "<group>"; };
 		F76F67B0257A5F8300E16A53 /* ActiveOrderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveOrderView.xib; sourceTree = "<group>"; };
 		F7805C392552E41500D1BBAD /* Tariff.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tariff.storyboard; sourceTree = "<group>"; };
@@ -1081,6 +1083,7 @@
 			children = (
 				F755112C25810A4F0030AF24 /* FoodActiveOrderView.swift */,
 				F755113025810B830030AF24 /* FoodActiveOrderStrings.swift */,
+				F75DB6072584EE0700C0A710 /* ExpandedFoodActiveOrderView.swift */,
 			);
 			path = FoodActiveOrder;
 			sourceTree = "<group>";
@@ -1898,6 +1901,7 @@
 				FA02B89B2573C59100692C65 /* OrderHistoryTaxiDetailsView.swift in Sources */,
 				FA449611254C0BE40071E76F /* DateTimeHelper.swift in Sources */,
 				72736D1F2561744D0094DBC5 /* CodeConfirmationViewModel.swift in Sources */,
+				F75DB6082584EE0700C0A710 /* ExpandedFoodActiveOrderView.swift in Sources */,
 				72F467D52559C52D00F8926E /* ProfileStrings.swift in Sources */,
 				F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */,
 				FAD0B01B2566D427008C2794 /* FoodStrings.swift in Sources */,

@@ -62,20 +62,24 @@ class InsetLabel: UILabel {
 }
 
 class CustomViewWithAnimation: UIView {
-    @objc func show() {
+    @objc func show(after time: TimeInterval = 0, completion: (() -> ())? = nil) {
         self.layer.frame.origin.y = UIScreen.main.bounds.height
         
-        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
+        UIView.animate(withDuration: generalAnimationDuration, delay: time, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
             guard let self = self else { return }
             self.layer.frame.origin.y = UIScreen.main.bounds.height -
                 self.frame.height
+        } completion: { _ in
+            completion?()
         }
     }
     
-    @objc func dismiss(padding: CGFloat = 0) {
+    @objc func dismiss(padding: CGFloat = 0, completion: (() -> ())? = nil) {
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveLinear]) { [weak self] in
             guard let self = self else { return }
             self.layer.frame.origin.y += self.frame.height - padding
+        } completion: { _ in
+            completion?()
         }
     }
     

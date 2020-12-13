@@ -176,8 +176,20 @@ class MapViewController: UIViewController {
         swipeGesture.direction = .up
         view.addGestureRecognizer(swipeGesture)
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showExpandedFoodActiveOrderView))
+        view.addGestureRecognizer(tapGesture)
+        
         return view
     }()
+    
+    @objc private func showExpandedFoodActiveOrderView() {
+        let expandedFoodActiveOrderView = ExpandedFoodActiveOrderView(foodActiveOrderView: foodActiveOrderView.copy() as! FoodActiveOrderView)
+        
+        view.addSubview(expandedFoodActiveOrderView)
+        
+        dismissActiveOrderViews()
+        expandedFoodActiveOrderView.show(after: 0.1)
+    }
     
     // Нужно будет добавить проверку на наличие активных заказов при появлении главного меню
     private var isActiveOrder: Bool? {

@@ -29,13 +29,17 @@ class FoodActiveOrderView: CustomViewWithAnimation {
     
     var isLastView = false {
         didSet {
-            if isLastView {
-                addSubview(tapIndicator)
-                
-                NSLayoutConstraint.activate([tapIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-                                             tapIndicator.bottomAnchor.constraint(equalTo: topAnchor, constant: -sidePadding),
-                                             tapIndicator.heightAnchor.constraint(equalToConstant: 5),
-                                             tapIndicator.widthAnchor.constraint(equalToConstant: 40)])
+            if isLastView != oldValue {
+                if isLastView {
+                    addSubview(tapIndicator)
+                    
+                    NSLayoutConstraint.activate([tapIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+                                                 tapIndicator.bottomAnchor.constraint(equalTo: topAnchor, constant: -sidePadding),
+                                                 tapIndicator.heightAnchor.constraint(equalToConstant: 5),
+                                                 tapIndicator.widthAnchor.constraint(equalToConstant: 40)])
+                } else {
+                    tapIndicator.removeFromSuperview()
+                }
             }
         }
     }
@@ -76,7 +80,10 @@ class FoodActiveOrderView: CustomViewWithAnimation {
     private func setupLayout() {
         self.addSubview(activeOrderView)
         
-        NSLayoutConstraint.activate([activeOrderView.topAnchor.constraint(equalTo: topAnchor, constant: padding), activeOrderView.leadingAnchor.constraint(equalTo: leadingAnchor), activeOrderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: sidePadding), activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
+        NSLayoutConstraint.activate([activeOrderView.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+                                     activeOrderView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                                     activeOrderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: sidePadding),
+                                     activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
         
 //        addGestures()
     }
@@ -101,5 +108,11 @@ class FoodActiveOrderView: CustomViewWithAnimation {
         text.append(NSAttributedString(string: "≈ \(value) мин", attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.locationOrange)()]))
         
         activeOrderView.timeLabel.attributedText = text
+    }
+}
+
+extension FoodActiveOrderView: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return self
     }
 }

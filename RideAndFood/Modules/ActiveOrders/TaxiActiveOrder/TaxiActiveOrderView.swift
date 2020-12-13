@@ -36,6 +36,8 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
                                              tapIndicator.bottomAnchor.constraint(equalTo: topAnchor, constant: -sidePadding),
                                              tapIndicator.heightAnchor.constraint(equalToConstant: 5),
                                              tapIndicator.widthAnchor.constraint(equalToConstant: 40)])
+            } else {
+                tapIndicator.removeFromSuperview()
             }
         }
     }
