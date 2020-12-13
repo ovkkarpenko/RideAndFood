@@ -183,7 +183,7 @@ class MapViewController: UIViewController {
     }()
     
     @objc private func showExpandedFoodActiveOrderView() {
-        let expandedFoodActiveOrderView = ExpandedFoodActiveOrderView(foodActiveOrderView: foodActiveOrderView.copy() as! FoodActiveOrderView)
+        let expandedFoodActiveOrderView = ExpandedActiveOrderView(type: .foodActiveOrderView)
         
         view.addSubview(expandedFoodActiveOrderView)
         

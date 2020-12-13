@@ -84,15 +84,7 @@ class FoodActiveOrderView: CustomViewWithAnimation {
                                      activeOrderView.leadingAnchor.constraint(equalTo: leadingAnchor),
                                      activeOrderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: sidePadding),
                                      activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
-        
-//        addGestures()
     }
-    
-//    private func addGestures() {
-//        let dismissGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismiss))
-//        dismissGesture.direction = .down
-//        addGestureRecognizer(dismissGesture)
-//    }
     
     // MARK: - public methods
     func setFromAddress(address: String?) {
