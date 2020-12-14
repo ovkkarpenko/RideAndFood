@@ -18,6 +18,8 @@ struct PromoCodeCellModel {
     var statusTime: String
     var code: String
     var title: String
+    var sale: Int
+    var saleText: String
     
     init(promoCode: PromoCode) {
         self.promoCode = promoCode
@@ -36,14 +38,16 @@ struct PromoCodeCellModel {
                 statusTime = FormatHelper.toHoursString(fromSeconds: Int(expireDate.timeIntervalSinceNow))
             }
         } else if promoCode.used {
-            imageName = "PromoCodeSuccess"
+            imageName = "PromocodeSuccess"
             statusDescription = PromoCodesStrings.promoCodeActivated.text()
             statusTime = FormatHelper.toShortDateString(date: expireDate)
         } else {
-            imageName = "PromoCodeExpired"
+            imageName = "PromocodeExpired"
             statusDescription = PromoCodesStrings.promoCodeHasExpired.text()
             statusTime = FormatHelper.toShortDateString(date: expireDate)
         }
         icon = UIImage(named: imageName)
+        saleText = "-\(promoCode.sale)%"
+        sale = promoCode.sale
     }
 }

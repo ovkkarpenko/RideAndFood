@@ -142,6 +142,13 @@ class MapViewController: UIViewController {
         return view
     }()
     
+    private lazy var dimmerView: DimmerView = {
+        let view = DimmerView()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideCart)))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: - Private properties
     
     private let accessManager = AccessLocationManager()
@@ -529,7 +536,7 @@ class MapViewController: UIViewController {
         cartView = CartView()
         cartView.configure(with: .init(cartRows: cart.rows,
                                        sum: cart.sum,
-                                       deliveryTimeInMinutes: 45,
+                                       deliveryTimeInMinutes: Int.random(in: 5...120),
                                        deliveryCost: 0,
                                        shopName: cart.shopName,
                                        backButtonTappedBlock: { [weak self] in
@@ -538,20 +545,26 @@ class MapViewController: UIViewController {
         additionalCardView.configure(with: .init(contentView: cartView,
                                                  style: .light,
                                                  paddingTop: 0,
-                                                 paddingBottom: padding / 2,
+                                                 paddingBottom: padding,
                                                  paddingX: 0,
                                                  didSwipeDownCallback: { [weak self] in
                                                     self?.hideCart()
                                                  }))
+        view.addSubview(dimmerView)
         view.addSubview(additionalCardView)
         
         NSLayoutConstraint.activate([
+            dimmerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            dimmerView.topAnchor.constraint(equalTo: view.topAnchor),
+            dimmerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            dimmerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             additionalCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             additionalCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             additionalCardViewBottomConstraint
         ])
         view.layoutIfNeeded()
         additionalCardViewBottomConstraint.constant = 0
+        dimmerView.show()
         
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
@@ -560,9 +573,11 @@ class MapViewController: UIViewController {
     
     @objc private func hideCart() {
         additionalCardViewBottomConstraint.constant = additionalCardViewOffset
+        self.dimmerView.hide()
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
         } completion: { _ in
+            self.dimmerView.removeFromSuperview()
             self.additionalCardView.removeFromSuperview()
         }
     }

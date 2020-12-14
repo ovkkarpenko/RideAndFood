@@ -98,7 +98,7 @@ class PromoCodesListViewController: UIViewController {
     }
     
     private func loadData() {
-        interactor.getPromoCodes(userId: UserConfig.shared.userId) { [weak self] (promoCodes, errorText) in
+        interactor.getPromoCodes() { [weak self] (promoCodes, errorText) in
             guard let promoCodes = promoCodes, errorText == nil else { return }
             let models = promoCodes.map { PromoCodeCellModel(promoCode: $0) }
             self?.activePromoCodes = models.filter { $0.isActive }

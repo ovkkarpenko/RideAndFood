@@ -16,7 +16,7 @@ class PromoCodesInteractor {
     
     // MARK: - Public methods
     
-    func getPromoCodes(userId: Int, completion: @escaping ([PromoCode]?, String?) -> Void) {
+    func getPromoCodes(completion: @escaping ([PromoCode]?, String?) -> Void) {
         let request = ApiConfig<[PromoCode]>.getPromoCodes.createRequest()
         networkManager.makeRequest(httpMethod: request.method,
                                    urlString: request.url,

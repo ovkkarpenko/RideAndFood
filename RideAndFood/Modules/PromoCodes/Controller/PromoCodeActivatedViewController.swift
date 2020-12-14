@@ -12,25 +12,10 @@ class PromoCodeActivatedViewController: UIViewController {
     
     // MARK: - UI
     
-    private lazy var successImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "PromoCodeSuccess"))
-        return imageView
-    }()
-    
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = FontHelper.semibold17.font()
-        label.textColor = ColorHelper.success.color()
-        label.text = PromoCodesStrings.promoCodeActivated.text()
-        return label
-    }()
-    
-    private lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = ColorHelper.secondaryText.color()
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        return label
+    private lazy var promoCodeActivatedView: PromoCodeActivatedView = {
+        let view = PromoCodeActivatedView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private lazy var confirmButton: PrimaryButton = {
@@ -47,7 +32,7 @@ class PromoCodeActivatedViewController: UIViewController {
     
     var descriptionText: String? {
         didSet {
-            descriptionLabel.text = descriptionText
+            promoCodeActivatedView.descriptionText = descriptionText
         }
     }
     
@@ -63,20 +48,14 @@ class PromoCodeActivatedViewController: UIViewController {
     
     private func setupLayout() {
         view.backgroundColor = ColorHelper.secondaryBackground.color()
-        let stackView = UIStackView(arrangedSubviews: [successImageView, titleLabel, descriptionLabel])
-        stackView.axis = .vertical
-        stackView.spacing = 11
-        stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(stackView)
+        view.addSubview(promoCodeActivatedView)
         view.addSubview(confirmButton)
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -padding),
+            promoCodeActivatedView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            promoCodeActivatedView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor),
+            promoCodeActivatedView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            promoCodeActivatedView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor),
+            promoCodeActivatedView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -padding),
             confirmButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             confirmButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             confirmButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding)
