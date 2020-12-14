@@ -25,8 +25,6 @@ class ActiveOrderView: UIView
     
     fileprivate func initWithNib() {
         Bundle.main.loadNibNamed(ActiveOrderView.ACTIVE_ORDER_VIEW, owner: self, options: nil)
-        contentView.frame = bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView)
     }
     
@@ -52,6 +50,10 @@ class ActiveOrderView: UIView
     }
     
     private func customizeTaxiActiveOrderView() {
+        firstTextLabel.textColor = Colors.getColor(.textGray)()
+        
+        secondTextLabel.textColor = Colors.getColor(.textGray)()
+        
         strokeImageView.image = UIImage(named: CustomImagesNames.stroke.rawValue)
         
         firstLabelImage.image = UIImage(named: CustomImagesNames.mark.rawValue)
@@ -64,6 +66,10 @@ class ActiveOrderView: UIView
     }
     
     private func customizeFoodActiveOrderView() {
+        firstTextLabel.textColor = Colors.getColor(.textGray)()
+        
+        secondTextLabel.textColor = Colors.getColor(.textGray)()
+        
         strokeImageView.image = UIImage(named: CustomImagesNames.reversedStroke.rawValue)
         
         firstLabelImage.image = UIImage(named: CustomImagesNames.bag.rawValue)

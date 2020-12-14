@@ -10,6 +10,7 @@ import UIKit
 
 public let generalCornerRaduis: CGFloat = 15
 public let generalAnimationDuration: TimeInterval = 0.15
+public let generalDelay: TimeInterval = 0.1
 
 enum Colors {
     case buttonBlue
@@ -28,6 +29,7 @@ enum Colors {
     case tapIndicatorOnDark
     case tableViewBorderGray
     case backgroundGray
+    case carNumberGray
     
     func getColor() -> UIColor {
         switch self {
@@ -63,6 +65,8 @@ enum Colors {
             return UIColor(hexString: "#C6C6C8")
         case .backgroundGray:
             return UIColor(hexString: "#F0F0F0")
+        case .carNumberGray:
+            return UIColor(hexString: "#F3F3F3")
         }
     }
 }
@@ -82,4 +86,6 @@ enum CustomImagesNames: String {
     case orangeMark = "OrangeMark"
     case disableTaxiButton = "DisableTaxiButton"
     case taxiButton = "TaxiButton"
+    case flag = "Flag"
+    case gradient = "Gradient"
 }

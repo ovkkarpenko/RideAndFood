@@ -62,29 +62,33 @@ class InsetLabel: UILabel {
 }
 
 class CustomViewWithAnimation: UIView {
-    @objc func show() {
+    @objc func show(after time: TimeInterval = 0, completion: (() -> ())? = nil) {
         self.layer.frame.origin.y = UIScreen.main.bounds.height
         
-        UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
+        UIView.animate(withDuration: generalAnimationDuration, delay: time, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
             guard let self = self else { return }
             self.layer.frame.origin.y = UIScreen.main.bounds.height -
                 self.frame.height
+        } completion: { _ in
+            completion?()
         }
     }
     
-    @objc func dismiss() {
+    @objc func dismiss(padding: CGFloat = 0, completion: (() -> ())? = nil) {
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveLinear]) { [weak self] in
             guard let self = self else { return }
-            self.layer.frame.origin.y += self.frame.height
+            self.layer.frame.origin.y += self.frame.height - padding
+        } completion: { _ in
+            completion?()
         }
     }
     
-    @objc func showMore() {
-        self.layer.frame.origin.y = UIScreen.main.bounds.height
+    @objc func showMore(originY: CGFloat = UIScreen.main.bounds.height) {
+        self.layer.frame.origin.y = originY
         
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
             guard let self = self else { return }
-            self.layer.frame.origin.y = UIScreen.main.bounds.height -
+            self.layer.frame.origin.y = originY -
                 2*self.frame.height
         }
     }

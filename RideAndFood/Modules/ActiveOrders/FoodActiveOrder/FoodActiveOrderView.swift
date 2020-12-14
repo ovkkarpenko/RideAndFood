@@ -1,16 +1,16 @@
 //
-//  TaxiActiveOrderView.swift
+//  FoodActiveOrderView.swift
 //  RideAndFood
 //
-//  Created by Лаура Есаян on 06.12.2020.
+//  Created by Лаура Есаян on 09.12.2020.
 //  Copyright © 2020 skillbox. All rights reserved.
 //
 
 import UIKit
 
-class TaxiActiveOrderView: CustomViewWithAnimation {
+class FoodActiveOrderView: CustomViewWithAnimation {
     private lazy var activeOrderView: ActiveOrderView = {
-        let view = ActiveOrderView(type: .taxiActiveOrderView)
+        let view = ActiveOrderView(type: .foodActiveOrderView)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -27,19 +27,19 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
     
     private var sidePadding: CGFloat = 10
     
-    private lazy var orderTaxiModelHandler = OrderTaxiModelHandler()
-    
     var isLastView = false {
         didSet {
-            if isLastView {
-                addSubview(tapIndicator)
-                
-                NSLayoutConstraint.activate([tapIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-                                             tapIndicator.bottomAnchor.constraint(equalTo: topAnchor, constant: -sidePadding),
-                                             tapIndicator.heightAnchor.constraint(equalToConstant: 5),
-                                             tapIndicator.widthAnchor.constraint(equalToConstant: 40)])
-            } else {
-                tapIndicator.removeFromSuperview()
+            if isLastView != oldValue {
+                if isLastView {
+                    addSubview(tapIndicator)
+                    
+                    NSLayoutConstraint.activate([tapIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+                                                 tapIndicator.bottomAnchor.constraint(equalTo: topAnchor, constant: -sidePadding),
+                                                 tapIndicator.heightAnchor.constraint(equalToConstant: 5),
+                                                 tapIndicator.widthAnchor.constraint(equalToConstant: 40)])
+                } else {
+                    tapIndicator.removeFromSuperview()
+                }
             }
         }
     }
@@ -60,7 +60,6 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
         super.layoutSubviews()
         
         addShadow()
-        setTaxiActiveOrderViewParameters()
     }
     
     // MARK: - private methods
@@ -81,14 +80,10 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
     private func setupLayout() {
         self.addSubview(activeOrderView)
         
-        NSLayoutConstraint.activate([activeOrderView.topAnchor.constraint(equalTo: topAnchor, constant: padding), activeOrderView.leadingAnchor.constraint(equalTo: leadingAnchor), activeOrderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: sidePadding), activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
-    }
-    
-    private func setTaxiActiveOrderViewParameters() {
-        let model = orderTaxiModelHandler.getTaxiOrder()
-        setToAddress(address: model?.to)
-        setFromAddress(address: model?.from)
-        setDeliveryTime(value: 10)
+        NSLayoutConstraint.activate([activeOrderView.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+                                     activeOrderView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                                     activeOrderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: sidePadding),
+                                     activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
     }
     
     // MARK: - public methods
@@ -101,9 +96,15 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
     }
     
     func setDeliveryTime(value: Int) {
-        let text = NSMutableAttributedString(string: ActiveTaxiOrderStrings.getString(.deliveryTime)())
+        let text = NSMutableAttributedString(string: FoodActiveOrderStrings.getString(.deliveryTime)())
         text.append(NSAttributedString(string: "≈ \(value) мин", attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.locationOrange)()]))
         
         activeOrderView.timeLabel.attributedText = text
+    }
+}
+
+extension FoodActiveOrderView: NSCopying {
+    func copy(with zone: NSZone? = nil) -> Any {
+        return self
     }
 }
