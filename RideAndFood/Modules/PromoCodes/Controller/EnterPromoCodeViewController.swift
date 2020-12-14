@@ -19,13 +19,19 @@ class EnterPromoCodeViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var promoCodeCardView: PromoCodeCardView = {
-        let view = PromoCodeCardView()
+    private lazy var cardView: CardView = {
+        let view = CardView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var enterPromoCodeView: EnterPromoCodeView = {
+        let view = EnterPromoCodeView()
         view.confirmBlock = { [weak self] code in
             self?.interactor.activatePromoCode(code: code) { (result, errorText) in
                 guard let result = result, errorText == nil else {
                     DispatchQueue.main.async {
-                        self?.promoCodeCardView.errorText = errorText
+                        self?.enterPromoCodeView.errorText = errorText
                     }
                     return
                 }
@@ -39,6 +45,9 @@ class EnterPromoCodeViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    private lazy var cardViewBottomConstraint = cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                                                                 constant: 0)
     
     // MARK: - Private properties
     
@@ -64,7 +73,7 @@ class EnterPromoCodeViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        promoCodeCardView.focusTextView()
+        enterPromoCodeView.focusTextView()
     }
     
     // MARK: - Private methods
@@ -72,15 +81,24 @@ class EnterPromoCodeViewController: UIViewController {
     private func setupLayout() {
         view.backgroundColor = ColorHelper.secondaryBackground.color()
         view.addSubview(backgroundImageView)
-        view.addSubview(promoCodeCardView)
+        view.addSubview(cardView)
+        
+        cardView.configure(with: .init(contentView: enterPromoCodeView,
+                                       style: .dark,
+                                       paddingTop: 0,
+                                       paddingBottom: 0,
+                                       paddingX: 0,
+                                       didSwipeDownCallback: { [weak self] in
+                                        self?.enterPromoCodeView.endEditing(false)
+                                       }))
         
         NSLayoutConstraint.activate([
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            promoCodeCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            promoCodeCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            promoCodeCardView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            cardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            cardViewBottomConstraint
         ])
         
         navigationItem.title = PromoCodesStrings.enterPromoCode.text()
@@ -88,18 +106,17 @@ class EnterPromoCodeViewController: UIViewController {
     
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-            keyboardSize.height > 0 {
-            
-            promoCodeCardView.bottomPadding = keyboardSize.height - view.safeAreaInsets.bottom
+           keyboardSize.height > 0 {
+            cardViewBottomConstraint.constant = -keyboardSize.height
             
             UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
                 self.view.layoutIfNeeded()
             }
         }
     }
-
+    
     @objc private func keyboardWillHide(notification: NSNotification) {
-        promoCodeCardView.bottomPadding = 0
+        cardViewBottomConstraint.constant = 0
         
         UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
             self.view.layoutIfNeeded()

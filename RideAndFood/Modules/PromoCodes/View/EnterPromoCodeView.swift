@@ -1,5 +1,5 @@
 //
-//  PromoCodeCardView.swift
+//  EnterPromoCodeView.swift
 //  RideAndFood
 //
 //  Created by Nikita Gundorin on 02.11.2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PromoCodeCardView: UIView {
+class EnterPromoCodeView: UIView {
     
     // MARK: - UI
     
@@ -35,15 +35,6 @@ class PromoCodeCardView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    private lazy var pickerLineView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = pickerLineHeight / 2
-        view.backgroundColor = ColorHelper.transparentGray.color()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private let pickerLineWidth: CGFloat = 40
-    private let pickerLineHeight: CGFloat = 5
     
     private lazy var confirmButtonBottomConstraint =
         confirmButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
@@ -51,7 +42,6 @@ class PromoCodeCardView: UIView {
     
     private let padding: CGFloat = 25
     private let errorLabelPadding: CGFloat = 7
-    private let pickerLineMargin: CGFloat = 10
     
     private var isCompleted = false {
         didSet {
@@ -60,11 +50,6 @@ class PromoCodeCardView: UIView {
     }
     
     // MARK: - Public properties
-    
-    var bottomPadding: CGFloat {
-        get { confirmButtonBottomConstraint.constant }
-        set { confirmButtonBottomConstraint.constant = -(padding + newValue) }
-    }
     
     var errorText: String? {
         didSet {
@@ -101,25 +86,11 @@ class PromoCodeCardView: UIView {
     // MARK: - Private methods
     
     private func setupLayout() {
-        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(UIView.endEditing(_:)))
-        swipeRecognizer.direction = .down
-        addGestureRecognizer(swipeRecognizer)
-        layer.cornerRadius = 15
-        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        layer.shadowColor = ColorHelper.shadow.color()?.cgColor
-        layer.shadowOpacity = 0.2
-        layer.shadowRadius = 10
-        backgroundColor = ColorHelper.background.color()
         addSubview(promoCodeTextField)
         addSubview(errorLabel)
         addSubview(confirmButton)
-        addSubview(pickerLineView)
         
         NSLayoutConstraint.activate([
-            pickerLineView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            pickerLineView.bottomAnchor.constraint(equalTo: topAnchor, constant: -pickerLineMargin),
-            pickerLineView.widthAnchor.constraint(equalToConstant: pickerLineWidth),
-            pickerLineView.heightAnchor.constraint(equalToConstant: pickerLineHeight),
             promoCodeTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             promoCodeTextField.topAnchor.constraint(equalTo: topAnchor, constant: padding),
             promoCodeTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),

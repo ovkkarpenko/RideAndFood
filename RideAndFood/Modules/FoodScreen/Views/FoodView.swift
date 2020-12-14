@@ -421,7 +421,7 @@ extension FoodView: FoodViewDelegate {
         
         cartView.configure(with: .init(cartRows: cart.rows,
                                        sum: cart.sum,
-                                       deliveryTimeInMinutes: 45,
+                                       deliveryTimeInMinutes: Int.random(in: 5...120),
                                        deliveryCost: 0,
                                        shopName: cart.shopName,
                                        backButtonTappedBlock: { [weak self] in

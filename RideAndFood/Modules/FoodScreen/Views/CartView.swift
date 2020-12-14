@@ -84,16 +84,28 @@ class CartView: UIView {
         return view
     }()
     
+    private lazy var promoCodeButton: CartButton = {
+        var promoImageView = UIImageView(image: UIImage(named: "promo"))
+        promoImageView.contentMode = .scaleAspectFit
+        return CartButton(icon: promoImageView,
+                          title: PromoCodesStrings.title.text(),
+                          target: self,
+                          action: #selector(promoButtonTapped))
+    }()
+    
+    private lazy var pointsButton: CartButton = {
+        var pointsImageView = UIImageView(image: UIImage(named: "points"))
+        pointsImageView.contentMode = .scaleAspectFit
+        return CartButton(icon: pointsImageView,
+                          title: PaymentStrings.points.text(),
+                          target: self,
+                          action: #selector(pointsButtonTapped))
+    }()
+    
     private lazy var buttonsStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
-            CartButton(icon: UIImage(named: "promo"),
-                       title: PromoCodesStrings.title.text(),
-                       target: self,
-                       action: #selector(promoButtonTapped)),
-            CartButton(icon: UIImage(named: "points"),
-                       title: PaymentStrings.points.text(),
-                       target: self,
-                       action: #selector(pointsButtonTapped))
+            promoCodeButton,
+            pointsButton
         ])
         stackView.distribution = .fillEqually
         stackView.spacing = 10
@@ -113,11 +125,10 @@ class CartView: UIView {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private lazy var dimmerView: UIView = {
-        let view = UIView()
+    private lazy var dimmerView: DimmerView = {
+        let view = DimmerView()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self,
-                                                         action: #selector(hideCardView)))
-        view.backgroundColor = ColorHelper.transparentGray.color()
+                                                         action: #selector(dimmerTapped)))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -133,22 +144,50 @@ class CartView: UIView {
     private let cellReuseIdentifier = "cartRowCell"
     private var cartRows: [CartRowModel] = []
     private var backButtonTappedBlock: (() -> Void)?
+    private lazy var promoCodesInteractor = PromoCodesInteractor()
+    private var sum: Float = 0
+    private var sumWithDiscount: Float = 0
+    private var promoCodeDiscount: Int = 0 {
+        didSet {
+            updateSum()
+        }
+    }
+    private var pointsDiscount: Int = 0 {
+        didSet {
+            updateSum()
+        }
+    }
     
     // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setupNotifications()
         setupLayout()
+        checkPromocodes()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
+        setupNotifications()
         setupLayout()
+        checkPromocodes()
     }
     
     // MARK: - Private methods
+    
+    private func setupNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
     
     private func setupLayout() {
         let topStackView = UIStackView(arrangedSubviews: [
@@ -200,60 +239,6 @@ class CartView: UIView {
     }
     
     private func showCardView() {
-        cardViewBottomConstraint.constant = 0
-        UIView.animate(withDuration: 0.2) {
-            self.dimmerView.alpha = 1
-            self.layoutIfNeeded()
-        }
-    }
-    
-    @objc private func hideCardView() {
-        cardViewBottomConstraint.constant = hideCardViewConstant
-        UIView.animate(withDuration: 0.2, animations: {
-            self.dimmerView.alpha = 0
-            self.layoutIfNeeded()
-        }) { _ in
-            self.dimmerView.removeFromSuperview()
-            self.cardView.removeFromSuperview()
-        }
-    }
-    
-    private func showCartIsEmptyViews() {
-        let emptyCartView = EmptyCartView()
-        emptyCartView.alpha = 0
-        emptyCartView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(emptyCartView)
-        NSLayoutConstraint.activate([
-            emptyCartView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-            emptyCartView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            emptyCartView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-	        hideCardView()
-        UIView.animate(withDuration: 0.2) {
-            emptyCartView.alpha = 1
-        }
-    }
-    
-    private func emptyCart() {
-        UIView.animate(withDuration: 0.2) {
-            [self.emptyCartButton,
-             self.shopNameLabel,
-             self.titleLabel,
-             self.tableView,
-             self.deliveryView,
-             self.buttonsStackView,
-             self.goToPaymentButton].forEach { $0.alpha = 0 }
-        } completion: { _ in
-            self.showCartIsEmptyViews()
-        }
-    }
-    
-    @objc private func backButtonTapped() {
-        backButtonTappedBlock?()
-    }
-    
-    @objc private func emptyCartTapped() {
-        let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
         if cardView.superview == nil {
             if let view = window {
                 addSubview(dimmerView)
@@ -273,7 +258,102 @@ class CartView: UIView {
             ])
             layoutIfNeeded()
         }
-        
+        cardViewBottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.2) {
+            self.dimmerView.alpha = 1
+            self.layoutIfNeeded()
+        }
+    }
+    
+    private func hideCardView(completion: (() -> Void)? = nil) {
+        cardViewBottomConstraint.constant = hideCardViewConstant
+        UIView.animate(withDuration: 0.2, animations: {
+            self.dimmerView.alpha = 0
+            self.layoutIfNeeded()
+        }) { _ in
+            self.dimmerView.removeFromSuperview()
+            self.cardView.removeFromSuperview()
+            completion?()
+        }
+    }
+    
+    private func showCartIsEmptyViews() {
+        let emptyCartView = EmptyCartView()
+        emptyCartView.alpha = 0
+        emptyCartView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(emptyCartView)
+        NSLayoutConstraint.activate([
+            emptyCartView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+            emptyCartView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+            emptyCartView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        hideCardView()
+        UIView.animate(withDuration: 0.2) {
+            emptyCartView.alpha = 1
+        }
+    }
+    
+    private func emptyCart() {
+        UIView.animate(withDuration: 0.2) {
+            [self.emptyCartButton,
+             self.shopNameLabel,
+             self.titleLabel,
+             self.tableView,
+             self.deliveryView,
+             self.buttonsStackView,
+             self.goToPaymentButton].forEach { $0.alpha = 0 }
+        } completion: { _ in
+            self.showCartIsEmptyViews()
+        }
+    }
+    
+    private func showPromoCodeActivatedView(descriptionText: String?) {
+        let view = PromoCodeActivatedView()
+        view.descriptionText = descriptionText
+        let padding: CGFloat = 35
+        cardView.configure(with: .init(contentView: view,
+                                       style: .light,
+                                       paddingTop: padding,
+                                       paddingBottom: padding,
+                                       paddingX: padding / 2,
+                                       didSwipeDownCallback: { [weak self] in
+                                        self?.hideCardView()
+                                       }))
+        showCardView()
+    }
+    
+    private func checkPromocodes() {
+        promoCodesInteractor.getPromoCodes() { [weak self] (promoCodes, errorText) in
+            guard let promoCodes = promoCodes, errorText == nil else { return }
+            let promoCode = promoCodes
+                .map { PromoCodeCellModel(promoCode: $0) }
+                .filter { $0.isActive && $0.title.contains("Еда") }
+                .sorted { $0.expireDate > $1.expireDate }
+                .first
+            if let code = promoCode {
+                DispatchQueue.main.async {
+                    self?.promoCodeButton.disable()
+                    self?.promoCodeButton.setLeftLabel(text: code.saleText)
+                    self?.promoCodeDiscount = code.sale
+                }
+            }
+        }
+    }
+    
+    private func updateSum() {
+        guard promoCodeDiscount > 0 || pointsDiscount > 0 else { return }
+        sumWithDiscount -= sum / 100 * Float(promoCodeDiscount)
+        sumWithDiscount -= Float(pointsDiscount)
+        // здесь должен быть зачеркнутый текст, но пока не получилось
+        goToPaymentButton.setTitles(left: FoodStrings.goToPayment.text(),
+                                    right: "\(sum.currencyString()) \(sumWithDiscount.currencyString())")
+    }
+    
+    @objc private func backButtonTapped() {
+        backButtonTappedBlock?()
+    }
+    
+    @objc private func emptyCartTapped() {
         let confirmationView = TitledButtonsStackView()
         confirmationView.configure(with: .init(buttonsStackViewModel: .init(primaryTitle: FoodStrings.empty.text(),
                                                                             secondaryTitle: StringsHelper.cancel.text(),
@@ -296,7 +376,33 @@ class CartView: UIView {
     }
     
     @objc private func promoButtonTapped() {
-        
+        let contentView = EnterPromoCodeView()
+        contentView.confirmBlock = { [weak self] code in
+            self?.promoCodesInteractor.activatePromoCode(code: code) { (result, errorText) in
+                guard let result = result, errorText == nil else {
+                    DispatchQueue.main.async {
+                        contentView.errorText = errorText
+                    }
+                    return
+                }
+                self?.checkPromocodes()
+                DispatchQueue.main.async {
+                    self?.hideCardView(completion: {
+                        self?.showPromoCodeActivatedView(descriptionText: result.description)
+                    })
+                }
+            }
+        }
+        cardView.configure(with: .init(contentView: contentView,
+                                       style: .light,
+                                       paddingTop: 0,
+                                       paddingBottom: (window?.safeAreaInsets.bottom ?? 0) + 5,
+                                       paddingX: 0,
+                                       didSwipeDownCallback: { [weak self] in
+                                        self?.hideCardView()
+                                       }))
+        showCardView()
+        contentView.focusTextView()
     }
     
     @objc private func pointsButtonTapped() {
@@ -309,6 +415,25 @@ class CartView: UIView {
     
     @objc private func dimmerTapped() {
         hideCardView()
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+           keyboardSize.height > 0 {
+            cardViewBottomConstraint.constant = -keyboardSize.height
+            
+            UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
+                self.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        cardViewBottomConstraint.constant = 0
+        
+        UIView.animate(withDuration: ConstantsHelper.baseAnimationDuration.value()) {
+            self.layoutIfNeeded()
+        }
     }
 }
 
@@ -330,6 +455,8 @@ extension CartView: IConfigurableView {
         goToPaymentButton.setTitles(left: FoodStrings.goToPayment.text(), right: model.sum.currencyString())
         shopNameLabel.text = model.shopName
         backButtonTappedBlock = model.backButtonTappedBlock
+        sum = model.sum
+        sumWithDiscount = model.sum
     }
 }
 

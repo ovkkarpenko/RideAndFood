@@ -17,7 +17,8 @@
 		720AA111256D682F0065BFED /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AA110256D682F0065BFED /* Payment.swift */; };
 		720AA115256D68820065BFED /* PaymentCardShort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AA114256D68820065BFED /* PaymentCardShort.swift */; };
 		720AA118256D741D0065BFED /* PaymentsHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AA117256D741D0065BFED /* PaymentsHistoryService.swift */; };
-		72269B5D25505F850034B533 /* PromoCodeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72269B5C25505F850034B533 /* PromoCodeCardView.swift */; };
+		721D78F425868AA0004A622E /* PromoCodeActivatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721D78F325868AA0004A622E /* PromoCodeActivatedView.swift */; };
+		72269B5D25505F850034B533 /* EnterPromoCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72269B5C25505F850034B533 /* EnterPromoCodeView.swift */; };
 		72269B602550607E0034B533 /* PromoCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72269B5F2550607E0034B533 /* PromoCodeTextField.swift */; };
 		72272C2B258001C3003E0BD0 /* Float+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72272C2A258001C3003E0BD0 /* Float+Format.swift */; };
 		72280181255EFE7C00C75841 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72280180255EFE7C00C75841 /* SecondaryButton.swift */; };
@@ -297,7 +298,8 @@
 		720AA110256D682F0065BFED /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		720AA114256D68820065BFED /* PaymentCardShort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardShort.swift; sourceTree = "<group>"; };
 		720AA117256D741D0065BFED /* PaymentsHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsHistoryService.swift; sourceTree = "<group>"; };
-		72269B5C25505F850034B533 /* PromoCodeCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeCardView.swift; sourceTree = "<group>"; };
+		721D78F325868AA0004A622E /* PromoCodeActivatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeActivatedView.swift; sourceTree = "<group>"; };
+		72269B5C25505F850034B533 /* EnterPromoCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPromoCodeView.swift; sourceTree = "<group>"; };
 		72269B5F2550607E0034B533 /* PromoCodeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeTextField.swift; sourceTree = "<group>"; };
 		72272C2A258001C3003E0BD0 /* Float+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Format.swift"; sourceTree = "<group>"; };
 		72280180255EFE7C00C75841 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
@@ -773,9 +775,10 @@
 			isa = PBXGroup;
 			children = (
 				726353E6254F49C800AF868D /* PromoCodesCell.swift */,
-				72269B5C25505F850034B533 /* PromoCodeCardView.swift */,
+				72269B5C25505F850034B533 /* EnterPromoCodeView.swift */,
 				72269B5F2550607E0034B533 /* PromoCodeTextField.swift */,
 				723230602552BC9300F238AF /* PromoCodeCardCell.swift */,
+				721D78F325868AA0004A622E /* PromoCodeActivatedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1850,8 +1853,9 @@
 				72F467DF255AFFEA00F8926E /* ProfileTableViewCell.swift in Sources */,
 				72280184255F033F00C75841 /* ButtonsStackView.swift in Sources */,
 				726353E4254F464500AF868D /* PromoCodesStrings.swift in Sources */,
-				72269B5D25505F850034B533 /* PromoCodeCardView.swift in Sources */,
+				72269B5D25505F850034B533 /* EnterPromoCodeView.swift in Sources */,
 				FA6DDFF2256A5D1700244E94 /* ShopProductViewModel.swift in Sources */,
+				721D78F425868AA0004A622E /* PromoCodeActivatedView.swift in Sources */,
 				FAD0B00225669B1F008C2794 /* Address.swift in Sources */,
 				F73BC4F0254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift in Sources */,
 				72585176257D99970087FF9A /* NotificationModel.swift in Sources */,

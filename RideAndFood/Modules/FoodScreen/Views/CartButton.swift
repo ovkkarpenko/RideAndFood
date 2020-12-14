@@ -12,10 +12,18 @@ class CartButton: UIButton {
     
     // MARK: - UI
     
-    private lazy var iconView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
+    lazy var iconView: UIView = UIView() {
+        didSet {
+            stackView.insertArrangedSubview(iconView, at: 0)
+        }
+    }
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [mainLabel])
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 6
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     private lazy var mainLabel = UILabel()
@@ -24,7 +32,7 @@ class CartButton: UIButton {
     
     // MARK: - Initializers
     
-    convenience init(icon: UIImage?,
+    convenience init(icon: UIView,
                      title: String?,
                      target: Any?,
                      action: Selector,
@@ -32,7 +40,7 @@ class CartButton: UIButton {
         self.init(type: .system)
         
         mainLabel.text = title
-        iconView.image = icon
+        iconView = icon
         addTarget(target, action: action, for: event)
     }
     
@@ -48,17 +56,45 @@ class CartButton: UIButton {
         setupLayout()
     }
     
+    // MARK: - Public methods
+    
+    func setLeftLabel(text: String?) {
+        let label = UILabel()
+        label.font = FontHelper.semibold15.font()
+        label.textColor = ColorHelper.success.color()
+        label.text = text
+        stackView.removeArrangedSubview(iconView)
+        iconView.removeFromSuperview()
+        iconView = label
+    }
+    
+    func setRightLabel(text: String?) {
+        mainLabel.text = text
+    }
+    
+    func disable() {
+        UIView.animate(withDuration: 0.2) {
+            self.layer.shadowOpacity = 0
+            self.isEnabled = false
+            self.mainLabel.textColor = ColorHelper.secondaryText.color()
+            self.backgroundColor = ColorHelper.controlBackground.color()
+        }
+    }
+    
+    func enable() {
+        UIView.animate(withDuration: 0.2) {
+            self.layer.shadowOpacity = 0.1
+            self.isEnabled = true
+            self.mainLabel.textColor = ColorHelper.primaryText.color()
+            self.backgroundColor = ColorHelper.background.color()
+        }
+    }
+    
     // MARK: - Private methods
     
     private func setupLayout() {
+        mainLabel.font = FontHelper.regular15.font()
         backgroundColor = ColorHelper.background.color()
-        let stackView = UIStackView(arrangedSubviews: [
-            iconView,
-            mainLabel
-        ])
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 6
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
         
         NSLayoutConstraint.activate([
@@ -70,7 +106,7 @@ class CartButton: UIButton {
         
         layer.cornerRadius = 15
         layer.shadowColor = ColorHelper.shadow.color()?.cgColor
-        layer.shadowOpacity = 0.1
         layer.shadowRadius = 5
+        enable()
     }
 }
