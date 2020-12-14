@@ -11,6 +11,7 @@ import UIKit
 class ExpandedActiveOrderView: CustomViewWithAnimation {
     private var type: ActiveOrderViewType?
     private var activeOrderView: UIView?
+    private lazy var taxiActiveOrderHandler = OrderTaxiModelHandler()
     private let padding: CGFloat = 25
     
     private lazy var stackView: UIStackView = {
@@ -27,16 +28,14 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
     private lazy var carName: UILabel = {
         let view = UILabel()
         view.textAlignment = .left
-        view.text = "fsfdsf"
+        view.text = "Белый Opel Astra"
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
     
-    private lazy var carNumber: UILabel = {
-        let view = UILabel()
-        view.text = "fdsf"
-        view.textAlignment = .left
+    private lazy var carNumber: CarNumberView = {
+        let view = CarNumberView(number: "T 342 TE", regionNumber: "777")
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -44,7 +43,6 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
     
     private lazy var implementer: UILabel = {
         let view = UILabel()
-        view.text = "Курьер: какой-то человек"
         view.textAlignment = .left
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -103,6 +101,9 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
                 stackView.insertArrangedSubview(taxiActiveOrderView, at: 0)
                 stackView.addArrangedSubview(carName)
                 stackView.addArrangedSubview(carNumber)
+                
+                // temp for test
+                implementer.attributedText = setImplemeneter(name: "Ivan Ivanov")
                 stackView.addArrangedSubview(implementer)
                 
                 mainButton.customizeButton(type: .blueButton)
@@ -124,6 +125,7 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
                 addSubview(stackView)
                 
                 stackView.addArrangedSubview(foodActiveOrderView)
+                
                 stackView.addArrangedSubview(implementer)
                 
                 mainButton.customizeButton(type: .greenButton)
@@ -168,7 +170,6 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
             
             carNumber.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: padding).isActive = true
             carNumber.heightAnchor.constraint(equalToConstant: labelHeight).isActive = true
-            carNumber.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         }
         
         implementer.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: padding).isActive = true
@@ -182,5 +183,16 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
         problemButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: padding).isActive = true
         problemButton.heightAnchor.constraint(equalToConstant: buttonHeight).isActive = true
         problemButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    }
+    
+    private func setImplemeneter(name: String) -> NSAttributedString? {
+        switch type! {
+        case .taxiActiveOrderView:
+            let text = NSMutableAttributedString(string: ActiveTaxiOrderStrings.getString(.driver)(), attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.textGray)()])
+            text.append(NSAttributedString(string: name))
+            return text
+        case .foodActiveOrderView:
+            return nil
+        }
     }
 }

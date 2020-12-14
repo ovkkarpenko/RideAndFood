@@ -27,6 +27,8 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
     
     private var sidePadding: CGFloat = 10
     
+    private lazy var orderTaxiModelHandler = OrderTaxiModelHandler()
+    
     var isLastView = false {
         didSet {
             if isLastView {
@@ -58,6 +60,7 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
         super.layoutSubviews()
         
         addShadow()
+        setTaxiActiveOrderViewParameters()
     }
     
     // MARK: - private methods
@@ -79,15 +82,14 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
         self.addSubview(activeOrderView)
         
         NSLayoutConstraint.activate([activeOrderView.topAnchor.constraint(equalTo: topAnchor, constant: padding), activeOrderView.leadingAnchor.constraint(equalTo: leadingAnchor), activeOrderView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: sidePadding), activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
-        
-//        addGestures() 
     }
     
-//    private func addGestures() {
-//        let dismissGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismiss))
-//        dismissGesture.direction = .down
-//        addGestureRecognizer(dismissGesture)
-//    }
+    private func setTaxiActiveOrderViewParameters() {
+        let model = orderTaxiModelHandler.getTaxiOrder()
+        setToAddress(address: model?.to)
+        setFromAddress(address: model?.from)
+        setDeliveryTime(value: 10)
+    }
     
     // MARK: - public methods
     func setFromAddress(address: String?) {

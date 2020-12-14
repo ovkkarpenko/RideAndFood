@@ -12,6 +12,7 @@ enum ActiveTaxiOrderStrings {
     case deliveryTime
     case addDelivery
     case reportProblem
+    case driver
     
     func getString() -> String {
         switch UserConfig.shared.settings.language {
@@ -23,6 +24,8 @@ enum ActiveTaxiOrderStrings {
                 return "Добавить доставку"
             case .reportProblem:
                 return "Сообщить о проблеме"
+            case .driver:
+                return "Водитель: "
             }
         case .eng:
             switch self {
@@ -32,6 +35,8 @@ enum ActiveTaxiOrderStrings {
                 return "Add delivery"
             case .reportProblem:
                 return "Report a problem"
+            case .driver:
+                return "Driver: "
             }
         }
     }

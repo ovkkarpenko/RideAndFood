@@ -141,9 +141,6 @@ class MapViewController: UIViewController {
         // здесь нужно проверять, есть ли активный заказ еды и тогда отступ фрейма делать от еды. То же самое нужно делать для вьюшки еды. И тап индикатор тоже в зависимости от того последняя ли это вьюшка ставится.
         let view = TaxiActiveOrderView()
         view.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.width, height: cardView.frame.height + activeOrderViewPadding)
-        view.setToAddress(address: taxiOrderModelHandler.getTaxiOrder()?.to)
-        view.setFromAddress(address: taxiOrderModelHandler.getTaxiOrder()?.from)
-        view.setDeliveryTime(value: 10)
         
         var swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissActiveOrderViews))
         swipeGesture.direction = .down
@@ -183,7 +180,7 @@ class MapViewController: UIViewController {
     }()
     
     @objc private func showExpandedFoodActiveOrderView() {
-        let expandedFoodActiveOrderView = ExpandedActiveOrderView(type: .foodActiveOrderView)
+        let expandedFoodActiveOrderView = ExpandedActiveOrderView(type: .taxiActiveOrderView)
         
         view.addSubview(expandedFoodActiveOrderView)
         

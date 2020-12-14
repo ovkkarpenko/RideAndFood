@@ -130,6 +130,8 @@
 		F755112D25810A4F0030AF24 /* FoodActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F755112C25810A4F0030AF24 /* FoodActiveOrderView.swift */; };
 		F755113125810B830030AF24 /* FoodActiveOrderStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F755113025810B830030AF24 /* FoodActiveOrderStrings.swift */; };
 		F76844C42586620500A4D425 /* ExpandedActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76844C32586620500A4D425 /* ExpandedActiveOrderView.swift */; };
+		F76844C925867F8900A4D425 /* CarNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76844C825867F8900A4D425 /* CarNumberView.swift */; };
+		F76844CC258688B100A4D425 /* CarNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76844CB258688B100A4D425 /* CarNumberView.xib */; };
 		F76F67AD257A5F5B00E16A53 /* ActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76F67AC257A5F5B00E16A53 /* ActiveOrderView.swift */; };
 		F76F67B1257A5F8300E16A53 /* ActiveOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76F67B0257A5F8300E16A53 /* ActiveOrderView.xib */; };
 		F77DE253254A1928001338D8 /* GeneralGUISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CAAC002540A5000049390C /* GeneralGUISettings.swift */; };
@@ -399,6 +401,8 @@
 		F755112C25810A4F0030AF24 /* FoodActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodActiveOrderView.swift; sourceTree = "<group>"; };
 		F755113025810B830030AF24 /* FoodActiveOrderStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodActiveOrderStrings.swift; sourceTree = "<group>"; };
 		F76844C32586620500A4D425 /* ExpandedActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedActiveOrderView.swift; sourceTree = "<group>"; };
+		F76844C825867F8900A4D425 /* CarNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarNumberView.swift; sourceTree = "<group>"; };
+		F76844CB258688B100A4D425 /* CarNumberView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarNumberView.xib; sourceTree = "<group>"; };
 		F76F67AC257A5F5B00E16A53 /* ActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderView.swift; sourceTree = "<group>"; };
 		F76F67B0257A5F8300E16A53 /* ActiveOrderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveOrderView.xib; sourceTree = "<group>"; };
 		F7805C392552E41500D1BBAD /* Tariff.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tariff.storyboard; sourceTree = "<group>"; };
@@ -1105,6 +1109,8 @@
 			children = (
 				F74AE858257CFF39001833EC /* TaxiActiveOrderView.swift */,
 				F7551128258103CB0030AF24 /* ActiveTaxiOrderStrings.swift */,
+				F76844C825867F8900A4D425 /* CarNumberView.swift */,
+				F76844CB258688B100A4D425 /* CarNumberView.xib */,
 			);
 			path = TaxiActiveOrder;
 			sourceTree = "<group>";
@@ -1618,6 +1624,7 @@
 				F7AECA7C256C365000CA86AC /* OrderView.xib in Resources */,
 				F7891733254A14FD00849D27 /* LaunchScreen.storyboard in Resources */,
 				F795DF3625547A58005A607C /* TariffPage.xib in Resources */,
+				F76844CC258688B100A4D425 /* CarNumberView.xib in Resources */,
 				FA43AE8B2544911000766652 /* Settings.storyboard in Resources */,
 				F7805C3A2552E41500D1BBAD /* Tariff.storyboard in Resources */,
 				F76F67B1257A5F8300E16A53 /* ActiveOrderView.xib in Resources */,
@@ -1922,6 +1929,7 @@
 				720AA118256D741D0065BFED /* PaymentsHistoryService.swift in Sources */,
 				FAA9495D25546FA8005C5B40 /* PaymentCardDetails.swift in Sources */,
 				FA186CD3257FA44F00903339 /* TaxiOrder.swift in Sources */,
+				F76844C925867F8900A4D425 /* CarNumberView.swift in Sources */,
 				72E933FA255F067000CED717 /* CardContainerViewModel.swift in Sources */,
 				FA3A056825480A1900C55447 /* SettingsAvailableSharesViewModel.swift in Sources */,
 				FA186CB9257F715E00903339 /* PromoCodeButtonView.swift in Sources */,

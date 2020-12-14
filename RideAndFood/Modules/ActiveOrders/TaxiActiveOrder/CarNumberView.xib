@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CarNumberView" customModule="RideAndFood" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundView" destination="BOQ-pc-Ii5" id="Y2P-JS-aG5"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="xin-AJ-iwk"/>
+                <outlet property="numberLabel" destination="2Pj-dM-fy5" id="Ga2-76-hVn"/>
+                <outlet property="regionNumberLabel" destination="vid-xj-wbe" id="OwF-uo-DxB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOQ-pc-Ii5">
+                    <rect key="frame" x="0.0" y="324.5" width="100" height="18"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Pj-dM-fy5">
+                            <rect key="frame" x="5" y="2" width="31" height="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vid-xj-wbe">
+                            <rect key="frame" x="61" y="6" width="22" height="10"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Flag" translatesAutoresizingMaskIntoConstraints="NO" id="6C4-1D-SXB">
+                            <rect key="frame" x="85" y="7" width="10" height="7"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="10" id="0ms-fy-5ol"/>
+                                <constraint firstAttribute="height" constant="7" id="9gY-hA-gh8"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="2Pj-dM-fy5" firstAttribute="top" secondItem="BOQ-pc-Ii5" secondAttribute="top" constant="2" id="0w4-bn-dS0"/>
+                        <constraint firstAttribute="height" constant="18" id="1vd-XH-4y7"/>
+                        <constraint firstAttribute="bottom" secondItem="2Pj-dM-fy5" secondAttribute="bottom" constant="2" id="7qs-Dr-3FP"/>
+                        <constraint firstAttribute="width" constant="100" id="NW0-Jz-SY6"/>
+                        <constraint firstAttribute="trailing" secondItem="6C4-1D-SXB" secondAttribute="trailing" constant="5" id="O2F-tM-Vfy"/>
+                        <constraint firstItem="2Pj-dM-fy5" firstAttribute="leading" secondItem="BOQ-pc-Ii5" secondAttribute="leading" constant="5" id="Rvq-lN-hWA"/>
+                        <constraint firstAttribute="bottom" secondItem="6C4-1D-SXB" secondAttribute="bottom" constant="4" id="XUN-eq-U5n"/>
+                        <constraint firstItem="vid-xj-wbe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2Pj-dM-fy5" secondAttribute="trailing" constant="5" id="YEs-0L-PEu"/>
+                        <constraint firstItem="vid-xj-wbe" firstAttribute="firstBaseline" secondItem="2Pj-dM-fy5" secondAttribute="firstBaseline" id="khf-gw-eyl"/>
+                        <constraint firstItem="6C4-1D-SXB" firstAttribute="leading" secondItem="vid-xj-wbe" secondAttribute="trailing" constant="2" id="qIn-s7-Pkg"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="BOQ-pc-Ii5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="APF-iI-oxX"/>
+                <constraint firstItem="BOQ-pc-Ii5" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="eHQ-vR-B9E"/>
+            </constraints>
+            <point key="canvasLocation" x="141" y="139"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Flag" width="10" height="7"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
