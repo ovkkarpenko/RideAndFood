@@ -92,6 +92,14 @@ class MapViewController: UIViewController {
         return button
     }()
     
+    private lazy var cartButton: UIButton = {
+        let button = RoundButton(type: .system)
+        button.bgImage = UIImage(named: "CartButton")
+        button.addTarget(self, action: #selector(showCart), for: .touchUpInside)
+        button.alpha = 0
+        return button
+    }()
+    
     private lazy var transparentView: UIView = {
         let view = UIView()
         view.backgroundColor = Colors.getColor(.tapIndicatorGray)()
@@ -107,6 +115,24 @@ class MapViewController: UIViewController {
         view.delegate = self
         addressDelegate = view
         
+        return view
+    }()
+    
+    private lazy var notificationView: NotificationView = {
+        let view = NotificationView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var cartView: CartView = {
+        let view = CartView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private lazy var additionalCardView: CardView = {
+        let view = CardView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -236,12 +262,13 @@ class MapViewController: UIViewController {
     private lazy var backgroundShownConstraint = backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor)
     private lazy var backgroundHiddenConstraint = backgroundView.rightAnchor.constraint(equalTo: view.leftAnchor,
                                                                                         constant: sideMenuOffset)
-
+    private lazy var additionalCardViewBottomConstraint = additionalCardView.bottomAnchor.constraint(equalTo: view.bottomAnchor,
+                                                                                                     constant: additionalCardViewOffset)
     private let padding: CGFloat = 25
     private let sideMenuPadding: CGFloat = 42
     private let activeOrderViewPadding: CGFloat = 10
     private lazy var sideMenuOffset: CGFloat = -500
-    
+    private lazy var additionalCardViewOffset: CGFloat = 1000
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
@@ -252,7 +279,7 @@ class MapViewController: UIViewController {
         TariffViewController.delegate = self
         PromotionDetailsViewController.delegate = self
         AddAddresViewController.delegate = self
-        
+        CartModel.shared.observers.append(self)
         NotificationCenter.default.addObserver(self, selector: #selector(managedObjectContextObjectsDidChange), name: NSNotification.Name.NSManagedObjectContextObjectsDidChange, object: nil)
     }
     
@@ -278,6 +305,7 @@ class MapViewController: UIViewController {
                     UserConfig.shared.settings = settings
                 }
             }
+            checkCartHasGoods()
         } else {
             let vc = LoginViewController()
             vc.modalPresentationStyle = .fullScreen
@@ -302,6 +330,7 @@ class MapViewController: UIViewController {
         view.addSubview(myLocationButton)
         view.addSubview(menuButton)
         view.addSubview(personButton)
+        view.addSubview(cartButton)
         view.addSubview(backgroundView)
         view.addSubview(sideMenuView)
         
@@ -332,7 +361,9 @@ class MapViewController: UIViewController {
             backgroundHiddenConstraint,
             backgroundLeftConstraint,
             personButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
-            personButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+            personButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            cartButton.topAnchor.constraint(equalTo: personButton.bottomAnchor, constant: padding),
+            cartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
         ])
     }
     
@@ -431,6 +462,81 @@ class MapViewController: UIViewController {
         
         backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding).isActive = true
         backButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding).isActive = true
+    }
+    
+    private func checkCartHasGoods() {
+        guard CartModel.getCart().rows.count > 0 else {
+            notificationView.removeFromSuperview()
+            cartButton.alpha = 0
+            return
+        }
+        guard notificationView.superview == nil else { return }
+        notificationView.configure(with: .init(messageText: FoodStrings.haveGoodsInCart.text(),
+                                               iconImage: UIImage(named: "CartLight"),
+                                               closeBlock: { [weak self] in
+                                                UIView.animate(withDuration: 0.3, animations: {
+                                                    self?.notificationView.alpha = 0
+                                                }) { [weak self] _ in
+                                                    self?.notificationView.removeFromSuperview()
+                                                }
+                                               },
+                                               tappedBlock: { [weak self] in
+                                                self?.showCart()
+                                               }))
+        view.insertSubview(notificationView, belowSubview: cardView)
+        NSLayoutConstraint.activate([
+            notificationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            notificationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            notificationView.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding / 2)
+        ])
+        UIView.animate(withDuration: 0.3) {
+            self.notificationView.alpha = 1
+            self.cartButton.alpha = 1
+        }
+    }
+    
+    @objc private func showCart() {
+        cartView.removeFromSuperview()
+        let cart = CartModel.getCart()
+        cartView = CartView()
+        cartView.configure(with: .init(cartRows: cart.rows,
+                                       sum: cart.sum,
+                                       deliveryTimeInMinutes: 45,
+                                       deliveryCost: 0,
+                                       shopName: cart.shopName,
+                                       backButtonTappedBlock: { [weak self] in
+                                        self?.hideCart()
+                                       }))
+        additionalCardView.configure(with: .init(contentView: cartView,
+                                                 style: .light,
+                                                 paddingTop: 0,
+                                                 paddingBottom: padding / 2,
+                                                 paddingX: 0,
+                                                 didSwipeDownCallback: { [weak self] in
+                                                    self?.hideCart()
+                                                 }))
+        view.addSubview(additionalCardView)
+        
+        NSLayoutConstraint.activate([
+            additionalCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            additionalCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            additionalCardViewBottomConstraint
+        ])
+        view.layoutIfNeeded()
+        additionalCardViewBottomConstraint.constant = 0
+        
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func hideCart() {
+        additionalCardViewBottomConstraint.constant = additionalCardViewOffset
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            self.additionalCardView.removeFromSuperview()
+        }
     }
     
     @objc private func myLocationButtonPressed() {
@@ -696,5 +802,15 @@ extension MapViewController: AddAddressViewControllerDelegate {
         }
         
         addressInputView.secondTextView.setText(address?.address)
+    }
+}
+
+// MARK: - ICartChangesObserver
+
+extension MapViewController: ICartChangesObserver {
+    func cartUpdated() {
+        DispatchQueue.main.async {
+            self.checkCartHasGoods()
+        }
     }
 }

@@ -31,11 +31,15 @@ class CoreDataManager: ICoreDataManager {
     
     // MARK: - ICoreDataManager
     
-    func addEntity<T: NSManagedObject>(_ type: T.Type, properties: [String: Any]) {
+    func addEntity<T: NSManagedObject>(_ type: T.Type,
+                                       properties: [String: Any],
+                                       completion: (() -> Void)? = nil) {
         performSave { context in
             guard let entity = NSEntityDescription.entity(forEntityName: T.description(), in: context) else { return }
             let record = T(entity: entity, insertInto: context)
             record.initialize(with: properties)
+        } completion: {
+            completion?()
         }
     }
     
@@ -55,19 +59,22 @@ class CoreDataManager: ICoreDataManager {
     
     func updateEntity(entityWithName name: String,
                       keyedValues: [String: Any],
-                      predicate: NSPredicate) {
-        
+                      predicate: NSPredicate,
+                      completion: (() -> Void)? = nil) {
         performSave { context in
             let request = NSFetchRequest<NSManagedObject>(entityName: name)
             request.predicate = predicate
             if let objectToUpdate = try? context.fetch(request).first {
                 objectToUpdate.setValuesForKeys(keyedValues)
             }
+        } completion: {
+            completion?()
         }
     }
     
     func deleteRange(entityName name: String,
-                     predicate: NSPredicate) {
+                     predicate: NSPredicate? = nil,
+                     completion: (() -> Void)? = nil) {
         performSave { context in
             let request = NSFetchRequest<NSManagedObject>(entityName: name)
             request.predicate = predicate
@@ -76,12 +83,15 @@ class CoreDataManager: ICoreDataManager {
                     context.delete($0)
                 }
             }
+        } completion: {
+            completion?()
         }
     }
     
     // MARK: - Private methods
     
-    private func performSave(block: @escaping (NSManagedObjectContext) -> Void) {
+    private func performSave(block: @escaping (NSManagedObjectContext) -> Void,
+                             completion: (() -> Void)? = nil) {
         container.performBackgroundTask { context in
             block(context)
             
@@ -90,8 +100,10 @@ class CoreDataManager: ICoreDataManager {
                     try context.save()
                 } catch {
                     print(error)
+                    completion?()
                 }
             }
+            completion?()
         }
     }
 }

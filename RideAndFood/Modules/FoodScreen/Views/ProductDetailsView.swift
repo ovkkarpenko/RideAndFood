@@ -74,10 +74,7 @@ class ProductDetailsView: UIView {
     private lazy var addToCartButton: PrimaryButton = {
         let button = PrimaryButton(title: ProductDetailsStrings.addToCard.text())
         button.addTarget(self, action: #selector(addToCardButtonPressed), for: .touchUpInside)
-        button.titleLabel?.numberOfLines = 0
-        button.titleEdgeInsets = .init(top: padding, left: padding, bottom: padding, right: padding)
-        button.setContentCompressionResistancePriority(.defaultHigh,
-                                                       for: .horizontal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     private lazy var addToCardStackView: UIStackView = {
@@ -98,7 +95,6 @@ class ProductDetailsView: UIView {
     
     // MARK: - Private properties
     
-    private let model = CartModel()
     private var productModel: ProductDetailModel?
     private var closeBlock: (() -> Void)?
     
@@ -127,6 +123,7 @@ class ProductDetailsView: UIView {
         addSubview(addToCardStackView)
         
         NSLayoutConstraint.activate([
+            addToCartButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
             productImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: productImageViewMargin),
             productImageView.topAnchor.constraint(equalTo: topAnchor, constant: topPadding),
             productImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -productImageViewMargin),
@@ -145,15 +142,11 @@ class ProductDetailsView: UIView {
     
     @objc private func addToCardButtonPressed() {
         guard let product = productModel else { return }
-        model.addToCart(product: product, count: counterView.count)
+        CartModel.shared.addToCart(product: product, count: counterView.count)
     }
     
     @objc private func closeButtonPressed() {
         closeBlock?()
-        
-        let cart = model.getCart()
-        print("CART CONTAIN \(cart.1) ITEMS: ")
-        cart.0.forEach { print("\n \($0.productName) - \($0.productPrice) - \($0.count)") }
     }
 }
 
@@ -164,7 +157,6 @@ extension ProductDetailsView: IConfigurableView {
     func configure(with model: ProductDetailModel) {
         self.productModel = model
         counterView.count = 1
-        addToCartButton.setAttributedTitle(nil, for: .normal)
         if let imageUrl = model.imageUrl {
             productImageView.imageByUrl(from: imageUrl)
         }
@@ -172,25 +164,9 @@ extension ProductDetailsView: IConfigurableView {
         compositionLabel.attributedText = model.composition
         producerLabel.attributedText = model.producer
         countryLabel.attributedText = model.country
-        let price = "\(model.price) \(StringsHelper.rub.text())"
+        let price = model.price.currencyString()
         let addToCart = ProductDetailsStrings.addToCard.text()
-        let text = "\(addToCart)\n\(price)"
-
-        let attributedString = NSMutableAttributedString(string: text)
-        let p1 = NSMutableParagraphStyle()
-        let p2 = NSMutableParagraphStyle()
-        p1.alignment = .left
-        p2.alignment = .right
-        p2.paragraphSpacingBefore = -(addToCartButton.titleLabel?.font.lineHeight ?? 0)
-        attributedString.addAttribute(.paragraphStyle,
-                                      value: p1,
-                                      range: .init(location: 0,
-                                                   length: addToCart.count))
-        attributedString.addAttributes([.paragraphStyle: p2,
-                                        .font: FontHelper.semibold17.font() as Any],
-                                       range: .init(location: addToCart.count,
-                                                    length: price.count + 1))
-        addToCartButton.setAttributedTitle(attributedString, for: .normal)
+        addToCartButton.setTitles(left: addToCart, right: price)
         closeBlock = model.closeBlock
     }
 }
