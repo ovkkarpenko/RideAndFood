@@ -41,3 +41,12 @@ enum ActiveTaxiOrderStrings {
         }
     }
 }
+
+func getActiveOrderCounterString(orderCount: Int) -> String {
+    switch UserConfig.shared.settings.language {
+    case .rus:
+        return orderCount == 1 ? "\(orderCount) активный заказ" : "\(orderCount) активных заказа"
+    case .eng:
+        return orderCount == 1 ? "\(orderCount) active order" : "\(orderCount) active orders"
+    }
+}

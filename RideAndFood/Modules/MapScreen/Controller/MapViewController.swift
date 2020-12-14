@@ -176,6 +176,11 @@ class MapViewController: UIViewController {
         swipeGesture.direction = .up
         view.addGestureRecognizer(swipeGesture)
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showExpandedTaxiActiveOrderView))
+        view.addGestureRecognizer(tapGesture)
+        
+        cardView.isTaxiButtonEnable = false
+        
         return view
     }()
     
@@ -186,10 +191,10 @@ class MapViewController: UIViewController {
         } else {
             view.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.width, height: cardView.frame.height + activeOrderViewPadding)
         }
-        // Временно, назначение еды должно происходить из базы еды.
-        view.setToAddress(address: taxiOrderModelHandler.getTaxiOrder()?.to)
-        view.setFromAddress(address: taxiOrderModelHandler.getTaxiOrder()?.from)
-        view.setDeliveryTime(value: 15)
+//        // Временно, назначение еды должно происходить из базы еды.
+//        view.setToAddress(address: taxiOrderModelHandler.getTaxiOrder()?.to)
+//        view.setFromAddress(address: taxiOrderModelHandler.getTaxiOrder()?.from)
+//        view.setDeliveryTime(value: 15)
         
         var swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissActiveOrderViews))
         swipeGesture.direction = .down
@@ -205,14 +210,16 @@ class MapViewController: UIViewController {
         return view
     }()
     
-    @objc private func showExpandedFoodActiveOrderView() {
-        let expandedFoodActiveOrderView = ExpandedActiveOrderView(type: .taxiActiveOrderView)
+    private lazy var activeOrderCounterView: UIButton = {
+        let view = UIButton(type: .system)
+        view.setBackgroundImage(UIImage(named: CustomImagesNames.gradient.rawValue), for: .normal)
+        view.isUserInteractionEnabled = false
+        view.setTitleColor(Colors.getColor(.buttonWhite)(), for: .normal)
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(expandedFoodActiveOrderView)
-        
-        dismissActiveOrderViews()
-        expandedFoodActiveOrderView.show(after: 0.1)
-    }
+        return view
+    }()
     
     // Нужно будет добавить проверку на наличие активных заказов при появлении главного меню
     private var isActiveOrder: Bool? {
@@ -225,18 +232,23 @@ class MapViewController: UIViewController {
                     view.insertSubview(taxiActiveOrderView, at: cardViewIndex - 1)
                     view.insertSubview(foodActiveOrderView, at: cardViewIndex - 2)
                     foodActiveOrderView.isLastView = true
+                    activeOrderCounterView.setTitle(getActiveOrderCounterString(orderCount: 2), for: .normal)
                     taxiActiveOrderView.show()
                     foodActiveOrderView.show()
                 } else if isTaxiActiveOrder {
                     taxiActiveOrderView.isLastView = true
                     view.insertSubview(taxiActiveOrderView, at: cardViewIndex - 1)
+                    activeOrderCounterView.setTitle(getActiveOrderCounterString(orderCount: 1), for: .normal)
                     taxiActiveOrderView.show()
                     cardView.isTaxiButtonEnable = false
                 } else if isFoodActiveOrder {
                     foodActiveOrderView.isLastView = true
                     view.insertSubview(foodActiveOrderView, at: cardViewIndex - 1)
+                    activeOrderCounterView.setTitle(getActiveOrderCounterString(orderCount: 1), for: .normal)
                     foodActiveOrderView.show()
                 }
+                
+                activeOrderCounterView.isHidden = false
                 
                 let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(showActiveOrderView))
                 swipeGesture.direction = .up
@@ -333,6 +345,7 @@ class MapViewController: UIViewController {
         view.addSubview(cartButton)
         view.addSubview(backgroundView)
         view.addSubview(sideMenuView)
+        view.addSubview(activeOrderCounterView)
         
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -363,7 +376,11 @@ class MapViewController: UIViewController {
             personButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
             personButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             cartButton.topAnchor.constraint(equalTo: personButton.bottomAnchor, constant: padding),
-            cartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding)
+            cartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            activeOrderCounterView.heightAnchor.constraint(equalToConstant: 40),
+            activeOrderCounterView.widthAnchor.constraint(equalToConstant: 165),
+            activeOrderCounterView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activeOrderCounterView.centerYAnchor.constraint(equalTo: menuButton.centerYAnchor)
         ])
     }
     
@@ -623,7 +640,7 @@ class MapViewController: UIViewController {
     
     @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
-        let timeInterval = 0.1 // 'cos core data needs time to update a db.
+        let timeInterval = generalDelay // 'cos core data needs time to update a db.
         
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval) { [weak self] in
@@ -650,6 +667,24 @@ class MapViewController: UIViewController {
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
             
         }
+    }
+    
+    @objc private func showExpandedFoodActiveOrderView() {
+        let expandedFoodActiveOrderView = ExpandedActiveOrderView(type: .foodActiveOrderView)
+        
+        view.addSubview(expandedFoodActiveOrderView)
+        
+        dismissActiveOrderViews()
+        expandedFoodActiveOrderView.show(after: generalDelay)
+    }
+    
+    @objc private func showExpandedTaxiActiveOrderView() {
+        let expandedTaxiActiveOrderView = ExpandedActiveOrderView(type: .taxiActiveOrderView)
+        
+        view.addSubview(expandedTaxiActiveOrderView)
+        
+        dismissActiveOrderViews()
+        expandedTaxiActiveOrderView.show(after: generalDelay)
     }
 }
 

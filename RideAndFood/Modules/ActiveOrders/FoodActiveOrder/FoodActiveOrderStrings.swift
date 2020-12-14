@@ -13,6 +13,7 @@ enum FoodActiveOrderStrings {
     case deliveryTime
     case callCourier
     case cancelButton
+    case courier
     
     func getString() -> String {
         switch UserConfig.shared.settings.language {
@@ -24,6 +25,8 @@ enum FoodActiveOrderStrings {
                 return "Позвонить курьеру"
             case .cancelButton:
                 return "Отменить заказ"
+            case .courier:
+                return "Курьер: "
             }
         case .eng:
             switch self {
@@ -33,6 +36,8 @@ enum FoodActiveOrderStrings {
                 return "To call courier"
             case .cancelButton:
                 return "Cancel order"
+            case .courier:
+                return "Courier: "
             }
         }
     }

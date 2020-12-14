@@ -10,6 +10,7 @@ import UIKit
 
 public let generalCornerRaduis: CGFloat = 15
 public let generalAnimationDuration: TimeInterval = 0.15
+public let generalDelay: TimeInterval = 0.1
 
 enum Colors {
     case buttonBlue
@@ -86,4 +87,5 @@ enum CustomImagesNames: String {
     case disableTaxiButton = "DisableTaxiButton"
     case taxiButton = "TaxiButton"
     case flag = "Flag"
+    case gradient = "Gradient"
 }

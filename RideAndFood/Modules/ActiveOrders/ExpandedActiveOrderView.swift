@@ -126,6 +126,8 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
                 
                 stackView.addArrangedSubview(foodActiveOrderView)
                 
+                // temp for test
+                implementer.attributedText = setImplemeneter(name: "Ivan Ivanov")
                 stackView.addArrangedSubview(implementer)
                 
                 mainButton.customizeButton(type: .greenButton)
@@ -192,7 +194,9 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
             text.append(NSAttributedString(string: name))
             return text
         case .foodActiveOrderView:
-            return nil
+            let text = NSMutableAttributedString(string: FoodActiveOrderStrings.getString(.courier)(), attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.textGray)()])
+            text.append(NSAttributedString(string: name))
+            return text
         }
     }
 }
