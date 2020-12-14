@@ -14,6 +14,8 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
     private lazy var taxiActiveOrderHandler = OrderTaxiModelHandler()
     private let padding: CGFloat = 25
     
+    weak var delegate: ExpandedActiveOrderViewDelegate?
+    
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -107,10 +109,12 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
                 stackView.addArrangedSubview(implementer)
                 
                 mainButton.customizeButton(type: .blueButton)
+                mainButton.addTarget(self, action: #selector(addDelivery(sender:)), for: .touchUpInside)
                 mainButton.setTitle(ActiveTaxiOrderStrings.getString(.addDelivery)(), for: .normal)
                 
                 stackView.addArrangedSubview(mainButton)
                 
+                problemButton.addTarget(self, action: #selector(reportProblem(sender:)), for: .touchUpInside)
                 problemButton.setTitle(ActiveTaxiOrderStrings.getString(.reportProblem)(), for: .normal)
                 stackView.addArrangedSubview(problemButton)
                 
@@ -131,9 +135,11 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
                 stackView.addArrangedSubview(implementer)
                 
                 mainButton.customizeButton(type: .greenButton)
+                mainButton.addTarget(self, action: #selector(callCourier(sender:)), for: .touchUpInside)
                 mainButton.setTitle(FoodActiveOrderStrings.getString(.callCourier)(), for: .normal)
                 stackView.addArrangedSubview(mainButton)
                 
+                problemButton.addTarget(self, action: #selector(cancelOrder(sender:)), for: .touchUpInside)
                 problemButton.setTitle(FoodActiveOrderStrings.getString(.cancelButton)(), for: .normal)
                 stackView.addArrangedSubview(problemButton)
                 
@@ -153,12 +159,6 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
         swipeGesture.direction = .down
         stackView.addGestureRecognizer(swipeGesture)
 
-    }
-    
-    @objc private func deleteFromView() {
-        dismiss { [weak self] in
-            self?.removeFromSuperview()
-        }
     }
     
     private func layoutStackView() {
@@ -198,5 +198,35 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
             text.append(NSAttributedString(string: name))
             return text
         }
+    }
+    
+    @objc private func deleteFromView() {
+        dismiss { [weak self] in
+            self?.removeFromSuperview()
+        }
+    }
+    
+    @objc private func addDelivery(sender: UIButton) {
+        dismiss() { [weak self] in
+            self?.removeFromSuperview()
+        }
+        
+        delegate?.addDeliveryButtonTapped()
+    }
+    
+    @objc private func callCourier(sender: UIButton) {
+        print("Call courier button tappped")
+    }
+    
+    @objc private func cancelOrder(sender: UIButton) {
+        delegate?.cancelButtonTapped()
+    }
+    
+    @objc private func reportProblem(sender: UIButton) {
+        dismiss() { [weak self] in
+            self?.removeFromSuperview()
+        }
+        
+        delegate?.reportProblemButtonTapped()
     }
 }

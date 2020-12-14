@@ -343,9 +343,9 @@ class MapViewController: UIViewController {
         view.addSubview(menuButton)
         view.addSubview(personButton)
         view.addSubview(cartButton)
+        view.addSubview(activeOrderCounterView)
         view.addSubview(backgroundView)
         view.addSubview(sideMenuView)
-        view.addSubview(activeOrderCounterView)
         
         NSLayoutConstraint.activate([
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -671,6 +671,7 @@ class MapViewController: UIViewController {
     
     @objc private func showExpandedFoodActiveOrderView() {
         let expandedFoodActiveOrderView = ExpandedActiveOrderView(type: .foodActiveOrderView)
+        expandedFoodActiveOrderView.delegate = self
         
         view.addSubview(expandedFoodActiveOrderView)
         
@@ -680,6 +681,7 @@ class MapViewController: UIViewController {
     
     @objc private func showExpandedTaxiActiveOrderView() {
         let expandedTaxiActiveOrderView = ExpandedActiveOrderView(type: .taxiActiveOrderView)
+        expandedTaxiActiveOrderView.delegate = self
         
         view.addSubview(expandedTaxiActiveOrderView)
         
@@ -847,5 +849,25 @@ extension MapViewController: ICartChangesObserver {
         DispatchQueue.main.async {
             self.checkCartHasGoods()
         }
+    }
+}
+
+extension MapViewController: ExpandedActiveOrderViewDelegate {
+    func cancelButtonTapped() {
+        print("Cancel button tapped")
+    }
+    
+    func reportProblemButtonTapped() {
+        if let controller = UIStoryboard.init(name: "SupportService", bundle: nil)
+            .instantiateViewController(withIdentifier: "SupportID") as? UINavigationController {
+            
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .coverVertical
+            present(controller, animated: true)
+        }
+    }
+    
+    func addDeliveryButtonTapped() {
+        foodButtonPressed()
     }
 }
