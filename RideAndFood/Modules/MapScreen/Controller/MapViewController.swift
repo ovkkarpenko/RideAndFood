@@ -164,7 +164,6 @@ class MapViewController: UIViewController {
     private lazy var taxiOrderModelHandler: OrderTaxiModelHandler = OrderTaxiModelHandler()
     
     private lazy var taxiActiveOrderView: TaxiActiveOrderView = {
-        // здесь нужно проверять, есть ли активный заказ еды и тогда отступ фрейма делать от еды. То же самое нужно делать для вьюшки еды. И тап индикатор тоже в зависимости от того последняя ли это вьюшка ставится.
         let view = TaxiActiveOrderView()
         view.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.width, height: cardView.frame.height + activeOrderViewPadding)
         
@@ -191,10 +190,6 @@ class MapViewController: UIViewController {
         } else {
             view.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.width, height: cardView.frame.height + activeOrderViewPadding)
         }
-//        // Временно, назначение еды должно происходить из базы еды.
-//        view.setToAddress(address: taxiOrderModelHandler.getTaxiOrder()?.to)
-//        view.setFromAddress(address: taxiOrderModelHandler.getTaxiOrder()?.from)
-//        view.setDeliveryTime(value: 15)
         
         var swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissActiveOrderViews))
         swipeGesture.direction = .down
@@ -221,7 +216,6 @@ class MapViewController: UIViewController {
         return view
     }()
     
-    // Нужно будет добавить проверку на наличие активных заказов при появлении главного меню
     private var isActiveOrder: Bool? {
         didSet {
             if let cardViewIndex = view.subviews.firstIndex(of: cardView), taxiOrderModelHandler.getTaxiOrder() != nil {
@@ -317,6 +311,8 @@ class MapViewController: UIViewController {
                     UserConfig.shared.settings = settings
                 }
             }
+            checkIfTaxiActiveOrderExists()
+            checkIfFoodActiveOrderExists()
             checkCartHasGoods()
         } else {
             let vc = LoginViewController()
@@ -362,7 +358,7 @@ class MapViewController: UIViewController {
             cardView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             cardView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             myLocationButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding*3.5),
+            myLocationButton.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding*5),
             menuButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             menuButton.topAnchor.constraint(equalTo: statusBarBlurView.bottomAnchor, constant: padding),
             sideMenuView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -504,12 +500,27 @@ class MapViewController: UIViewController {
         NSLayoutConstraint.activate([
             notificationView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             notificationView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            notificationView.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -padding / 2)
+            notificationView.bottomAnchor.constraint(equalTo: cardView.topAnchor, constant: -2 * padding)
         ])
         UIView.animate(withDuration: 0.3) {
             self.notificationView.alpha = 1
             self.cartButton.alpha = 1
         }
+    }
+    
+    private func checkIfTaxiActiveOrderExists() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + generalDelay) { [weak self] in
+            guard let self = self else { return }
+            if self.taxiOrderModelHandler.getTaxiOrder() != nil {
+                self.isTaxiActiveOrder = true
+                self.isFoodActiveOrder = true
+                self.isActiveOrder = true
+            }
+        }
+    }
+    
+    private func checkIfFoodActiveOrderExists() {
+        
     }
     
     @objc private func showCart() {
@@ -640,32 +651,23 @@ class MapViewController: UIViewController {
     
     @objc private func managedObjectContextObjectsDidChange(notification: NSNotification) {
         guard let userInfo = notification.userInfo else { return }
-        let timeInterval = generalDelay // 'cos core data needs time to update a db.
         
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval) { [weak self] in
-                guard let self = self else { return }
-                if self.taxiOrderModelHandler.getTaxiOrder() != nil {
-                    self.isTaxiActiveOrder = true
-                    self.isFoodActiveOrder = true
-                    self.isActiveOrder = true
-                }
-            }
+            checkIfTaxiActiveOrderExists()
+            
+            // Нужно реализовать БД еды и реализовать эту функцию
+            checkIfFoodActiveOrderExists()
         }
         
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updates.count > 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval) { [weak self] in
-                guard let self = self else { return }
-                if self.taxiOrderModelHandler.getTaxiOrder() != nil {
-                    self.isTaxiActiveOrder = true
-                    self.isFoodActiveOrder = true
-                    self.isActiveOrder = true
-                }
-            }
+            checkIfTaxiActiveOrderExists()
+            
+            // Нужно реализовать БД еды и реализовать эту функцию
+            checkIfFoodActiveOrderExists()
         }
         
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
-            
+            // Здесь нужно будет удалить вьюшки активных заказов и вернуть состояние стартового экрана.
         }
     }
     
@@ -719,11 +721,7 @@ extension MapViewController: OrderViewDelegate {
     func buttonTapped(senderType: OrderViewType, addressInfo: String?) {
         switch senderType {
         case .addressInput:
-            let taxiOrderModel = OrderTaxiModelHandler()
-//            taxiOrderModel.removeTaxiOrder(withId: 1)
-//            print(taxiOrderModel.getTaxiOrder())
-            taxiOrderModel.addToTaxiOrder(order: OrderTaxiModel(id: 1, from: addressInputView.firstTextView.textField.text, to: addressInputView.secondTextView.textField.text))
-//            confirmAddressButtonPressed() // вернуть это
+            confirmAddressButtonPressed()
             backButtonPressed()
         case .currentAddressDetail:
             backButtonPressed()
@@ -834,11 +832,15 @@ extension MapViewController: PromotionDetailDelegate {
 
 extension MapViewController: AddAddressViewControllerDelegate {
     func didSelectedAddressAsDestination(address: Address?) {
-        if !self.view.subviews.contains(addressInputView) {
-            taxiButtonPressed()
+        if cardView.isTaxiButtonEnable! {
+            if !self.view.subviews.contains(addressInputView) {
+                taxiButtonPressed()
+            }
+            
+            addressInputView.secondTextView.setText(address?.address)
+        } else {
+            // show alert taxi already ordered
         }
-        
-        addressInputView.secondTextView.setText(address?.address)
     }
 }
 
