@@ -112,7 +112,7 @@ class TariffPage: UIView {
     
     private func setCarImage() {
         if let imageUrlPart = tariffModel.icon {
-            downloadImage(with: baseUrl + imageUrlPart) { [weak self] (iconImage) in
+            downloadImage(with: imageUrlPart) { [weak self] (iconImage) in
                 guard let self = self else { return }
                 guard let iconImage = iconImage else { return }
                 self.carImageView.image = iconImage
@@ -147,7 +147,7 @@ class TariffPage: UIView {
         for i in 0..<iconButtons.count {
             if let advantage = tariffModel.advantages {
                 if let iconUrlPart = advantage[i]?.icon {
-                    downloadImage(with: baseUrl + iconUrlPart) { [weak self] (iconImage) in
+                    downloadImage(with: iconUrlPart) { [weak self] (iconImage) in
                         guard let self = self else { return }
                         guard let iconImage = iconImage else { return }
                         self.iconButtons[i].tintColor = color

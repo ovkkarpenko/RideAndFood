@@ -142,6 +142,8 @@ class MapViewController: UIViewController {
         return view
     }()
     
+    private lazy var taxiConfirmationView = TaxiConfirmationView()
+    
     private lazy var dimmerView: DimmerView = {
         let view = DimmerView()
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideCart)))
@@ -325,6 +327,10 @@ class MapViewController: UIViewController {
             let vc = LoginViewController()
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.showTaxiConfirmationView()
         }
     }
     
@@ -530,26 +536,7 @@ class MapViewController: UIViewController {
         
     }
     
-    @objc private func showCart() {
-        cartView.removeFromSuperview()
-        let cart = CartModel.getCart()
-        cartView = CartView()
-        cartView.configure(with: .init(cartRows: cart.rows,
-                                       sum: cart.sum,
-                                       deliveryTimeInMinutes: Int.random(in: 5...120),
-                                       deliveryCost: 0,
-                                       shopName: cart.shopName,
-                                       backButtonTappedBlock: { [weak self] in
-                                        self?.hideCart()
-                                       }))
-        additionalCardView.configure(with: .init(contentView: cartView,
-                                                 style: .light,
-                                                 paddingTop: 0,
-                                                 paddingBottom: padding,
-                                                 paddingX: 0,
-                                                 didSwipeDownCallback: { [weak self] in
-                                                    self?.hideCart()
-                                                 }))
+    private func showAdditionalCardView() {
         view.addSubview(dimmerView)
         view.addSubview(additionalCardView)
         
@@ -571,7 +558,7 @@ class MapViewController: UIViewController {
         }
     }
     
-    @objc private func hideCart() {
+    private func hideAdditionalCardView() {
         additionalCardViewBottomConstraint.constant = additionalCardViewOffset
         self.dimmerView.hide()
         UIView.animate(withDuration: 0.2) {
@@ -580,6 +567,53 @@ class MapViewController: UIViewController {
             self.dimmerView.removeFromSuperview()
             self.additionalCardView.removeFromSuperview()
         }
+    }
+    
+    private func showTaxiConfirmationView() {
+        guard let order = taxiOrderModelHandler.getTaxiOrder() else { return }
+        
+        taxiConfirmationView.configure(with: .init(addressFrom: order.from,
+                                                   addressTo: order.to) {
+                                                    
+                                                   } secondaryButtonPressedBlock: { [weak self] in
+                                                    self?.hideAdditionalCardView()
+                                                   })
+        additionalCardView.configure(with: .init(contentView: taxiConfirmationView,
+                                                 style: .light,
+                                                 paddingTop: 0,
+                                                 paddingBottom: 0,
+                                                 paddingX: 0,
+                                                 didSwipeDownCallback: { [weak self] in
+                                                    self?.hideAdditionalCardView()
+                                                 }))
+        showAdditionalCardView()
+    }
+    
+    @objc private func showCart() {
+        cartView.removeFromSuperview()
+        let cart = CartModel.getCart()
+        cartView = CartView()
+        cartView.configure(with: .init(cartRows: cart.rows,
+                                       sum: cart.sum,
+                                       deliveryTimeInMinutes: Int.random(in: 5...120),
+                                       deliveryCost: 0,
+                                       shopName: cart.shopName,
+                                       backButtonTappedBlock: { [weak self] in
+                                        self?.hideCart()
+                                       }))
+        additionalCardView.configure(with: .init(contentView: cartView,
+                                                 style: .light,
+                                                 paddingTop: 0,
+                                                 paddingBottom: padding,
+                                                 paddingX: 0,
+                                                 didSwipeDownCallback: { [weak self] in
+                                                    self?.hideCart()
+                                                 }))
+        showAdditionalCardView()
+    }
+    
+    @objc private func hideCart() {
+        hideAdditionalCardView()
     }
     
     @objc private func myLocationButtonPressed() {
