@@ -22,6 +22,13 @@ enum FoodStrings {
     case backToShopping
     case emptyCartDescription
     case emptyCartConfirmation
+    case spendAllPoints
+    case spendSomePoints
+    case youHave
+    case confirm
+    case enterPointsCount
+    case errorLabelMessage
+    case points
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -60,6 +67,20 @@ enum FoodStrings {
             return "Для новых покупок вам необходимо очистить корзину предыдущего заказа"
         case .emptyCartConfirmation:
             return "Очистить корзину"
+        case .spendAllPoints:
+            return "Потратить все баллы сразу"
+        case .spendSomePoints:
+            return "Другое количество"
+        case .youHave:
+            return "У вас "
+        case .confirm:
+            return "Подтвердить"
+        case .enterPointsCount:
+            return "Введите количество баллов"
+        case .errorLabelMessage:
+            return "Недопустимое количество"
+        case .points:
+            return "Баллов"
         }
     }
     
@@ -91,6 +112,20 @@ enum FoodStrings {
             return "For new purchases, you need to empty the cart of the previous order"
         case .emptyCartConfirmation:
             return "Empty cart"
+        case .spendAllPoints:
+            return "Spend all points"
+        case .spendSomePoints:
+            return "Spend some points"
+        case .youHave:
+            return "You have "
+        case .confirm:
+            return "Confirm"
+        case .enterPointsCount:
+            return "Enter points count"
+        case .errorLabelMessage:
+            return "Invalid number"
+        case .points:
+            return "Points"
         }
     }
 }

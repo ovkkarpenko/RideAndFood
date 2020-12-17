@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InputPointsView" customModule="RideAndFood" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundView" destination="cRZ-CB-bao" id="hBI-Ue-F8w"/>
+                <outlet property="confirmButton" destination="gfL-i3-xYh" id="h7q-nF-9n9"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="yYN-tB-jNz"/>
+                <outlet property="errorLabel" destination="Xld-Fy-wtt" id="i6b-IB-vNj"/>
+                <outlet property="indicatorView" destination="eMk-MP-Sx9" id="PHL-s4-bmP"/>
+                <outlet property="textField" destination="I3a-y3-uzT" id="Thg-xK-Zbr"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cRZ-CB-bao" customClass="CustomViewWithAnimation" customModule="RideAndFood" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="497.5" width="375" height="169.5"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="cVw-y1-Aaw">
+                            <rect key="frame" x="25" y="25" width="325" height="119.5"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="thx-41-PmX">
+                                    <rect key="frame" x="0.0" y="0.0" width="325" height="47.5"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I3a-y3-uzT">
+                                            <rect key="frame" x="0.0" y="0.0" width="325" height="18.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        </textField>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eMk-MP-Sx9">
+                                            <rect key="frame" x="0.0" y="26.5" width="325" height="1"/>
+                                            <color key="backgroundColor" name="Primary"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="1" id="fve-Wj-696"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xld-Fy-wtt">
+                                            <rect key="frame" x="0.0" y="35.5" width="325" height="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="I3a-y3-uzT" firstAttribute="leading" secondItem="thx-41-PmX" secondAttribute="leading" id="5as-GX-mE3"/>
+                                        <constraint firstAttribute="trailing" secondItem="I3a-y3-uzT" secondAttribute="trailing" id="BXt-hf-Ah1"/>
+                                        <constraint firstAttribute="trailing" secondItem="Xld-Fy-wtt" secondAttribute="trailing" id="Tdv-BR-CcF"/>
+                                        <constraint firstItem="Xld-Fy-wtt" firstAttribute="leading" secondItem="thx-41-PmX" secondAttribute="leading" id="egI-Sb-NgA"/>
+                                        <constraint firstAttribute="trailing" secondItem="eMk-MP-Sx9" secondAttribute="trailing" id="hC6-HR-ofk"/>
+                                        <constraint firstItem="eMk-MP-Sx9" firstAttribute="leading" secondItem="thx-41-PmX" secondAttribute="leading" id="uGt-Tn-BRm"/>
+                                    </constraints>
+                                </stackView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfL-i3-xYh" customClass="CustomButton" customModule="RideAndFood" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="69.5" width="325" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="Ddj-E6-ogr"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="confirm:" destination="-1" eventType="touchUpInside" id="HWg-jV-708"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="thx-41-PmX" secondAttribute="trailing" id="KPC-1d-vNv"/>
+                                <constraint firstItem="gfL-i3-xYh" firstAttribute="leading" secondItem="cVw-y1-Aaw" secondAttribute="leading" id="Wos-BU-bUs"/>
+                                <constraint firstAttribute="trailing" secondItem="gfL-i3-xYh" secondAttribute="trailing" id="jb1-KZ-uJc"/>
+                                <constraint firstItem="thx-41-PmX" firstAttribute="leading" secondItem="cVw-y1-Aaw" secondAttribute="leading" id="r8e-6s-Tgh"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="cVw-y1-Aaw" firstAttribute="leading" secondItem="cRZ-CB-bao" secondAttribute="leading" constant="25" id="7do-h0-xhs"/>
+                        <constraint firstItem="cVw-y1-Aaw" firstAttribute="top" secondItem="cRZ-CB-bao" secondAttribute="top" constant="25" id="B5L-BF-l1Y"/>
+                        <constraint firstAttribute="bottom" secondItem="cVw-y1-Aaw" secondAttribute="bottom" constant="25" id="HZo-gj-gB7"/>
+                        <constraint firstAttribute="height" constant="169.5" id="tBH-GE-gEI"/>
+                        <constraint firstAttribute="trailing" secondItem="cVw-y1-Aaw" secondAttribute="trailing" constant="25" id="vDQ-Tp-Ny3"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cRZ-CB-bao" secondAttribute="trailing" id="8r6-0w-3qU"/>
+                <constraint firstItem="cRZ-CB-bao" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="EUd-UW-rmL"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cRZ-CB-bao" secondAttribute="bottom" id="jaF-Dy-26b"/>
+            </constraints>
+            <point key="canvasLocation" x="-196" y="141"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Primary">
+            <color red="0.25699999928474426" green="0.17299999296665192" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

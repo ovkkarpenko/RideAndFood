@@ -9,7 +9,7 @@
 import UIKit
 
 public let generalCornerRaduis: CGFloat = 15
-public let generalAnimationDuration: TimeInterval = 0.15
+public let generalAnimationDuration: TimeInterval = 0.25
 public let generalDelay: TimeInterval = 0.1
 
 enum Colors {
@@ -30,6 +30,8 @@ enum Colors {
     case tableViewBorderGray
     case backgroundGray
     case carNumberGray
+    case yellow
+    case errorRed
     
     func getColor() -> UIColor {
         switch self {
@@ -67,6 +69,10 @@ enum Colors {
             return UIColor(hexString: "#F0F0F0")
         case .carNumberGray:
             return UIColor(hexString: "#F3F3F3")
+        case .yellow:
+            return UIColor(hexString: "#FACA50")
+        case .errorRed:
+            return UIColor(hexString: "#FF3B30")
         }
     }
 }

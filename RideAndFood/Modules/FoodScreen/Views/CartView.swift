@@ -93,13 +93,28 @@ class CartView: UIView {
                           action: #selector(promoButtonTapped))
     }()
     
-    private lazy var pointsButton: CartButton = {
-        var pointsImageView = UIImageView(image: UIImage(named: "points"))
-        pointsImageView.contentMode = .scaleAspectFit
-        return CartButton(icon: pointsImageView,
-                          title: PaymentStrings.points.text(),
-                          target: self,
-                          action: #selector(pointsButtonTapped))
+//    private lazy var pointsButton: CartButton = {
+//        var pointsImageView = UIImageView(image: UIImage(named: "points"))
+//        pointsImageView.contentMode = .scaleAspectFit
+//        return CartButton(icon: pointsImageView,
+//                          title: PaymentStrings.points.text(),
+//                          target: self,
+//                          action: #selector(pointsButtonTapped))
+//    }()
+    
+    private lazy var pointsButton: UIButton = {
+        let view = UIButton(type: .system)
+        view.contentEdgeInsets = UIEdgeInsets(top: 0, left: -50, bottom: 0, right: 10)
+        view.setTitle(PaymentStrings.points.text(), for: .normal)
+        view.setImage(UIImage(named: "points"), for: .normal)
+        view.setTitleColor(Colors.textBlack.getColor(), for: .normal)
+        view.tintColor = Colors.yellow.getColor()
+        view.layer.cornerRadius = generalCornerRaduis
+        view.layer.shadowOpacity = 0.1
+        view.backgroundColor = ColorHelper.background.color()
+        view.addTarget(self, action: #selector(pointsButtonTapped), for: .touchUpInside)
+        view.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        return view
     }()
     
     private lazy var buttonsStackView: UIStackView = {
@@ -134,6 +149,8 @@ class CartView: UIView {
     }()
     private lazy var cardViewBottomConstraint = cardView.bottomAnchor.constraint(equalTo: superview?.bottomAnchor ?? bottomAnchor,
                                                                                  constant: hideCardViewConstant)
+    
+    private var pointsCount: Int?
     
     private let hideCardViewConstant: CGFloat = 1000
     private let padding: CGFloat = 25
@@ -234,7 +251,7 @@ class CartView: UIView {
             goToPaymentButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             goToPaymentButton.topAnchor.constraint(greaterThanOrEqualTo: buttonsStackView.bottomAnchor, constant: padding),
             goToPaymentButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            goToPaymentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding / 2)
+            goToPaymentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding / 2)
         ])
     }
     
@@ -349,6 +366,16 @@ class CartView: UIView {
                                     right: "\(sum.currencyString()) \(sumWithDiscount.currencyString())")
     }
     
+    private func updatePointsButton() {
+        let title = NSMutableAttributedString(string: "-\(pointsDiscount) ", attributes: [NSAttributedString.Key.foregroundColor : Colors.buttonGreen.getColor()])
+        title.append(NSAttributedString(string: FoodStrings.points.text(), attributes: [NSAttributedString.Key.foregroundColor : Colors.textGray.getColor()]))
+        pointsButton.setAttributedTitle(title, for: .normal)
+        pointsButton.backgroundColor = Colors.backgroundGray.getColor()
+        pointsButton.layer.shadowOpacity = 0
+        pointsButton.setImage(nil, for: .normal)
+        pointsButton.isEnabled = false
+    }
+    
     @objc private func backButtonTapped() {
         backButtonTappedBlock?()
     }
@@ -406,7 +433,19 @@ class CartView: UIView {
     }
     
     @objc private func pointsButtonTapped() {
-        
+        let viewModel = SelectTariffViewModel()
+        viewModel.getPointsCount { [weak self] credits in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if credits > 0 {
+                    self.pointsCount = credits
+                    let pointsView = PointsView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: self.frame.width, height: self.frame.height + self.padding / 2))
+                    pointsView.delegate = self
+                    pointsView.pointsCount = credits
+                    self.addSubview(pointsView)
+                }
+            }
+        }
     }
     
     @objc private func paymentButtonTapped() {
@@ -482,5 +521,22 @@ extension CartView: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+}
+
+extension CartView: PointsViewDelegate {
+    func spendAllPoints() {
+        pointsDiscount = pointsCount!
+        if pointsDiscount > 0 {
+            updatePointsButton()
+        }
+    }
+    
+    func setPointsToSpend(points: String) {
+        pointsDiscount = Int(points) ?? 0
+        // should update points count in server
+        if pointsDiscount > 0 {
+            updatePointsButton()
+        }
     }
 }

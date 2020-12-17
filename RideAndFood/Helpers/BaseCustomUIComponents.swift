@@ -62,13 +62,12 @@ class InsetLabel: UILabel {
 }
 
 class CustomViewWithAnimation: UIView {
-    @objc func show(after time: TimeInterval = 0, completion: (() -> ())? = nil) {
-        self.layer.frame.origin.y = UIScreen.main.bounds.height
+    @objc func show(after time: TimeInterval = 0, originY: CGFloat = UIScreen.main.bounds.height, keyboardHeight: CGFloat = 0, completion: (() -> ())? = nil) {
+        self.frame.origin.y = originY
         
         UIView.animate(withDuration: generalAnimationDuration, delay: time, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
             guard let self = self else { return }
-            self.layer.frame.origin.y = UIScreen.main.bounds.height -
-                self.frame.height
+            self.frame.origin.y = originY - self.frame.height - keyboardHeight
         } completion: { _ in
             completion?()
         }
@@ -77,18 +76,18 @@ class CustomViewWithAnimation: UIView {
     @objc func dismiss(padding: CGFloat = 0, completion: (() -> ())? = nil) {
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveLinear]) { [weak self] in
             guard let self = self else { return }
-            self.layer.frame.origin.y += self.frame.height - padding
+            self.frame.origin.y += self.frame.height - padding
         } completion: { _ in
             completion?()
         }
     }
     
     @objc func showMore(originY: CGFloat = UIScreen.main.bounds.height) {
-        self.layer.frame.origin.y = originY
+        self.frame.origin.y = originY
         
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut, .allowAnimatedContent]) { [weak self] in
             guard let self = self else { return }
-            self.layer.frame.origin.y = originY -
+            self.frame.origin.y = originY -
                 2*self.frame.height
         }
     }
