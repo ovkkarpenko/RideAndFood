@@ -1153,6 +1153,26 @@
 			path = FoodActiveOrder;
 			sourceTree = "<group>";
 		};
+		F75CF40D258CB02900A076A1 /* FoodPaymentView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FoodPaymentView;
+			sourceTree = "<group>";
+		};
+		F75CF40E258CB03500A076A1 /* FoodPointsView */ = {
+			isa = PBXGroup;
+			children = (
+				F768C0BB2588ABC600B85307 /* PointsView.swift */,
+				F760ADC3258B59F40017B7D8 /* PointsViewDelegate.swift */,
+				F768C0BE2588BA1200B85307 /* PointsView.xib */,
+				F768C0C92588F9AD00B85307 /* InputPointsView.xib */,
+				F768C0CC2588F9C400B85307 /* InputPointsView.swift */,
+				F7AB8766258A43BD00DD3CA4 /* InputPointsViewDelegate.swift */,
+			);
+			path = FoodPointsView;
+			sourceTree = "<group>";
+		};
 		F76F67AA257A5F1700E16A53 /* ActiveOrders */ = {
 			isa = PBXGroup;
 			children = (
@@ -1517,6 +1537,8 @@
 		FAD0AFEC25669B1A008C2794 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F75CF40E258CB03500A076A1 /* FoodPointsView */,
+				F75CF40D258CB02900A076A1 /* FoodPaymentView */,
 				FA707FA3256A608800D88F97 /* Cells */,
 				FAD0AFED25669B1A008C2794 /* FoodAddressView.swift */,
 				FAD0AFEE25669B1A008C2794 /* FoodView.swift */,
@@ -1531,12 +1553,6 @@
 				7258516F257D4C9D0087FF9A /* CartButton.swift */,
 				72BC6C0B2582B72F00C4E878 /* BaseFoodView.swift */,
 				7233AAC42582E93E001D589F /* EmptyCartView.swift */,
-				F768C0BB2588ABC600B85307 /* PointsView.swift */,
-				F760ADC3258B59F40017B7D8 /* PointsViewDelegate.swift */,
-				F768C0BE2588BA1200B85307 /* PointsView.xib */,
-				F768C0C92588F9AD00B85307 /* InputPointsView.xib */,
-				F768C0CC2588F9C400B85307 /* InputPointsView.swift */,
-				F7AB8766258A43BD00DD3CA4 /* InputPointsViewDelegate.swift */,
 				F760ADD3258BA6070017B7D8 /* ComplexButton.swift */,
 				F760ADD6258BA62C0017B7D8 /* ComplexButton.xib */,
 			);
