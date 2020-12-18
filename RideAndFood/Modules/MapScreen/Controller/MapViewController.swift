@@ -807,8 +807,9 @@ extension MapViewController: SelectTariffViewDelegate {
         addNewView(view)
     }
     
-    func orderButtonPressed() {
+    func orderButtonPressed(order: TaxiOrder) {
         let view = LookingForDriverView()
+        view.order = order
         view.delegate = self
         addNewView(view)
     }
@@ -828,6 +829,12 @@ extension MapViewController: SelectTariffViewDelegate {
             nc.modalPresentationStyle = .fullScreen
             self?.present(nc, animated: true)
         }
+        addNewView(view)
+    }
+    
+    func foundTaxi(order: TaxiOrder?) {
+        let view = TaxiFoundView()
+        view.order = order
         addNewView(view)
     }
     

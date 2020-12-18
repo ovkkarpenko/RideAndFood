@@ -10,7 +10,10 @@ import UIKit
 
 class LookingForDriverView: UIView, CustromViewProtocol {
     
+    var order: TaxiOrder?
     weak var delegate: SelectTariffViewDelegate?
+    
+    private var taxiTimer: Timer?
     
     private lazy var contentView: UIView = {
         let view = UIView()
@@ -100,9 +103,14 @@ class LookingForDriverView: UIView, CustromViewProtocol {
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut]) { [weak self] in
             self?.layoutIfNeeded()
         }
+        
+        taxiTimer = Timer.scheduledTimer(withTimeInterval: Double.random(in: 5.0...10.0), repeats: false) { [weak self] _ in
+            self?.foundTaxi()
+        }
     }
     
     func dismiss(_ completion: (() -> ())?) {
+        taxiTimer?.invalidate()
         contentViewTopAnchorConstraint.constant = screenHeight+offset
         contentViewBottomAnchorConstraint.constant = -screenHeight-offset
         
@@ -111,6 +119,13 @@ class LookingForDriverView: UIView, CustromViewProtocol {
         } completion: { _ in
             completion?()
         }
+    }
+    
+    private func foundTaxi() {
+        dismiss { [weak self] in
+            self?.removeFromSuperview()
+        }
+        delegate?.foundTaxi(order: order)
     }
     
     @objc private func cencelButtonPressed() {

@@ -10,6 +10,7 @@ protocol SelectTariffViewDelegate: class {
     func promoCodeButtonPressed(_ dismissCallback: ((String?) -> ())?)
     func pointsButtonPressed(_ dismissCallback: ((Int?) -> ())?)
     func backSubButtonPressed()
-    func orderButtonPressed()
+    func orderButtonPressed(order: TaxiOrder)
     func cencelOrderButtonPressed()
+    func foundTaxi(order: TaxiOrder?)
 }
