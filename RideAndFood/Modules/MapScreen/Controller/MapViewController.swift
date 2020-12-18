@@ -835,6 +835,7 @@ extension MapViewController: SelectTariffViewDelegate {
     func foundTaxi(order: TaxiOrder?) {
         let view = TaxiFoundView()
         view.order = order
+        view.delegate = self
         addNewView(view)
     }
     

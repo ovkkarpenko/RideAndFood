@@ -11,6 +11,7 @@ import UIKit
 class TaxiFoundView: UIView, CustromViewProtocol {
     
     var order: TaxiOrder?
+    weak var delegate: SelectTariffViewDelegate?
     
     private let contentView: UIView = {
         let view = UIView()
@@ -77,7 +78,7 @@ class TaxiFoundView: UIView, CustromViewProtocol {
     
     private lazy var cencelButton: PrimaryButton = {
         let button = PrimaryButton(title: PaymentStrings.celncelButtonTitle.text())
-//        button.addTarget(self, action: #selector(otherQuantityButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(cencelButtonPressed), for: .touchUpInside)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -177,5 +178,12 @@ class TaxiFoundView: UIView, CustromViewProtocol {
         } completion: { _ in
             completion?()
         }
+    }
+    
+    @objc private func cencelButtonPressed() {
+        dismiss { [weak self] in
+            self?.removeFromSuperview()
+        }
+        delegate?.cencelOrderButtonPressed()
     }
 }

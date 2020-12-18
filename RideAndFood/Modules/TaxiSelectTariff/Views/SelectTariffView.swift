@@ -49,12 +49,14 @@ class SelectTariffView: UIView {
     
     lazy var firstTextField: CustomTextView = {
         let textField = CustomTextView(textViewType: .currentAddress)
+        textField.isUserInteractionEnabled = false
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
     lazy var secondTextField: CustomTextView = {
         let textField = CustomTextView(textViewType: .destinationAddress)
+        textField.isUserInteractionEnabled = false
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -239,6 +241,7 @@ class SelectTariffView: UIView {
             guard let self = self else { return }
             self.firstTextField.textField.becomeFirstResponder()
             self.secondTextField.textField.becomeFirstResponder()
+            self.secondTextField.textField.resignFirstResponder()
         }
     }
     
