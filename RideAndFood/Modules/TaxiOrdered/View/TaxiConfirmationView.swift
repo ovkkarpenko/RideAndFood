@@ -83,7 +83,7 @@ extension TaxiConfirmationView: IConfigurableView {
                                              addressTo: model.addressTo))
         taxiOrderedCarView.configure(with: .init(carName: "Белый Opel Astra",
                                                  className: "Standart",
-                                                 classColor: ColorHelper.green.color()!,
+                                                 classColor: ColorHelper.green.color(),
                                                  carImage: UIImage(named: "car-large"),
                                                  driverName: "Анатолий (id: 23-87)",
                                                  pickupTime: "3 \(StringsHelper.minutes.text())",
@@ -93,11 +93,4 @@ extension TaxiConfirmationView: IConfigurableView {
                                                primaryButtonPressedBlock: model.primaryButtonPressedBlock,
                                                secondaryButtonPressedBlock: model.secondaryButtonPressedBlock))
     }
-}
-
-struct TaxiConfirmationViewModel {
-    let addressFrom: String
-    let addressTo: String
-    let primaryButtonPressedBlock: () -> Void
-    let secondaryButtonPressedBlock: () -> Void
 }
