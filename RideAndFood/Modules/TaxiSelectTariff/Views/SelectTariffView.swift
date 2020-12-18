@@ -34,37 +34,9 @@ class SelectTariffView: UIView {
         return button
     }()
     
-    private lazy var tripDurationView: UIView = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 15)
-        label.textColor = .white
-        label.text = "≈15 мин"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        let view = UIView()
-        view.frame.size = .init(width: 125, height: 40)
+    private lazy var tripDurationView: TripDurationView = {
+        let view = TripDurationView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        
-        let colorLeft =  UIColor(red: 0.984, green: 0.557, blue: 0.314, alpha: 1).cgColor
-        let colorRight = UIColor(red: 0.239, green: 0.231, blue: 1, alpha: 1).cgColor
-        
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorLeft, colorRight]
-        gradientLayer.locations = [0.24, 0.71]
-        gradientLayer.transform = CATransform3DMakeRotation(.pi/2, 0, 0, 1)
-        gradientLayer.frame = view.bounds
-        gradientLayer.cornerRadius = 15
-        
-        view.layer.insertSublayer(gradientLayer, at:0)
-        view.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-        ])
-        
         return view
     }()
     
@@ -305,7 +277,7 @@ class SelectTariffView: UIView {
                 
                 DispatchQueue.main.async {
                     self?.dismiss()
-                    self?.delegate?.orderButtonPressed()
+                    self?.delegate?.orderButtonPressed(order: order)
                 }
             })
         }
