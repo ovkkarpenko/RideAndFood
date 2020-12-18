@@ -146,7 +146,10 @@ class TariffPage: UIView {
         
         for i in 0..<iconButtons.count {
             if let advantage = tariffModel.advantages {
-                if let iconUrlPart = advantage[i]?.icon {
+                if var iconUrlPart = advantage[i]?.icon {
+                    if iconUrlPart.contains(oldBaseUrl) {
+                        iconUrlPart = iconUrlPart.replacingOccurrences(of: oldBaseUrl, with: "")
+                    }
                     downloadImage(with: baseUrl + iconUrlPart) { [weak self] (iconImage) in
                         guard let self = self else { return }
                         guard let iconImage = iconImage else { return }
@@ -159,7 +162,12 @@ class TariffPage: UIView {
     }
     
     private func downloadImage(with urlString : String , imageCompletionHandler: @escaping (UIImage?) -> Void){
-        guard let url = URL.init(string: urlString) else {
+        var localUrlString = urlString
+        if localUrlString.contains(oldBaseUrl) {
+            localUrlString = localUrlString.replacingOccurrences(of: oldBaseUrl, with: "")
+        }
+        
+        guard let url = URL.init(string: localUrlString) else {
             return  imageCompletionHandler(nil)
         }
         
