@@ -147,6 +147,8 @@
 		F755112D25810A4F0030AF24 /* FoodActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F755112C25810A4F0030AF24 /* FoodActiveOrderView.swift */; };
 		F755113125810B830030AF24 /* FoodActiveOrderStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F755113025810B830030AF24 /* FoodActiveOrderStrings.swift */; };
 		F760ADC4258B59F40017B7D8 /* PointsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760ADC3258B59F40017B7D8 /* PointsViewDelegate.swift */; };
+		F760ADD4258BA6070017B7D8 /* ComplexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760ADD3258BA6070017B7D8 /* ComplexButton.swift */; };
+		F760ADD7258BA62C0017B7D8 /* ComplexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = F760ADD6258BA62C0017B7D8 /* ComplexButton.xib */; };
 		F76844C42586620500A4D425 /* ExpandedActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76844C32586620500A4D425 /* ExpandedActiveOrderView.swift */; };
 		F76844C925867F8900A4D425 /* CarNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76844C825867F8900A4D425 /* CarNumberView.swift */; };
 		F76844CC258688B100A4D425 /* CarNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76844CB258688B100A4D425 /* CarNumberView.xib */; };
@@ -443,6 +445,8 @@
 		F755112C25810A4F0030AF24 /* FoodActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodActiveOrderView.swift; sourceTree = "<group>"; };
 		F755113025810B830030AF24 /* FoodActiveOrderStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodActiveOrderStrings.swift; sourceTree = "<group>"; };
 		F760ADC3258B59F40017B7D8 /* PointsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsViewDelegate.swift; sourceTree = "<group>"; };
+		F760ADD3258BA6070017B7D8 /* ComplexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexButton.swift; sourceTree = "<group>"; };
+		F760ADD6258BA62C0017B7D8 /* ComplexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComplexButton.xib; sourceTree = "<group>"; };
 		F76844C32586620500A4D425 /* ExpandedActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedActiveOrderView.swift; sourceTree = "<group>"; };
 		F76844C825867F8900A4D425 /* CarNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarNumberView.swift; sourceTree = "<group>"; };
 		F76844CB258688B100A4D425 /* CarNumberView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarNumberView.xib; sourceTree = "<group>"; };
@@ -1533,6 +1537,8 @@
 				F768C0C92588F9AD00B85307 /* InputPointsView.xib */,
 				F768C0CC2588F9C400B85307 /* InputPointsView.swift */,
 				F7AB8766258A43BD00DD3CA4 /* InputPointsViewDelegate.swift */,
+				F760ADD3258BA6070017B7D8 /* ComplexButton.swift */,
+				F760ADD6258BA62C0017B7D8 /* ComplexButton.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1703,6 +1709,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F760ADD7258BA62C0017B7D8 /* ComplexButton.xib in Resources */,
 				F7FD685D253F72BD00A67E07 /* SupportService.storyboard in Resources */,
 				FAB14FDA25811151007BC55E /* loading3.gif in Resources */,
 				F7AECA7C256C365000CA86AC /* OrderView.xib in Resources */,
@@ -1822,6 +1829,7 @@
 				7286E5282542E79D0027A69B /* TermsOfUseStrings.swift in Sources */,
 				F76F67AD257A5F5B00E16A53 /* ActiveOrderView.swift in Sources */,
 				F797ACD525801AA600421284 /* ActiveOrderViewType.swift in Sources */,
+				F760ADD4258BA6070017B7D8 /* ComplexButton.swift in Sources */,
 				FAC0661C255585AB003CC6AA /* ConfirmBindCardView.swift in Sources */,
 				FA050B7F2549AA9200CF363D /* AppDelegate.swift in Sources */,
 				FA0938CA257AAB820061ACF5 /* TaxiTariffCollectionViewCell.swift in Sources */,

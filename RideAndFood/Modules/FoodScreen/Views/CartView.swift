@@ -128,11 +128,19 @@ class CartView: UIView {
         return stackView
     }()
     
-    private lazy var goToPaymentButton: PrimaryButton = {
-        let button = PrimaryButton()
-        button.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+//    private lazy var goToPaymentButton: PrimaryButton = {
+//        let button = PrimaryButton()
+//        button.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        return button
+//    }()
+    
+    private lazy var goToPaymentButton: ComplexButton = {
+        let view = ComplexButton()
+        view.actionButton.addTarget(self, action: #selector(paymentButtonTapped), for: .touchUpInside)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
     }()
     
     private lazy var cardView: CardView = {
@@ -361,9 +369,10 @@ class CartView: UIView {
         guard promoCodeDiscount > 0 || pointsDiscount > 0 else { return }
         sumWithDiscount -= sum / 100 * Float(promoCodeDiscount)
         sumWithDiscount -= Float(pointsDiscount)
-        // здесь должен быть зачеркнутый текст, но пока не получилось
-        goToPaymentButton.setTitles(left: FoodStrings.goToPayment.text(),
-                                    right: "\(sum.currencyString()) \(sumWithDiscount.currencyString())")
+//        goToPaymentButton.setTitles(left: FoodStrings.goToPayment.text(),
+//                                    right: "\(sum.currencyString()) \(sumWithDiscount.currencyString())")
+        goToPaymentButton.setPreviousCost(cost: sum.currencyString())
+        goToPaymentButton.setNewCost(text: sumWithDiscount.currencyString())
     }
     
     private func updatePointsButton() {
@@ -449,7 +458,7 @@ class CartView: UIView {
     }
     
     @objc private func paymentButtonTapped() {
-        
+        print("fsfdsfdfs")
     }
     
     @objc private func dimmerTapped() {
@@ -491,7 +500,8 @@ extension CartView: IConfigurableView {
                                                   length: deliveryTime.count))
         deliveryLabel.attributedText = deliveryString
         deliveryCostLabel.text = model.deliveryCost.currencyString()
-        goToPaymentButton.setTitles(left: FoodStrings.goToPayment.text(), right: model.sum.currencyString())
+//        goToPaymentButton.setTitles(left: FoodStrings.goToPayment.text(), right: model.sum.currencyString())
+        goToPaymentButton.setNewCost(text: model.sum.currencyString())
         shopNameLabel.text = model.shopName
         backButtonTappedBlock = model.backButtonTappedBlock
         sum = model.sum
