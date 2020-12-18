@@ -11,4 +11,5 @@ protocol SelectTariffViewDelegate: class {
     func pointsButtonPressed(_ dismissCallback: ((Int?) -> ())?)
     func backSubButtonPressed()
     func orderButtonPressed()
+    func cencelOrderButtonPressed()
 }
