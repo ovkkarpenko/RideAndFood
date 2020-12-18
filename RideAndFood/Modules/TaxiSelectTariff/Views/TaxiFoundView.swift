@@ -71,7 +71,7 @@ class TaxiFoundView: UIView, CustromViewProtocol {
     
     private lazy var confirmButton: PrimaryButton = {
         let button = PrimaryButton(title: FoodStrings.confirm.text())
-//        button.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(confirmButtonPressed), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -178,6 +178,21 @@ class TaxiFoundView: UIView, CustromViewProtocol {
         } completion: { _ in
             completion?()
         }
+    }
+    
+    @objc private func confirmButtonPressed() {
+        guard let order = order else { return }
+        
+        CoreDataManager.shared.addEntity(TaxiOrderDB.self, properties: [
+            "id": 1,
+            "from": order.from,
+            "to": order.to
+        ])
+        
+        dismiss { [weak self] in
+            self?.removeFromSuperview()
+        }
+        delegate?.confirmOrderButtonPressed()
     }
     
     @objc private func cencelButtonPressed() {

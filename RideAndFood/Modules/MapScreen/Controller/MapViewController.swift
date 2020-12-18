@@ -814,6 +814,12 @@ extension MapViewController: SelectTariffViewDelegate {
         addNewView(view)
     }
     
+    func confirmOrderButtonPressed() {
+        cardView.isHidden = false
+        personButton.isHidden = false
+        menuButton.isHidden = false
+    }
+    
     func cencelOrderButtonPressed() {
         let view = CencelTaxiOrderView()
         view.dismissCallback = { [weak self] in
