@@ -10,7 +10,6 @@ import UIKit
 
 class ComplexButton: UIView {
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var leftLabel: UILabel!
     @IBOutlet weak var previousCostLabel: UILabel!
     @IBOutlet weak var newCostLabel: UILabel!
@@ -45,8 +44,8 @@ class ComplexButton: UIView {
     }
     
     private func customizeSubviews() {
-        backgroundView.backgroundColor = Colors.buttonBlue.getColor()
-        backgroundView.layer.cornerRadius = generalCornerRaduis
+        contentView.backgroundColor = Colors.buttonBlue.getColor()
+        contentView.layer.cornerRadius = generalCornerRaduis
         
         leftLabel.text = FoodStrings.goToPayment.text()
         leftLabel.textColor = Colors.buttonWhite.getColor()

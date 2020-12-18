@@ -259,7 +259,8 @@ class CartView: UIView {
             goToPaymentButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
             goToPaymentButton.topAnchor.constraint(greaterThanOrEqualTo: buttonsStackView.bottomAnchor, constant: padding),
             goToPaymentButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-            goToPaymentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding / 2)
+            goToPaymentButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -padding / 2),
+            goToPaymentButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
