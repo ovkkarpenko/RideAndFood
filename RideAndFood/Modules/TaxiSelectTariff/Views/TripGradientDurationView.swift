@@ -1,5 +1,5 @@
 //
-//  TripDurationView.swift
+//  TripGradientDurationView.swift
 //  RideAndFood
 //
 //  Created by Nikita Gundorin on 15.12.2020.
@@ -8,24 +8,15 @@
 
 import UIKit
 
-class TripDurationView: UIView {
+class TripGradientDurationView: UIView {
     
     // MARK: - UI
-    
-    private lazy var tripDurationView: UIView = {
-        
-        let view = UIView()
-        view.frame.size = .init(width: 125, height: 40)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
     
     private lazy var mainLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = FontHelper.regular15.font()
-        label.textColor = .white
+        label.textColor = ColorHelper.primaryButtonText.color()
         let time = Int.random(in: 3...100)
         label.text = "≈\(time) \(StringsHelper.minutes.text())"
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +31,6 @@ class TripDurationView: UIView {
         gradientLayer.colors = [colorLeft, colorRight]
         gradientLayer.locations = [0.24, 0.71]
         gradientLayer.transform = CATransform3DMakeRotation(.pi/2, 0, 0, 1)
-        gradientLayer.frame = bounds
         gradientLayer.cornerRadius = 15
         return gradientLayer
     }()
@@ -73,7 +63,7 @@ class TripDurationView: UIView {
     // MARK: - Private methods
     
     private func setupLayout() {
-        layer.insertSublayer(gradientLayer, at:0)
+        layer.insertSublayer(gradientLayer, at: 0)
         addSubview(mainLabel)
         
         NSLayoutConstraint.activate([

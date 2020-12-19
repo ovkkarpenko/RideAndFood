@@ -12,7 +12,7 @@ class TaxiConfirmationView: UIView {
     
     // MARK: - UI
     
-    private lazy var tripDurationView = TripDurationView()
+    private lazy var tripDurationView = TripGradientDurationView()
     private lazy var directionsView = TaxiDirectionsView()
     private lazy var taxiOrderedCarView = TaxiOrderedCarView()
     private lazy var buttonsStackView = ButtonsStackView()
