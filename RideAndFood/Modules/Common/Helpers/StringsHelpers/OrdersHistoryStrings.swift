@@ -28,6 +28,7 @@ enum OrdersHistoryStrings {
     case shopLabel
     case courierLabel
     case orderList
+    case time
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -82,6 +83,8 @@ enum OrdersHistoryStrings {
             return "Курьер:"
         case .orderList:
             return "Состав заказа:"
+        case .time:
+            return "Время подачи"
         }
     }
     
@@ -129,6 +132,8 @@ enum OrdersHistoryStrings {
             return "Courier:"
         case .orderList:
             return "Order list:"
+        case .time:
+            return "Delivery time"
         }
     }
 }

@@ -1,21 +1,24 @@
 //
-//  LookingForDriverView.swift
+//  CencelTaxiOrderView.swift
 //  RideAndFood
 //
-//  Created by Oleksandr Karpenko on 08.12.2020.
+//  Created by Oleksandr Karpenko on 15.12.2020.
 //  Copyright © 2020 skillbox. All rights reserved.
 //
 
 import UIKit
 
-class LookingForDriverView: UIView, CustromViewProtocol {
+class CencelTaxiOrderView: UIView, CustromViewProtocol {
     
-    var order: TaxiOrder?
-    weak var delegate: SelectTariffViewDelegate?
+    var dismissCallback: (() -> ())?
     
-    private var taxiTimer: Timer?
+    private let cellIdentifier = "CencelTaxiOrderCell"
+    private let reasons = [SelectTariffStrings.reason1.text(),
+                           SelectTariffStrings.reason2.text(),
+                           SelectTariffStrings.reason3.text(),
+                           SelectTariffStrings.reason4.text()]
     
-    private lazy var contentView: UIView = {
+    private let contentView: UIView = {
         let view = UIView()
         view.backgroundColor = ColorHelper.background.color()
         view.layer.shadowColor = ColorHelper.shadow.color()?.cgColor
@@ -27,30 +30,23 @@ class LookingForDriverView: UIView, CustromViewProtocol {
         return view
     }()
     
-    private lazy var searchImageView: UIImageView = {
-        let image = UIImage.gif(name: "loading3")
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    private lazy var titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = SelectTariffStrings.lookingForDriver.text()
         label.textAlignment = .center
-        label.textColor = UIColor(red: 0.983, green: 0.556, blue: 0.315, alpha: 1)
-        label.font = .systemFont(ofSize: 17)
+        label.text = SelectTariffStrings.reasonTitle.text()
+        label.font = .boldSystemFont(ofSize: 17)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var cencelButton: PrimaryButton = {
-        let button = PrimaryButton(title: PaymentStrings.celncelButtonTitle.text())
-        button.addTarget(self, action: #selector(cencelButtonPressed), for: .touchUpInside)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
     }()
     
     override init(frame: CGRect) {
@@ -64,7 +60,7 @@ class LookingForDriverView: UIView, CustromViewProtocol {
     }
     
     private let padding: CGFloat = 20
-    private let offset: CGFloat = UIScreen.main.bounds.height-140
+    private let offset: CGFloat = UIScreen.main.bounds.height-300
     private let screenHeight = UIScreen.main.bounds.height
     
     private lazy var contentViewTopAnchorConstraint = contentView.topAnchor.constraint(equalTo: topAnchor, constant: screenHeight+offset)
@@ -72,9 +68,8 @@ class LookingForDriverView: UIView, CustromViewProtocol {
     
     private func setupUI() {
         addSubview(contentView)
-        contentView.addSubview(searchImageView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(cencelButton)
+        contentView.addSubview(tableView)
         
         NSLayoutConstraint.activate([
             contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -82,17 +77,14 @@ class LookingForDriverView: UIView, CustromViewProtocol {
             contentViewTopAnchorConstraint,
             contentViewBottomAnchorConstraint,
             
-            searchImageView.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -5),
-            searchImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            searchImageView.widthAnchor.constraint(equalToConstant: 31),
-            searchImageView.heightAnchor.constraint(equalToConstant: 22),
-            
-            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             
-            cencelButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            cencelButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            cencelButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            tableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: padding),
+            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
         ])
     }
     
@@ -103,14 +95,9 @@ class LookingForDriverView: UIView, CustromViewProtocol {
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveEaseOut]) { [weak self] in
             self?.layoutIfNeeded()
         }
-        
-        taxiTimer = Timer.scheduledTimer(withTimeInterval: Double.random(in: 5.0...10.0), repeats: false) { [weak self] _ in
-            self?.foundTaxi()
-        }
     }
     
     func dismiss(_ completion: (() -> ())?) {
-        taxiTimer?.invalidate()
         contentViewTopAnchorConstraint.constant = screenHeight+offset
         contentViewBottomAnchorConstraint.constant = -screenHeight-offset
         
@@ -120,18 +107,29 @@ class LookingForDriverView: UIView, CustromViewProtocol {
             completion?()
         }
     }
+}
+
+extension CencelTaxiOrderView: UITableViewDataSource, UITableViewDelegate {
     
-    private func foundTaxi() {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss { [weak self] in
             self?.removeFromSuperview()
         }
-        delegate?.foundTaxi(order: order)
+        
+        dismissCallback?()
     }
     
-    @objc private func cencelButtonPressed() {
-        dismiss { [weak self] in
-            self?.removeFromSuperview()
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reasons.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) {
+            cell.accessoryType = .disclosureIndicator
+            cell.textLabel?.text = reasons[indexPath.row]
+            cell.textLabel?.font = .systemFont(ofSize: 15)
+            return cell
         }
-        delegate?.cencelOrderButtonPressed()
+        return .init()
     }
 }

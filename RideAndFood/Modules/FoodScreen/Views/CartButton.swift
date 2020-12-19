@@ -26,7 +26,7 @@ class CartButton: UIButton {
         return stackView
     }()
     
-    private lazy var mainLabel = UILabel()
+    lazy var mainLabel = UILabel()
     
     private let padding: CGFloat = 15
     

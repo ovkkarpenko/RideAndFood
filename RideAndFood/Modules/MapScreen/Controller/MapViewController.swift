@@ -871,8 +871,41 @@ extension MapViewController: SelectTariffViewDelegate {
         addNewView(view)
     }
     
-    func orderButtonPressed() {
+    func orderButtonPressed(order: TaxiOrder) {
         let view = LookingForDriverView()
+        view.order = order
+        view.delegate = self
+        addNewView(view)
+    }
+    
+    func confirmOrderButtonPressed() {
+        cardView.isHidden = false
+        personButton.isHidden = false
+        menuButton.isHidden = false
+    }
+    
+    func cencelOrderButtonPressed() {
+        let view = CencelTaxiOrderView()
+        view.dismissCallback = { [weak self] in
+            let vc = CencelTaxiOrderViewController()
+            vc.dismissCallback = { [weak self] in
+                self?.cardView.isHidden = false
+                self?.personButton.isHidden = false
+                self?.menuButton.isHidden = false
+            }
+            
+            let nc = UINavigationController(rootViewController: vc)
+            nc.modalTransitionStyle = .crossDissolve
+            nc.modalPresentationStyle = .fullScreen
+            self?.present(nc, animated: true)
+        }
+        addNewView(view)
+    }
+    
+    func foundTaxi(order: TaxiOrder?) {
+        let view = TaxiFoundView()
+        view.order = order
+        view.delegate = self
         addNewView(view)
     }
     

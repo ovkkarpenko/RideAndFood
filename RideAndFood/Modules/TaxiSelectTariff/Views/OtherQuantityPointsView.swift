@@ -60,6 +60,10 @@ class OtherQuantityPointsView: UIView, CustromViewProtocol {
         setupUI()
     }
     
+    deinit {
+        removeKeyboardObservation()
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
@@ -90,6 +94,8 @@ class OtherQuantityPointsView: UIView, CustromViewProtocol {
             confirmButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             confirmButton.topAnchor.constraint(equalTo: pointsTextField.bottomAnchor, constant: padding)
         ])
+        
+        setKeyboardObserver()
     }
     
     func show() {
@@ -109,6 +115,35 @@ class OtherQuantityPointsView: UIView, CustromViewProtocol {
             self?.layoutIfNeeded()
         } completion: { _ in
             completion?()
+        }
+    }
+    
+    private func setKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardObservation() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+    
+        contentViewTopAnchorConstraint.constant = offset-keyboardSize.height
+        contentViewBottomAnchorConstraint.constant = keyboardSize.height
+        
+        UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
+            self?.layoutIfNeeded()
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        contentViewBottomAnchorConstraint.constant = 0
+        
+        UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
+            self?.layoutIfNeeded()
         }
     }
     

@@ -31,7 +31,7 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
     }()
     
     private lazy var promoCodeTextField: MaskTextField = {
-        let textField = MaskTextField(format: "[A]-[000000]", valueChangedCallback: { [weak self] isCompleted in
+        let textField = MaskTextField(format: "R - [000000]", valueChangedCallback: { [weak self] isCompleted in
             if isCompleted { self?.confirmButton.isEnabled = true }
         })
         textField.placeholder = "R-123456"
@@ -67,6 +67,10 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
+    }
+    
+    deinit {
+        removeKeyboardObservation()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -111,6 +115,8 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
             confirmButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             confirmButton.topAnchor.constraint(equalTo: promoCodeTextField.bottomAnchor, constant: padding)
         ])
+        
+        setKeyboardObserver()
     }
     
     func show() {
@@ -132,6 +138,35 @@ class TariffPromoCodeView: UIView, CustromViewProtocol {
             self?.layoutIfNeeded()
         } completion: { _ in
             completion?()
+        }
+    }
+    
+    private func setKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeKeyboardObservation() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+    
+        contentViewTopAnchorConstraint.constant = offset-keyboardSize.height
+        contentViewBottomAnchorConstraint.constant = keyboardSize.height
+        
+        UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
+            self?.layoutIfNeeded()
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        contentViewBottomAnchorConstraint.constant = 0
+        
+        UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
+            self?.layoutIfNeeded()
         }
     }
     
