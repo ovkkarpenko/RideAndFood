@@ -36,6 +36,8 @@ class TaxiDirectionsView: UIStackView {
         return stackView
     }()
     
+    private lazy var carImageView = UIImageView(image: UIImage(named: "MiniCar"))
+    
     private lazy var addressesStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
                                         addressFromView,
@@ -68,6 +70,12 @@ class TaxiDirectionsView: UIStackView {
         addArrangedSubview(strokeImage)
         addArrangedSubview(addressesStackView)
         spacing = 3
+        addSubview(carImageView)
+        carImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        carImageView.leadingAnchor.constraint(equalTo: addressFromView.arrangedSubviews[1].leadingAnchor).isActive = true
+        carImageView.topAnchor.constraint(equalTo: addressFromView.bottomAnchor,
+                                          constant: 10).isActive = true
     }
 }
 
@@ -78,5 +86,6 @@ extension TaxiDirectionsView: IConfigurableView {
     func configure(with model: TaxiDirectionsViewModel) {
         addressFromLabel.text = model.addressFrom
         addressToLabel.text = model.addressTo
+        carImageView.alpha = model.showCar ? 1 : 0
     }
 }

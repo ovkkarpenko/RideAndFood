@@ -11,4 +11,5 @@ import Foundation
 struct TaxiDirectionsViewModel {
     let addressFrom: String
     let addressTo: String
+    let showCar: Bool
 }

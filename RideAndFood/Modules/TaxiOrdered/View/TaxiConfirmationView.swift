@@ -80,7 +80,8 @@ extension TaxiConfirmationView: IConfigurableView {
     
     func configure(with model: TaxiConfirmationViewModel) {
         directionsView.configure(with: .init(addressFrom: model.addressFrom,
-                                             addressTo: model.addressTo))
+                                             addressTo: model.addressTo,
+                                             showCar: false))
         taxiOrderedCarView.configure(with: .init(carName: "Белый Opel Astra",
                                                  className: "Standart",
                                                  classColor: ColorHelper.green.color(),

@@ -116,7 +116,8 @@ extension TaxiTripInfoView: IConfigurableView {
     
     func configure(with model: TaxiTripInfoViewModel) {
         directionsView.configure(with: .init(addressFrom: model.addressFrom,
-                                             addressTo: model.addressTo))
+                                             addressTo: model.addressTo,
+                                             showCar: true))
         
         let remainingTripTime = TaxiStrings.remainingTripTime.text()
         let tripTime = "≈\(model.tripTimeInMinutes) \(StringsHelper.minutes.text())"

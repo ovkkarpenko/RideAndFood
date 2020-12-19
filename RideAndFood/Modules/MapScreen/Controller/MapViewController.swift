@@ -331,6 +331,7 @@ class MapViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         }
+        showTaxiTripInfoView()
     }
     
     override func viewDidLayoutSubviews() {
