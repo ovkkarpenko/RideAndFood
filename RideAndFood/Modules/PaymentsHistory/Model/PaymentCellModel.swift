@@ -16,6 +16,7 @@ struct PaymentCellModel {
     let paymentSystem: String?
     let service: String
     let date: Date
+    let padding: CGFloat?
     
     var cardImage: UIImage? {
         switch method {
@@ -40,7 +41,7 @@ struct PaymentCellModel {
     }
     
     var amountText: String {
-        return "\(amount) \(PaymentsHistoryStrings.rub.text())"
+        return amount.currencyString()
     }
     
     var descriptionText: String {
@@ -51,7 +52,7 @@ struct PaymentCellModel {
         return PaymentsHistoryStrings.description.text()
     }
     
-    init?(payment: Payment) {
+    init?(payment: Payment, padding: CGFloat? = nil) {
         guard let paymentNumber = payment.order,
               let paid = payment.paid,
               let method = payment.method else {
@@ -65,5 +66,6 @@ struct PaymentCellModel {
         self.paymentSystem = payment.paymentCard?.system
         self.service = paid.truncatingRemainder(dividingBy: 2) == 0 ? PaymentsHistoryStrings.taxi.text() : PaymentsHistoryStrings.food.text()
         self.date = Date()
+        self.padding = padding
     }
 }

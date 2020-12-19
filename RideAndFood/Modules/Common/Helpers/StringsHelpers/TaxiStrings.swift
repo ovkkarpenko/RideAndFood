@@ -21,6 +21,8 @@ enum TaxiStrings {
     case paidWaitingDescription
     case onMyWay
     case remainingTripTime
+    case thankForTrip
+    case gladToSeeAgain
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -57,6 +59,10 @@ enum TaxiStrings {
             return "Скоро буду"
         case .remainingTripTime:
             return "Оставшееся время в пути"
+        case .thankForTrip:
+            return "Благодарим за поездку!"
+        case .gladToSeeAgain:
+            return "Будем рады вам снова :)"
         }
     }
     
@@ -86,6 +92,10 @@ enum TaxiStrings {
             return "On my way"
         case .remainingTripTime:
             return "Remaining trip time"
+        case .thankForTrip:
+            return "Thank you for the trip!"
+        case .gladToSeeAgain:
+            return "We will be glad to see you again :)"
         }
     }
 }

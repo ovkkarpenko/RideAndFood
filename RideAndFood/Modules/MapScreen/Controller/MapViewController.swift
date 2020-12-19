@@ -153,6 +153,7 @@ class MapViewController: UIViewController {
     
     private lazy var taxiArrivingView = TaxiArrivingView()
     private lazy var taxiTripInfoView = TaxiTripInfoView()
+    private lazy var taxiTripFinishedView = TaxiTripFinishedView()
     
     // MARK: - Private properties
     
@@ -276,7 +277,7 @@ class MapViewController: UIViewController {
                                                                                     constant: sideMenuOffset)
     
     private lazy var backgroundLeftConstraint = backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor,
-                                                                                 constant: sideMenuOffset)
+                                                                                     constant: sideMenuOffset)
     private lazy var backgroundShownConstraint = backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor)
     private lazy var backgroundHiddenConstraint = backgroundView.rightAnchor.constraint(equalTo: view.leftAnchor,
                                                                                         constant: sideMenuOffset)
@@ -287,6 +288,7 @@ class MapViewController: UIViewController {
     private let activeOrderViewPadding: CGFloat = 10
     private lazy var sideMenuOffset: CGFloat = -500
     private lazy var additionalCardViewOffset: CGFloat = 1000
+    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
@@ -469,9 +471,9 @@ class MapViewController: UIViewController {
         view.addSubview(selectTariffView)
         
         NSLayoutConstraint.activate([selectTariffView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                      selectTariffView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                      selectTariffView.topAnchor.constraint(equalTo: view.topAnchor),
-                                      selectTariffView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+                                     selectTariffView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                                     selectTariffView.topAnchor.constraint(equalTo: view.topAnchor),
+                                     selectTariffView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
         view.layoutIfNeeded()
         selectTariffView.show()
     }
@@ -605,15 +607,37 @@ class MapViewController: UIViewController {
                                                driverName: "Анатолий (id: 23-87)",
                                                carName: "Белый Opel Astra",
                                                tripTimeInMinutes: 14,
-                                               primaryButtonPressedBlock: {
-                                                
+                                               primaryButtonPressedBlock: { [weak self] in
+                                                self?.hideAdditionalCardView()
+                                                self?.foodButtonPressed()
                                                },
-                                               secondaryButtonPressedBlock: {
-                                                
+                                               secondaryButtonPressedBlock: { [weak self] in
+                                                if let controller = UIStoryboard.init(name: "SupportService", bundle: nil)
+                                                    .instantiateViewController(withIdentifier: "SupportID") as? UINavigationController {
+                                                    controller.modalPresentationStyle = .fullScreen
+                                                    self?.present(controller, animated: true)
+                                                }
                                                }))
         additionalCardView.configure(with: .init(contentView: taxiTripInfoView,
                                                  paddingBottom: 0,
                                                  paddingX: 0,
+                                                 didSwipeDownCallback: { [weak self] in
+                                                    self?.hideAdditionalCardView()
+                                                 }))
+        showAdditionalCardView()
+    }
+    
+    private func showTripFinishedView() {
+        taxiTripFinishedView.configure(with: .init(payment: .init(id: 5,
+                                                                  paid: 544,
+                                                                  method: "card",
+                                                                  status: "paid",
+                                                                  order: 5,
+                                                                  paymentCard: .init(number: "**** 6666",
+                                                                                     system: "MasterCard"))) { [weak self] in
+                                                                                        self?.hideAdditionalCardView()
+                                                                                     })
+        additionalCardView.configure(with: .init(contentView: taxiTripFinishedView,
                                                  didSwipeDownCallback: { [weak self] in
                                                     self?.hideAdditionalCardView()
                                                  }))
@@ -665,9 +689,9 @@ class MapViewController: UIViewController {
         let foodView = FoodView()
         foodView.currentUserAddress = cardView.address
         foodView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         view.addSubview(foodView)
-
+        
         NSLayoutConstraint.activate([
             foodView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             foodView.trailingAnchor.constraint(equalTo: view.trailingAnchor),

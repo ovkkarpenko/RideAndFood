@@ -12,7 +12,7 @@ class PromoCodeActivatedView: UIView {
     
     // MARK: - UI
     
-    private lazy var successImageView = UIImageView(image: UIImage(named: "PromocodeSuccess"))
+    private lazy var successImageView = UIImageView(image: UIImage(named: "Success"))
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()

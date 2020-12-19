@@ -49,6 +49,7 @@ class PaymentView: UIView {
     
     private lazy var cardImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -108,7 +109,24 @@ class PaymentView: UIView {
         return stackView
     }()
     
-    private let margin: CGFloat = 25
+    private lazy var bgViewLeadingConstraint = bgView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                                                               constant: margin)
+    private lazy var bgViewTopConstraint = bgView.topAnchor.constraint(equalTo: topAnchor,
+                                                                       constant: margin / 2)
+    private lazy var bgViewTrailingConstraint = bgView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                                                 constant: -margin)
+    private lazy var backgroundImageViewBottomConstraint =
+        backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                                    constant: -margin / 2)
+    
+    private var margin: CGFloat = 25 {
+        didSet {
+            bgViewLeadingConstraint.constant = margin
+            bgViewTopConstraint.constant = margin
+            bgViewTrailingConstraint.constant = margin
+            backgroundImageViewBottomConstraint.constant = margin
+        }
+    }
     private let padding: CGFloat = 13
     private let stackViewSpacing: CGFloat = 6
     private let imageHeight: CGFloat = 14
@@ -149,9 +167,11 @@ class PaymentView: UIView {
         NSLayoutConstraint.activate([
             amountExpandedTopConstraint,
             detailsLabel.leadingAnchor.constraint(equalTo: paymentInfoView.leadingAnchor),
-            detailsLabel.topAnchor.constraint(equalTo: paymentInfoView.bottomAnchor, constant: stackViewSpacing),
+            detailsLabel.topAnchor.constraint(equalTo: paymentInfoView.bottomAnchor,
+                                              constant: stackViewSpacing),
             detailsLabel.trailingAnchor.constraint(equalTo: cardInfoView.trailingAnchor),
-            detailsLabel.bottomAnchor.constraint(equalTo: amountLabel.topAnchor, constant: -padding),
+            detailsLabel.bottomAnchor.constraint(equalTo: amountLabel.topAnchor,
+                                                 constant: -padding),
             sendEmailButton.leadingAnchor.constraint(equalTo: paymentInfoView.leadingAnchor),
             sendEmailButton.trailingAnchor.constraint(equalTo: cardInfoView.trailingAnchor),
             sendEmailButton.bottomAnchor.constraint(equalTo: backgroundImageView.bottomAnchor,
@@ -191,7 +211,6 @@ class PaymentView: UIView {
                 } completion: { _ in
                     completion?()
                 }
-
             }
         })
     }
@@ -210,22 +229,26 @@ class PaymentView: UIView {
         addSubview(cardInfoView)
         
         NSLayoutConstraint.activate([
-            bgView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: margin),
-            bgView.topAnchor.constraint(equalTo: topAnchor, constant: margin / 2),
-            bgView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -margin),
+            bgViewLeadingConstraint,
+            bgViewTopConstraint,
+            bgViewTrailingConstraint,
             bgView.bottomAnchor.constraint(equalTo: backgroundImageView.topAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: bgView.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: bgView.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                                        constant: -margin / 2),
-            paymentInfoView.leadingAnchor.constraint(equalTo: backgroundImageView.leadingAnchor, constant: padding),
+            backgroundImageViewBottomConstraint,
+            paymentInfoView.leadingAnchor.constraint(equalTo: backgroundImageView.leadingAnchor,
+                                                     constant: padding),
             paymentInfoView.topAnchor.constraint(equalTo: bgView.topAnchor, constant: padding),
-            paymentInfoView.trailingAnchor.constraint(equalTo: cardInfoView.leadingAnchor, constant: -padding),
+            paymentInfoView.trailingAnchor.constraint(equalTo: cardInfoView.leadingAnchor,
+                                                      constant: -padding),
             cardInfoView.topAnchor.constraint(equalTo: bgView.topAnchor, constant: padding),
-            cardInfoView.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor, constant: -padding),
-            amountLabel.leadingAnchor.constraint(equalTo: backgroundImageView.leadingAnchor, constant: padding),
+            cardInfoView.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor,
+                                                   constant: -padding),
+            amountLabel.leadingAnchor.constraint(equalTo: backgroundImageView.leadingAnchor,
+                                                 constant: padding),
             amountShrinkedTopConstraint,
-            amountLabel.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor,constant: -padding),
+            amountLabel.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor,
+                                                  constant: -padding),
             cardImageView.heightAnchor.constraint(equalToConstant: imageHeight)
         ])
     }
@@ -238,5 +261,8 @@ extension PaymentView: IConfigurableView {
         amountLabel.text = model.amountText
         cardNumberLabel.text = model.cardNumber
         cardImage = model.cardImage
+        if let padding = model.padding {
+            self.margin = padding
+        }
     }
 }

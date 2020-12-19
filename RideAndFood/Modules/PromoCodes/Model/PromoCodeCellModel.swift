@@ -38,7 +38,7 @@ struct PromoCodeCellModel {
                 statusTime = FormatHelper.toHoursString(fromSeconds: Int(expireDate.timeIntervalSinceNow))
             }
         } else if promoCode.used {
-            imageName = "PromocodeSuccess"
+            imageName = "Success"
             statusDescription = PromoCodesStrings.promoCodeActivated.text()
             statusTime = FormatHelper.toShortDateString(date: expireDate)
         } else {

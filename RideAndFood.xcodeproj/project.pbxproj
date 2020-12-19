@@ -17,6 +17,8 @@
 		720AA111256D682F0065BFED /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AA110256D682F0065BFED /* Payment.swift */; };
 		720AA115256D68820065BFED /* PaymentCardShort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AA114256D68820065BFED /* PaymentCardShort.swift */; };
 		720AA118256D741D0065BFED /* PaymentsHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720AA117256D741D0065BFED /* PaymentsHistoryService.swift */; };
+		720D9E7F258E7509000AEC04 /* TaxiTripFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720D9E7E258E7509000AEC04 /* TaxiTripFinishedView.swift */; };
+		720D9E82258E824C000AEC04 /* Double+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720D9E81258E824C000AEC04 /* Double+Format.swift */; };
 		720F732F258C73CB0072BC71 /* TaxiTripInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720F732E258C73CB0072BC71 /* TaxiTripInfoView.swift */; };
 		721D78F425868AA0004A622E /* PromoCodeActivatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721D78F325868AA0004A622E /* PromoCodeActivatedView.swift */; };
 		72269B5D25505F850034B533 /* EnterPromoCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72269B5C25505F850034B533 /* EnterPromoCodeView.swift */; };
@@ -331,6 +333,8 @@
 		720AA110256D682F0065BFED /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
 		720AA114256D68820065BFED /* PaymentCardShort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardShort.swift; sourceTree = "<group>"; };
 		720AA117256D741D0065BFED /* PaymentsHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsHistoryService.swift; sourceTree = "<group>"; };
+		720D9E7E258E7509000AEC04 /* TaxiTripFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiTripFinishedView.swift; sourceTree = "<group>"; };
+		720D9E81258E824C000AEC04 /* Double+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Format.swift"; sourceTree = "<group>"; };
 		720F732E258C73CB0072BC71 /* TaxiTripInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiTripInfoView.swift; sourceTree = "<group>"; };
 		721D78F325868AA0004A622E /* PromoCodeActivatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoCodeActivatedView.swift; sourceTree = "<group>"; };
 		72269B5C25505F850034B533 /* EnterPromoCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPromoCodeView.swift; sourceTree = "<group>"; };
@@ -845,6 +849,7 @@
 				72AA113F258A76AB00D704AE /* TaxiArrivingView.swift */,
 				72AA1148258A791700D704AE /* TaxiCircleButtonView.swift */,
 				720F732E258C73CB0072BC71 /* TaxiTripInfoView.swift */,
+				720D9E7E258E7509000AEC04 /* TaxiTripFinishedView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1138,6 +1143,7 @@
 				FA8517F62580D1D2000C7674 /* GifImage.swift */,
 				725838F9257A8D0100637ABF /* UIButton+TwoTitles.swift */,
 				72272C2A258001C3003E0BD0 /* Float+Format.swift */,
+				720D9E81258E824C000AEC04 /* Double+Format.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1929,6 +1935,7 @@
 				F760ADD4258BA6070017B7D8 /* ComplexButton.swift in Sources */,
 				FAC0661C255585AB003CC6AA /* ConfirmBindCardView.swift in Sources */,
 				FA050B7F2549AA9200CF363D /* AppDelegate.swift in Sources */,
+				720D9E7F258E7509000AEC04 /* TaxiTripFinishedView.swift in Sources */,
 				FA0938CA257AAB820061ACF5 /* TaxiTariffCollectionViewCell.swift in Sources */,
 				FA18FFF3256917D900148FAB /* FoodShopViewModel.swift in Sources */,
 				722D69AE2573B40F00A8432D /* ProductDetailModel.swift in Sources */,
@@ -2073,6 +2080,7 @@
 				72E933FD255F083000CED717 /* ProfileTableViewDataSource.swift in Sources */,
 				7233AAC22582DE1B001D589F /* ShopDB+init.swift in Sources */,
 				FAA9495A25546F9F005C5B40 /* PaymentCard.swift in Sources */,
+				720D9E82258E824C000AEC04 /* Double+Format.swift in Sources */,
 				F768C0CD2588F9C400B85307 /* InputPointsView.swift in Sources */,
 				72FBDC6325488F3F00727C12 /* MapStrings.swift in Sources */,
 				7238B4702562CBED00609B92 /* Phone.swift in Sources */,

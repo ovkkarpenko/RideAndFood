@@ -25,12 +25,14 @@ class TaxiDirectionsView: UIStackView {
     }()
     private lazy var addressFromView: UIStackView = {
         let imageView = UIImageView(image: UIImage(named: "addressFromMark"))
+        imageView.contentMode = .scaleAspectFit
         let stackView = UIStackView(arrangedSubviews: [imageView, addressFromLabel])
         stackView.spacing = 15
         return stackView
     }()
     private lazy var addressToView: UIStackView = {
         let imageView = UIImageView(image: UIImage(named: "addressToMark"))
+        imageView.contentMode = .scaleAspectFit
         let stackView = UIStackView(arrangedSubviews: [imageView, addressToLabel])
         stackView.spacing = 15
         return stackView
@@ -43,6 +45,7 @@ class TaxiDirectionsView: UIStackView {
                                         addressFromView,
                                         addressToView])
         stackView.axis = .vertical
+        stackView.alignment = .leading
         stackView.spacing = 35
         return stackView
     }()

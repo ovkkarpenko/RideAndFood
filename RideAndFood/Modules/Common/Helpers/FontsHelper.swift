@@ -15,10 +15,13 @@ enum FontHelper {
     case regular15
     case regular17
     case regular26
+    
     case semibold12
     case semibold15
     case semibold17
     case semibold26
+    
+    case light17
     
     func font() -> UIFont? {
         switch self {
@@ -42,6 +45,8 @@ enum FontHelper {
             return .systemFont(ofSize: 26, weight: .semibold)
         case .regular26:
             return .systemFont(ofSize: 26)
+        case .light17:
+            return .systemFont(ofSize: 17, weight: .light)
         }
     }
 }

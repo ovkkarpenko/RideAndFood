@@ -28,7 +28,7 @@ class PromoCodeActivetedView: UIView {
     }()
     
     private lazy var successImageView: UIImageView = {
-        let image = UIImage(named: "PromocodeSuccess")
+        let image = UIImage(named: "Success")
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
