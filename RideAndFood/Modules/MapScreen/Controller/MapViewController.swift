@@ -152,6 +152,7 @@ class MapViewController: UIViewController {
     }()
     
     private lazy var taxiArrivingView = TaxiArrivingView()
+    private lazy var taxiTripInfoView = TaxiTripInfoView()
     
     // MARK: - Private properties
     
@@ -590,6 +591,28 @@ class MapViewController: UIViewController {
     private func showTaxiArrivingView() {
         additionalCardView.configure(with: .init(contentView: taxiArrivingView,
                                                  paddingBottom: padding,
+                                                 didSwipeDownCallback: { [weak self] in
+                                                    self?.hideAdditionalCardView()
+                                                 }))
+        showAdditionalCardView()
+    }
+    
+    private func showTaxiTripInfoView() {
+        guard let order = taxiOrderModelHandler.getTaxiOrder() else { return }
+        taxiTripInfoView.configure(with: .init(addressFrom: order.from,
+                                               addressTo: order.to,
+                                               driverName: "Анатолий (id: 23-87)",
+                                               carName: "Белый Opel Astra",
+                                               tripTimeInMinutes: 14,
+                                               primaryButtonPressedBlock: {
+                                                
+                                               },
+                                               secondaryButtonPressedBlock: {
+                                                
+                                               }))
+        additionalCardView.configure(with: .init(contentView: taxiTripInfoView,
+                                                 paddingBottom: 0,
+                                                 paddingX: 0,
                                                  didSwipeDownCallback: { [weak self] in
                                                     self?.hideAdditionalCardView()
                                                  }))
