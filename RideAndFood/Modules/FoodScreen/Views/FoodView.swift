@@ -418,6 +418,7 @@ extension FoodView: FoodViewDelegate {
     
     func showCartView() {
         let cart = CartModel.getCart()
+        cartView.cartViewDelegate = self
         
         cartView.configure(with: .init(cartRows: cart.rows,
                                        sum: cart.sum,
@@ -548,5 +549,11 @@ extension FoodView: ICartChangesObserver {
         DispatchQueue.main.async {
             self.updateMakeOrderButton()
         }
+    }
+}
+
+extension FoodView: CartViewDelegate {
+    func foodPaymentButtonTapped() {
+        dismissCart()
     }
 }
