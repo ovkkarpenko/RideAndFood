@@ -2,7 +2,7 @@
 //  FoodPaymentView.swift
 //  RideAndFood
 //
-//  Created by Лаура Есаян on 18.12.2020.
+//  Created by Laura Esaian on 18.12.2020.
 //  Copyright © 2020 skillbox. All rights reserved.
 //
 
@@ -11,7 +11,29 @@ import UIKit
 class FoodPaymentView: CustomViewWithAnimation {
     private let padding: CGFloat = 25
     
-    private var tableView: UITableView = {
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [tableView, needChangeStackView])
+        view.axis = .vertical
+        view.spacing = padding
+        view.alignment = .center
+        view.distribution = .fill
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var needChangeStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [needChangeButton, needChangeIndicatorView])
+        view.axis = .vertical
+        view.spacing = padding / 5
+        view.alignment = .leading
+        view.distribution = .equalSpacing
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var tableView: UITableView = {
         let view = UITableView()
         view.tableFooterView = UIView()
         view.isScrollEnabled = false
@@ -49,7 +71,6 @@ class FoodPaymentView: CustomViewWithAnimation {
     
     private lazy var needChangeButton: UIButton = {
         let view = UIButton(type: .system)
-//        view.contentEdgeInsets = UIEdgeInsets(top: 0, left: -180, bottom: 0, right: 0)
         view.setTitle(FoodStrings.needChange.text(), for: .normal)
         view.setTitleColor(Colors.textGray.getColor(), for: .normal)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -90,53 +111,49 @@ class FoodPaymentView: CustomViewWithAnimation {
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.cornerRadius = generalCornerRaduis
         
+        addSubview(tapIndicator)
         addSubview(title)
         addSubview(backButton)
-        addSubview(tableView)
-        addSubview(tapIndicator)
-        addSubview(needChangeButton)
-        addSubview(needChangeIndicatorView)
+        addSubview(stackView)
         addSubview(payButton)
         
-        NSLayoutConstraint.activate([title.topAnchor.constraint(equalTo: topAnchor, constant: padding),
+        NSLayoutConstraint.activate([tapIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+                                     tapIndicator.bottomAnchor.constraint(equalTo: topAnchor, constant: -padding / 2),
+                                     tapIndicator.heightAnchor.constraint(equalToConstant: 5),
+                                     tapIndicator.widthAnchor.constraint(equalToConstant: 40),
+                                     title.topAnchor.constraint(equalTo: topAnchor, constant: padding),
                                      title.centerXAnchor.constraint(equalTo: centerXAnchor),
                                      backButton.centerYAnchor.constraint(equalTo: title.centerYAnchor),
                                      backButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
                                      backButton.widthAnchor.constraint(equalToConstant: 13),
                                      backButton.trailingAnchor.constraint(greaterThanOrEqualTo: title.leadingAnchor, constant: padding / 2),
-                                     tableView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: padding),
-                                     tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: padding),
-                                     tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -padding),
-//                                     tableViewBottomConstraintWhileCashPaymentDselected,
-                                     tapIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-                                     tapIndicator.bottomAnchor.constraint(equalTo: topAnchor, constant: -padding / 2),
-                                     tapIndicator.heightAnchor.constraint(equalToConstant: 5),
-                                     tapIndicator.widthAnchor.constraint(equalToConstant: 40),
+                                     needChangeStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+                                     needChangeStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+                                     needChangeButton.leadingAnchor.constraint(equalTo: needChangeStackView.leadingAnchor),
+//                                     needChangeButton.trailingAnchor.constraint(equalTo: needChangeStackView.trailingAnchor),
+                                     needChangeIndicatorView.leadingAnchor.constraint(equalTo: needChangeStackView.leadingAnchor),
+                                     needChangeIndicatorView.trailingAnchor.constraint(equalTo: needChangeStackView.trailingAnchor),
+                                     needChangeIndicatorView.heightAnchor.constraint(equalToConstant: 1),
+                                     stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+                                     stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+                                     stackView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: padding),
+                                     stackView.bottomAnchor.constraint(greaterThanOrEqualTo: payButton.topAnchor, constant: -padding),
+                                     tableView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+                                     tableView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
                                      payButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
                                      payButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
                                      payButton.heightAnchor.constraint(equalToConstant: 50),
-                                     payButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding),
-                                     needChangeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-//                                     needChangeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-                                     needChangeButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: padding),
-                                     needChangeButton.bottomAnchor.constraint(equalTo: needChangeIndicatorView.topAnchor, constant: -padding / 4),
-                                     needChangeIndicatorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-                                     needChangeIndicatorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-                                     needChangeIndicatorView.bottomAnchor.constraint(equalTo: payButton.topAnchor, constant: -padding),
-                                     needChangeIndicatorView.heightAnchor.constraint(equalToConstant: 1)])
+                                     payButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding)])
         
         hideNeedChangeView()
-        
     }
     
     private func hideNeedChangeView() {
-        needChangeButton.isHidden = true
-        needChangeIndicatorView.isHidden = true
+        needChangeStackView.isHidden = true
     }
     
     private func showNeedChangeView() {
-        needChangeButton.isHidden = false
-        needChangeIndicatorView.isHidden = false
+        needChangeStackView.isHidden = false
     }
     
     @objc private func backButtonTapped() {

@@ -895,7 +895,7 @@ extension MapViewController: CartViewDelegate {
     func foodPaymentButtonTapped() {
         hideCart()
         shouldShowTranspatentView()
-        let foodPaymentView = FoodPaymentView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 550))
+        let foodPaymentView = FoodPaymentView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500))
 //        let foodPaymentView = FoodPaymentView()
 //        foodPaymentView.translatesAutoresizingMaskIntoConstraints = false
         
