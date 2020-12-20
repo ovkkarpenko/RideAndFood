@@ -47,10 +47,11 @@ class FoodPaymentView: CustomViewWithAnimation {
         return view
     }()
     
-    private lazy var needChangeTextField: UITextField = {
-        let view = UITextField()
-        view.borderStyle = .none
-        view.placeholder = FoodStrings.needChange.text()
+    private lazy var needChangeButton: UIButton = {
+        let view = UIButton(type: .system)
+//        view.contentEdgeInsets = UIEdgeInsets(top: 0, left: -180, bottom: 0, right: 0)
+        view.setTitle(FoodStrings.needChange.text(), for: .normal)
+        view.setTitleColor(Colors.textGray.getColor(), for: .normal)
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -73,7 +74,7 @@ class FoodPaymentView: CustomViewWithAnimation {
         return view
     }()
     
-    private lazy var tableViewBottomConstraintWhileCashPaymentSelected = tableView.bottomAnchor.constraint(equalTo: needChangeTextField.topAnchor, constant: -padding)
+    private lazy var tableViewBottomConstraintWhileCashPaymentSelected = tableView.bottomAnchor.constraint(equalTo: needChangeButton.topAnchor, constant: -padding)
     private lazy var tableViewBottomConstraintWhileCashPaymentDselected = tableView.bottomAnchor.constraint(equalTo: payButton.topAnchor, constant: -padding)
     
     override func layoutSubviews() {
@@ -86,13 +87,14 @@ class FoodPaymentView: CustomViewWithAnimation {
     // MARK: - private methods
     private func setupLayout() {
         backgroundColor = UIColor.white
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.cornerRadius = generalCornerRaduis
         
         addSubview(title)
         addSubview(backButton)
         addSubview(tableView)
         addSubview(tapIndicator)
-        addSubview(needChangeTextField)
+        addSubview(needChangeButton)
         addSubview(needChangeIndicatorView)
         addSubview(payButton)
         
@@ -114,10 +116,10 @@ class FoodPaymentView: CustomViewWithAnimation {
                                      payButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
                                      payButton.heightAnchor.constraint(equalToConstant: 50),
                                      payButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding),
-                                     needChangeTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-                                     needChangeTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
-                                     needChangeTextField.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: padding),
-                                     needChangeTextField.bottomAnchor.constraint(equalTo: needChangeIndicatorView.topAnchor, constant: -padding / 4),
+                                     needChangeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+//                                     needChangeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+                                     needChangeButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: padding),
+                                     needChangeButton.bottomAnchor.constraint(equalTo: needChangeIndicatorView.topAnchor, constant: -padding / 4),
                                      needChangeIndicatorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
                                      needChangeIndicatorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
                                      needChangeIndicatorView.bottomAnchor.constraint(equalTo: payButton.topAnchor, constant: -padding),
@@ -128,21 +130,16 @@ class FoodPaymentView: CustomViewWithAnimation {
     }
     
     private func hideNeedChangeView() {
-        needChangeTextField.isHidden = true
+        needChangeButton.isHidden = true
         needChangeIndicatorView.isHidden = true
     }
     
     private func showNeedChangeView() {
-        needChangeTextField.isHidden = false
+        needChangeButton.isHidden = false
         needChangeIndicatorView.isHidden = false
-        
-        UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
-            self?.layoutIfNeeded()
-        }
     }
     
     @objc private func backButtonTapped() {
-        hideNeedChangeView()
     }
 }
 
@@ -175,7 +172,7 @@ extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
         } else {
             let cell = PaymentTypeCell()
             cell.cellTextLabel.text = "fsdfdsfds"
-            cell.icon.image = UIImage(systemName: "chevron.left")
+            cell.icon.image = UIImage(named: "applePay")
             tableView.register(PaymentTypeCell.self, forCellReuseIdentifier: PaymentTypeCell.PAYMENT_TYPE_CELL)
             
             return cell
@@ -198,7 +195,15 @@ extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? PaymentTypeCell {
             cell.checkButton.isSelected = true
-            showNeedChangeView()
+            if indexPath.row == 0 {
+                showNeedChangeView()
+            } else {
+                hideNeedChangeView()
+            }
+            
+            UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
+                self?.layoutIfNeeded()
+            }
         }
     }
     

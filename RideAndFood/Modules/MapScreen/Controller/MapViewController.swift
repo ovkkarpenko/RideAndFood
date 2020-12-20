@@ -895,15 +895,16 @@ extension MapViewController: CartViewDelegate {
     func foodPaymentButtonTapped() {
         hideCart()
         shouldShowTranspatentView()
-        let foodPaymentView = FoodPaymentView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 600))
+        let foodPaymentView = FoodPaymentView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 550))
 //        let foodPaymentView = FoodPaymentView()
+//        foodPaymentView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(foodPaymentView)
-        NSLayoutConstraint.activate([foodPaymentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                                     foodPaymentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                                     foodPaymentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                                     foodPaymentView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 25)
-        ])
+//        NSLayoutConstraint.activate([foodPaymentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//                                     foodPaymentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//                                     foodPaymentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+//                                     foodPaymentView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 25)
+//        ])
         
         foodPaymentView.show()
     }
