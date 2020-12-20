@@ -47,6 +47,35 @@ class FoodPaymentView: CustomViewWithAnimation {
         return view
     }()
     
+    private lazy var needChangeTextField: UITextField = {
+        let view = UITextField()
+        view.borderStyle = .none
+        view.placeholder = FoodStrings.needChange.text()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var needChangeIndicatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Colors.tableViewBorderGray.getColor()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var payButton: ComplexButton = {
+        let view = ComplexButton()
+        view.setNewCost(text: "231")
+        view.setLeftLabelText(text: "Pay")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private lazy var tableViewBottomConstraintWhileCashPaymentSelected = tableView.bottomAnchor.constraint(equalTo: needChangeTextField.topAnchor, constant: -padding)
+    private lazy var tableViewBottomConstraintWhileCashPaymentDselected = tableView.bottomAnchor.constraint(equalTo: payButton.topAnchor, constant: -padding)
+    
     override func layoutSubviews() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -63,6 +92,9 @@ class FoodPaymentView: CustomViewWithAnimation {
         addSubview(backButton)
         addSubview(tableView)
         addSubview(tapIndicator)
+        addSubview(needChangeTextField)
+        addSubview(needChangeIndicatorView)
+        addSubview(payButton)
         
         NSLayoutConstraint.activate([title.topAnchor.constraint(equalTo: topAnchor, constant: padding),
                                      title.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -73,16 +105,44 @@ class FoodPaymentView: CustomViewWithAnimation {
                                      tableView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: padding),
                                      tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: padding),
                                      tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -padding),
-                                     tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: padding),
+//                                     tableViewBottomConstraintWhileCashPaymentDselected,
                                      tapIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
                                      tapIndicator.bottomAnchor.constraint(equalTo: topAnchor, constant: -padding / 2),
                                      tapIndicator.heightAnchor.constraint(equalToConstant: 5),
-                                     tapIndicator.widthAnchor.constraint(equalToConstant: 40)])
+                                     tapIndicator.widthAnchor.constraint(equalToConstant: 40),
+                                     payButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+                                     payButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+                                     payButton.heightAnchor.constraint(equalToConstant: 50),
+                                     payButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding),
+                                     needChangeTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+                                     needChangeTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+                                     needChangeTextField.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: padding),
+                                     needChangeTextField.bottomAnchor.constraint(equalTo: needChangeIndicatorView.topAnchor, constant: -padding / 4),
+                                     needChangeIndicatorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
+                                     needChangeIndicatorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+                                     needChangeIndicatorView.bottomAnchor.constraint(equalTo: payButton.topAnchor, constant: -padding),
+                                     needChangeIndicatorView.heightAnchor.constraint(equalToConstant: 1)])
+        
+        hideNeedChangeView()
         
     }
     
-    @objc private func backButtonTapped() {
+    private func hideNeedChangeView() {
+        needChangeTextField.isHidden = true
+        needChangeIndicatorView.isHidden = true
+    }
+    
+    private func showNeedChangeView() {
+        needChangeTextField.isHidden = false
+        needChangeIndicatorView.isHidden = false
         
+        UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
+            self?.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func backButtonTapped() {
+        hideNeedChangeView()
     }
 }
 
@@ -108,6 +168,7 @@ extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0 {
             let cell = Bundle.main.loadNibNamed("AddressCell", owner: self, options: nil)![0] as! UITableViewCell
             cell.selectionStyle = .none
+            cell.isUserInteractionEnabled = false
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AddressCell")
             
             return cell
@@ -137,6 +198,7 @@ extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? PaymentTypeCell {
             cell.checkButton.isSelected = true
+            showNeedChangeView()
         }
     }
     

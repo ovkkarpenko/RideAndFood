@@ -29,6 +29,7 @@ enum FoodStrings {
     case enterPointsCount
     case errorLabelMessage
     case points
+    case needChange
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -81,6 +82,8 @@ enum FoodStrings {
             return "Недопустимое количество"
         case .points:
             return "Баллов"
+        case .needChange:
+            return "Потребуется сдача"
         }
     }
     
@@ -126,6 +129,8 @@ enum FoodStrings {
             return "Invalid number"
         case .points:
             return "Points"
+        case .needChange:
+            return "Need change"
         }
     }
 }

@@ -67,4 +67,8 @@ class ComplexButton: UIView {
     func setNewCost(text: String) {
         newCostLabel.text = "\(text) "
     }
+    
+    func setLeftLabelText(text: String) {
+        leftLabel.text = text
+    }
 }
