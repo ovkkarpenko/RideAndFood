@@ -81,8 +81,10 @@ class ChangeCountView: CustomViewWithAnimation {
     }
     
     @objc private func dismissFromParentView() {
-        backgroundView.dismiss()
-        removeFromSuperview()
+        backgroundView.dismiss() { [weak self] in
+            self?.removeFromSuperview()
+        }
+        
     }
     
     @IBAction func leftButtonTapped(_ sender: Any) {
