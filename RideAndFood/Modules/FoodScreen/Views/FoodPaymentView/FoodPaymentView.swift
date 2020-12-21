@@ -10,9 +10,10 @@ import UIKit
 
 class FoodPaymentView: CustomViewWithAnimation {
     private let padding: CGFloat = 25
+    private var changeCount: Int = 0
     
     private lazy var stackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [tableView, needChangeStackView])
+        let view = UIStackView(arrangedSubviews: [tableView, needChangeStackView, payButton])
         view.axis = .vertical
         view.spacing = padding
         view.alignment = .center
@@ -74,6 +75,7 @@ class FoodPaymentView: CustomViewWithAnimation {
         view.setTitle(FoodStrings.needChange.text(), for: .normal)
         view.setTitleColor(Colors.textGray.getColor(), for: .normal)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.addTarget(self, action: #selector(needChangeButtonTapped), for: .touchUpInside)
         
         return view
     }()
@@ -90,6 +92,7 @@ class FoodPaymentView: CustomViewWithAnimation {
         let view = ComplexButton()
         view.setNewCost(text: "231")
         view.setLeftLabelText(text: "Pay")
+        view.actionButton.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
@@ -115,7 +118,6 @@ class FoodPaymentView: CustomViewWithAnimation {
         addSubview(title)
         addSubview(backButton)
         addSubview(stackView)
-        addSubview(payButton)
         
         NSLayoutConstraint.activate([tapIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
                                      tapIndicator.bottomAnchor.constraint(equalTo: topAnchor, constant: -padding / 2),
@@ -130,25 +132,25 @@ class FoodPaymentView: CustomViewWithAnimation {
                                      needChangeStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
                                      needChangeStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
                                      needChangeButton.leadingAnchor.constraint(equalTo: needChangeStackView.leadingAnchor),
-//                                     needChangeButton.trailingAnchor.constraint(equalTo: needChangeStackView.trailingAnchor),
                                      needChangeIndicatorView.leadingAnchor.constraint(equalTo: needChangeStackView.leadingAnchor),
                                      needChangeIndicatorView.trailingAnchor.constraint(equalTo: needChangeStackView.trailingAnchor),
                                      needChangeIndicatorView.heightAnchor.constraint(equalToConstant: 1),
                                      stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
                                      stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
                                      stackView.topAnchor.constraint(equalTo: title.bottomAnchor, constant: padding),
-                                     stackView.bottomAnchor.constraint(greaterThanOrEqualTo: payButton.topAnchor, constant: -padding),
                                      tableView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
                                      tableView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-                                     payButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: padding),
-                                     payButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -padding),
+                                     payButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+                                     payButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
                                      payButton.heightAnchor.constraint(equalToConstant: 50),
-                                     payButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding)])
+                                     stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding)])
         
         hideNeedChangeView()
     }
     
     private func hideNeedChangeView() {
+        changeCount = 0
+        needChangeButton.setAttributedTitle(NSAttributedString(string: FoodStrings.needChange.text()), for: .normal)
         needChangeStackView.isHidden = true
     }
     
@@ -158,6 +160,15 @@ class FoodPaymentView: CustomViewWithAnimation {
     
     @objc private func backButtonTapped() {
     }
+    
+    @objc private func payButtonTapped() {
+    }
+    
+    @objc private func needChangeButtonTapped() {
+        let changeCountView = ChangeCountView(frame: frame)
+        changeCountView.delegate = self
+        UIApplication.shared.windows[0].rootViewController?.view.addSubview(changeCountView)
+    }
 }
 
 // MARK: - extensions
@@ -166,7 +177,7 @@ extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
         if section == 0 {
             return 1
         } else {
-            return 3
+            return 2
         }
     }
     
@@ -228,5 +239,19 @@ extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? PaymentTypeCell {
             cell.checkButton.isSelected = false
         }
+    }
+}
+
+extension FoodPaymentView: ChangeCountViewDelegate {
+    func changeCountSelected(count: Int) {
+        needChangeButton.setAttributedTitle(createAttributedTitle(text: "\(count)"), for: .normal)
+        changeCount = count
+    }
+    
+    private func createAttributedTitle(text: String) -> NSAttributedString {
+        let attriburedText = NSMutableAttributedString(string: FoodStrings.needChange.text(), attributes: [NSAttributedString.Key.foregroundColor : Colors.textGray.getColor()])
+        attriburedText.append(NSAttributedString(string: " \(FoodStrings.from.text()) \(text) \(OrdersHistoryStrings.rub.text())", attributes: [NSAttributedString.Key.foregroundColor : Colors.textBlack.getColor()]))
+        
+        return attriburedText
     }
 }

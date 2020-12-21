@@ -30,6 +30,10 @@ enum FoodStrings {
     case errorLabelMessage
     case points
     case needChange
+    case changeCount
+    case leftChangeValue
+    case rightChangeValue
+    case from
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -84,6 +88,14 @@ enum FoodStrings {
             return "Баллов"
         case .needChange:
             return "Потребуется сдача"
+        case .changeCount:
+            return "С какой суммы потребуется сдача?"
+        case .leftChangeValue:
+            return "\(ReservedChangeCount.change1000.rawValue) руб"
+        case .rightChangeValue:
+            return "\(ReservedChangeCount.change5000.rawValue) руб"
+        case .from:
+            return "с"
         }
     }
     
@@ -131,6 +143,14 @@ enum FoodStrings {
             return "Points"
         case .needChange:
             return "Need change"
+        case .changeCount:
+            return "How much will you need to change?"
+        case .leftChangeValue:
+            return "\(ReservedChangeCount.change1000.rawValue) rub"
+        case .rightChangeValue:
+            return "\(ReservedChangeCount.change5000.rawValue) rub"
+        case .from:
+            return "from"
         }
     }
 }

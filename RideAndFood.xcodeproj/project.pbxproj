@@ -131,6 +131,9 @@
 		F72D0ADC257643C6000952AF /* TariffPageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */; };
 		F73AE214257EB3AF00963196 /* OrderTaxiRowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73AE213257EB3AF00963196 /* OrderTaxiRowModel.swift */; };
 		F73AE217257EB6EB00963196 /* TaxiOrderDB+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73AE216257EB6EB00963196 /* TaxiOrderDB+init.swift */; };
+		F73B87A32590A70C001B27F5 /* ChangeCountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F73B87A22590A70C001B27F5 /* ChangeCountView.xib */; };
+		F73B87A62590A718001B27F5 /* ChangeCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B87A52590A718001B27F5 /* ChangeCountView.swift */; };
+		F73B87B42590D570001B27F5 /* ChangeCountViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B87B32590D570001B27F5 /* ChangeCountViewDelegate.swift */; };
 		F73BC4F0254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */; };
 		F73BC4F4254ECE0A0018FC0A /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F3254ECE0A0018FC0A /* RequestModel.swift */; };
 		F73BC4F8254ECF3D0018FC0A /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73BC4F7254ECF3D0018FC0A /* Networker.swift */; };
@@ -436,6 +439,9 @@
 		F72D0ADB257643C6000952AF /* TariffPageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffPageDelegate.swift; sourceTree = "<group>"; };
 		F73AE213257EB3AF00963196 /* OrderTaxiRowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTaxiRowModel.swift; sourceTree = "<group>"; };
 		F73AE216257EB6EB00963196 /* TaxiOrderDB+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaxiOrderDB+init.swift"; sourceTree = "<group>"; };
+		F73B87A22590A70C001B27F5 /* ChangeCountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeCountView.xib; sourceTree = "<group>"; };
+		F73B87A52590A718001B27F5 /* ChangeCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCountView.swift; sourceTree = "<group>"; };
+		F73B87B32590D570001B27F5 /* ChangeCountViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCountViewDelegate.swift; sourceTree = "<group>"; };
 		F73BC4EF254ECC4B0018FC0A /* ExtensionsOfSwiftTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsOfSwiftTypes.swift; sourceTree = "<group>"; };
 		F73BC4F3254ECE0A0018FC0A /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		F73BC4F7254ECF3D0018FC0A /* Networker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
@@ -1169,6 +1175,9 @@
 			isa = PBXGroup;
 			children = (
 				F75CF40F258CB17800A076A1 /* FoodPaymentView.swift */,
+				F73B87A22590A70C001B27F5 /* ChangeCountView.xib */,
+				F73B87B32590D570001B27F5 /* ChangeCountViewDelegate.swift */,
+				F73B87A52590A718001B27F5 /* ChangeCountView.swift */,
 				F727C593258F7CD400DF831A /* PaymentTypeCell.swift */,
 				F727C590258F77AC00DF831A /* PaymentTypeCell.xib */,
 				F755F3B5258E5D8200535682 /* TableViewHeaderView.xib */,
@@ -1757,6 +1766,7 @@
 				F7805C3A2552E41500D1BBAD /* Tariff.storyboard in Resources */,
 				F727C591258F77AC00DF831A /* PaymentTypeCell.xib in Resources */,
 				F76F67B1257A5F8300E16A53 /* ActiveOrderView.xib in Resources */,
+				F73B87A32590A70C001B27F5 /* ChangeCountView.xib in Resources */,
 				F7AECA7F256C36A000CA86AC /* CustomTextView.xib in Resources */,
 				FA050B862549AB0500CF363D /* Assets.xcassets in Resources */,
 				F755F3B6258E5D8200535682 /* TableViewHeaderView.xib in Resources */,
@@ -2028,6 +2038,7 @@
 				72D82F1625818F3800E76919 /* TitledButtonsStackView.swift in Sources */,
 				FA730E4B256FA594001F7AEB /* OrdersHistoryStrings.swift in Sources */,
 				FA8CA7752546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift in Sources */,
+				F73B87A62590A718001B27F5 /* ChangeCountView.swift in Sources */,
 				FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */,
 				FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */,
 				F74AE859257CFF39001833EC /* TaxiActiveOrderView.swift in Sources */,
@@ -2048,6 +2059,7 @@
 				FA8CA7792546D0F8001FDE5E /* AlertButton.swift in Sources */,
 				720AA0F1256C2BA90065BFED /* PaymentsHistoryTableViewDataSource.swift in Sources */,
 				F7805C432552F26400D1BBAD /* TariffModel.swift in Sources */,
+				F73B87B42590D570001B27F5 /* ChangeCountViewDelegate.swift in Sources */,
 				FA730E52256FAB69001F7AEB /* OrdersHistoryViewModel.swift in Sources */,
 				FAB9706F256988E600FD6563 /* ShopSubCategoryViewModel.swift in Sources */,
 				722D5B552572D5F10026A9D8 /* PaymentView.swift in Sources */,
