@@ -94,4 +94,5 @@ enum CustomImagesNames: String {
     case taxiButton = "TaxiButton"
     case flag = "Flag"
     case gradient = "Gradient"
+    case checkMark = "CheckMark"
 }

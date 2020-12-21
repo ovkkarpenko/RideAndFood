@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol CartViewDelegate: class {
+    func foodPaymentButtonTapped()
+}
+
 class CartView: UIView {
     
     // MARK: - UI
     
     weak var delegate: FoodViewDelegate?
+    weak var cartViewDelegate: CartViewDelegate?
     
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .system)
@@ -459,7 +464,7 @@ class CartView: UIView {
     }
     
     @objc private func paymentButtonTapped() {
-        print("fsfdsfdfs")
+        cartViewDelegate?.foodPaymentButtonTapped()
     }
     
     @objc private func dimmerTapped() {
