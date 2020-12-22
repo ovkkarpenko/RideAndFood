@@ -34,6 +34,7 @@ enum FoodStrings {
     case leftChangeValue
     case rightChangeValue
     case from
+    case deliveryAddress
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -96,6 +97,8 @@ enum FoodStrings {
             return "\(ReservedChangeCount.change5000.rawValue) руб"
         case .from:
             return "с"
+        case .deliveryAddress:
+            return "Адрес доставки"
         }
     }
     
@@ -151,6 +154,8 @@ enum FoodStrings {
             return "\(ReservedChangeCount.change5000.rawValue) rub"
         case .from:
             return "from"
+        case .deliveryAddress:
+            return "Delivery address"
         }
     }
 }

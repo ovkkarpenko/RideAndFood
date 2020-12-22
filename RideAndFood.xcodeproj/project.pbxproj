@@ -154,10 +154,11 @@
 		F755F3A3258E400E00535682 /* AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F755F3A2258E400E00535682 /* AddressCell.xib */; };
 		F755F3AF258E571D00535682 /* FoodPaymentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F755F3AE258E571D00535682 /* FoodPaymentModel.swift */; };
 		F755F3B6258E5D8200535682 /* TableViewHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F755F3B5258E5D8200535682 /* TableViewHeaderView.xib */; };
-		F75CF410258CB17800A076A1 /* FoodPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75CF40F258CB17800A076A1 /* FoodPaymentView.swift */; };
 		F760ADC4258B59F40017B7D8 /* PointsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760ADC3258B59F40017B7D8 /* PointsViewDelegate.swift */; };
 		F760ADD4258BA6070017B7D8 /* ComplexButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F760ADD3258BA6070017B7D8 /* ComplexButton.swift */; };
 		F760ADD7258BA62C0017B7D8 /* ComplexButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = F760ADD6258BA62C0017B7D8 /* ComplexButton.xib */; };
+		F764E44025925498003C9F40 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F764E43F25925498003C9F40 /* AddressCell.swift */; };
+		F764E4432592605D003C9F40 /* FoodPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75CF40F258CB17800A076A1 /* FoodPaymentView.swift */; };
 		F76844C42586620500A4D425 /* ExpandedActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76844C32586620500A4D425 /* ExpandedActiveOrderView.swift */; };
 		F76844C925867F8900A4D425 /* CarNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76844C825867F8900A4D425 /* CarNumberView.swift */; };
 		F76844CC258688B100A4D425 /* CarNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76844CB258688B100A4D425 /* CarNumberView.xib */; };
@@ -471,6 +472,7 @@
 		F760ADC3258B59F40017B7D8 /* PointsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsViewDelegate.swift; sourceTree = "<group>"; };
 		F760ADD3258BA6070017B7D8 /* ComplexButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexButton.swift; sourceTree = "<group>"; };
 		F760ADD6258BA62C0017B7D8 /* ComplexButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ComplexButton.xib; sourceTree = "<group>"; };
+		F764E43F25925498003C9F40 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		F76844C32586620500A4D425 /* ExpandedActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedActiveOrderView.swift; sourceTree = "<group>"; };
 		F76844C825867F8900A4D425 /* CarNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarNumberView.swift; sourceTree = "<group>"; };
 		F76844CB258688B100A4D425 /* CarNumberView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CarNumberView.xib; sourceTree = "<group>"; };
@@ -1191,6 +1193,7 @@
 				F73B87B32590D570001B27F5 /* ChangeCountViewDelegate.swift */,
 				F73B87A52590A718001B27F5 /* ChangeCountView.swift */,
 				F727C593258F7CD400DF831A /* PaymentTypeCell.swift */,
+				F764E43F25925498003C9F40 /* AddressCell.swift */,
 				F727C590258F77AC00DF831A /* PaymentTypeCell.xib */,
 				F755F3B5258E5D8200535682 /* TableViewHeaderView.xib */,
 				F755F3AE258E571D00535682 /* FoodPaymentModel.swift */,
@@ -1871,6 +1874,7 @@
 				7286E5252542E7610027A69B /* TermsOfUseViewController.swift in Sources */,
 				F7AECA72256C340500CA86AC /* OrderViewDirector.swift in Sources */,
 				723958FB25613DD400027FA8 /* ProfilePhoneEnteringViewModel.swift in Sources */,
+				F764E4432592605D003C9F40 /* FoodPaymentView.swift in Sources */,
 				72A1DBD62545A764005A047A /* BaseNetworkManager.swift in Sources */,
 				72E30EFB254EEFF50037E4B4 /* RoundButton.swift in Sources */,
 				72A1DBE92545BF24005A047A /* CodeConfirmationModel.swift in Sources */,
@@ -1951,7 +1955,6 @@
 				722D69B12573DB7200A8432D /* ProductDetailsStrings.swift in Sources */,
 				7233AAC52582E93E001D589F /* EmptyCartView.swift in Sources */,
 				FA6100AC255715C700ED0CD5 /* PaymentType.swift in Sources */,
-				F75CF410258CB17800A076A1 /* FoodPaymentView.swift in Sources */,
 				72A1DBE02545B424005A047A /* LoginInteractor.swift in Sources */,
 				72585167257D3DFE0087FF9A /* CartRowCell.swift in Sources */,
 				7286E51D2542BA940027A69B /* Checkbox.swift in Sources */,
@@ -2068,6 +2071,7 @@
 				FA730E4B256FA594001F7AEB /* OrdersHistoryStrings.swift in Sources */,
 				FA8CA7752546C8B8001FDE5E /* SettingsPersonalDataViewModel.swift in Sources */,
 				F73B87A62590A718001B27F5 /* ChangeCountView.swift in Sources */,
+				F764E44025925498003C9F40 /* AddressCell.swift in Sources */,
 				FA8CA77D2546D360001FDE5E /* AlertTextField.swift in Sources */,
 				FA44F2B225459B1F0004A1C9 /* SettingsLanguageViewModel.swift in Sources */,
 				F74AE859257CFF39001833EC /* TaxiActiveOrderView.swift in Sources */,

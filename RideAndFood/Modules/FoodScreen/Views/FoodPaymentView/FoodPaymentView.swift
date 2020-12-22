@@ -11,6 +11,7 @@ import UIKit
 class FoodPaymentView: CustomViewWithAnimation {
     private let padding: CGFloat = 25
     private var changeCount: Int = 0
+    private lazy var foodPaymentModel: FoodPaymentModel = FoodPaymentModel()
     
     private lazy var stackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [tableView, needChangeStackView, payButton])
@@ -175,32 +176,40 @@ class FoodPaymentView: CustomViewWithAnimation {
 extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            return foodPaymentModel.deliveryAddressCell.count
         } else {
-            return 2
+            return foodPaymentModel.foodPaymentCell.count
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 43.5
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return foodPaymentModel.sectionsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = Bundle.main.loadNibNamed("AddressCell", owner: self, options: nil)![0] as! UITableViewCell
+            let cell = AddressCell()
             cell.selectionStyle = .none
             cell.isUserInteractionEnabled = false
-            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AddressCell")
+            cell.firstLabel.text = foodPaymentModel.deliveryAddressCell[indexPath.row].addressName
+            cell.secondLabel.text = foodPaymentModel.deliveryAddressCell[indexPath.row].address
+            tableView.register(AddressCell.self, forCellReuseIdentifier: AddressCell.ADDRESS_CELL)
             
             return cell
         } else {
             let cell = PaymentTypeCell()
-            cell.cellTextLabel.text = "fsdfdsfds"
-            cell.icon.image = UIImage(named: "applePay")
+            if UserConfig.shared.paymentType == foodPaymentModel.foodPaymentCell[indexPath.row].type {
+                cell.checkButton.isSelected = true
+                if UserConfig.shared.paymentType == .cash {
+                    showNeedChangeView()
+                }
+            }
+            cell.cellTextLabel.text = foodPaymentModel.foodPaymentCell[indexPath.row].text
+            cell.icon.image = foodPaymentModel.foodPaymentCell[indexPath.row].image
             tableView.register(PaymentTypeCell.self, forCellReuseIdentifier: PaymentTypeCell.PAYMENT_TYPE_CELL)
             
             return cell
@@ -209,12 +218,12 @@ extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UILabel()
-        tableView.sectionHeaderHeight = 30
+        header.font = UIFont.boldSystemFont(ofSize: 15)
         
         if section == 0 {
-            header.text = "Адрес доставки"
+            header.text = foodPaymentModel.deliveryCellTitle
         } else {
-            header.text = "Способ оплаты"
+            header.text = foodPaymentModel.paymentCellTitle
         }
         
         return header
@@ -222,23 +231,39 @@ extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? PaymentTypeCell {
+            deselectAllRows()
             cell.checkButton.isSelected = true
-            if indexPath.row == 0 {
+
+            if foodPaymentModel.foodPaymentCell[indexPath.row].type == .cash {
                 showNeedChangeView()
             } else {
                 hideNeedChangeView()
             }
-            
+
             UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
                 self?.layoutIfNeeded()
             }
         }
     }
     
+    private func deselectAllRows() {
+        for section in 0..<tableView.numberOfSections {
+            for row in 0..<tableView.numberOfRows(inSection: section) {
+                if let cell = tableView.cellForRow(at: IndexPath(row: row, section: section)) as? PaymentTypeCell {
+                    cell.checkButton.isSelected = false
+                }
+            }
+        }
+    }
+
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? PaymentTypeCell {
             cell.checkButton.isSelected = false
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
 }
 
