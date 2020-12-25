@@ -553,7 +553,7 @@ extension FoodView: ICartChangesObserver {
 }
 
 extension FoodView: CartViewDelegate {
-    func foodPaymentButtonTapped() {
+    func foodPaymentButtonTapped(amount: String) {
         dismissCart()
     }
 }

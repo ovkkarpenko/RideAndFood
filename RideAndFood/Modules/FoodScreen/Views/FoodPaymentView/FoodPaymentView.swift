@@ -10,8 +10,20 @@ import UIKit
 
 class FoodPaymentView: CustomViewWithAnimation {
     private let padding: CGFloat = 25
+    
     private var changeCount: Int = 0
-    private lazy var foodPaymentModel: FoodPaymentModel = FoodPaymentModel()
+    
+    private var paymentType: PaymentType = UserConfig.shared.paymentType
+    
+    private var totalAmount: String = "0"
+    
+    private lazy var foodPaymentModel: FoodPaymentModel = {
+        let model = FoodPaymentModel { [weak self] in
+            self?.tableView.reloadData()
+        }
+        
+        return model
+    }()
     
     private lazy var stackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [tableView, needChangeStackView, payButton])
@@ -91,8 +103,7 @@ class FoodPaymentView: CustomViewWithAnimation {
     
     private lazy var payButton: ComplexButton = {
         let view = ComplexButton()
-        view.setNewCost(text: "231")
-        view.setLeftLabelText(text: "Pay")
+        view.setNewCost(text: "\(totalAmount)")
         view.actionButton.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -101,6 +112,15 @@ class FoodPaymentView: CustomViewWithAnimation {
     
     private lazy var tableViewBottomConstraintWhileCashPaymentSelected = tableView.bottomAnchor.constraint(equalTo: needChangeButton.topAnchor, constant: -padding)
     private lazy var tableViewBottomConstraintWhileCashPaymentDselected = tableView.bottomAnchor.constraint(equalTo: payButton.topAnchor, constant: -padding)
+    
+    init(amount: String, frame: CGRect) {
+        self.totalAmount = amount
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func layoutSubviews() {
         tableView.delegate = self
@@ -145,8 +165,17 @@ class FoodPaymentView: CustomViewWithAnimation {
                                      payButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
                                      payButton.heightAnchor.constraint(equalToConstant: 50),
                                      stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -padding)])
-        
+
         hideNeedChangeView()
+        setButtonText()
+    }
+    
+    private func setButtonText() {
+        if paymentType == .cash {
+            payButton.setLeftLabelText(text: FoodStrings.order.text())
+        } else {
+            payButton.setLeftLabelText(text: FoodStrings.pay.text())
+        }
     }
     
     private func hideNeedChangeView() {
@@ -202,13 +231,13 @@ extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
             return cell
         } else {
             let cell = PaymentTypeCell()
-            if UserConfig.shared.paymentType == foodPaymentModel.foodPaymentCell[indexPath.row].type {
+            if paymentType == foodPaymentModel.foodPaymentCell[indexPath.row].type {
                 cell.checkButton.isSelected = true
-                if UserConfig.shared.paymentType == .cash {
+                if paymentType == .cash {
                     showNeedChangeView()
                 }
             }
-            cell.cellTextLabel.text = foodPaymentModel.foodPaymentCell[indexPath.row].text
+            cell.cellTextLabel.attributedText = foodPaymentModel.foodPaymentCell[indexPath.row].text
             cell.icon.image = foodPaymentModel.foodPaymentCell[indexPath.row].image
             tableView.register(PaymentTypeCell.self, forCellReuseIdentifier: PaymentTypeCell.PAYMENT_TYPE_CELL)
             
@@ -233,12 +262,16 @@ extension FoodPaymentView: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? PaymentTypeCell {
             deselectAllRows()
             cell.checkButton.isSelected = true
+            
+            paymentType = foodPaymentModel.foodPaymentCell[indexPath.row].type
 
-            if foodPaymentModel.foodPaymentCell[indexPath.row].type == .cash {
+            if paymentType == .cash {
                 showNeedChangeView()
             } else {
                 hideNeedChangeView()
             }
+            
+            setButtonText()
 
             UIView.animate(withDuration: generalAnimationDuration) { [weak self] in
                 self?.layoutIfNeeded()
