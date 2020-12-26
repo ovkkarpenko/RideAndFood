@@ -554,6 +554,18 @@ extension FoodView: ICartChangesObserver {
 
 extension FoodView: CartViewDelegate {
     func foodPaymentButtonTapped(amount: String) {
-        dismissCart()
+        cardView.isHidden = true
+        let foodPaymentView = FoodPaymentView(amount: amount)
+        
+        foodPaymentView.dismissFoodPaymentView = { [weak self] in
+            guard let self = self else { return }
+            foodPaymentView.dismiss() {
+                foodPaymentView.removeFromSuperview()
+                self.cardView.isHidden = false
+            }
+        }
+        
+        addSubview(foodPaymentView)
+        foodPaymentView.show()
     }
 }

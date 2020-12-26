@@ -17,6 +17,8 @@ class FoodPaymentView: CustomViewWithAnimation {
     
     private var totalAmount: String = "0"
     
+    var dismissFoodPaymentView: (() -> ())?
+    
     private lazy var foodPaymentModel: FoodPaymentModel = {
         let model = FoodPaymentModel { [weak self] in
             self?.tableView.reloadData()
@@ -113,9 +115,9 @@ class FoodPaymentView: CustomViewWithAnimation {
     private lazy var tableViewBottomConstraintWhileCashPaymentSelected = tableView.bottomAnchor.constraint(equalTo: needChangeButton.topAnchor, constant: -padding)
     private lazy var tableViewBottomConstraintWhileCashPaymentDselected = tableView.bottomAnchor.constraint(equalTo: payButton.topAnchor, constant: -padding)
     
-    init(amount: String, frame: CGRect) {
+    init(amount: String) {
         self.totalAmount = amount
-        super.init(frame: frame)
+        super.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 530))
     }
     
     required init?(coder: NSCoder) {
@@ -135,6 +137,10 @@ class FoodPaymentView: CustomViewWithAnimation {
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.cornerRadius = generalCornerRaduis
         
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(dismissAndRemoveFromSuperView))
+        swipeGesture.direction = .down
+        addGestureRecognizer(swipeGesture)
+        
         addSubview(tapIndicator)
         addSubview(title)
         addSubview(backButton)
@@ -152,6 +158,7 @@ class FoodPaymentView: CustomViewWithAnimation {
                                      backButton.trailingAnchor.constraint(greaterThanOrEqualTo: title.leadingAnchor, constant: padding / 2),
                                      needChangeStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
                                      needChangeStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+                                     needChangeStackView.heightAnchor.constraint(equalToConstant: 20),
                                      needChangeButton.leadingAnchor.constraint(equalTo: needChangeStackView.leadingAnchor),
                                      needChangeIndicatorView.leadingAnchor.constraint(equalTo: needChangeStackView.leadingAnchor),
                                      needChangeIndicatorView.trailingAnchor.constraint(equalTo: needChangeStackView.trailingAnchor),
@@ -188,14 +195,19 @@ class FoodPaymentView: CustomViewWithAnimation {
         needChangeStackView.isHidden = false
     }
     
+    @objc private func dismissAndRemoveFromSuperView() {
+        dismissFoodPaymentView?()
+    }
+    
     @objc private func backButtonTapped() {
+        dismissAndRemoveFromSuperView()
     }
     
     @objc private func payButtonTapped() {
     }
     
     @objc private func needChangeButtonTapped() {
-        let changeCountView = ChangeCountView(frame: frame)
+        let changeCountView = ChangeCountView(frame: CGRect(x: UIScreen.main.bounds.origin.x, y: UIScreen.main.bounds.origin.y, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         changeCountView.delegate = self
         UIApplication.shared.windows[0].rootViewController?.view.addSubview(changeCountView)
     }

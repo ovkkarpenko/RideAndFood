@@ -54,8 +54,6 @@ class ChangeCountView: CustomViewWithAnimation {
     }
     
     private func customizeView() {
-        contentView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        contentView.layer.cornerRadius = generalCornerRaduis
         contentView.backgroundColor = Colors.tapIndicatorGray.getColor()
         
         backgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
