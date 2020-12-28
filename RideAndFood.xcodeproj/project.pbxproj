@@ -168,6 +168,8 @@
 		F768C0CD2588F9C400B85307 /* InputPointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F768C0CC2588F9C400B85307 /* InputPointsView.swift */; };
 		F76F67AD257A5F5B00E16A53 /* ActiveOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76F67AC257A5F5B00E16A53 /* ActiveOrderView.swift */; };
 		F76F67B1257A5F8300E16A53 /* ActiveOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F76F67B0257A5F8300E16A53 /* ActiveOrderView.xib */; };
+		F772B01725988E1A00756C8E /* ThankForOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F772B01625988E1A00756C8E /* ThankForOrderView.swift */; };
+		F772B01A25988EA000756C8E /* ThankForOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F772B01925988EA000756C8E /* ThankForOrderView.xib */; };
 		F77DE253254A1928001338D8 /* GeneralGUISettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CAAC002540A5000049390C /* GeneralGUISettings.swift */; };
 		F77DE255254A192C001338D8 /* BaseCustomUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */; };
 		F7805C3A2552E41500D1BBAD /* Tariff.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7805C392552E41500D1BBAD /* Tariff.storyboard */; };
@@ -482,6 +484,8 @@
 		F768C0CC2588F9C400B85307 /* InputPointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPointsView.swift; sourceTree = "<group>"; };
 		F76F67AC257A5F5B00E16A53 /* ActiveOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOrderView.swift; sourceTree = "<group>"; };
 		F76F67B0257A5F8300E16A53 /* ActiveOrderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveOrderView.xib; sourceTree = "<group>"; };
+		F772B01625988E1A00756C8E /* ThankForOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankForOrderView.swift; sourceTree = "<group>"; };
+		F772B01925988EA000756C8E /* ThankForOrderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ThankForOrderView.xib; sourceTree = "<group>"; };
 		F7805C392552E41500D1BBAD /* Tariff.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tariff.storyboard; sourceTree = "<group>"; };
 		F7805C3F2552EFBE00D1BBAD /* TariffStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffStrings.swift; sourceTree = "<group>"; };
 		F7805C422552F26400D1BBAD /* TariffModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffModel.swift; sourceTree = "<group>"; };
@@ -1198,6 +1202,8 @@
 				F755F3B5258E5D8200535682 /* TableViewHeaderView.xib */,
 				F755F3AE258E571D00535682 /* FoodPaymentModel.swift */,
 				F755F3A2258E400E00535682 /* AddressCell.xib */,
+				F772B01625988E1A00756C8E /* ThankForOrderView.swift */,
+				F772B01925988EA000756C8E /* ThankForOrderView.xib */,
 			);
 			path = FoodPaymentView;
 			sourceTree = "<group>";
@@ -1796,6 +1802,7 @@
 				F727C591258F77AC00DF831A /* PaymentTypeCell.xib in Resources */,
 				F76F67B1257A5F8300E16A53 /* ActiveOrderView.xib in Resources */,
 				F73B87A32590A70C001B27F5 /* ChangeCountView.xib in Resources */,
+				F772B01A25988EA000756C8E /* ThankForOrderView.xib in Resources */,
 				F7AECA7F256C36A000CA86AC /* CustomTextView.xib in Resources */,
 				FA050B862549AB0500CF363D /* Assets.xcassets in Resources */,
 				F755F3B6258E5D8200535682 /* TableViewHeaderView.xib in Resources */,
@@ -1981,6 +1988,7 @@
 				F795DF3325547A50005A607C /* TariffPage.swift in Sources */,
 				FA561B4C254F0D8E00BD549E /* SideMenuView.swift in Sources */,
 				723230512551D94300F238AF /* ActivatePromoCodeRequest.swift in Sources */,
+				F772B01725988E1A00756C8E /* ThankForOrderView.swift in Sources */,
 				72A1DBEF2545BFCD005A047A /* Language.swift in Sources */,
 				FA3FD468254D84BE00769610 /* SideMenuStrings.swift in Sources */,
 				FAD0B00D25669BA0008C2794 /* AddressesStrings.swift in Sources */,

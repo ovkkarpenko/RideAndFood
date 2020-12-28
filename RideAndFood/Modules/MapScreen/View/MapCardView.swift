@@ -123,9 +123,25 @@ class MapCardView: UIView {
             if isTaxiButtonEnable! {
                 taxiButton.isUserInteractionEnabled = true
                 taxiButton.bgImage = UIImage(named: CustomImagesNames.taxiButton.rawValue)
+                taxiButton.titleColor = Colors.buttonWhite.getColor()
             } else {
                 taxiButton.isUserInteractionEnabled = false
                 taxiButton.bgImage = UIImage(named: CustomImagesNames.disableTaxiButton.rawValue)
+                taxiButton.titleColor = Colors.textGray.getColor()
+            }
+        }
+    }
+    
+    var isFoodButtonEnable: Bool? {
+        didSet {
+            if isFoodButtonEnable! {
+                foodButton.isUserInteractionEnabled = true
+                foodButton.bgImage = UIImage(named: CustomImagesNames.foodButton.rawValue)
+                foodButton.titleColor = Colors.buttonWhite.getColor()
+            } else {
+                foodButton.isUserInteractionEnabled = false
+                foodButton.bgImage = UIImage(named: CustomImagesNames.disableFoodButton.rawValue)
+                foodButton.titleColor = Colors.textGray.getColor()
             }
         }
     }

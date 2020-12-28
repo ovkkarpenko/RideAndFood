@@ -38,6 +38,9 @@ enum FoodStrings {
     case card
     case order
     case pay
+    case thanks
+    case gladToSeeAgain
+    case newOrder
     
     func text() -> String {
         switch UserConfig.shared.settings.language {
@@ -108,6 +111,12 @@ enum FoodStrings {
             return "Заказать"
         case .pay:
             return "Оплатить"
+        case .thanks:
+            return "Благодарим за заказ!"
+        case .gladToSeeAgain:
+            return "Будем рады вам снова :)"
+        case .newOrder:
+            return "Новый заказ"
         }
     }
     
@@ -171,6 +180,12 @@ enum FoodStrings {
             return "Order"
         case .pay:
             return "Pay"
+        case .thanks:
+            return "Thank you for order"
+        case .gladToSeeAgain:
+            return "Glad to see you again"
+        case .newOrder:
+            return "New order"
         }
     }
 }

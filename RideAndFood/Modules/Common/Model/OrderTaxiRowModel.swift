@@ -9,6 +9,8 @@
 import Foundation
 
 struct OrderTaxiModelHandler {
+    static var shared = OrderTaxiModelHandler()
+    
     private var coreDataManager = CoreDataManager.shared
     
     private let entityName = "TaxiOrderDB"

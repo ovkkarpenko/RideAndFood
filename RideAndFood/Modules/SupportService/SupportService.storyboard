@@ -225,7 +225,7 @@
                                             <constraint firstAttribute="width" constant="50" id="EGA-Wz-1fo"/>
                                         </constraints>
                                         <color key="tintColor" red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" image="checkmark.circle.fill" catalog="system"/>
+                                        <state key="normal" image="Done"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4AD-VN-EEk">
                                         <rect key="frame" x="64" y="164" width="197" height="20.5"/>
@@ -307,7 +307,7 @@
     </scenes>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
     <resources>
-        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="Done" width="50" height="50"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="removeButton" width="30" height="30"/>

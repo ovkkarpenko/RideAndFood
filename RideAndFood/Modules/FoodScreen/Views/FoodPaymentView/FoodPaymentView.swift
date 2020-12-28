@@ -19,8 +19,10 @@ class FoodPaymentView: CustomViewWithAnimation {
     
     var dismissFoodPaymentView: (() -> ())?
     
-    private lazy var foodPaymentModel: FoodPaymentModel = {
-        let model = FoodPaymentModel { [weak self] in
+    var payButtonAction: (() -> ())?
+    
+    private lazy var foodPaymentModel: FoodPaymentModel = { [weak self] in
+        let model = FoodPaymentModel {
             self?.tableView.reloadData()
         }
         
@@ -204,6 +206,7 @@ class FoodPaymentView: CustomViewWithAnimation {
     }
     
     @objc private func payButtonTapped() {
+        payButtonAction?()
     }
     
     @objc private func needChangeButtonTapped() {

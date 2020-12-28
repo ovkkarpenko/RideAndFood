@@ -27,7 +27,7 @@ class FoodPaymentModel {
         var isSelected = false
     }
     
-    init(completion: @escaping ()->()) {
+    init(completion: (()->())? = nil) {
         self.deliveryAddressCell = [DeliveryAddressCell(address: "Address from db", addressName: "Address name from db")]
         self.foodPaymentCell = [
             FoodPaymentCell(type: .cash, image: UIImage(named: "cash")!, text: NSAttributedString(string: PaymentStrings.cash.text())),
@@ -37,7 +37,7 @@ class FoodPaymentModel {
         configureCardRow { [weak self] cardNumber in
             guard let self = self else { return }
             self.foodPaymentCell.insert(FoodPaymentCell(type: .card, image: UIImage(named: "visa")!, text: cardNumber), at: 1)
-            completion()
+            completion?()
         }
     }
     

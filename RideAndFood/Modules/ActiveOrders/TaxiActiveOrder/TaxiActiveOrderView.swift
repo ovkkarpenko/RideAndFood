@@ -27,8 +27,6 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
     
     private var sidePadding: CGFloat = 10
     
-    private lazy var orderTaxiModelHandler = OrderTaxiModelHandler()
-    
     var isLastView = false {
         didSet {
             if isLastView {
@@ -85,7 +83,7 @@ class TaxiActiveOrderView: CustomViewWithAnimation {
     }
     
     private func setTaxiActiveOrderViewParameters() {
-        let model = orderTaxiModelHandler.getTaxiOrder()
+        let model = OrderTaxiModelHandler.shared.getTaxiOrder()
         setToAddress(address: model?.to)
         setFromAddress(address: model?.from)
         setDeliveryTime(value: 10)

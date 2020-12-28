@@ -557,11 +557,31 @@ extension FoodView: CartViewDelegate {
         cardView.isHidden = true
         let foodPaymentView = FoodPaymentView(amount: amount)
         
-        foodPaymentView.dismissFoodPaymentView = { [weak self] in
+        foodPaymentView.dismissFoodPaymentView = { [weak self, weak foodPaymentView] in
             guard let self = self else { return }
+            guard let foodPaymentView = foodPaymentView else { return }
+            
             foodPaymentView.dismiss() {
                 foodPaymentView.removeFromSuperview()
                 self.cardView.isHidden = false
+            }
+        }
+        
+        foodPaymentView.payButtonAction = { [weak self, weak foodPaymentView] in
+            guard let self = self else { return }
+            guard let foodPaymentView = foodPaymentView else { return }
+            
+            foodPaymentView.dismiss() {
+                foodPaymentView.removeFromSuperview()
+                self.cardView.removeFromSuperview()
+                CartModel.shared.emptyCart()
+                let thankForOrderView = ThankForOrderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + self.safeAreaInsets.bottom))
+                self.removeFromSuperview()
+                UIApplication.shared.windows[0].rootViewController?.view.addSubview(thankForOrderView)
+                if let root = UIApplication.shared.windows[0].rootViewController as? MapViewController {
+                    root.cardView.isFoodButtonEnable = false
+                }
+                // record food active order to bd.
             }
         }
         
