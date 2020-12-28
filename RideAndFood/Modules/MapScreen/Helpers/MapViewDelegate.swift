@@ -17,6 +17,20 @@ class MapViewDelegate: NSObject, MKMapViewDelegate {
                                                    longitude: mapView.centerCoordinate.longitude))
     }
     
+//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+//        let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "annotationView")
+//            ?? MKAnnotationView()
+//        
+//        guard annotation is CarAnnotation else {
+//            annotationView.image = UIImage(named: "")
+//            return annotationView
+//        }
+//        
+//        annotationView.image = UIImage(named: "Car")
+//
+//        return annotationView
+//    }
+    
     private func lookUpCurrentLocation(location: CLLocation) {
         
         let geocoder = CLGeocoder()

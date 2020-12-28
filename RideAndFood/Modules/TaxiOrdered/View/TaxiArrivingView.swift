@@ -118,7 +118,6 @@ class TaxiArrivingView: UIView {
     
     private func setupLayout() {
         updateTitle()
-        carNameLabel.text = "Белый Opel Astra"
         callButton.configure(with: .init(image: UIImage(named: "Phone"),
                                          title: TaxiStrings.call.text(), buttonTappedBlock: {
                                             
@@ -225,4 +224,18 @@ class TaxiArrivingView: UIView {
             self.actionBlock = actionBlock
         }
     }
+}
+
+// MARK: - ConfigurableView
+
+extension TaxiArrivingView: IConfigurableView {
+    
+    func configure(with model: TaxiArrivingViewModel) {
+        carNameLabel.text = "\(model.carColor) \(model.carName)"
+    }
+}
+
+struct TaxiArrivingViewModel {
+    let carName: String
+    let carColor: String
 }

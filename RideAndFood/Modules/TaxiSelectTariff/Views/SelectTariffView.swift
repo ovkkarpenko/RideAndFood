@@ -267,7 +267,8 @@ class SelectTariffView: UIView {
         
         if let tariffId = activatedTariffCell?.tariff?.id,
            let from = firstTextField.textField.text,
-           let to = secondTextField.textField.text {
+           let to = secondTextField.textField.text,
+           let tariff = activatedTariffCell?.tariff {
             
             let order = TaxiOrder(
                 tariff: tariffId,
@@ -280,7 +281,7 @@ class SelectTariffView: UIView {
                 
                 DispatchQueue.main.async {
                     self?.dismiss()
-                    self?.delegate?.orderButtonPressed(order: order)
+                    self?.delegate?.orderButtonPressed(order: order, tariff: tariff)
                 }
             })
         }

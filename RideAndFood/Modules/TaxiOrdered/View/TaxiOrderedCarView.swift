@@ -15,6 +15,7 @@ class TaxiOrderedCarView: UIView {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = FontHelper.regular26.font()
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -41,8 +42,8 @@ class TaxiOrderedCarView: UIView {
         return view
     }()
     
-    private lazy var carImageView: UIImageView = {
-        let imageView = UIImageView()
+    private lazy var carImageView: ScaledHeightImageView = {
+        let imageView = ScaledHeightImageView()
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -58,6 +59,7 @@ class TaxiOrderedCarView: UIView {
         ])
         stackView.distribution = .equalSpacing
         stackView.alignment = .center
+        stackView.spacing = 8
         return stackView
     }()
     
@@ -129,7 +131,9 @@ extension TaxiOrderedCarView: IConfigurableView {
         titleLabel.text = model.carName
         classLabel.text = model.className
         classView.backgroundColor = model.classColor
-        carImageView.image = model.carImage
+        if let carImageUrl = URL(string: model.carImage) {
+            carImageView.imageByUrl(from: carImageUrl)
+        }
         let driver = NSMutableAttributedString(string: "\(TaxiStrings.driver.text()): ",
                                                attributes: [
                                                 .foregroundColor: ColorHelper.secondaryText.color() as Any,

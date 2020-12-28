@@ -11,6 +11,7 @@ import UIKit
 class LookingForDriverView: UIView, CustromViewProtocol {
     
     var order: TaxiOrder?
+    var tariff: TariffModel?
     weak var delegate: SelectTariffViewDelegate?
     
     private var taxiTimer: Timer?
@@ -125,7 +126,9 @@ class LookingForDriverView: UIView, CustromViewProtocol {
         dismiss { [weak self] in
             self?.removeFromSuperview()
         }
-        delegate?.foundTaxi(order: order)
+        if let order = order, let tariff = tariff {
+            delegate?.foundTaxi(order: order, tariff: tariff)
+        }
     }
     
     @objc private func cencelButtonPressed() {

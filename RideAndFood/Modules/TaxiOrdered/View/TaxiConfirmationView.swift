@@ -79,16 +79,16 @@ class TaxiConfirmationView: UIView {
 extension TaxiConfirmationView: IConfigurableView {
     
     func configure(with model: TaxiConfirmationViewModel) {
-        directionsView.configure(with: .init(addressFrom: model.addressFrom,
-                                             addressTo: model.addressTo,
+        directionsView.configure(with: .init(addressFrom: model.taxiOrderModel.from,
+                                             addressTo: model.taxiOrderModel.to,
                                              showCar: false))
-        taxiOrderedCarView.configure(with: .init(carName: "Белый Opel Astra",
-                                                 className: "Standart",
-                                                 classColor: ColorHelper.green.color(),
-                                                 carImage: UIImage(named: "car-large"),
-                                                 driverName: "Анатолий (id: 23-87)",
-                                                 pickupTime: "3 \(StringsHelper.minutes.text())",
-                                                 price: "100 \(StringsHelper.rub.text())"))
+        taxiOrderedCarView.configure(with: .init(carName: model.carName,
+                                                 className: model.taxiOrderModel.tariffName,
+                                                 classColor: model.tariffColor,
+                                                 carImage: model.taxiOrderModel.carImage,
+                                                 driverName: model.taxiOrderModel.driver,
+                                                 pickupTime: model.pickupTime,
+                                                 price: model.price))
         buttonsStackView.configure(with: .init(primaryTitle: StringsHelper.confirm.text(),
                                                secondaryTitle: StringsHelper.cancel.text(),
                                                primaryButtonPressedBlock: model.primaryButtonPressedBlock,

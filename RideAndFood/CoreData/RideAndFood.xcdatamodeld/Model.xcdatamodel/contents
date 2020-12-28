@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CartRowDB" representedClassName="CartRowDB" syncable="YES" codeGenerationType="class">
         <attribute name="count" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="productId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -11,13 +11,20 @@
         <attribute name="shopName" attributeType="String"/>
     </entity>
     <entity name="TaxiOrderDB" representedClassName="TaxiOrderDB" syncable="YES" codeGenerationType="class">
+        <attribute name="car" optional="YES" attributeType="String"/>
+        <attribute name="carImage" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="driver" optional="YES" attributeType="String"/>
         <attribute name="from" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tariffId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tariffName" optional="YES" attributeType="String"/>
         <attribute name="to" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="CartRowDB" positionX="-63" positionY="-18" width="128" height="89"/>
         <element name="ShopDB" positionX="-63" positionY="9" width="128" height="59"/>
-        <element name="TaxiOrderDB" positionX="120.546875" positionY="-16.24609375" width="128" height="88"/>
+        <element name="TaxiOrderDB" positionX="141.030029296875" positionY="-11.28912353515625" width="128" height="179"/>
     </elements>
 </model>

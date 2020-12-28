@@ -12,7 +12,7 @@ struct TaxiOrderedCarViewModel {
     let carName: String
     let className: String
     let classColor: UIColor?
-    let carImage: UIImage?
+    let carImage: String
     let driverName: String
     let pickupTime: String
     let price: String

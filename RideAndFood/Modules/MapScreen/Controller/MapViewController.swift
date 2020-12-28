@@ -333,7 +333,7 @@ class MapViewController: UIViewController {
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         }
-        showTaxiTripInfoView()
+        taxiOrderModelHandler.finishOrder()
     }
     
     override func viewDidLayoutSubviews() {
@@ -560,7 +560,8 @@ class MapViewController: UIViewController {
                                                  didSwipeDownCallback: { [weak self] in
                                                     self?.hideCart()
                                                  }))
-    private func showAdditionalCardView() {
+    }
+    private func showAdditionalCardView(showDimmer: Bool = true) {
         view.addSubview(dimmerView)
         view.addSubview(additionalCardView)
         
@@ -575,60 +576,82 @@ class MapViewController: UIViewController {
         ])
         view.layoutIfNeeded()
         additionalCardViewBottomConstraint.constant = 0
-        dimmerView.show()
+        if showDimmer {
+            dimmerView.show()
+        }
         
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
         }
     }
     
-    private func hideAdditionalCardView() {
+    private func hideAdditionalCardView(completion: (() -> Void)? = nil) {
         additionalCardViewBottomConstraint.constant = additionalCardViewOffset
-        self.dimmerView.hide()
+        dimmerView.hide()
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
         } completion: { _ in
             self.dimmerView.removeFromSuperview()
             self.additionalCardView.removeFromSuperview()
+            completion?()
         }
     }
     
     private func showTaxiConfirmationView() {
         guard let order = taxiOrderModelHandler.getTaxiOrder() else { return }
         
-        taxiConfirmationView.configure(with: .init(addressFrom: order.from,
-                                                   addressTo: order.to) {
-                                                    
-                                                   } secondaryButtonPressedBlock: { [weak self] in
-                                                    self?.hideAdditionalCardView()
-                                                   })
+        taxiConfirmationView.configure(with: .init(taxiOrderModel: order) { [weak self] in
+            self?.hideAdditionalCardView(completion: {
+                self?.showTaxiArrivingView()
+            })
+        } secondaryButtonPressedBlock: { [weak self] in
+            self?.taxiOrderModelHandler.finishOrder()
+            self?.hideAdditionalCardView()
+        })
         additionalCardView.configure(with: .init(contentView: taxiConfirmationView,
                                                  style: .light,
                                                  paddingTop: 0,
                                                  paddingBottom: 0,
                                                  paddingX: 0,
                                                  didSwipeDownCallback: { [weak self] in
+                                                    self?.taxiOrderModelHandler.finishOrder()
                                                     self?.hideAdditionalCardView()
                                                  }))
         showAdditionalCardView()
     }
     
     private func showTaxiArrivingView() {
+        guard let order = taxiOrderModelHandler.getTaxiOrder() else { return }
+        let coordinate = mapView.userLocation.coordinate
+        let randomCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude
+                                                        * Double.random(in: 0.9999...1.1111),
+                                                      longitude: coordinate.longitude
+                                                        * Double.random(in: 0.9999...1.1111))
+        let car = CarAnnotation(coordinate: randomCoordinate)
+        mapView.addAnnotation(car)
+        taxiArrivingView.configure(with: .init(carName: order.car, carColor: order.color))
         additionalCardView.configure(with: .init(contentView: taxiArrivingView,
                                                  paddingBottom: padding,
                                                  didSwipeDownCallback: { [weak self] in
                                                     self?.hideAdditionalCardView()
+                                                    // Mock trip finish
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + .random(in: 1...10)) {
+                                                        self?.taxiOrderModelHandler.finishOrder()
+                                                        self?.hideAdditionalCardView {
+                                                            self?.showTripFinishedView()
+                                                        }
+                                                    }
                                                  }))
-        showAdditionalCardView()
+        showAdditionalCardView(showDimmer: false)
     }
     
     private func showTaxiTripInfoView() {
         guard let order = taxiOrderModelHandler.getTaxiOrder() else { return }
         taxiTripInfoView.configure(with: .init(addressFrom: order.from,
                                                addressTo: order.to,
-                                               driverName: "Анатолий (id: 23-87)",
-                                               carName: "Белый Opel Astra",
-                                               tripTimeInMinutes: 14,
+                                               driverName: order.driver,
+                                               carName: "\(order.color) \(order.car)",
+                                               tripTimeInMinutes: Int.random(in: 1...15),
                                                primaryButtonPressedBlock: { [weak self] in
                                                 self?.hideAdditionalCardView()
                                                 self?.foodButtonPressed()
@@ -662,29 +685,6 @@ class MapViewController: UIViewController {
         additionalCardView.configure(with: .init(contentView: taxiTripFinishedView,
                                                  didSwipeDownCallback: { [weak self] in
                                                     self?.hideAdditionalCardView()
-                                                 }))
-        showAdditionalCardView()
-    }
-    
-    @objc private func showCart() {
-        cartView.removeFromSuperview()
-        let cart = CartModel.getCart()
-        cartView = CartView()
-        cartView.configure(with: .init(cartRows: cart.rows,
-                                       sum: cart.sum,
-                                       deliveryTimeInMinutes: Int.random(in: 5...120),
-                                       deliveryCost: 0,
-                                       shopName: cart.shopName,
-                                       backButtonTappedBlock: { [weak self] in
-                                        self?.hideCart()
-                                       }))
-        additionalCardView.configure(with: .init(contentView: cartView,
-                                                 style: .light,
-                                                 paddingTop: 0,
-                                                 paddingBottom: padding,
-                                                 paddingX: 0,
-                                                 didSwipeDownCallback: { [weak self] in
-                                                    self?.hideCart()
                                                  }))
         showAdditionalCardView()
     }
@@ -808,13 +808,8 @@ class MapViewController: UIViewController {
     }
     
     @objc private func showExpandedTaxiActiveOrderView() {
-        let expandedTaxiActiveOrderView = ExpandedActiveOrderView(type: .taxiActiveOrderView)
-        expandedTaxiActiveOrderView.delegate = self
-        
-        view.addSubview(expandedTaxiActiveOrderView)
-        
         dismissActiveOrderViews()
-        expandedTaxiActiveOrderView.show(after: generalDelay)
+        showTaxiTripInfoView()
     }
 }
 
@@ -918,9 +913,10 @@ extension MapViewController: SelectTariffViewDelegate {
         addNewView(view)
     }
     
-    func orderButtonPressed(order: TaxiOrder) {
+    func orderButtonPressed(order: TaxiOrder, tariff: TariffModel) {
         let view = LookingForDriverView()
         view.order = order
+        view.tariff = tariff
         view.delegate = self
         addNewView(view)
     }
@@ -949,11 +945,13 @@ extension MapViewController: SelectTariffViewDelegate {
         addNewView(view)
     }
     
-    func foundTaxi(order: TaxiOrder?) {
-        let view = TaxiFoundView()
-        view.order = order
-        view.delegate = self
-        addNewView(view)
+    func foundTaxi(order: TaxiOrder, tariff: TariffModel) {
+        let orderModel = taxiOrderModelHandler.generateOrder(order: order, tariff: tariff)
+        taxiOrderModelHandler.addToTaxiOrder(order: orderModel) { [weak self] in
+            DispatchQueue.main.async {
+                self?.showTaxiConfirmationView()
+            }
+        }
     }
     
     func addNewView(_ view: CustromViewProtocol) {
