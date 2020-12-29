@@ -30,7 +30,7 @@ enum ActiveTaxiOrderStrings {
         case .eng:
             switch self {
             case .deliveryTime:
-                return "The remaining travel time"
+                return "The remaining travel time "
             case .addDelivery:
                 return "Add delivery"
             case .reportProblem:

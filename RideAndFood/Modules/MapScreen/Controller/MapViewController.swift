@@ -37,7 +37,7 @@ class MapViewController: UIViewController {
         return view
     }()
     
-    private lazy var cardView: MapCardView = {
+    lazy var cardView: MapCardView = {
         let view = MapCardView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.taxiAction = taxiButtonPressed
@@ -174,7 +174,7 @@ class MapViewController: UIViewController {
         }
     }
     
-    private lazy var taxiOrderModelHandler: OrderTaxiModelHandler = OrderTaxiModelHandler()
+    private let taxiOrderModelHandler = OrderTaxiModelHandler.shared
     
     private lazy var taxiActiveOrderView: TaxiActiveOrderView = {
         let view = TaxiActiveOrderView()
@@ -231,7 +231,7 @@ class MapViewController: UIViewController {
     
     private var isActiveOrder: Bool? {
         didSet {
-            if let cardViewIndex = view.subviews.firstIndex(of: cardView), taxiOrderModelHandler.getTaxiOrder() != nil {
+            if let cardViewIndex = view.subviews.firstIndex(of: cardView), OrderTaxiModelHandler.shared.getTaxiOrder() != nil {
                 myLocationButton.isHidden = true
                 locationImageView.isHidden = true
                 
@@ -526,7 +526,7 @@ class MapViewController: UIViewController {
     private func checkIfTaxiActiveOrderExists() {
         DispatchQueue.main.asyncAfter(deadline: .now() + generalDelay) { [weak self] in
             guard let self = self else { return }
-            if self.taxiOrderModelHandler.getTaxiOrder() != nil {
+            if OrderTaxiModelHandler.shared.getTaxiOrder() != nil {
                 self.isTaxiActiveOrder = true
                 self.isFoodActiveOrder = true
                 self.isActiveOrder = true
@@ -560,7 +560,9 @@ class MapViewController: UIViewController {
                                                  didSwipeDownCallback: { [weak self] in
                                                     self?.hideCart()
                                                  }))
+        showAdditionalCardView()
     }
+    
     private func showAdditionalCardView(showDimmer: Bool = true) {
         view.addSubview(dimmerView)
         view.addSubview(additionalCardView)
@@ -1032,20 +1034,39 @@ extension MapViewController: ExpandedActiveOrderViewDelegate {
 }
 
 extension MapViewController: CartViewDelegate {
-    func foodPaymentButtonTapped() {
+    func foodPaymentButtonTapped(amount: String) {
         hideCart()
         shouldShowTranspatentView()
-        let foodPaymentView = FoodPaymentView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500))
-//        let foodPaymentView = FoodPaymentView()
-//        foodPaymentView.translatesAutoresizingMaskIntoConstraints = false
+        let foodPaymentView = FoodPaymentView(amount: amount)
+        
+        foodPaymentView.dismissFoodPaymentView = { [weak self, weak foodPaymentView] in
+            guard let self = self else { return }
+            guard let foodPaymentView = foodPaymentView else { return }
+            
+            foodPaymentView.dismiss() {
+                self.shouldRemoveTranspatentView()
+                foodPaymentView.removeFromSuperview()
+                self.showCart()
+            }
+        }
+        
+        foodPaymentView.payButtonAction = { [weak self, weak foodPaymentView] in
+            guard let self = self else { return }
+            guard let foodPaymentView = foodPaymentView else { return }
+            
+            foodPaymentView.dismiss() {
+                self.shouldRemoveTranspatentView()
+                foodPaymentView.removeFromSuperview()
+                self.cartView.removeFromSuperview()
+                CartModel.shared.emptyCart()
+                let thankForOrderView = ThankForOrderView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + self.view.safeAreaInsets.bottom))
+                self.view.addSubview(thankForOrderView)
+                self.cardView.isFoodButtonEnable = false
+                // record food active order to bd.
+            }
+        }
         
         view.addSubview(foodPaymentView)
-//        NSLayoutConstraint.activate([foodPaymentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//                                     foodPaymentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//                                     foodPaymentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//                                     foodPaymentView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 25)
-//        ])
-        
         foodPaymentView.show()
     }
 }

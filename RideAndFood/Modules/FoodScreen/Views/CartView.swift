@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CartViewDelegate: class {
-    func foodPaymentButtonTapped()
+    func foodPaymentButtonTapped(amount: String)
 }
 
 class CartView: UIView {
@@ -378,10 +378,15 @@ class CartView: UIView {
 //        goToPaymentButton.setTitles(left: FoodStrings.goToPayment.text(),
 //                                    right: "\(sum.currencyString()) \(sumWithDiscount.currencyString())")
         goToPaymentButton.setPreviousCost(cost: sum.currencyString())
+        sumWithDiscount = sumWithDiscount < 0 ? 0 : sumWithDiscount
         goToPaymentButton.setNewCost(text: sumWithDiscount.currencyString())
     }
     
     private func updatePointsButton() {
+        if Float(pointsDiscount) > sum {
+            pointsDiscount = Int(sum)
+        }
+        
         let title = NSMutableAttributedString(string: "-\(pointsDiscount) ", attributes: [NSAttributedString.Key.foregroundColor : Colors.buttonGreen.getColor()])
         title.append(NSAttributedString(string: FoodStrings.points.text(), attributes: [NSAttributedString.Key.foregroundColor : Colors.textGray.getColor()]))
         pointsButton.setAttributedTitle(title, for: .normal)
@@ -464,7 +469,11 @@ class CartView: UIView {
     }
     
     @objc private func paymentButtonTapped() {
-        cartViewDelegate?.foodPaymentButtonTapped()
+        if sumWithDiscount.currencyString().isEmpty {
+            cartViewDelegate?.foodPaymentButtonTapped(amount: sum.currencyString())
+        } else {
+            cartViewDelegate?.foodPaymentButtonTapped(amount: sumWithDiscount.currencyString())
+        }
     }
     
     @objc private func dimmerTapped() {

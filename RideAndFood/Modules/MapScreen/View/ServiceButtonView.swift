@@ -50,6 +50,12 @@ class ServiceButtonView: UIView {
         }
     }
     
+    var titleColor: UIColor? {
+        didSet {
+            titleLabel.textColor = titleColor
+        }
+    }
+    
     var action: (() -> Void)?
     
     // MARK: - Initializers
