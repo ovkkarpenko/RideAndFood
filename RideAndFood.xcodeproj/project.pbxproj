@@ -116,6 +116,11 @@
 		72BC6C0C2582B72F00C4E878 /* BaseFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BC6C0B2582B72F00C4E878 /* BaseFoodView.swift */; };
 		72C6CCBC25758790003D85FD /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C6CCBB25758790003D85FD /* CounterView.swift */; };
 		72D132A825642B8700A4505F /* PhoneConfirmationCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D132A725642B8700A4505F /* PhoneConfirmationCode.swift */; };
+		72D1889E259BB5BA00E48D67 /* MapScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D1889D259BB5BA00E48D67 /* MapScreenState.swift */; };
+		72D188BC259BBB6100E48D67 /* FromAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D188BB259BBB6100E48D67 /* FromAnnotation.swift */; };
+		72D188BF259BBB7F00E48D67 /* ToAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D188BE259BBB7F00E48D67 /* ToAnnotation.swift */; };
+		72D188C2259BC65000E48D67 /* CLLocationCoordinate2D+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D188C1259BC65000E48D67 /* CLLocationCoordinate2D+Random.swift */; };
+		72D188C5259C30BD00E48D67 /* CLLocationCoordinate2D+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D188C4259C30BD00E48D67 /* CLLocationCoordinate2D+Equatable.swift */; };
 		72D3E8D9256AAD37008167FF /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D3E8D8256AAD37008167FF /* ErrorResponse.swift */; };
 		72D82F1625818F3800E76919 /* TitledButtonsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D82F1525818F3800E76919 /* TitledButtonsStackView.swift */; };
 		72E30EF5254EE2F40037E4B4 /* ServiceButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E30EF4254EE2F40037E4B4 /* ServiceButtonView.swift */; };
@@ -448,6 +453,11 @@
 		72BC6C0B2582B72F00C4E878 /* BaseFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFoodView.swift; sourceTree = "<group>"; };
 		72C6CCBB25758790003D85FD /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		72D132A725642B8700A4505F /* PhoneConfirmationCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneConfirmationCode.swift; sourceTree = "<group>"; };
+		72D1889D259BB5BA00E48D67 /* MapScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapScreenState.swift; sourceTree = "<group>"; };
+		72D188BB259BBB6100E48D67 /* FromAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromAnnotation.swift; sourceTree = "<group>"; };
+		72D188BE259BBB7F00E48D67 /* ToAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToAnnotation.swift; sourceTree = "<group>"; };
+		72D188C1259BC65000E48D67 /* CLLocationCoordinate2D+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Random.swift"; sourceTree = "<group>"; };
+		72D188C4259C30BD00E48D67 /* CLLocationCoordinate2D+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Equatable.swift"; sourceTree = "<group>"; };
 		72D3E8D8256AAD37008167FF /* ErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		72D82F1525818F3800E76919 /* TitledButtonsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledButtonsStackView.swift; sourceTree = "<group>"; };
 		72E30EF4254EE2F40037E4B4 /* ServiceButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceButtonView.swift; sourceTree = "<group>"; };
@@ -1098,6 +1108,8 @@
 				72E30EFA254EEFF50037E4B4 /* RoundButton.swift */,
 				FA561B4B254F0D8E00BD549E /* SideMenuView.swift */,
 				72B3952F2599827D005AF30C /* CarAnnotation.swift */,
+				72D188BB259BBB6100E48D67 /* FromAnnotation.swift */,
+				72D188BE259BBB7F00E48D67 /* ToAnnotation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1173,6 +1185,8 @@
 				725838F9257A8D0100637ABF /* UIButton+TwoTitles.swift */,
 				72272C2A258001C3003E0BD0 /* Float+Format.swift */,
 				720D9E81258E824C000AEC04 /* Double+Format.swift */,
+				72D188C1259BC65000E48D67 /* CLLocationCoordinate2D+Random.swift */,
+				72D188C4259C30BD00E48D67 /* CLLocationCoordinate2D+Equatable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1191,6 +1205,7 @@
 			children = (
 				72F79E0625475AEE00F4E6AC /* MapViewDelegate.swift */,
 				72FBDC6225488F3F00727C12 /* MapStrings.swift */,
+				72D1889D259BB5BA00E48D67 /* MapScreenState.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1973,6 +1988,7 @@
 				72AA113D258A707C00D704AE /* TaxiStrings.swift in Sources */,
 				FA180004256964CD00148FAB /* ShopCategoryViewModel.swift in Sources */,
 				FA6DDFE2256A488400244E94 /* ShopDetailsView.swift in Sources */,
+				72D188C2259BC65000E48D67 /* CLLocationCoordinate2D+Random.swift in Sources */,
 				FA730E44256FA2D7001F7AEB /* OrdersHistoryViewController.swift in Sources */,
 				FAD0AFF025669B1A008C2794 /* FoodView.swift in Sources */,
 				FAD0B00325669B1F008C2794 /* AddressesViewController.swift in Sources */,
@@ -2019,6 +2035,7 @@
 				FA8196B12556A7100053EE22 /* PaymentPointsDetailsView.swift in Sources */,
 				FAA9495125546F73005C5B40 /* PaymentViewController.swift in Sources */,
 				7286E52A2542ECA70027A69B /* CodeConfirmationView.swift in Sources */,
+				72D188BC259BBB6100E48D67 /* FromAnnotation.swift in Sources */,
 				72F79E0725475AEE00F4E6AC /* MapViewDelegate.swift in Sources */,
 				722D69AB2573B2FC00A8432D /* ProductDetailsView.swift in Sources */,
 				7286E51B2542B9CB0027A69B /* ConstantsHelper.swift in Sources */,
@@ -2048,6 +2065,7 @@
 				FA6DDFEF256A5B0500244E94 /* ShopSubCategory.swift in Sources */,
 				72450AD22578041400F2D1FD /* RideAndFood.xcdatamodeld in Sources */,
 				722D69B12573DB7200A8432D /* ProductDetailsStrings.swift in Sources */,
+				72D1889E259BB5BA00E48D67 /* MapScreenState.swift in Sources */,
 				7233AAC52582E93E001D589F /* EmptyCartView.swift in Sources */,
 				FA6100AC255715C700ED0CD5 /* PaymentType.swift in Sources */,
 				72A1DBE02545B424005A047A /* LoginInteractor.swift in Sources */,
@@ -2141,6 +2159,7 @@
 				FA81AE73254B364F00B74182 /* ServerConfig.swift in Sources */,
 				FAF9C53A258CC8D900D2C130 /* TaxiFoundView.swift in Sources */,
 				F7551129258103CB0030AF24 /* ActiveTaxiOrderStrings.swift in Sources */,
+				72D188BF259BBB7F00E48D67 /* ToAnnotation.swift in Sources */,
 				72FF3ACE253F470D0042B2A0 /* PrimaryButton.swift in Sources */,
 				FAA9495625546F80005C5B40 /* PaymentViewModel.swift in Sources */,
 				FA18FFF62569180800148FAB /* FoodShop.swift in Sources */,
@@ -2212,6 +2231,7 @@
 				F755113125810B830030AF24 /* FoodActiveOrderStrings.swift in Sources */,
 				FA3A0565254809A000C55447 /* SettingsAvailableSharesViewController.swift in Sources */,
 				FA02B89B2573C59100692C65 /* OrderHistoryTaxiDetailsView.swift in Sources */,
+				72D188C5259C30BD00E48D67 /* CLLocationCoordinate2D+Equatable.swift in Sources */,
 				FA449611254C0BE40071E76F /* DateTimeHelper.swift in Sources */,
 				72736D1F2561744D0094DBC5 /* CodeConfirmationViewModel.swift in Sources */,
 				72F467D52559C52D00F8926E /* ProfileStrings.swift in Sources */,

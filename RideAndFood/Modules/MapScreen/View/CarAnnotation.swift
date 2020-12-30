@@ -9,9 +9,20 @@
 import MapKit
 
 class CarAnnotation: NSObject, MKAnnotation {
-    var coordinate: CLLocationCoordinate2D
+    @objc dynamic var coordinate: CLLocationCoordinate2D
+    var image = UIImage(named: "Car")
     
     init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
+    }
+    
+    func setCoordinate(coordinate: CLLocationCoordinate2D, animated: Bool = true) {
+        if animated {
+            UIView.animate(withDuration: 2) {
+                self.coordinate = coordinate
+            }
+        } else {
+            self.coordinate = coordinate
+        }
     }
 }

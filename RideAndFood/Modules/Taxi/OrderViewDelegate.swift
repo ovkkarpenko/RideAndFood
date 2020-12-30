@@ -9,6 +9,7 @@
 import Foundation
 
 protocol OrderViewDelegate: class {
+    func stateChanged(to newState: MapScreenState)
     func shouldShowTranspatentView()
     func shouldRemoveTranspatentView()
     func buttonTapped(senderType: OrderViewType, addressInfo: String?)

@@ -64,7 +64,7 @@ class SelectAddressMapViewController: UIViewController {
     
     private lazy var mapViewDelegate: MapViewDelegate = {
         let delegate = MapViewDelegate()
-        delegate.mapViewCenterUpdatedCollback = { [weak self] placemark in
+        delegate.mapViewCenterUpdatedCallback = { [weak self] placemark in
             self?.cuurentPlacemark = placemark
         }
         return delegate

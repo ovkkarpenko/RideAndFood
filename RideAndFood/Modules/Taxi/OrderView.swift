@@ -230,15 +230,26 @@ class OrderView: UIView {
             self.backView.layer.frame.origin.y = UIScreen.main.bounds.height -
                 self.backView.frame.height
         }
+        if (secondTextView.isHidden) {
+            delegate?.stateChanged(to: .selectToAddress)
+        } else {
+            delegate?.stateChanged(to: .selectFromAddress)
+        }
     }
     
-    func dismiss() {
+    func dismiss(withUpdateStatus: Bool = true) {
         UIView.animate(withDuration: generalAnimationDuration, delay: 0, options: [.curveLinear]) { [weak self] in
             guard let self = self else { return }
             self.backView.layer.frame.origin.y += self.backView.frame.height
-           
         } completion: { [weak self] _ in
             self?.removeFromSuperview()
+        }
+        if withUpdateStatus {
+            if secondTextView.isHidden {
+                delegate?.stateChanged(to: .selectFromAddress)
+            } else {
+                delegate?.stateChanged(to: .main)
+            }
         }
     }
 }
