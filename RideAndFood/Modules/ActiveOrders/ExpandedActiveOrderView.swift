@@ -11,7 +11,6 @@ import UIKit
 class ExpandedActiveOrderView: CustomViewWithAnimation {
     private var type: ActiveOrderViewType?
     private var activeOrderView: UIView?
-    private lazy var taxiActiveOrderHandler = OrderTaxiModelHandler()
     private let padding: CGFloat = 25
     
     weak var delegate: ExpandedActiveOrderViewDelegate?
@@ -130,8 +129,7 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
                 
                 stackView.addArrangedSubview(foodActiveOrderView)
                 
-                // temp for test
-                implementer.attributedText = setImplemeneter(name: "Ivan Ivanov")
+                implementer.attributedText = setImplemeneter(name: OrderFoodModelHandler.shared.getFoodOrder()?.courierName ?? "")
                 stackView.addArrangedSubview(implementer)
                 
                 mainButton.customizeButton(type: .greenButton)
@@ -220,6 +218,9 @@ class ExpandedActiveOrderView: CustomViewWithAnimation {
     
     @objc private func cancelOrder(sender: UIButton) {
         delegate?.cancelButtonTapped()
+        self.dismiss { [weak self] in
+            self?.removeFromSuperview()
+        }
     }
     
     @objc private func reportProblem(sender: UIButton) {

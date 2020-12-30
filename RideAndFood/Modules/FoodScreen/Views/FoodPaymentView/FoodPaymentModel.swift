@@ -28,7 +28,7 @@ class FoodPaymentModel {
     }
     
     init(completion: (()->())? = nil) {
-        self.deliveryAddressCell = [DeliveryAddressCell(address: "Address from db", addressName: "Address name from db")]
+        self.deliveryAddressCell = [DeliveryAddressCell(address: OrderFoodModelHandler.shared.getFoodOrder()!.to, addressName: OrderFoodModelHandler.shared.getFoodOrder()!.toName)]
         self.foodPaymentCell = [
             FoodPaymentCell(type: .cash, image: UIImage(named: "cash")!, text: NSAttributedString(string: PaymentStrings.cash.text())),
             FoodPaymentCell(type: .applePay, image: UIImage(named: "applePay")!, text: NSAttributedString(string: PaymentStrings.applePay.text()))

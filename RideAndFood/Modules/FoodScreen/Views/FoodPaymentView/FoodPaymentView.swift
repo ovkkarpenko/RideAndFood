@@ -206,6 +206,27 @@ class FoodPaymentView: CustomViewWithAnimation {
     }
     
     @objc private func payButtonTapped() {
+        let order = OrderFoodModelHandler.shared.getFoodOrder()
+        var products: [Int] = []
+        for row in CartModel.getCart().rows {
+            products.append(Int(row.productId))
+        }
+        
+        let model = FoodOrderBodyModel(to: order!.to, payment_card: UserConfig.shared.paymentCardId, payment_method: "cash", promo_codes: [""], credit: 0, comment: FoodOrderBodyModel.Comment(banknote: changeCount), products: products)
+
+        let request = RequestModel(path: orderFoodPath, method: .post, body: model)
+        let networker = Networker()
+        
+        networker.makeRequest(request: request) { (results: CourierModel?, error: RequestErrorModel?) in
+            if let results = results {
+                OrderFoodModelHandler.shared.addToFoodOrder(order: OrderFoodModel(id: -1, to: order?.to, toName: order?.toName, credit: 0, time: Int.random(in: 1...60), courierName: results.courier?.first?.name, courierNumber: results.courier?.first?.phone))
+            }
+
+            if let error = error {
+                print(error.message)
+            }
+        }
+        
         payButtonAction?()
     }
     

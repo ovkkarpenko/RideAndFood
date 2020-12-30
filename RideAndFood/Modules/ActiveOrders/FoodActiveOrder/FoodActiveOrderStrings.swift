@@ -20,7 +20,7 @@ enum FoodActiveOrderStrings {
         case .rus:
             switch self {
             case .deliveryTime:
-                return "Доставим через "
+                return "Доставим через"
             case .callCourier:
                 return "Позвонить курьеру"
             case .cancelButton:

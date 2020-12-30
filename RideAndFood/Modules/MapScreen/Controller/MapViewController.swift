@@ -223,35 +223,50 @@ class MapViewController: UIViewController {
     
     private var isActiveOrder: Bool? {
         didSet {
-            if let cardViewIndex = view.subviews.firstIndex(of: cardView), OrderTaxiModelHandler.shared.getTaxiOrder() != nil {
-                myLocationButton.isHidden = true
-                locationImageView.isHidden = true
-                
-                if isFoodActiveOrder && isTaxiActiveOrder {
-                    view.insertSubview(taxiActiveOrderView, at: cardViewIndex - 1)
-                    view.insertSubview(foodActiveOrderView, at: cardViewIndex - 2)
-                    foodActiveOrderView.isLastView = true
-                    activeOrderCounterView.setTitle(getActiveOrderCounterString(orderCount: 2), for: .normal)
-                    taxiActiveOrderView.show()
-                    foodActiveOrderView.show()
-                } else if isTaxiActiveOrder {
-                    taxiActiveOrderView.isLastView = true
-                    view.insertSubview(taxiActiveOrderView, at: cardViewIndex - 1)
-                    activeOrderCounterView.setTitle(getActiveOrderCounterString(orderCount: 1), for: .normal)
-                    taxiActiveOrderView.show()
-                    cardView.isTaxiButtonEnable = false
-                } else if isFoodActiveOrder {
-                    foodActiveOrderView.isLastView = true
-                    view.insertSubview(foodActiveOrderView, at: cardViewIndex - 1)
-                    activeOrderCounterView.setTitle(getActiveOrderCounterString(orderCount: 1), for: .normal)
-                    foodActiveOrderView.show()
+            if let cardViewIndex = view.subviews.firstIndex(of: cardView) {
+                if isFoodActiveOrder || isTaxiActiveOrder {
+                    myLocationButton.isHidden = true
+                    locationImageView.isHidden = true
+                    
+                    if isFoodActiveOrder && isTaxiActiveOrder {
+                        view.insertSubview(taxiActiveOrderView, at: cardViewIndex - 1)
+                        view.insertSubview(foodActiveOrderView, at: cardViewIndex - 2)
+                        foodActiveOrderView.isLastView = true
+                        taxiActiveOrderView.isLastView = false
+                        activeOrderCounterView.setTitle(getActiveOrderCounterString(orderCount: 2), for: .normal)
+                        taxiActiveOrderView.show()
+                        foodActiveOrderView.show()
+                        cardView.isTaxiButtonEnable = false
+                        cardView.isFoodButtonEnable = false
+                    } else if isTaxiActiveOrder {
+                        taxiActiveOrderView.isLastView = true
+                        view.insertSubview(taxiActiveOrderView, at: cardViewIndex - 1)
+                        activeOrderCounterView.setTitle(getActiveOrderCounterString(orderCount: 1), for: .normal)
+                        taxiActiveOrderView.show()
+                        cardView.isFoodButtonEnable = true
+                        cardView.isTaxiButtonEnable = false
+                    } else if isFoodActiveOrder {
+                        foodActiveOrderView.isLastView = true
+                        view.insertSubview(foodActiveOrderView, at: cardViewIndex - 1)
+                        activeOrderCounterView.setTitle(getActiveOrderCounterString(orderCount: 1), for: .normal)
+                        foodActiveOrderView.show()
+                        cardView.isTaxiButtonEnable = true
+                        cardView.isFoodButtonEnable = false
+                    }
+                    
+                    activeOrderCounterView.isHidden = false
+                    
+                    let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(showActiveOrderView))
+                    swipeGesture.direction = .up
+                    cardView.addGestureRecognizer(swipeGesture)
+                } else {
+                    myLocationButton.isHidden = false
+                    locationImageView.isHidden = false
+                    activeOrderCounterView.isHidden = true
+                    cardView.gestureRecognizers?.removeAll()
+                    cardView.isTaxiButtonEnable = true
+                    cardView.isFoodButtonEnable = true
                 }
-                
-                activeOrderCounterView.isHidden = false
-                
-                let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(showActiveOrderView))
-                swipeGesture.direction = .up
-                cardView.addGestureRecognizer(swipeGesture)
             }
         }
     }
@@ -518,14 +533,19 @@ class MapViewController: UIViewController {
             guard let self = self else { return }
             if OrderTaxiModelHandler.shared.getTaxiOrder() != nil {
                 self.isTaxiActiveOrder = true
-                self.isFoodActiveOrder = true
                 self.isActiveOrder = true
             }
         }
     }
     
     private func checkIfFoodActiveOrderExists() {
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + generalDelay) { [weak self] in
+            guard let self = self else { return }
+            if OrderFoodModelHandler.shared.getFoodOrder() != nil, OrderFoodModelHandler.shared.getFoodOrder()?.time != 0 {
+                self.isFoodActiveOrder = true
+                self.isActiveOrder = true
+            }
+        }
     }
     
     @objc private func showCart() {
@@ -670,18 +690,19 @@ class MapViewController: UIViewController {
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<NSManagedObject>, inserts.count > 0 {
             checkIfTaxiActiveOrderExists()
             
-            // Нужно реализовать БД еды и реализовать эту функцию
             checkIfFoodActiveOrderExists()
         }
         
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<NSManagedObject>, updates.count > 0 {
             checkIfTaxiActiveOrderExists()
             
-            // Нужно реализовать БД еды и реализовать эту функцию
             checkIfFoodActiveOrderExists()
         }
         
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
+            if OrderTaxiModelHandler.shared.getTaxiOrder() == nil {
+                taxiActiveOrderView.removeFromSuperview()
+            }
             // Здесь нужно будет удалить вьюшки активных заказов и вернуть состояние стартового экрана.
         }
     }
@@ -904,7 +925,10 @@ extension MapViewController: ICartChangesObserver {
 
 extension MapViewController: ExpandedActiveOrderViewDelegate {
     func cancelButtonTapped() {
-        print("Cancel button tapped")
+        OrderFoodModelHandler.shared.deleteAllFoodOrders()
+        foodActiveOrderView.removeFromSuperview()
+        isFoodActiveOrder = false
+        isActiveOrder = true
     }
     
     func reportProblemButtonTapped() {
