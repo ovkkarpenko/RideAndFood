@@ -29,7 +29,7 @@ class MapViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var locationIVCenterYConstraint = locationImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+    private lazy var locationIVCenterYConstraint = locationImageView.centerYAnchor.constraint(equalTo: mapView.centerYAnchor)
     
     private lazy var statusBarBlurView: UIVisualEffectView = {
         let view = UIVisualEffectView(effect: UIBlurEffect(style: .light))
@@ -111,7 +111,7 @@ class MapViewController: UIViewController {
     private lazy var addressInputView: OrderViewDirector = {
         let view = OrderViewDirector(type: .addressInput)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.currentAddress = cuurentPlacemark?.name
+        view.currentAddress = currentPlacemark?.name
         view.delegate = self
         addressDelegate = view
         
@@ -155,22 +155,32 @@ class MapViewController: UIViewController {
     private lazy var taxiTripInfoView = TaxiTripInfoView()
     private lazy var taxiTripFinishedView = TaxiTripFinishedView()
     
+    // MARK: - Public properties
+    
+    var state: MapScreenState = .main {
+        didSet {
+            stateChanged()
+        }
+    }
+    
     // MARK: - Private properties
     
     private let accessManager = AccessLocationManager()
     private let regionInMeters: Double = 100
     private lazy var mapViewDelegate: MapViewDelegate = {
         let delegate = MapViewDelegate()
-        delegate.mapViewCenterUpdatedCollback = { [weak self] placemark in
-            self?.cuurentPlacemark = placemark
+        delegate.mapViewCenterUpdatedCallback = { [weak self] placemark in
+            self?.currentPlacemark = placemark
+            self?.updateAnnotations()
         }
+        delegate.mapViewController = self
         return delegate
     }()
     
-    private var cuurentPlacemark: CLPlacemark? {
+    private var currentPlacemark: CLPlacemark? {
         didSet {
-            cardView.address = cuurentPlacemark?.name
-            addressDelegate?.currentAddressChanged(newAddress: cuurentPlacemark?.name)
+            cardView.address = currentPlacemark?.name
+            addressDelegate?.currentAddressChanged(newAddress: currentPlacemark?.name)
         }
     }
     
@@ -289,6 +299,20 @@ class MapViewController: UIViewController {
     private lazy var sideMenuOffset: CGFloat = -500
     private lazy var additionalCardViewOffset: CGFloat = 1000
     
+    private var fromAnnotation: FromAnnotation? {
+        mapView.annotations.first(where: { $0 is FromAnnotation }) as? FromAnnotation
+    }
+    
+    private var toAnnotation: ToAnnotation? {
+        mapView.annotations.first(where: { $0 is ToAnnotation }) as? ToAnnotation
+    }
+    
+    private var carAnnotations: [CarAnnotation] {
+        mapView.annotations.compactMap { $0 as? CarAnnotation }
+    }
+    
+    private var routeOverlay = MKPolyline()
+    
     // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
@@ -339,7 +363,7 @@ class MapViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        locationIVCenterYConstraint.constant = -locationImageView.bounds.height / 2
+        locationIVCenterYConstraint.constant = -(locationImageView.image?.size.height ?? 0) / 2
         cardView.bottomPadding = view.safeAreaInsets.bottom
     }
     
@@ -609,6 +633,7 @@ class MapViewController: UIViewController {
         } secondaryButtonPressedBlock: { [weak self] in
             self?.taxiOrderModelHandler.finishOrder()
             self?.hideAdditionalCardView()
+            self?.cencelOrderButtonPressed()
         })
         additionalCardView.configure(with: .init(contentView: taxiConfirmationView,
                                                  style: .light,
@@ -623,21 +648,16 @@ class MapViewController: UIViewController {
     }
     
     private func showTaxiArrivingView() {
+        state = .waitForTaxi
         guard let order = taxiOrderModelHandler.getTaxiOrder() else { return }
-        let coordinate = mapView.userLocation.coordinate
-        let randomCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude
-                                                        * Double.random(in: 0.9999...1.1111),
-                                                      longitude: coordinate.longitude
-                                                        * Double.random(in: 0.9999...1.1111))
-        let car = CarAnnotation(coordinate: randomCoordinate)
-        mapView.addAnnotation(car)
         taxiArrivingView.configure(with: .init(carName: order.car, carColor: order.color))
         additionalCardView.configure(with: .init(contentView: taxiArrivingView,
                                                  paddingBottom: padding,
                                                  didSwipeDownCallback: { [weak self] in
                                                     self?.hideAdditionalCardView()
+                                                    self?.state = .trip
                                                     // Mock trip finish
-                                                    DispatchQueue.main.asyncAfter(deadline: .now() + .random(in: 1...10)) {
+                                                    DispatchQueue.main.asyncAfter(deadline: .now() + .random(in: 5...10)) {
                                                         self?.taxiOrderModelHandler.finishOrder()
                                                         self?.hideAdditionalCardView {
                                                             self?.showTripFinishedView()
@@ -645,6 +665,17 @@ class MapViewController: UIViewController {
                                                     }
                                                  }))
         showAdditionalCardView(showDimmer: false)
+        
+        // Mock taxi arrived
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            if let coordinate = self?.fromAnnotation?.coordinate {
+                self?.carAnnotations.first?.setCoordinate(coordinate: coordinate)
+                self?.centerViewOn(coordinate: coordinate)
+            }
+            if let overlay = self?.routeOverlay {
+                self?.mapView.removeOverlay(overlay)
+            }
+        }
     }
     
     private func showTaxiTripInfoView() {
@@ -675,6 +706,7 @@ class MapViewController: UIViewController {
     }
     
     private func showTripFinishedView() {
+        state = .main
         taxiTripFinishedView.configure(with: .init(payment: .init(id: 5,
                                                                   paid: 544,
                                                                   method: "card",
@@ -689,6 +721,158 @@ class MapViewController: UIViewController {
                                                     self?.hideAdditionalCardView()
                                                  }))
         showAdditionalCardView()
+    }
+    
+    private func updateAnnotations() {
+        switch state {
+        case .selectFromAddress:
+            fromAnnotation?.setCoordinate(coordinate: mapView.centerCoordinate)
+        case .selectToAddress:
+            toAnnotation?.setCoordinate(coordinate: mapView.centerCoordinate)
+        default:
+            return
+        }
+    }
+    
+    private func stateChanged() {
+        switch state {
+        case .main:
+            locationImageView.isHidden = false
+            myLocationButtonPressed()
+            mapView.removeAnnotations(mapView.annotations.filter { $0 is CarAnnotation || $0 is FromAnnotation || $0 is ToAnnotation })
+            mapView.removeOverlay(routeOverlay)
+        case .selectFromAddress:
+            locationImageView.isHidden = true
+            if fromAnnotation == nil {
+                mapView.addAnnotation(FromAnnotation(coordinate: mapView.centerCoordinate))
+            }
+        case .selectToAddress:
+            locationImageView.isHidden = true
+            if toAnnotation == nil {
+                mapView.addAnnotation(ToAnnotation(coordinate: mapView.centerCoordinate))
+            }
+        case .orderTaxi:
+            locationImageView.isHidden = true
+            var fromAnnotation: FromAnnotation
+            var toAnnotation: ToAnnotation
+            
+            if let fromAnn = self.fromAnnotation {
+                fromAnnotation = fromAnn
+            } else {
+                fromAnnotation = FromAnnotation(coordinate: mapView.userLocation.coordinate)
+                mapView.addAnnotation(fromAnnotation)
+            }
+            if let toAnn = self.toAnnotation {
+                toAnnotation = toAnn
+            } else {
+                toAnnotation = ToAnnotation(coordinate: fromAnnotation.coordinate.randomAround)
+                mapView.addAnnotation(toAnnotation)
+            }
+            mapView.showAnnotations([fromAnnotation, toAnnotation], animated: true)
+            showRouteOnMap(fromCoordinate: fromAnnotation.coordinate, toCoordinate: toAnnotation.coordinate)
+        case .searchForTaxi:
+            locationImageView.isHidden = true
+            if carAnnotations.count < 2 {
+                for _ in 0...5 {
+                    mapView.addAnnotation(CarAnnotation(coordinate: (fromAnnotation?.coordinate
+                                                                        ?? mapView.userLocation.coordinate).randomAround))
+                }
+            }
+            var annotations: [MKAnnotation] = carAnnotations
+            if let fromAnnotation = fromAnnotation {
+                annotations.append(fromAnnotation)
+            }
+            mapView.showAnnotations(annotations, animated: true)
+        case .waitForTaxi:
+            locationImageView.isHidden = true
+            var carAnnotation: CarAnnotation
+            if let carAnn = carAnnotations.first {
+                carAnnotation = carAnn
+                mapView.removeAnnotations(carAnnotations)
+            } else {
+                carAnnotation = CarAnnotation(coordinate: (fromAnnotation?.coordinate
+                                                            ?? mapView.userLocation.coordinate).randomAround)
+            }
+            mapView.addAnnotation(carAnnotation)
+            var annotations: [MKAnnotation] = [carAnnotation]
+            if let fromAnnotation = fromAnnotation {
+                annotations.append(fromAnnotation)
+                showRouteOnMap(fromCoordinate: carAnnotation.coordinate, toCoordinate: fromAnnotation.coordinate)
+            }
+        case .trip:
+            locationImageView.isHidden = true
+            var toAnnotation: ToAnnotation
+            var carAnnotation: CarAnnotation
+            if let toAnn = self.toAnnotation {
+                toAnnotation = toAnn
+            } else {
+                toAnnotation = ToAnnotation(coordinate: (fromAnnotation?.coordinate
+                                                            ?? mapView.userLocation.coordinate).randomAround)
+                mapView.addAnnotation(toAnnotation)
+            }
+            
+            if let carAnn = carAnnotations.first {
+                carAnnotation = carAnn
+            } else {
+                carAnnotation = CarAnnotation(coordinate: (fromAnnotation?.coordinate
+                                                            ?? mapView.userLocation.coordinate).randomAround)
+                mapView.addAnnotation(carAnnotation)
+            }
+            showRouteOnMap(fromCoordinate: carAnnotation.coordinate, toCoordinate: toAnnotation.coordinate)
+        }
+    }
+    
+    private func showRouteOnMap(fromCoordinate: CLLocationCoordinate2D, toCoordinate: CLLocationCoordinate2D) {
+        mapView.removeOverlay(routeOverlay)
+        let sourcePlacemark = MKPlacemark(coordinate: fromCoordinate, addressDictionary: nil)
+        let destinationPlacemark = MKPlacemark(coordinate: toCoordinate, addressDictionary: nil)
+        
+        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        let sourceAnnotation = MKPointAnnotation()
+        
+        if let location = sourcePlacemark.location {
+            sourceAnnotation.coordinate = location.coordinate
+        }
+        
+        let destinationAnnotation = MKPointAnnotation()
+        
+        if let location = destinationPlacemark.location {
+            destinationAnnotation.coordinate = location.coordinate
+        }
+        
+        self.mapView.showAnnotations([sourceAnnotation,destinationAnnotation], animated: true )
+        
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = sourceMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .automobile
+        
+        // Calculate the direction
+        let directions = MKDirections(request: directionRequest)
+        
+        directions.calculate { (response, error) -> Void in
+            guard let response = response else {
+                if error != nil {
+                    AlertHelper().alert(self, title: StringsHelper.alertErrorTitle.text())
+                    self.state = .main
+                    self.selectTariffView.dismiss()
+                    self.hideAdditionalCardView()
+                }
+                return
+            }
+            
+            let route = response.routes[0]
+            self.mapView.addOverlay((route.polyline), level: MKOverlayLevel.aboveRoads)
+            self.routeOverlay = route.polyline
+            let rect = route.polyline.boundingMapRect
+            let region = MKCoordinateRegion(.init(x: rect.minX - rect.width * 0.1,
+                                                  y: rect.minY - rect.height * 0.1,
+                                                  width: rect.width * 1.2,
+                                                  height: rect.height * 3))
+            self.mapView.setRegion(region, animated: true)
+        }
     }
     
     @objc private func hideCart() {
@@ -749,9 +933,10 @@ class MapViewController: UIViewController {
     
     @objc private func confirmAddressButtonPressed() {
         if let currentView = view.subviews.last as? OrderViewDirector {
-            currentView.dismiss()
+            currentView.dismiss(withUpdateStatus: false)
             initializeSelectTariffView(currentView.firstTextView.textField.text, currentView.secondTextView.textField.text)
         }
+        state = .orderTaxi
     }
     
     @objc private func showActiveOrderView() {
@@ -817,10 +1002,25 @@ class MapViewController: UIViewController {
 
 // MARK: - Extensions
 extension MapViewController: OrderViewDelegate {
+    func stateChanged(to newState: MapScreenState) {
+        if newState == .selectToAddress {
+            if let toCoordinate = toAnnotation?.coordinate {
+                centerViewOn(coordinate: toCoordinate)
+            }
+            locationImageView.image = UIImage(named: "LocationTo")
+        } else if newState == .selectFromAddress {
+            if let fromCoordinate = fromAnnotation?.coordinate {
+                centerViewOn(coordinate: fromCoordinate)
+            }
+            locationImageView.image = UIImage(named: "Location")
+        }
+        state = newState
+    }
+    
     func mapButtonTapped(senderType: TextViewType) {
         if senderType == .destinationAddress {
             let destinationAddressFromMapView = OrderViewDirector(type: .destinationAddressFromMap)
-            destinationAddressFromMapView.currentAddress = cuurentPlacemark?.name
+            destinationAddressFromMapView.currentAddress = currentPlacemark?.name
             addNewOrderView(newSubview: destinationAddressFromMapView)
         }
     }
@@ -829,11 +1029,11 @@ extension MapViewController: OrderViewDelegate {
         switch senderType {
         case .currentAddress:
             let currentAddressDetailView = OrderViewDirector(type: .currentAddressDetail)
-            currentAddressDetailView.currentAddress = cuurentPlacemark?.name
+            currentAddressDetailView.currentAddress = currentPlacemark?.name
             addNewOrderView(newSubview: currentAddressDetailView)
         case .destinationAddress:
             let destinationAddressDetailView = OrderViewDirector(type: .destinationAddressDetail)
-            destinationAddressDetailView.currentAddress = cuurentPlacemark?.name
+            destinationAddressDetailView.currentAddress = currentPlacemark?.name
             addNewOrderView(newSubview: destinationAddressDetailView)
             
         default:
@@ -898,6 +1098,7 @@ extension MapViewController: OrderViewDelegate {
 extension MapViewController: SelectTariffViewDelegate {
     
     func backSubButtonPressed() {
+        state = .main
         menuButton.isHidden = false
         cardView.isHidden = false
         personButton.isHidden = false
@@ -916,6 +1117,7 @@ extension MapViewController: SelectTariffViewDelegate {
     }
     
     func orderButtonPressed(order: TaxiOrder, tariff: TariffModel) {
+        state = .searchForTaxi
         let view = LookingForDriverView()
         view.order = order
         view.tariff = tariff
@@ -930,6 +1132,7 @@ extension MapViewController: SelectTariffViewDelegate {
     }
     
     func cencelOrderButtonPressed() {
+        state = .main
         let view = CencelTaxiOrderView()
         view.dismissCallback = { [weak self] in
             let vc = CencelTaxiOrderViewController()
