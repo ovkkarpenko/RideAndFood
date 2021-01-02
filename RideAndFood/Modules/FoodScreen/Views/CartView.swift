@@ -474,6 +474,12 @@ class CartView: UIView {
         } else {
             cartViewDelegate?.foodPaymentButtonTapped(amount: sumWithDiscount.currencyString())
         }
+        
+        if let shopId = (CoreDataManager.shared.fetchEntities(withName: "ShopDB") as? [ShopDB])?.first?.shopId {
+            ServerApi.shared.getShopDetails(shopId: Int(shopId)) { item, _ in
+                OrderFoodModelHandler.shared.addToFoodOrder(order: OrderFoodModel(id: -1, from: item?.address))
+            }
+        }
     }
     
     @objc private func dimmerTapped() {

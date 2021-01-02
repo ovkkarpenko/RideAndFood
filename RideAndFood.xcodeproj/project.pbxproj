@@ -215,6 +215,10 @@
 		F7E5E9C7254A17AA0026ED71 /* SupportMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */; };
 		F7E5E9C9254A17B40026ED71 /* SupportServiceStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */; };
 		F7E5E9CB254A17B60026ED71 /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */; };
+		F7F9502C259B5532008EBA6A /* OrderFoodModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F9502B259B5532008EBA6A /* OrderFoodModelHandler.swift */; };
+		F7F9502F259B559C008EBA6A /* FoodOrderDB+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F9502E259B559C008EBA6A /* FoodOrderDB+init.swift */; };
+		F7F95033259B71E9008EBA6A /* CourierModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F95032259B71E9008EBA6A /* CourierModel.swift */; };
+		F7F95036259B7303008EBA6A /* FoodOrderBodyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F95035259B7303008EBA6A /* FoodOrderBodyModel.swift */; };
 		F7FD685D253F72BD00A67E07 /* SupportService.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7FD685C253F72BD00A67E07 /* SupportService.storyboard */; };
 		FA02B89B2573C59100692C65 /* OrderHistoryTaxiDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02B89A2573C59100692C65 /* OrderHistoryTaxiDetailsView.swift */; };
 		FA02B89F2573CBBC00692C65 /* OrderHistoryFoodDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02B89E2573CBBC00692C65 /* OrderHistoryFoodDetailsView.swift */; };
@@ -546,6 +550,10 @@
 		F7AECA7B256C365000CA86AC /* OrderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderView.xib; sourceTree = "<group>"; };
 		F7AECA7E256C36A000CA86AC /* CustomTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTextView.xib; sourceTree = "<group>"; };
 		F7CAAC002540A5000049390C /* GeneralGUISettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralGUISettings.swift; sourceTree = "<group>"; };
+		F7F9502B259B5532008EBA6A /* OrderFoodModelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderFoodModelHandler.swift; sourceTree = "<group>"; };
+		F7F9502E259B559C008EBA6A /* FoodOrderDB+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodOrderDB+init.swift"; sourceTree = "<group>"; };
+		F7F95032259B71E9008EBA6A /* CourierModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierModel.swift; sourceTree = "<group>"; };
+		F7F95035259B7303008EBA6A /* FoodOrderBodyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodOrderBodyModel.swift; sourceTree = "<group>"; };
 		F7FD685C253F72BD00A67E07 /* SupportService.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SupportService.storyboard; sourceTree = "<group>"; };
 		F7FD6860253F72DB00A67E07 /* SupportMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportMessageViewController.swift; sourceTree = "<group>"; };
 		F7FE9836254330E4009B89F5 /* BaseCustomUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCustomUIComponents.swift; sourceTree = "<group>"; };
@@ -853,6 +861,7 @@
 				72450AE12578190800F2D1FD /* NSManagedObject+init.swift */,
 				7233AAC12582DE1B001D589F /* ShopDB+init.swift */,
 				F73AE216257EB6EB00963196 /* TaxiOrderDB+init.swift */,
+				F7F9502E259B559C008EBA6A /* FoodOrderDB+init.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1065,6 +1074,8 @@
 				F7805C422552F26400D1BBAD /* TariffModel.swift */,
 				F73AE213257EB3AF00963196 /* OrderTaxiModelHandler.swift */,
 				72585175257D99970087FF9A /* NotificationModel.swift */,
+				F7F95032259B71E9008EBA6A /* CourierModel.swift */,
+				F7F95035259B7303008EBA6A /* FoodOrderBodyModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1794,6 +1805,7 @@
 				7258516C257D49150087FF9A /* CartViewModel.swift */,
 				72585178257EA4B30087FF9A /* Cart.swift */,
 				7233AAC72582EB94001D589F /* EmptyCartViewModel.swift */,
+				F7F9502B259B5532008EBA6A /* OrderFoodModelHandler.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2008,6 +2020,7 @@
 				F73BC506254ED28E0018FC0A /* PhonesModel.swift in Sources */,
 				72E30EF5254EE2F40037E4B4 /* ServiceButtonView.swift in Sources */,
 				F768C0BC2588ABC600B85307 /* PointsView.swift in Sources */,
+				F7F95033259B71E9008EBA6A /* CourierModel.swift in Sources */,
 				FA8517F42580C6CC000C7674 /* OtherQuantityPointsView.swift in Sources */,
 				F7E5E9CB254A17B60026ED71 /* AddPhotoViewController.swift in Sources */,
 				FAC0661325556B16003CC6AA /* MaskTextField.swift in Sources */,
@@ -2086,6 +2099,7 @@
 				FA2C80CA254AF96E00F82637 /* PromotionsViewModel.swift in Sources */,
 				72A1DBE22545B472005A047A /* Response.swift in Sources */,
 				7286E52C254311AC0027A69B /* CodeConfirmationTextFieldDelegate.swift in Sources */,
+				F7F9502F259B559C008EBA6A /* FoodOrderDB+init.swift in Sources */,
 				FA2C80C0254AF8A000F82637 /* SettingsStrings.swift in Sources */,
 				F79DD3BF2577BA9900E82B73 /* PromotionDetailDelegate.swift in Sources */,
 				7277A373258A7F4500ECA318 /* TaxiCircleButtonViewModel.swift in Sources */,
@@ -2183,6 +2197,7 @@
 				FAA0B6C925496D1D0020ACE7 /* SettingsViewController.swift in Sources */,
 				FA050B6925499CF300CF363D /* Profile.swift in Sources */,
 				FAD0B00A25669B1F008C2794 /* AddressTableViewCell.swift in Sources */,
+				F7F9502C259B5532008EBA6A /* OrderFoodModelHandler.swift in Sources */,
 				F73BC50B254EDB3E0018FC0A /* MediaResponseModel.swift in Sources */,
 				725838FA257A8D0100637ABF /* UIButton+TwoTitles.swift in Sources */,
 				FA8CA7802546D531001FDE5E /* AlertTextFieldViewController.swift in Sources */,
@@ -2224,6 +2239,7 @@
 				FAE81CAA254818D10082A6B5 /* Settings.swift in Sources */,
 				72B3CE432554951D0081B1CD /* PromoCodeCellModel.swift in Sources */,
 				F73BC502254ED19D0018FC0A /* AddressModel.swift in Sources */,
+				F7F95036259B7303008EBA6A /* FoodOrderBodyModel.swift in Sources */,
 				FA730E4E256FAA23001F7AEB /* OrderHistoryModel.swift in Sources */,
 				FA3A05702548128600C55447 /* PromotionsViewController.swift in Sources */,
 				FAF9C540258CCFFF00D2C130 /* TaxiOrderDetailsView.swift in Sources */,

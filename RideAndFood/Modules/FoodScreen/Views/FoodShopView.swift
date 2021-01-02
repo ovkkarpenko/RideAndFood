@@ -21,6 +21,7 @@ class FoodShopView: UIView {
                 
                 addressNameLabel.text = address.name
                 addressTextField.text = address.address
+                OrderFoodModelHandler.shared.addToFoodOrder(order: OrderFoodModel(id: -1, to: address.address, toName: address.name))
             }
         }
     }

@@ -60,6 +60,7 @@ class FoodActiveOrderView: CustomViewWithAnimation {
         super.layoutSubviews()
         
         addShadow()
+        setFoodActiveOrderViewParameters()
     }
     
     // MARK: - private methods
@@ -86,6 +87,14 @@ class FoodActiveOrderView: CustomViewWithAnimation {
                                      activeOrderView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: padding)])
     }
     
+    private func setFoodActiveOrderViewParameters() {
+        if let order = OrderFoodModelHandler.shared.getFoodOrder() {
+            setToAddress(address: order.to)
+            setDeliveryTime(value: order.time)
+            setFromAddress(address: order.from)
+        }
+    }
+    
     // MARK: - public methods
     func setFromAddress(address: String?) {
         activeOrderView.firstTextLabel.text = address
@@ -97,7 +106,7 @@ class FoodActiveOrderView: CustomViewWithAnimation {
     
     func setDeliveryTime(value: Int) {
         let text = NSMutableAttributedString(string: FoodActiveOrderStrings.getString(.deliveryTime)())
-        text.append(NSAttributedString(string: "≈ \(value) мин", attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.locationOrange)()]))
+        text.append(NSAttributedString(string: " ≈ \(value) мин", attributes: [NSAttributedString.Key.foregroundColor : Colors.getColor(.locationOrange)()]))
         
         activeOrderView.timeLabel.attributedText = text
     }
