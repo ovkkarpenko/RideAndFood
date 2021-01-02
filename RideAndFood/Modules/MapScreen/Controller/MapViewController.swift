@@ -700,9 +700,6 @@ class MapViewController: UIViewController {
         }
         
         if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
-            if OrderTaxiModelHandler.shared.getTaxiOrder() == nil {
-                taxiActiveOrderView.removeFromSuperview()
-            }
             // Здесь нужно будет удалить вьюшки активных заказов и вернуть состояние стартового экрана.
         }
     }
