@@ -36,6 +36,7 @@ class LoginViewController: UIViewController {
     
     private lazy var codeLabel: UILabel = {
         let label = UILabel()
+        label.accessibilityIdentifier = "codeLabel"
         label.backgroundColor = ColorHelper.primary.color()
         label.textColor = ColorHelper.primaryButtonText.color()
         label.textAlignment = .center
@@ -46,7 +47,13 @@ class LoginViewController: UIViewController {
         return label
     }()
     
-    private lazy var confirmButton = PrimaryButton(title: StringsHelper.next.text())
+    private lazy var confirmButton: PrimaryButton = {
+        let button = PrimaryButton(title: StringsHelper.next.text())
+        button.accessibilityIdentifier = "confirmButton"
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private let padding: CGFloat = 25
     
     // MARK: - Constraints

@@ -52,6 +52,7 @@ class LoginView: UIView {
     
     private lazy var phoneTextField: PhoneTextField = {
         let maskedTextField = PhoneTextField(frame: .zero)
+        maskedTextField.accessibilityIdentifier = "phoneTextField"
         maskedTextField.configure(with: .init(valueChangedCallback: { [weak self] isCompleted in
             self?.isCompleted = isCompleted && self?.checkbox.isChecked ?? false
         }))
@@ -82,6 +83,7 @@ class LoginView: UIView {
     
     private lazy var checkbox: Checkbox = {
         let checkbox = Checkbox()
+        checkbox.accessibilityIdentifier = "checkbox"
         checkbox.valueChangedCallback = { [weak self] isCompleted in
             self?.isCompleted = isCompleted && self?.phoneTextField.isCompleted ?? false
         }

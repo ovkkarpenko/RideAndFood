@@ -14,7 +14,7 @@ class CodeConfirmationView: UIView {
     
     private lazy var hiddenTextField: UITextField = {
         let textField = UITextField()
-        textField.isHidden = true
+        textField.accessibilityIdentifier = "hiddenTextField"
         textField.delegate = textFieldDelegate
         textField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         textField.keyboardType = .numberPad
@@ -160,7 +160,7 @@ class CodeConfirmationView: UIView {
         NSLayoutConstraint.activate([
             hiddenTextField.leadingAnchor.constraint(equalTo: leadingAnchor),
             hiddenTextField.trailingAnchor.constraint(equalTo: trailingAnchor),
-            hiddenTextField.bottomAnchor.constraint(equalTo: bottomAnchor),
+            hiddenTextField.topAnchor.constraint(equalTo: topAnchor, constant: -80),
             verticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
             verticalStackView.topAnchor.constraint(greaterThanOrEqualTo: topAnchor),
             verticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor),

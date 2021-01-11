@@ -72,6 +72,7 @@ class MapViewController: UIViewController {
     
     private lazy var menuButton: UIButton = {
         let button = RoundButton(type: .system)
+        button.accessibilityIdentifier = "menuButton"
         button.bgImage = UIImage(named: "MenuButton")
         button.addTarget(self, action: #selector(menuButtonPressed), for: .touchUpInside)
         return button

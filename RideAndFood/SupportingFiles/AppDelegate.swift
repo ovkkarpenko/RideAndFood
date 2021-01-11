@@ -17,10 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let rootVc = MapViewController()
         
+        #if DEBUG
+        if CommandLine.arguments.contains("enable-testing") {
+            configureAppForTesting()
+        }
+        #endif
+        
         window = UIWindow()
         window?.rootViewController = rootVc
         window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    private func configureAppForTesting() {
+        UserConfig.shared.userId = 0
     }
 }
