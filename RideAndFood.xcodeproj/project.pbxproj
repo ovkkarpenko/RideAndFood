@@ -145,6 +145,7 @@
 		72FF3AD0253F511D0042B2A0 /* PhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */; };
 		72FF3ADA253F58CD0042B2A0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FF3AD9253F58CD0042B2A0 /* LoginView.swift */; };
 		96D62A89E82A8316062BDE0E /* Pods_RideAndFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */; };
+		EFD9700EE3C125CFD4DBB975 /* Pods_RideAndFoodUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D01527B8BBDB52EE609626 /* Pods_RideAndFoodUITests.framework */; };
 		F707DBA0257030A0002C3F58 /* OrderViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F707DB9F257030A0002C3F58 /* OrderViewType.swift */; };
 		F727C591258F77AC00DF831A /* PaymentTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F727C590258F77AC00DF831A /* PaymentTypeCell.xib */; };
 		F727C594258F7CD400DF831A /* PaymentTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F727C593258F7CD400DF831A /* PaymentTypeCell.swift */; };
@@ -275,6 +276,8 @@
 		FA53E566257AAEB000B87385 /* SelectTariffViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA53E565257AAEB000B87385 /* SelectTariffViewModel.swift */; };
 		FA561B4C254F0D8E00BD549E /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA561B4B254F0D8E00BD549E /* SideMenuView.swift */; };
 		FA6100AC255715C700ED0CD5 /* PaymentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6100AB255715C700ED0CD5 /* PaymentType.swift */; };
+		FA63CE5225AC1C4800C441A5 /* AuthorizationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63CE5125AC1C4800C441A5 /* AuthorizationUITests.swift */; };
+		FA63CE8C25AC30B600C441A5 /* UITestsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63CE8B25AC30B600C441A5 /* UITestsExtension.swift */; };
 		FA6DDFE2256A488400244E94 /* ShopDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6DDFE1256A488400244E94 /* ShopDetailsView.swift */; };
 		FA6DDFE5256A488B00244E94 /* ShopDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6DDFE4256A488B00244E94 /* ShopDetailsViewModel.swift */; };
 		FA6DDFE8256A582E00244E94 /* ShopProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6DDFE7256A582E00244E94 /* ShopProduct.swift */; };
@@ -342,8 +345,19 @@
 		FAF9C540258CCFFF00D2C130 /* TaxiOrderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9C53F258CCFFF00D2C130 /* TaxiOrderDetailsView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		FA63CE5425AC1C4800C441A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7240BF07253E0E7600C00BB9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7240BF0E253E0E7600C00BB9;
+			remoteInfo = RideAndFood;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		260608DF4629E155247171D4 /* Pods-RideAndFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RideAndFood.release.xcconfig"; path = "Target Support Files/Pods-RideAndFood/Pods-RideAndFood.release.xcconfig"; sourceTree = "<group>"; };
+		440040D121EE6F1C76836D04 /* Pods-RideAndFoodUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RideAndFoodUITests.release.xcconfig"; path = "Target Support Files/Pods-RideAndFoodUITests/Pods-RideAndFoodUITests.release.xcconfig"; sourceTree = "<group>"; };
 		59450567917FDB3850FEC3EC /* Pods-RideAndFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RideAndFood.debug.xcconfig"; path = "Target Support Files/Pods-RideAndFood/Pods-RideAndFood.debug.xcconfig"; sourceTree = "<group>"; };
 		61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RideAndFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		720AA0EC256C2B360065BFED /* PaymentsHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsHistoryViewController.swift; sourceTree = "<group>"; };
@@ -484,6 +498,8 @@
 		72FF3ACD253F470D0042B2A0 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		72FF3ACF253F511D0042B2A0 /* PhoneTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneTextField.swift; sourceTree = "<group>"; };
 		72FF3AD9253F58CD0042B2A0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		85D01527B8BBDB52EE609626 /* Pods_RideAndFoodUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RideAndFoodUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4407C12A5C2D8C0E158BB5F /* Pods-RideAndFoodUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RideAndFoodUITests.debug.xcconfig"; path = "Target Support Files/Pods-RideAndFoodUITests/Pods-RideAndFoodUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F707DB9F257030A0002C3F58 /* OrderViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewType.swift; sourceTree = "<group>"; };
 		F709FFDB254458AE00A83A7C /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		F720A8A22547467B00B1BA7B /* SupportServiceStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportServiceStrings.swift; sourceTree = "<group>"; };
@@ -614,6 +630,10 @@
 		FA53E565257AAEB000B87385 /* SelectTariffViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTariffViewModel.swift; sourceTree = "<group>"; };
 		FA561B4B254F0D8E00BD549E /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		FA6100AB255715C700ED0CD5 /* PaymentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentType.swift; sourceTree = "<group>"; };
+		FA63CE4F25AC1C4800C441A5 /* RideAndFoodUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RideAndFoodUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA63CE5125AC1C4800C441A5 /* AuthorizationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationUITests.swift; sourceTree = "<group>"; };
+		FA63CE5325AC1C4800C441A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA63CE8B25AC30B600C441A5 /* UITestsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestsExtension.swift; sourceTree = "<group>"; };
 		FA6DDFE1256A488400244E94 /* ShopDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailsView.swift; sourceTree = "<group>"; };
 		FA6DDFE4256A488B00244E94 /* ShopDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailsViewModel.swift; sourceTree = "<group>"; };
 		FA6DDFE7256A582E00244E94 /* ShopProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopProduct.swift; sourceTree = "<group>"; };
@@ -691,6 +711,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA63CE4C25AC1C4800C441A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFD9700EE3C125CFD4DBB975 /* Pods_RideAndFoodUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -699,6 +727,8 @@
 			children = (
 				59450567917FDB3850FEC3EC /* Pods-RideAndFood.debug.xcconfig */,
 				260608DF4629E155247171D4 /* Pods-RideAndFood.release.xcconfig */,
+				D4407C12A5C2D8C0E158BB5F /* Pods-RideAndFoodUITests.debug.xcconfig */,
+				440040D121EE6F1C76836D04 /* Pods-RideAndFoodUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -707,6 +737,7 @@
 			isa = PBXGroup;
 			children = (
 				61E3BF1654C2EE497073C23B /* Pods_RideAndFood.framework */,
+				85D01527B8BBDB52EE609626 /* Pods_RideAndFoodUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -807,6 +838,7 @@
 			isa = PBXGroup;
 			children = (
 				7240BF11253E0E7600C00BB9 /* RideAndFood */,
+				FA63CE5025AC1C4800C441A5 /* RideAndFoodUITests */,
 				7240BF10253E0E7600C00BB9 /* Products */,
 				3727488ABC83AA663419FD5A /* Pods */,
 				493E12A5CDA37FF285717E41 /* Frameworks */,
@@ -817,6 +849,7 @@
 			isa = PBXGroup;
 			children = (
 				7240BF0F253E0E7600C00BB9 /* RideAndFood.app */,
+				FA63CE4F25AC1C4800C441A5 /* RideAndFoodUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1554,6 +1587,16 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		FA63CE5025AC1C4800C441A5 /* RideAndFoodUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FA63CE5125AC1C4800C441A5 /* AuthorizationUITests.swift */,
+				FA63CE5325AC1C4800C441A5 /* Info.plist */,
+				FA63CE8B25AC30B600C441A5 /* UITestsExtension.swift */,
+			);
+			path = RideAndFoodUITests;
+			sourceTree = "<group>";
+		};
 		FA707FA3256A608800D88F97 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1853,18 +1896,42 @@
 			productReference = 7240BF0F253E0E7600C00BB9 /* RideAndFood.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FA63CE4E25AC1C4800C441A5 /* RideAndFoodUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FA63CE5625AC1C4800C441A5 /* Build configuration list for PBXNativeTarget "RideAndFoodUITests" */;
+			buildPhases = (
+				098A3F11A9E66A6DFE4B43D8 /* [CP] Check Pods Manifest.lock */,
+				FA63CE4B25AC1C4800C441A5 /* Sources */,
+				FA63CE4C25AC1C4800C441A5 /* Frameworks */,
+				FA63CE4D25AC1C4800C441A5 /* Resources */,
+				CB97FF6B32ADC176C4C67E03 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FA63CE5525AC1C4800C441A5 /* PBXTargetDependency */,
+			);
+			name = RideAndFoodUITests;
+			productName = RideAndFoodUITests;
+			productReference = FA63CE4F25AC1C4800C441A5 /* RideAndFoodUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		7240BF07253E0E7600C00BB9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1170;
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1210;
 				ORGANIZATIONNAME = skillbox;
 				TargetAttributes = {
 					7240BF0E253E0E7600C00BB9 = {
 						CreatedOnToolsVersion = 11.7;
+					};
+					FA63CE4E25AC1C4800C441A5 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 7240BF0E253E0E7600C00BB9;
 					};
 				};
 			};
@@ -1885,6 +1952,7 @@
 			projectRoot = "";
 			targets = (
 				7240BF0E253E0E7600C00BB9 /* RideAndFood */,
+				FA63CE4E25AC1C4800C441A5 /* RideAndFoodUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1916,9 +1984,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA63CE4D25AC1C4800C441A5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		098A3F11A9E66A6DFE4B43D8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RideAndFoodUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6B34789B1052C342B165BA8F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1934,6 +2031,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RideAndFood/Pods-RideAndFood-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB97FF6B32ADC176C4C67E03 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RideAndFoodUITests/Pods-RideAndFoodUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RideAndFoodUITests/Pods-RideAndFoodUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RideAndFoodUITests/Pods-RideAndFoodUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FC2EFC1717B447D30E11B712 /* [CP] Check Pods Manifest.lock */ = {
@@ -2280,7 +2394,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FA63CE4B25AC1C4800C441A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA63CE5225AC1C4800C441A5 /* AuthorizationUITests.swift in Sources */,
+				FA63CE8C25AC30B600C441A5 /* UITestsExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FA63CE5525AC1C4800C441A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7240BF0E253E0E7600C00BB9 /* RideAndFood */;
+			targetProxy = FA63CE5425AC1C4800C441A5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7240BF21253E0E7A00C00BB9 /* Debug */ = {
@@ -2442,6 +2573,48 @@
 			};
 			name = Release;
 		};
+		FA63CE5725AC1C4800C441A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4407C12A5C2D8C0E158BB5F /* Pods-RideAndFoodUITests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LMGHP5L64B;
+				INFOPLIST_FILE = RideAndFoodUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sanyakarpenko.RideAndFoodUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RideAndFood;
+			};
+			name = Debug;
+		};
+		FA63CE5825AC1C4800C441A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 440040D121EE6F1C76836D04 /* Pods-RideAndFoodUITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LMGHP5L64B;
+				INFOPLIST_FILE = RideAndFoodUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = sanyakarpenko.RideAndFoodUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RideAndFood;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2459,6 +2632,15 @@
 			buildConfigurations = (
 				7240BF24253E0E7A00C00BB9 /* Debug */,
 				7240BF25253E0E7A00C00BB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FA63CE5625AC1C4800C441A5 /* Build configuration list for PBXNativeTarget "RideAndFoodUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA63CE5725AC1C4800C441A5 /* Debug */,
+				FA63CE5825AC1C4800C441A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
